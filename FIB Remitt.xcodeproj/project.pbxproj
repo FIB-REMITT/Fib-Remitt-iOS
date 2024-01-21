@@ -8,21 +8,38 @@
 
 /* Begin PBXBuildFile section */
 		40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */; };
-		40711F672B5CFD1500F966E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40711F662B5CFD1500F966E7 /* ContentView.swift */; };
 		40711F692B5CFD1600F966E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F682B5CFD1600F966E7 /* Assets.xcassets */; };
 		40711F6C2B5CFD1600F966E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */; };
-		40711F6E2B5CFD1600F966E7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40711F6D2B5CFD1600F966E7 /* Persistence.swift */; };
-		40711F712B5CFD1600F966E7 /* FIB_Remitt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40711F6F2B5CFD1600F966E7 /* FIB_Remitt.xcdatamodeld */; };
+		89740D322B5D120D000ACFBA /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D312B5D120D000ACFBA /* InitialView.swift */; };
+		89740D3D2B5D2A0B000ACFBA /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D3C2B5D2A0B000ACFBA /* UI.swift */; };
+		89740D402B5D3883000ACFBA /* FRVerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D3F2B5D3883000ACFBA /* FRVerticalButton.swift */; };
+		89740D422B5D3907000ACFBA /* FRText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D412B5D3907000ACFBA /* FRText.swift */; };
+		89740D452B5D4284000ACFBA /* Colour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D442B5D4284000ACFBA /* Colour.swift */; };
+		89740D482B5D558D000ACFBA /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D472B5D558D000ACFBA /* View.swift */; };
+		89740D4B2B5D5669000ACFBA /* ViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D4A2B5D5669000ACFBA /* ViewModifier.swift */; };
+		89740D4D2B5D5762000ACFBA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D4C2B5D5761000ACFBA /* Image.swift */; };
+		89740D532B5D6915000ACFBA /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D512B5D6661000ACFBA /* Roboto-Bold.ttf */; };
+		89740D542B5D6918000ACFBA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D502B5D6655000ACFBA /* Roboto-Regular.ttf */; };
+		89740D552B5D691B000ACFBA /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D4F2B5D6646000ACFBA /* Roboto-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		40711F612B5CFD1500F966E7 /* FIB Remitt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FIB Remitt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIB_RemittApp.swift; sourceTree = "<group>"; };
-		40711F662B5CFD1500F966E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		40711F682B5CFD1600F966E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		40711F6D2B5CFD1600F966E7 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		40711F702B5CFD1600F966E7 /* FIB_Remitt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FIB_Remitt.xcdatamodel; sourceTree = "<group>"; };
+		89740D312B5D120D000ACFBA /* InitialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
+		89740D3C2B5D2A0B000ACFBA /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		89740D3F2B5D3883000ACFBA /* FRVerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRVerticalButton.swift; sourceTree = "<group>"; };
+		89740D412B5D3907000ACFBA /* FRText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRText.swift; sourceTree = "<group>"; };
+		89740D442B5D4284000ACFBA /* Colour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colour.swift; sourceTree = "<group>"; };
+		89740D472B5D558D000ACFBA /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		89740D4A2B5D5669000ACFBA /* ViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier.swift; sourceTree = "<group>"; };
+		89740D4C2B5D5761000ACFBA /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		89740D4F2B5D6646000ACFBA /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		89740D502B5D6655000ACFBA /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		89740D512B5D6661000ACFBA /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		89740D522B5D66DD000ACFBA /* FIB-Remitt-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FIB-Remitt-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +72,10 @@
 		40711F632B5CFD1500F966E7 /* FIB Remitt */ = {
 			isa = PBXGroup;
 			children = (
-				40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */,
-				40711F662B5CFD1500F966E7 /* ContentView.swift */,
-				40711F682B5CFD1600F966E7 /* Assets.xcassets */,
-				40711F6D2B5CFD1600F966E7 /* Persistence.swift */,
-				40711F6F2B5CFD1600F966E7 /* FIB_Remitt.xcdatamodeld */,
+				89740D522B5D66DD000ACFBA /* FIB-Remitt-Info.plist */,
+				89740D332B5D1CC0000ACFBA /* Modules */,
+				89740D342B5D1CD2000ACFBA /* SupportFiles */,
+				89740D3A2B5D23C5000ACFBA /* Utils */,
 				40711F6A2B5CFD1600F966E7 /* Preview Content */,
 			);
 			path = "FIB Remitt";
@@ -71,6 +87,128 @@
 				40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		89740D332B5D1CC0000ACFBA /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				89740D352B5D1EA0000ACFBA /* InitialScene */,
+				89740D362B5D1EBB000ACFBA /* Home */,
+				89740D382B5D1F04000ACFBA /* History */,
+				89740D372B5D1ED0000ACFBA /* Beneficiary */,
+				89740D392B5D226C000ACFBA /* Common Components */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		89740D342B5D1CD2000ACFBA /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				89740D4E2B5D662B000ACFBA /* Fonts */,
+				40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */,
+				40711F682B5CFD1600F966E7 /* Assets.xcassets */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		89740D352B5D1EA0000ACFBA /* InitialScene */ = {
+			isa = PBXGroup;
+			children = (
+				89740D312B5D120D000ACFBA /* InitialView.swift */,
+			);
+			path = InitialScene;
+			sourceTree = "<group>";
+		};
+		89740D362B5D1EBB000ACFBA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		89740D372B5D1ED0000ACFBA /* Beneficiary */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Beneficiary;
+			sourceTree = "<group>";
+		};
+		89740D382B5D1F04000ACFBA /* History */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		89740D392B5D226C000ACFBA /* Common Components */ = {
+			isa = PBXGroup;
+			children = (
+				89740D432B5D3958000ACFBA /* MicroComponent */,
+				89740D3E2B5D385A000ACFBA /* Button */,
+			);
+			path = "Common Components";
+			sourceTree = "<group>";
+		};
+		89740D3A2B5D23C5000ACFBA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				89740D492B5D5639000ACFBA /* Modifiers */,
+				89740D462B5D5515000ACFBA /* Extensions */,
+				89740D3B2B5D25B5000ACFBA /* Constant */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		89740D3B2B5D25B5000ACFBA /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				89740D3C2B5D2A0B000ACFBA /* UI.swift */,
+				89740D442B5D4284000ACFBA /* Colour.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		89740D3E2B5D385A000ACFBA /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				89740D3F2B5D3883000ACFBA /* FRVerticalButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		89740D432B5D3958000ACFBA /* MicroComponent */ = {
+			isa = PBXGroup;
+			children = (
+				89740D412B5D3907000ACFBA /* FRText.swift */,
+			);
+			path = MicroComponent;
+			sourceTree = "<group>";
+		};
+		89740D462B5D5515000ACFBA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				89740D472B5D558D000ACFBA /* View.swift */,
+				89740D4C2B5D5761000ACFBA /* Image.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		89740D492B5D5639000ACFBA /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				89740D4A2B5D5669000ACFBA /* ViewModifier.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		89740D4E2B5D662B000ACFBA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				89740D512B5D6661000ACFBA /* Roboto-Bold.ttf */,
+				89740D502B5D6655000ACFBA /* Roboto-Regular.ttf */,
+				89740D4F2B5D6646000ACFBA /* Roboto-Medium.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,8 +269,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89740D552B5D691B000ACFBA /* Roboto-Medium.ttf in Resources */,
 				40711F6C2B5CFD1600F966E7 /* Preview Assets.xcassets in Resources */,
 				40711F692B5CFD1600F966E7 /* Assets.xcassets in Resources */,
+				89740D542B5D6918000ACFBA /* Roboto-Regular.ttf in Resources */,
+				89740D532B5D6915000ACFBA /* Roboto-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,10 +284,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40711F712B5CFD1600F966E7 /* FIB_Remitt.xcdatamodeld in Sources */,
-				40711F6E2B5CFD1600F966E7 /* Persistence.swift in Sources */,
-				40711F672B5CFD1500F966E7 /* ContentView.swift in Sources */,
+				89740D322B5D120D000ACFBA /* InitialView.swift in Sources */,
+				89740D4D2B5D5762000ACFBA /* Image.swift in Sources */,
 				40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */,
+				89740D422B5D3907000ACFBA /* FRText.swift in Sources */,
+				89740D3D2B5D2A0B000ACFBA /* UI.swift in Sources */,
+				89740D402B5D3883000ACFBA /* FRVerticalButton.swift in Sources */,
+				89740D482B5D558D000ACFBA /* View.swift in Sources */,
+				89740D452B5D4284000ACFBA /* Colour.swift in Sources */,
+				89740D4B2B5D5669000ACFBA /* ViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +429,7 @@
 				DEVELOPMENT_TEAM = 5F92FMJYFX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "FIB-Remitt-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -312,6 +459,7 @@
 				DEVELOPMENT_TEAM = 5F92FMJYFX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "FIB-Remitt-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -352,19 +500,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		40711F6F2B5CFD1600F966E7 /* FIB_Remitt.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				40711F702B5CFD1600F966E7 /* FIB_Remitt.xcdatamodel */,
-			);
-			currentVersion = 40711F702B5CFD1600F966E7 /* FIB_Remitt.xcdatamodel */;
-			path = FIB_Remitt.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 40711F592B5CFD1500F966E7 /* Project object */;
 }
