@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "beneficiary_ico.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

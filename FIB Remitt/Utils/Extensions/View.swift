@@ -21,4 +21,11 @@ extension View{
             .font(UI.FRAppDesignedFont(style: .baseMedium))
             .cornerRadius(15)
     }
+    
+    func tabItemStyle(isSelected:Bool) -> some View {
+        self.foregroundColor(isSelected ? Color.white : .text_subitle_deep)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
+            .cornerRadius(6)
+    }
 }
