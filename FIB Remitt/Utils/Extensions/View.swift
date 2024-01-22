@@ -23,7 +23,7 @@ extension View{
     }
     
     func tabItemStyle(isSelected:Bool) -> some View {
-        self.foregroundColor(isSelected ? Color.white : .text_subitle_deep)
+        self.foregroundColor(isSelected ? Color.white : .textFade)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
             .cornerRadius(6)

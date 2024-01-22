@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TextBaseRegular: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .baseRegular, forgroundColor: fg_color)
     }
@@ -17,7 +17,7 @@ struct TextBaseRegular: View {
 
 struct TextBaseMedium: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .baseMedium, forgroundColor: fg_color)
     }
@@ -25,7 +25,7 @@ struct TextBaseMedium: View {
 
 struct TextBaseBold: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .baseBold, forgroundColor: fg_color)
     }
@@ -33,7 +33,7 @@ struct TextBaseBold: View {
 
 struct TextMediumRegular: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .mediumRegular, forgroundColor: fg_color)
     }
@@ -41,7 +41,7 @@ struct TextMediumRegular: View {
 
 struct TextMediumMedium: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .mediumMedium, forgroundColor: fg_color)
     }
@@ -49,7 +49,7 @@ struct TextMediumMedium: View {
 
 struct TextMediumBold: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .mediumBold, forgroundColor: fg_color)
     }
@@ -57,7 +57,7 @@ struct TextMediumBold: View {
 
 struct TextSmallRegular: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .smallRegular, forgroundColor: fg_color)
     }
@@ -65,7 +65,7 @@ struct TextSmallRegular: View {
 
 struct TextSmallMedium: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .smallMedium, forgroundColor: fg_color)
     }
@@ -73,7 +73,7 @@ struct TextSmallMedium: View {
 
 struct TextSmallBold: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .smallBold, forgroundColor: fg_color)
     }
@@ -81,7 +81,7 @@ struct TextSmallBold: View {
 
 struct TextH6Regular: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .H6Regular, forgroundColor: fg_color)
     }
@@ -89,7 +89,7 @@ struct TextH6Regular: View {
 
 struct TextH6Medium: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .H6Medium, forgroundColor: fg_color)
     }
@@ -97,7 +97,7 @@ struct TextH6Medium: View {
 
 struct TextH6Bold: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .H6Bold, forgroundColor: fg_color)
     }
@@ -105,7 +105,7 @@ struct TextH6Bold: View {
 
 struct TextH5Regular: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .H5Regular, forgroundColor: fg_color)
     }
@@ -113,7 +113,7 @@ struct TextH5Regular: View {
 
 struct TextH5Medium: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .H5Medium, forgroundColor: fg_color)
     }
@@ -121,7 +121,7 @@ struct TextH5Medium: View {
 
 struct TextH5Bold: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .H5Bold, forgroundColor: fg_color)
     }
@@ -131,7 +131,7 @@ struct TextH5Bold: View {
 
 struct TextH4Regular: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .H4Regular, forgroundColor: fg_color)
     }
@@ -139,7 +139,7 @@ struct TextH4Regular: View {
 
 struct TextH4Medium: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .H4Medium, forgroundColor: fg_color)
     }
@@ -147,7 +147,7 @@ struct TextH4Medium: View {
 
 struct TextH4Bold: View {
     var text:String
-    var fg_color:Color = .white
+    var fg_color:Color = .text_Regula
     var body: some View {
         DRText(text: text, drFontStyle: .H4Bold, forgroundColor: fg_color)
     }
@@ -156,7 +156,7 @@ struct TextH4Bold: View {
 struct DRText: View {
     var text:String
     var drFontStyle:DesignedFontStyle
-    var forgroundColor:Color = .white
+    var forgroundColor:Color = .text_Regula
     
     var body: some View {
         Text(text)

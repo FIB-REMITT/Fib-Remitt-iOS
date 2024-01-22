@@ -16,6 +16,21 @@
 		40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */; };
 		40711F692B5CFD1600F966E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F682B5CFD1600F966E7 /* Assets.xcassets */; };
 		40711F6C2B5CFD1600F966E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */; };
+		89611BDF2B5E300300407E32 /* SheetHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BDE2B5E300300407E32 /* SheetHolder.swift */; };
+		89611BE12B5E31E400407E32 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BE02B5E31E400407E32 /* Utils.swift */; };
+		89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BE32B5E32AD00407E32 /* TopRoundedShape.swift */; };
+		89611BE62B5E338900407E32 /* FRVContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BE52B5E338900407E32 /* FRVContainer.swift */; };
+		89611BE82B5E3A6D00407E32 /* FRCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BE72B5E3A6D00407E32 /* FRCheckbox.swift */; };
+		89611BEA2B5E464B00407E32 /* FRSimpleDropDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BE92B5E464B00407E32 /* FRSimpleDropDownButton.swift */; };
+		89611BEC2B5E4F4300407E32 /* FRCircularRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BEB2B5E4F4300407E32 /* FRCircularRadioButton.swift */; };
+		89611BEE2B5E785D00407E32 /* FRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BED2B5E785D00407E32 /* FRTextField.swift */; };
+		89611BF02B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BEF2B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift */; };
+		89611BF32B5E7D0600407E32 /* AccountInfoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BF22B5E7D0600407E32 /* AccountInfoCellView.swift */; };
+		89611BF52B5E966000407E32 /* SimpleHInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BF42B5E966000407E32 /* SimpleHInfoView.swift */; };
+		89611BF72B5E9A4900407E32 /* HomeBeneficiarySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BF62B5E9A4900407E32 /* HomeBeneficiarySummaryView.swift */; };
+		89611BF92B5E9A9F00407E32 /* SimpleHInfoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BF82B5E9A9F00407E32 /* SimpleHInfoCellView.swift */; };
+		89611BFB2B5EA5E400407E32 /* HomePayViaFIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BFA2B5EA5E400407E32 /* HomePayViaFIBView.swift */; };
+		89611BFD2B5EA66900407E32 /* SimpleDirectedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BFC2B5EA66900407E32 /* SimpleDirectedCellView.swift */; };
 		89740D322B5D120D000ACFBA /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D312B5D120D000ACFBA /* InitialView.swift */; };
 		89740D3D2B5D2A0B000ACFBA /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D3C2B5D2A0B000ACFBA /* UI.swift */; };
 		89740D402B5D3883000ACFBA /* FRVerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D3F2B5D3883000ACFBA /* FRVerticalButton.swift */; };
@@ -40,6 +55,21 @@
 		40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIB_RemittApp.swift; sourceTree = "<group>"; };
 		40711F682B5CFD1600F966E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		89611BDE2B5E300300407E32 /* SheetHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHolder.swift; sourceTree = "<group>"; };
+		89611BE02B5E31E400407E32 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		89611BE32B5E32AD00407E32 /* TopRoundedShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRoundedShape.swift; sourceTree = "<group>"; };
+		89611BE52B5E338900407E32 /* FRVContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRVContainer.swift; sourceTree = "<group>"; };
+		89611BE72B5E3A6D00407E32 /* FRCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCheckbox.swift; sourceTree = "<group>"; };
+		89611BE92B5E464B00407E32 /* FRSimpleDropDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRSimpleDropDownButton.swift; sourceTree = "<group>"; };
+		89611BEB2B5E4F4300407E32 /* FRCircularRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCircularRadioButton.swift; sourceTree = "<group>"; };
+		89611BED2B5E785D00407E32 /* FRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRTextField.swift; sourceTree = "<group>"; };
+		89611BEF2B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSelectBeneficiaryView.swift; sourceTree = "<group>"; };
+		89611BF22B5E7D0600407E32 /* AccountInfoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoCellView.swift; sourceTree = "<group>"; };
+		89611BF42B5E966000407E32 /* SimpleHInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHInfoView.swift; sourceTree = "<group>"; };
+		89611BF62B5E9A4900407E32 /* HomeBeneficiarySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBeneficiarySummaryView.swift; sourceTree = "<group>"; };
+		89611BF82B5E9A9F00407E32 /* SimpleHInfoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHInfoCellView.swift; sourceTree = "<group>"; };
+		89611BFA2B5EA5E400407E32 /* HomePayViaFIBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePayViaFIBView.swift; sourceTree = "<group>"; };
+		89611BFC2B5EA66900407E32 /* SimpleDirectedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDirectedCellView.swift; sourceTree = "<group>"; };
 		89740D312B5D120D000ACFBA /* InitialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		89740D3C2B5D2A0B000ACFBA /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		89740D3F2B5D3883000ACFBA /* FRVerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRVerticalButton.swift; sourceTree = "<group>"; };
@@ -118,6 +148,33 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		89611BDD2B5E2A8800407E32 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				89611BDE2B5E300300407E32 /* SheetHolder.swift */,
+				89611BE52B5E338900407E32 /* FRVContainer.swift */,
+			);
+			path = Containers;
+			sourceTree = "<group>";
+		};
+		89611BE22B5E326D00407E32 /* Shape */ = {
+			isa = PBXGroup;
+			children = (
+				89611BE32B5E32AD00407E32 /* TopRoundedShape.swift */,
+			);
+			path = Shape;
+			sourceTree = "<group>";
+		};
+		89611BF12B5E7CA000407E32 /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				89611BF22B5E7D0600407E32 /* AccountInfoCellView.swift */,
+				89611BF82B5E9A9F00407E32 /* SimpleHInfoCellView.swift */,
+				89611BFC2B5EA66900407E32 /* SimpleDirectedCellView.swift */,
+			);
+			path = ViewComponents;
+			sourceTree = "<group>";
+		};
 		89740D332B5D1CC0000ACFBA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				2E0F98FA2B5D9FCE0094CE9F /* HomeRootView.swift */,
+				89611BEF2B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift */,
+				89611BF62B5E9A4900407E32 /* HomeBeneficiarySummaryView.swift */,
+				89611BFA2B5EA5E400407E32 /* HomePayViaFIBView.swift */,
 			);
 			path = HomeTab;
 			sourceTree = "<group>";
@@ -177,8 +237,11 @@
 		89740D392B5D226C000ACFBA /* Common Components */ = {
 			isa = PBXGroup;
 			children = (
-				89740D432B5D3958000ACFBA /* MicroComponent */,
+				89740D432B5D3958000ACFBA /* MicroComponents */,
+				89611BF12B5E7CA000407E32 /* ViewComponents */,
+				89611BDD2B5E2A8800407E32 /* Containers */,
 				89740D3E2B5D385A000ACFBA /* Buttons */,
+				89611BE22B5E326D00407E32 /* Shape */,
 			);
 			path = "Common Components";
 			sourceTree = "<group>";
@@ -189,6 +252,7 @@
 				89740D492B5D5639000ACFBA /* Modifiers */,
 				89740D462B5D5515000ACFBA /* Extensions */,
 				89740D3B2B5D25B5000ACFBA /* Constant */,
+				89611BE02B5E31E400407E32 /* Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -206,16 +270,21 @@
 			isa = PBXGroup;
 			children = (
 				89740D3F2B5D3883000ACFBA /* FRVerticalButton.swift */,
+				89611BE72B5E3A6D00407E32 /* FRCheckbox.swift */,
+				89611BEB2B5E4F4300407E32 /* FRCircularRadioButton.swift */,
+				89611BE92B5E464B00407E32 /* FRSimpleDropDownButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
 		};
-		89740D432B5D3958000ACFBA /* MicroComponent */ = {
+		89740D432B5D3958000ACFBA /* MicroComponents */ = {
 			isa = PBXGroup;
 			children = (
 				89740D412B5D3907000ACFBA /* FRText.swift */,
+				89611BED2B5E785D00407E32 /* FRTextField.swift */,
+				89611BF42B5E966000407E32 /* SimpleHInfoView.swift */,
 			);
-			path = MicroComponent;
+			path = MicroComponents;
 			sourceTree = "<group>";
 		};
 		89740D462B5D5515000ACFBA /* Extensions */ = {
@@ -319,19 +388,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				89740D322B5D120D000ACFBA /* InitialView.swift in Sources */,
+				89611BE62B5E338900407E32 /* FRVContainer.swift in Sources */,
+				89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */,
 				2E0F99032B5DAE260094CE9F /* FRBottomBar.swift in Sources */,
 				2E0F99022B5DAE260094CE9F /* XBottomBarContainer.swift in Sources */,
+				89611BF92B5E9A9F00407E32 /* SimpleHInfoCellView.swift in Sources */,
+				89611BDF2B5E300300407E32 /* SheetHolder.swift in Sources */,
+				89611BEC2B5E4F4300407E32 /* FRCircularRadioButton.swift in Sources */,
+				89611BF02B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift in Sources */,
 				89740D4D2B5D5762000ACFBA /* Image.swift in Sources */,
 				40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */,
 				2E0F99062B5DB0B40094CE9F /* SettingsRootView.swift in Sources */,
+				89611BE82B5E3A6D00407E32 /* FRCheckbox.swift in Sources */,
+				89611BFB2B5EA5E400407E32 /* HomePayViaFIBView.swift in Sources */,
 				2E0F98FB2B5D9FCE0094CE9F /* HomeRootView.swift in Sources */,
 				2E0F98FF2B5DA0590094CE9F /* BeneficiaryRootView.swift in Sources */,
+				89611BE12B5E31E400407E32 /* Utils.swift in Sources */,
+				89611BEA2B5E464B00407E32 /* FRSimpleDropDownButton.swift in Sources */,
 				89740D422B5D3907000ACFBA /* FRText.swift in Sources */,
+				89611BF72B5E9A4900407E32 /* HomeBeneficiarySummaryView.swift in Sources */,
+				89611BEE2B5E785D00407E32 /* FRTextField.swift in Sources */,
 				89740D3D2B5D2A0B000ACFBA /* UI.swift in Sources */,
+				89611BFD2B5EA66900407E32 /* SimpleDirectedCellView.swift in Sources */,
+				89611BF52B5E966000407E32 /* SimpleHInfoView.swift in Sources */,
 				2E0F98FD2B5DA00E0094CE9F /* HistoryRootView.swift in Sources */,
 				89740D402B5D3883000ACFBA /* FRVerticalButton.swift in Sources */,
 				89740D482B5D558D000ACFBA /* View.swift in Sources */,
 				89740D452B5D4284000ACFBA /* Colour.swift in Sources */,
+				89611BF32B5E7D0600407E32 /* AccountInfoCellView.swift in Sources */,
 				89740D4B2B5D5669000ACFBA /* ViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

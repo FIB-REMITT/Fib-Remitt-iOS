@@ -21,7 +21,7 @@ struct InitialView: View {
                     .imageDefaultStyle()
                     .frame(width: UIScreen.main.bounds.width * 0.224)
                 
-                TextMediumRegular(text: "Instant Cash Transfers at Your Fingertips. Effortless, Secure, Anytime, Anywhere.", fg_color: .textBackground)
+                TextMediumRegular(text: "Instant Cash Transfers at Your Fingertips. Effortless, Secure, Anytime, Anywhere.", fg_color: .frBackground)
                     .padding(.horizontal, 50)
                     .padding(8)
                     .multilineTextAlignment(.center)
@@ -31,7 +31,7 @@ struct InitialView: View {
                     .padding(29)
                 
                 Spacer()
-                XVerticalBtn(title: "Log In With FIB", textColor:.primary500) {}
+                FRVerticalBtn(title: "Log In With FIB", textColor:.primary500) {}
                     .padding()
                 Spacer()
             }

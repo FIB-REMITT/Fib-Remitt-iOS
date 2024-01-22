@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-struct XVerticalBtn: View {
+struct FRVerticalBtn: View {
 
-    var title: String?
-    var btnColor : Color = .white
-    var textColor : Color = Color.white
-    var action : ()->Void
-    var icon : String?
-    var body: some View {
+    var title       : String?
+    var btnColor    : Color = .white
+    var textColor   : Color = Color.white
+    var action      : ()->Void
+    var icon        : String?
+    
+    var body : some View {
         Button(action: action, label: {
             HStack(spacing: 12){
                 if icon != nil {

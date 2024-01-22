@@ -22,7 +22,7 @@ struct FRBottomBar: View {
             }
         }
         .padding(6)
-        .background(Color.text_background.edgesIgnoringSafeArea(.bottom))
+        .background(Color.frBackground.edgesIgnoringSafeArea(.bottom))
         .shadow(radius: 3)
     }
 }
