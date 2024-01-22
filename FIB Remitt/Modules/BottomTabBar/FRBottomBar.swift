@@ -30,7 +30,7 @@ struct FRBottomBar: View {
 extension FRBottomBar{
     func tabView(_ tab:TabBarItem) -> some View {
         VStack {
-            Image(tab.icon)
+            Image(selected == tab ? "\(tab.icon)_selected" :  tab.icon)
                 .font(.subheadline)
                 .scaleEffect(selected == tab ? 1.1 : 1)
             

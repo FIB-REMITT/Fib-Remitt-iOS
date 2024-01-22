@@ -13,6 +13,9 @@
 		2E0F99022B5DAE260094CE9F /* XBottomBarContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F99002B5DAE260094CE9F /* XBottomBarContainer.swift */; };
 		2E0F99032B5DAE260094CE9F /* FRBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F99012B5DAE260094CE9F /* FRBottomBar.swift */; };
 		2E0F99062B5DB0B40094CE9F /* SettingsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F99052B5DB0B40094CE9F /* SettingsRootView.swift */; };
+		2E91D7072B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D7062B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift */; };
+		2E91D7092B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */; };
+		2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D70A2B5F094B002983F1 /* BeneficiaryDetailView.swift */; };
 		40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */; };
 		40711F692B5CFD1600F966E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F682B5CFD1600F966E7 /* Assets.xcassets */; };
 		40711F6C2B5CFD1600F966E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */; };
@@ -51,6 +54,9 @@
 		2E0F99002B5DAE260094CE9F /* XBottomBarContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XBottomBarContainer.swift; sourceTree = "<group>"; };
 		2E0F99012B5DAE260094CE9F /* FRBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRBottomBar.swift; sourceTree = "<group>"; };
 		2E0F99052B5DB0B40094CE9F /* SettingsRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootView.swift; sourceTree = "<group>"; };
+		2E91D7062B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTransferSuccessfulView.swift; sourceTree = "<group>"; };
+		2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryTypeCellView.swift; sourceTree = "<group>"; };
+		2E91D70A2B5F094B002983F1 /* BeneficiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryDetailView.swift; sourceTree = "<group>"; };
 		40711F612B5CFD1500F966E7 /* FIB Remitt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FIB Remitt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIB_RemittApp.swift; sourceTree = "<group>"; };
 		40711F682B5CFD1600F966E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -171,6 +177,7 @@
 				89611BF22B5E7D0600407E32 /* AccountInfoCellView.swift */,
 				89611BF82B5E9A9F00407E32 /* SimpleHInfoCellView.swift */,
 				89611BFC2B5EA66900407E32 /* SimpleDirectedCellView.swift */,
+				2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -214,6 +221,7 @@
 				89611BEF2B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift */,
 				89611BF62B5E9A4900407E32 /* HomeBeneficiarySummaryView.swift */,
 				89611BFA2B5EA5E400407E32 /* HomePayViaFIBView.swift */,
+				2E91D7062B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift */,
 			);
 			path = HomeTab;
 			sourceTree = "<group>";
@@ -222,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				2E0F98FE2B5DA0590094CE9F /* BeneficiaryRootView.swift */,
+				2E91D70A2B5F094B002983F1 /* BeneficiaryDetailView.swift */,
 			);
 			path = BeneficiaryTab;
 			sourceTree = "<group>";
@@ -390,6 +399,7 @@
 				89740D322B5D120D000ACFBA /* InitialView.swift in Sources */,
 				89611BE62B5E338900407E32 /* FRVContainer.swift in Sources */,
 				89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */,
+				2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */,
 				2E0F99032B5DAE260094CE9F /* FRBottomBar.swift in Sources */,
 				2E0F99022B5DAE260094CE9F /* XBottomBarContainer.swift in Sources */,
 				89611BF92B5E9A9F00407E32 /* SimpleHInfoCellView.swift in Sources */,
@@ -401,6 +411,7 @@
 				2E0F99062B5DB0B40094CE9F /* SettingsRootView.swift in Sources */,
 				89611BE82B5E3A6D00407E32 /* FRCheckbox.swift in Sources */,
 				89611BFB2B5EA5E400407E32 /* HomePayViaFIBView.swift in Sources */,
+				2E91D7072B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift in Sources */,
 				2E0F98FB2B5D9FCE0094CE9F /* HomeRootView.swift in Sources */,
 				2E0F98FF2B5DA0590094CE9F /* BeneficiaryRootView.swift in Sources */,
 				89611BE12B5E31E400407E32 /* Utils.swift in Sources */,
@@ -408,6 +419,7 @@
 				89740D422B5D3907000ACFBA /* FRText.swift in Sources */,
 				89611BF72B5E9A4900407E32 /* HomeBeneficiarySummaryView.swift in Sources */,
 				89611BEE2B5E785D00407E32 /* FRTextField.swift in Sources */,
+				2E91D7092B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift in Sources */,
 				89740D3D2B5D2A0B000ACFBA /* UI.swift in Sources */,
 				89611BFD2B5EA66900407E32 /* SimpleDirectedCellView.swift in Sources */,
 				89611BF52B5E966000407E32 /* SimpleHInfoView.swift in Sources */,
