@@ -52,6 +52,10 @@ struct HomeRootView: View {
     }
 }
 
+extension HomeRootView {
+    
+}
+
 #Preview {
     HomeRootView()
 }

@@ -28,7 +28,7 @@ struct SimpleHColonInfoView: View {
     var body: some View {
         HStack(spacing:20){
             TextBaseRegular(text: title, fg_color: .textMute)
-                .frame(width: 100, alignment: .leading)
+                .frame(width: 120, alignment: .leading)
             TextBaseRegular(text: ":", fg_color: .textMute)
             TextBaseRegular(text: info, fg_color: .textMute)
             Spacer()

@@ -38,6 +38,18 @@ struct HomeTransferSuccessfulView: View {
     }
 }
 
+////MARK: - VIEW COMPONENTS
+//extension HomePayViaFIBView{
+//    private var bottomButton : some View{}
+//}
+//
+////MARK: - ACTIONS
+//extension HomePayViaFIBView{
+//    private func notificationBtnPressed() {
+//
+//    }
+//}
+
 #Preview {
     HomeTransferSuccessfulView()
 }

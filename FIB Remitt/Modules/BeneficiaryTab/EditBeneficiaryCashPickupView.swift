@@ -1,15 +1,15 @@
 //
-//  SettingsRootView.swift
+//  EditBeneficiaryCashPickupView.swift
 //  FIB Remitt
 //
-//  Created by Izak on 22/1/24.
+//  Created by Ainul Kazi on 23/1/24.
 //
 
 import SwiftUI
 
-struct SettingsRootView: View {
+struct EditBeneficiaryCashPickupView: View {
     var body: some View {
-        Text("Settings, World!")
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 ////MARK: - VIEW COMPONENTS
@@ -24,5 +24,5 @@ struct SettingsRootView: View {
 //    }
 //}
 #Preview {
-    SettingsRootView()
+    EditBeneficiaryCashPickupView()
 }

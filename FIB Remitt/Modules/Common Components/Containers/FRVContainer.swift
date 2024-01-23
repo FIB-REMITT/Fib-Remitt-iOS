@@ -23,13 +23,7 @@ struct FRVContainer<Content:View>: View {
     
     var body: some View {
             VStack (spacing:0){
-
                 VStack (alignment:alignment, spacing:spacing){
-//                    Rectangle()
-//                        .foregroundColor(Color.text_title)
-//                        .frame(width: UIScreen.main.bounds.width * 0.11, height: 4)
-//                        .cornerRadius(4)
-//                        .offset(y:-7)
                     content
                         .onTapGesture {}
                 }
@@ -47,7 +41,6 @@ struct FRVContainer<Content:View>: View {
     FRVContainer(spacing:10, alignment: .trailing, backgroundColor: .primary200) {
         TextMediumRegular(text: "Instant Cash Transfers at Your Fingertips. Effortless, Secure, Anytime, Anywhere.", fg_color: .textFade)
             .padding(.horizontal, 0)
-           // .padding(8)
             .multilineTextAlignment(.center)
         
         TextMediumRegular(text: "Instant Cash Transfers at Your", fg_color: .frBackground)

@@ -9,25 +9,12 @@ import SwiftUI
 
 struct HomePayViaFIBView: View {
     var body: some View {
-        VStack{
-            TextBaseRegular(text: "Scan bellow QR using FIB App", fg_color: .textMute)
-            Image("QR_Img")
-            TextMediumRegular(text: "EFGH-ABCD-IJKL-MNOP", fg_color: .textMute)
-                .padding()
-                .background(.frForground)
-                .cornerRadius(18)
-                
-
-            TextBaseRegular(text: "Already have FIB on your phone?", fg_color: .textMute).padding(.vertical)
-            SimpleDirectedCellView()
-            SimpleDirectedCellView()
-            SimpleDirectedCellView()
+        VStack(spacing:20){
+            navigationBar
+            qrInfoContainer
+            middleListContainer
             Spacer()
-            Button(action: {
-                
-            }, label: {
-                TextBaseRegular(text: "Cancel", fg_color: .red).underline()
-            })
+            bottomCancelButton
 
         }
         .padding()
@@ -37,4 +24,41 @@ struct HomePayViaFIBView: View {
 
 #Preview {
     HomePayViaFIBView()
+}
+
+//MARK: - VIEW COMPONENTS
+extension HomePayViaFIBView{
+    private var navigationBar : some View {
+        FRNavigationBarView(title: "Pay via FIB", rightView: AnyView(FRBarButton(icon: "bell_ico", action: {self.notificationBtnPressed()})))
+    }
+    private var qrInfoContainer : some View{
+        VStack {
+            TextBaseRegular(text: "Scan bellow QR using FIB App", fg_color: .textMute)
+            Image("QR_Img")
+            TextMediumRegular(text: "EFGH-ABCD-IJKL-MNOP", fg_color: .textMute)
+                .padding(10)
+                .background(.frForground)
+                .cornerRadius(18)
+        }
+    }
+    
+    private var middleListContainer : some View{
+        VStack{
+            TextBaseRegular(text: "Already have FIB on your phone?", fg_color: .textMute).padding(.vertical,15)
+            SimpleDirectedCellView()
+            SimpleDirectedCellView()
+            SimpleDirectedCellView()
+        }
+    }
+    
+    private var bottomCancelButton : some View{
+        FRTextButton(title: "Cancel", color: .red) { }
+    }
+}
+
+//MARK: - ACTIONS
+extension HomePayViaFIBView{
+    private func notificationBtnPressed() {
+        
+    }
 }

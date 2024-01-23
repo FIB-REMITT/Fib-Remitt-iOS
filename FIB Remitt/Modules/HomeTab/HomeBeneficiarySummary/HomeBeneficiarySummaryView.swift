@@ -9,7 +9,25 @@ import SwiftUI
 
 struct HomeBeneficiarySummaryView: View {
     var body: some View {
-        VStack(spacing:10){
+        VStack(spacing:15){
+            navigationBar
+            contextContainer
+            Spacer()
+            bottomButton
+        }
+        .padding()
+        .background(Color.frBackground.ignoresSafeArea())
+    }
+}
+
+//MARK: - VIEW COMPONENTS
+extension HomeBeneficiarySummaryView{
+    private var navigationBar : some View {
+        FRNavigationBarView(title: "Summary", rightView: AnyView(FRBarButton(icon: "bell_ico", action: {self.notificationBtnPressed()})))
+    }
+    
+    private var contextContainer : some View{
+        VStack{
             SimpleHInfoCellView()
             SimpleHInfoCellView(title: "Purpose", info: "Family Support")
             FRVContainer (backgroundColor:.frForground){
@@ -34,11 +52,20 @@ struct HomeBeneficiarySummaryView: View {
                     SimpleHInfoView(title: "Total payble", info: "130,000 IQD")
                     SimpleHInfoView(title: "Recipient gets", info: "2,875 TRY")}.foregroundColor(Color.primary500)
             }
-            Spacer()
-            FRVerticalBtn(title: "Procced", btnColor: .primary500) {}
         }
-        .padding()
-        .background(Color.frBackground.ignoresSafeArea())
+    }
+    private var bottomButton : some View{
+        FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}
+    }
+}
+
+//MARK: - ACTIONS
+extension HomeBeneficiarySummaryView{
+    private func notificationBtnPressed() {
+        
+    }
+    private func proccedBtnPressed() {
+        
     }
 }
 

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "trash_red_ico.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
