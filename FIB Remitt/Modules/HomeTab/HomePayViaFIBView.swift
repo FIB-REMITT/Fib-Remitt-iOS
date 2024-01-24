@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomePayViaFIBView: View {
+    @ObservedObject var vm = HomeViewModel()
     var body: some View {
         VStack(spacing:20){
             navigationBar
@@ -19,6 +20,8 @@ struct HomePayViaFIBView: View {
         }
         .padding()
         .background(Color.frBackground.ignoresSafeArea())
+        .navigationBarHidden(true)
+        .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
     }
 }
 

@@ -12,15 +12,13 @@ struct FRCheckbox: View {
     @Binding var isSelected : Bool
     var radioColor = Color.primary_500
     var body: some View {
-        HStack(alignment: .top,spacing: 13){
+        HStack(alignment: .center, spacing: 13){
             Toggle("", isOn: $isSelected)
                 .toggleStyle(SquareRadioButtonStyle(size: 22, color: radioColor))
             
             Text("I agree the")
                 .font(UI.FRAppDesignedFont(style: .baseRegular))
                 .foregroundColor(Color.textFade)
-//                .tint(Color.btn_primary)
-            Spacer()
         }
         .frame(maxHeight: 36)
     }

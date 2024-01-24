@@ -13,12 +13,13 @@ struct SplashView: View {
     var body: some View {
         ZStack{
             if isActive{
-                splashView
-            }else{
                 InitialView()
+//                splashView
+            }else{
+                splashView
             }
         }.onAppear(){
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 withAnimation {
                     self.isActive = true
                 }

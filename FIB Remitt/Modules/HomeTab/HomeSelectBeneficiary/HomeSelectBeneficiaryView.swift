@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeSelectBeneficiaryView: View {
     @State var isSelected : Bool = true
     @State var isNotSelected : Bool = false
+    @ObservedObject var vm = HomeViewModel()
     var body: some View {
         VStack (spacing: 25){
             navigationBar
@@ -20,6 +21,8 @@ struct HomeSelectBeneficiaryView: View {
         }
         .padding()
         .background(Color.frBackground.ignoresSafeArea())
+        .navigationBarHidden(true)
+        .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
     }
 }
 
@@ -58,7 +61,7 @@ extension HomeSelectBeneficiaryView{
         
     }
     private func proccedBtnPressed() {
-        
+        vm.navigateToBeneficiarySummary()
     }
 }
 

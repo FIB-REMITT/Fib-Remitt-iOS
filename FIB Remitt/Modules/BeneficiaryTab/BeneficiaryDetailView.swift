@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BeneficiaryDetailView: View {
+    @ObservedObject var vm = BeneficiaryViewModel()
     var body: some View {
         VStack(spacing:20){
             navigationBar
@@ -16,6 +17,8 @@ struct BeneficiaryDetailView: View {
         }
         .padding()
         .background(Color.fr_background.ignoresSafeArea())
+        .navigationBarHidden(true)
+        .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
         
     }
 }
@@ -27,9 +30,7 @@ extension BeneficiaryDetailView{
     private var contextContainer : some View{
         FRVContainer (backgroundColor:.frForground){
             contextTopInfoSection
-            
             contextMiddleInfoSection
-            
             bankDetail
         }
     }
@@ -82,7 +83,7 @@ extension BeneficiaryDetailView{
 
     }
     private func editBtnPressed() {
-
+        vm.navigateToEditBankBeneficiary()
     }
 }
 #Preview {

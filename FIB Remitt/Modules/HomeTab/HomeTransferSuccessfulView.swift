@@ -12,43 +12,56 @@ struct HomeTransferSuccessfulView: View {
     var body: some View {
         VStack(spacing: 20){
             Spacer()
-            Image("success_tick")
-                .imageDefaultStyle()
-                .frame(width: width * 0.25)
-            TextH4Medium(text: "Congratulation!", fg_color: .textRegula)
-            TextBaseRegular(text: "Your remittance has been submitted for processing. You'll be updated regularly about the progress of the transfer.", fg_color: .textFade)
-                .padding(.horizontal)
-                .multilineTextAlignment(.center)
-
-            VStack(spacing:10){
-                FRVerticalBtn(title:"Back To Home", btnColor: .primary500) {}
-                    .frame(width: width * 0.4)
-                Button(action: {
-                }, label: {
-                    TextBaseMedium(text: "Track My Transfer", fg_color: .primary500)
-                        .padding(12)
-                        .padding(.horizontal, 6)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 20)
-                                .strokeBorder(Color.primary500, lineWidth: 1) }
-                })
-            }.padding()
+            tickIcon
+            topTitle
+            messageDescription
+            actionButtonContainer
             Spacer()
         }.background(Color.fr_background.ignoresSafeArea())
     }
 }
 
-////MARK: - VIEW COMPONENTS
-//extension HomePayViaFIBView{
-//    private var bottomButton : some View{}
-//}
-//
-////MARK: - ACTIONS
-//extension HomePayViaFIBView{
-//    private func notificationBtnPressed() {
-//
-//    }
-//}
+//MARK: - VIEW COMPONENTS
+extension HomeTransferSuccessfulView{
+    private var tickIcon : some View{
+        Image("success_tick")
+            .imageDefaultStyle()
+            .frame(width: width * 0.25)
+    }
+    
+    private var topTitle : some View{
+        TextH4Medium(text: "Congratulation!", fg_color: .textRegula)
+    }
+    
+    private var messageDescription : some View{
+        TextBaseRegular(text: "Your remittance has been submitted for processing. You'll be updated regularly about the progress of the transfer.", fg_color: .textFade)
+            .padding(.horizontal)
+            .multilineTextAlignment(.center)
+    }
+    private var actionButtonContainer : some View{
+        VStack(spacing:10){
+            FRVerticalBtn(title:"Back To Home", btnColor: .primary500) {self.backToHomeBtnPressed()}
+                .frame(width: width * 0.4)
+            
+            Button(action: { self.trackMyTransferButtonPressed() }, label: {
+                TextBaseMedium(text: "Track My Transfer", fg_color: .primary500)
+                    .padding(12)
+                    .padding(.horizontal, 6)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 20)
+                            .strokeBorder(Color.primary500, lineWidth: 1) }
+            })
+        }.padding()
+
+    }
+
+}
+
+//MARK: - ACTIONS
+extension HomeTransferSuccessfulView{
+    private func backToHomeBtnPressed() {}
+    private func trackMyTransferButtonPressed() {}
+}
 
 #Preview {
     HomeTransferSuccessfulView()

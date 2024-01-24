@@ -11,49 +11,112 @@ struct HomeRootView: View {
     @State var isSelected = false
     @State var isNotSelected = true
     @State var transferAmount = ""
+    
+    @ObservedObject var vm = HomeViewModel()
+    
     var body: some View {
         ZStack{
             Color.frBackground.ignoresSafeArea()
             VStack (spacing: 16){
-                Spacer()
-                FRVContainer (spacing: 7, backgroundColor: .frForground){
-                    TextBaseMedium(text: "Transfer amount", fg_color: .text_Mute)
-                    HStack{
-                        FRTextField(placeholder: Text("Enter Amount"), text: $transferAmount)
-                        FRSimpleDropDownButton(title: "IQD", icon: "turkey")
-                    }
-                    
-                    TextBaseMedium(text: "Recipient gets", fg_color: .text_Mute)
-                    HStack{
-                        FRTextField(placeholder: Text("Enter Amount"), text: $transferAmount)
-                        FRSimpleDropDownButton(title: "IQD", icon: "turkey")
-                    }
-                    Divider().padding(.horizontal)
-                    TextSmallRegular(text: "Conversion rate 1 TRY = 43.53 IQD", fg_color: .primary400)
-                }
-                FRVContainer (spacing: 7, backgroundColor: .frForground){
-                    TextBaseMedium(text: "Delivery Method", fg_color: .text_Mute)
-                    HStack{
-                        FRCircularRadioButton(isSelected: $isSelected)
-                        FRCircularRadioButton(isSelected: $isNotSelected, title: "Cash Pickup")
+                //Spacer()
+                topBarContainer
+                ScrollView{
+                    VStack(spacing:16){
+                        topProfileContainer
+                        topAmountInputContainer
+                        deliveryMethodContainer
+                        purposeContainer
+                        termsAndConditionContainer
+                        bottomProccedButton
                     }
                 }
-                FRVContainer (backgroundColor: .frForground){
-                    TextBaseMedium(text: "Purpose", fg_color: .text_Mute)
-                    FRSimpleDropDownButton()
-                }
-                FRCheckbox(isSelected: $isSelected)
-                FRVerticalBtn(title: "Procced", btnColor: .primary500) {}
-                Spacer()
             }
             .padding()
             
-        }.onTapGesture {hideKeyboard()}
+            
+        }.navigationBarHidden(true)
+        .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
+        .onTapGesture {hideKeyboard()}
     }
 }
 
-extension HomeRootView {
-    
+//MARK: - VIEW COMPONENTS
+extension HomeRootView{
+    private var topBarContainer : some View{
+        HStack{
+            Image("logo_horizantal")
+            Spacer()
+            FRTextDropDownButton(title: "Eng")
+            FRBarButton(icon: "bell_ico")
+        }
+    }
+    private var topProfileContainer : some View{
+        FRHContainer(backgroundColor: Color.primary500){
+            HStack{
+                Image("turkey")
+                    .imageDefaultStyle()
+                    .frame(width: 40)
+                TextBaseMedium(text: "Oscar Pruitt", fg_color: .fr_forground)
+                    .padding(.trailing,70)
+                
+            }
+            .padding(5)
+            .background(Color.primary400)
+            .cornerRadius(21)
+            Spacer()
+            FRImageButton(image: "nav",size: 40)
+        }
+    }
+    private var topAmountInputContainer : some View{
+        FRVContainer (spacing: 7, backgroundColor: .frForground){
+            TextBaseMedium(text: "Transfer amount", fg_color: .text_Mute)
+            HStack{
+                FRVerticalField(placeholder: "Enter Amount", inputText: $transferAmount)
+                FRSimpleDropDownButton(title: "IQD", icon: "turkey")
+            }
+            
+            TextBaseMedium(text: "Recipient gets", fg_color: .text_Mute)
+            HStack{
+                FRVerticalField(placeholder: "Enter Amount", inputText: $transferAmount)
+                FRSimpleDropDownButton(title: "IQD", icon: "turkey")
+            }
+            Divider().padding(.horizontal)
+            TextSmallRegular(text: "Conversion rate 1 TRY = 43.53 IQD", fg_color: .primary400)
+        }
+    }
+    private var deliveryMethodContainer : some View{
+        FRVContainer (spacing: 7, backgroundColor: .frForground){
+            TextBaseMedium(text: "Delivery Method", fg_color: .text_Mute)
+            HStack{
+                FRCircularRadioButton(isSelected: $isSelected)
+                FRCircularRadioButton(isSelected: $isNotSelected, title: "Cash Pickup")
+            }
+        }
+    }
+    private var purposeContainer : some View{
+        FRVContainer (backgroundColor: .frForground){
+            TextBaseMedium(text: "Purpose", fg_color: .text_Mute)
+            FRSimpleDropDownButton()
+        }
+    }
+    private var termsAndConditionContainer : some View{
+        HStack(){
+            FRCheckbox(isSelected: $isSelected)
+            FRTextButton(title: "Terms and Conditions", action: {self.termsAndConditionBtnPressed()})
+            Spacer()
+        }
+    }
+    private var bottomProccedButton : some View{
+        FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}
+    }
+}
+
+//MARK: - ACTIONS
+extension HomeRootView{
+    private func notificationBtnPressed() {}
+    private func proccedBtnPressed() {vm.navigateSelectBeneficiary()}
+    private func termsAndConditionBtnPressed() {
+    }
 }
 
 #Preview {

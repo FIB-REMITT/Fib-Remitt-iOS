@@ -20,7 +20,7 @@ struct FRBottomBarContainer: View {
             VStack (spacing: 0){
                 ZStack {
                     TabView(selection: $selected) {
-                        AnyView(HomeRootView())
+                        AnyView( HomeRootView())
                             .tag(TabBarItem.data[0])
                         AnyView(BeneficiaryRootView())
                             .tag(TabBarItem.data[1])

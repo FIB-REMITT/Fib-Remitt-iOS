@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeBeneficiarySummaryView: View {
+    @ObservedObject var vm = HomeViewModel()
     var body: some View {
         VStack(spacing:15){
             navigationBar
@@ -17,6 +18,8 @@ struct HomeBeneficiarySummaryView: View {
         }
         .padding()
         .background(Color.frBackground.ignoresSafeArea())
+        .navigationBarHidden(true)
+        .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
     }
 }
 
@@ -65,7 +68,7 @@ extension HomeBeneficiarySummaryView{
         
     }
     private func proccedBtnPressed() {
-        
+        vm.navigateToPayViaFIB()
     }
 }
 

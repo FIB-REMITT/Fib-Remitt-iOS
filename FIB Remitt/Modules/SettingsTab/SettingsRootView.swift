@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsRootView: View {
     var body: some View {
-        Text("Settings, World!")
+        Text("Comming Soon!")
     }
 }
 ////MARK: - VIEW COMPONENTS

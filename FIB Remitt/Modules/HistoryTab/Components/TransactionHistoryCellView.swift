@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TransactionHistoryCellView: View {
+    @ObservedObject var vm = TransactionHistoryViewModel()
     var body: some View {
         FRVContainer (backgroundColor: .frForground){
             HStack (spacing:15){

@@ -10,6 +10,8 @@ import SwiftUI
 struct BeneficiaryRootView: View {
     @State var isNotSelected : Bool = false
     @State var isSelected    : Bool = true
+    @ObservedObject var vm = BeneficiaryViewModel()
+    
     var body: some View {
         VStack(spacing:15){
             navigationBar
@@ -19,6 +21,8 @@ struct BeneficiaryRootView: View {
         }
         .padding()
         .background(Color.fr_background.ignoresSafeArea())
+        .navigationBarHidden(true)
+        .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
     }
 }
 //MARK: - VIEW COMPONENTS
@@ -41,6 +45,8 @@ extension BeneficiaryRootView{
             AccountInfoCellView(selected: $isNotSelected)
             AccountInfoCellView(selected: $isNotSelected)
             AccountInfoCellView(selected: $isNotSelected)
+        }.onTapGesture {
+            vm.navigateToBeneficiaryDetail()
         }
     }
 }
@@ -48,7 +54,7 @@ extension BeneficiaryRootView{
 //MARK: - ACTIONS
 extension BeneficiaryRootView{
     private func addNewBtnPressed() {
-
+        vm.navigateToEditBankBeneficiary()
     }
 }
 #Preview {

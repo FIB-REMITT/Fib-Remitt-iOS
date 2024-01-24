@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct FRBarButton: View {
+    @Environment(\.presentationMode) var presentationMode
     var icon    : String
-    var action  : () -> Void = {}
+    var action  : (() -> Void)? = nil
     var body: some View {
-        Button(action: { action() }, label: {
+        Button(action: {
+            if let action{action()}else{presentationMode.wrappedValue.dismiss()}
+        }, label: {
             Image(icon)
                 .imageDefaultStyle()
-                .frame(width: 20 ,height: 20)
-                .padding(6)
+                .frame(width: 26 ,height: 26)
+                .padding(4)
                 .background(.frForground)
                 .cornerRadius(5)
         })

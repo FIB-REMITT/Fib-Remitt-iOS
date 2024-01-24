@@ -19,6 +19,7 @@ struct HistoryDetailView: View {
             Spacer()
         }.padding()
             .background(Color.fr_background.ignoresSafeArea())
+            .navigationBarHidden(true)
     }
 }
 //MARK: - VIEW COMPONENTS

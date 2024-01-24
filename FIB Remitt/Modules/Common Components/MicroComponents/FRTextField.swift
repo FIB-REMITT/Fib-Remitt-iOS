@@ -20,7 +20,7 @@ struct FRTextField: View {
                 TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
                     .autocapitalization(.none)
                     .autocorrectionDisabled()
-                    .foregroundColor(.white)
+                    .foregroundColor(.text_Regula)
                     .onTapGesture { isEditing = true }
                     .focused($isEditing)
         }
