@@ -8,7 +8,27 @@
 import SwiftUI
 
 struct SplashView: View {
+    @State private var isActive = false
+
     var body: some View {
+        ZStack{
+            if isActive{
+                splashView
+            }else{
+                InitialView()
+            }
+        }.onAppear(){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation {
+                    self.isActive = true
+                }
+            }
+        }
+    }
+}
+
+extension SplashView{
+    private var splashView : some View{
         ZStack{
             Image("initial_scene_bg")
                 .resizable()
@@ -31,7 +51,7 @@ struct SplashView: View {
                     .padding(29)
                 
                 Spacer()
-               Spacer()
+                Spacer()
             }
         }
     }

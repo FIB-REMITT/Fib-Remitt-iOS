@@ -15,6 +15,18 @@ func hideSheet( after:Double = 0.0) {
         getWindow().rootViewController?.dismiss(animated: true)}
 }
 
+func getInitialView() -> AnyView {
+//    if let isUserLoggedIn = UserSettings.shared.isUserLoggedIn{
+//        if isUserLoggedIn{
+            return AnyView(FRBottomBarContainer())
+//        }else{
+//            return AnyView(LandingRouter.start().entry!)
+//        }
+//    }else{
+//        return AnyView(LandingRouter.start().entry!)
+//    }
+}
+
 func getWindow() -> UIWindow{
     let windows = UIApplication.shared.connectedScenes
         .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
