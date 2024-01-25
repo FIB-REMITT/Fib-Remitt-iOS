@@ -55,6 +55,7 @@
 		89740D532B5D6915000ACFBA /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D512B5D6661000ACFBA /* Roboto-Bold.ttf */; };
 		89740D542B5D6918000ACFBA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D502B5D6655000ACFBA /* Roboto-Regular.ttf */; };
 		89740D552B5D691B000ACFBA /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D4F2B5D6646000ACFBA /* Roboto-Medium.ttf */; };
+		8988E8EC2B62360100741F58 /* DeliveryMethodEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8988E8EB2B62360100741F58 /* DeliveryMethodEnum.swift */; };
 		8997492E2B60DB1100DEBD8C /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8997492D2B60DB1100DEBD8C /* AuthViewModel.swift */; };
 		899749312B60EE7600DEBD8C /* FRImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899749302B60EE7600DEBD8C /* FRImageButton.swift */; };
 		899749332B60F16400DEBD8C /* FRHContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899749322B60F16400DEBD8C /* FRHContainer.swift */; };
@@ -115,6 +116,7 @@
 		89740D502B5D6655000ACFBA /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		89740D512B5D6661000ACFBA /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		89740D522B5D66DD000ACFBA /* FIB-Remitt-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FIB-Remitt-Info.plist"; sourceTree = SOURCE_ROOT; };
+		8988E8EB2B62360100741F58 /* DeliveryMethodEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMethodEnum.swift; sourceTree = "<group>"; };
 		8997492D2B60DB1100DEBD8C /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		899749302B60EE7600DEBD8C /* FRImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRImageButton.swift; sourceTree = "<group>"; };
 		899749322B60F16400DEBD8C /* FRHContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRHContainer.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				2E0F98FA2B5D9FCE0094CE9F /* HomeRootView.swift */,
+				8988E8EB2B62360100741F58 /* DeliveryMethodEnum.swift */,
 			);
 			path = HomeRoot;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */,
 				2E0F99062B5DB0B40094CE9F /* SettingsRootView.swift in Sources */,
 				89611BE82B5E3A6D00407E32 /* FRCheckbox.swift in Sources */,
+				8988E8EC2B62360100741F58 /* DeliveryMethodEnum.swift in Sources */,
 				89611BFB2B5EA5E400407E32 /* HomePayViaFIBView.swift in Sources */,
 				2E91D7072B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift in Sources */,
 				899749312B60EE7600DEBD8C /* FRImageButton.swift in Sources */,
@@ -671,6 +675,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -701,6 +706,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

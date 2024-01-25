@@ -10,6 +10,10 @@ import SwiftUI
 struct HomeRootView: View {
     @State var isSelected = false
     @State var isNotSelected = true
+    
+    @State var selectedDeliveryMethod = "Bank Transfer"
+    
+    
     @State var transferAmount = ""
     
     @ObservedObject var vm = HomeViewModel()
@@ -35,8 +39,8 @@ struct HomeRootView: View {
             
             
         }.navigationBarHidden(true)
-        .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
-        .onTapGesture {hideKeyboard()}
+            .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
+            .onTapGesture {hideKeyboard()}
     }
 }
 
@@ -60,9 +64,9 @@ extension HomeRootView{
                     .padding(.trailing,70)
                 
             }
-            .padding(5)
+            .padding(6)
             .background(Color.primary400)
-            .cornerRadius(21)
+            .cornerRadius(100)
             Spacer()
             FRImageButton(image: "nav",size: 40)
         }
@@ -72,24 +76,44 @@ extension HomeRootView{
             TextBaseMedium(text: "Transfer amount", fg_color: .text_Mute)
             HStack{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $transferAmount)
+                    .frame(width: 188)
+                    .keyboardType(.numberPad)
+                    
                 FRSimpleDropDownButton(title: "IQD", icon: "turkey")
             }
             
             TextBaseMedium(text: "Recipient gets", fg_color: .text_Mute)
             HStack{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $transferAmount)
+                    .frame(width: 188)
+                    .keyboardType(.numberPad)
                 FRSimpleDropDownButton(title: "IQD", icon: "turkey")
             }
             Divider().padding(.horizontal)
-            TextSmallRegular(text: "Conversion rate 1 TRY = 43.53 IQD", fg_color: .primary400)
+                .padding(.top, 5)
+                .padding(.bottom, 2)
+            HStack {
+                Spacer()
+                TextSmallRegular(text: "Conversion rate 1 TRY = 43.53 IQD", fg_color: .primary400)
+                Spacer()
+            }
         }
     }
     private var deliveryMethodContainer : some View{
         FRVContainer (spacing: 7, backgroundColor: .frForground){
             TextBaseMedium(text: "Delivery Method", fg_color: .text_Mute)
             HStack{
-                FRCircularRadioButton(isSelected: $isSelected)
-                FRCircularRadioButton(isSelected: $isNotSelected, title: "Cash Pickup")
+                ForEach(DeliveryMethodEnum.allCases, id: \.self) { item in
+                    FRCircularRadioButton(isSelected: Binding(get: { selectedDeliveryMethod == item.title },
+                                                              set: { newValue in
+                        if newValue {
+                            // Update your selectedDeliveryMethod here if needed
+                            selectedDeliveryMethod = item.title
+                        }
+                    }),
+                                          title: item.title)
+                    
+                }
             }
         }
     }
