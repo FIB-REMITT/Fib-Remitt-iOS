@@ -10,12 +10,13 @@ import SwiftUI
 struct FRVerticalField: View {
     var placeholder : String
     @Binding var inputText:String
+    var paddingValue : CGFloat = 15
     var body: some View {
         VStack {
             FRTextField(placeholder: Text(placeholder), text: $inputText)
-        }   .padding(15)
+        }   .padding(paddingValue)
             .background(Color.fr_background)
-            .cornerRadius(18)
+            .cornerRadius(100)
     }
 }
 
