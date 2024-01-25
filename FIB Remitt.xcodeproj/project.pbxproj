@@ -55,6 +55,13 @@
 		89740D532B5D6915000ACFBA /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D512B5D6661000ACFBA /* Roboto-Bold.ttf */; };
 		89740D542B5D6918000ACFBA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D502B5D6655000ACFBA /* Roboto-Regular.ttf */; };
 		89740D552B5D691B000ACFBA /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D4F2B5D6646000ACFBA /* Roboto-Medium.ttf */; };
+		897A10ED2B62401B002CF87D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10EB2B62401B002CF87D /* APIManager.swift */; };
+		897A10EE2B62401B002CF87D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10EC2B62401B002CF87D /* EndPoint.swift */; };
+		897A10F02B626B5C002CF87D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10EF2B626B5C002CF87D /* Network.swift */; };
+		897A10F32B626BF7002CF87D /* LoaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10F22B626BF7002CF87D /* LoaderManager.swift */; };
+		897A10F52B626C5C002CF87D /* FIBLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10F42B626C5C002CF87D /* FIBLoaderView.swift */; };
+		897A10F72B626DF4002CF87D /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10F62B626DF4002CF87D /* UserSettings.swift */; };
+		897A10FA2B626F21002CF87D /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10F92B626F20002CF87D /* EmptyResponse.swift */; };
 		8997492E2B60DB1100DEBD8C /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8997492D2B60DB1100DEBD8C /* AuthViewModel.swift */; };
 		899749312B60EE7600DEBD8C /* FRImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899749302B60EE7600DEBD8C /* FRImageButton.swift */; };
 		899749332B60F16400DEBD8C /* FRHContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899749322B60F16400DEBD8C /* FRHContainer.swift */; };
@@ -62,9 +69,11 @@
 		899749372B61494D00DEBD8C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899749362B61494D00DEBD8C /* HomeViewModel.swift */; };
 		899749392B615C4F00DEBD8C /* BeneficiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899749382B615C4F00DEBD8C /* BeneficiaryViewModel.swift */; };
 		8997493B2B615EC200DEBD8C /* TransactionHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8997493A2B615EC200DEBD8C /* TransactionHistoryViewModel.swift */; };
+		9248954BA1DA9AF72EF8DF96 /* Pods_FIB_Remitt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2DA127C8347C3157FCEE541E /* Pods-FIB Remitt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FIB Remitt.debug.xcconfig"; path = "Target Support Files/Pods-FIB Remitt/Pods-FIB Remitt.debug.xcconfig"; sourceTree = "<group>"; };
 		2E0F98FA2B5D9FCE0094CE9F /* HomeRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRootView.swift; sourceTree = "<group>"; };
 		2E0F98FC2B5DA00E0094CE9F /* HistoryRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRootView.swift; sourceTree = "<group>"; };
 		2E0F98FE2B5DA0590094CE9F /* BeneficiaryRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryRootView.swift; sourceTree = "<group>"; };
@@ -78,6 +87,7 @@
 		40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIB_RemittApp.swift; sourceTree = "<group>"; };
 		40711F682B5CFD1600F966E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		541E218C4505AE18176251D8 /* Pods-FIB Remitt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FIB Remitt.release.xcconfig"; path = "Target Support Files/Pods-FIB Remitt/Pods-FIB Remitt.release.xcconfig"; sourceTree = "<group>"; };
 		89611BDE2B5E300300407E32 /* SheetHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHolder.swift; sourceTree = "<group>"; };
 		89611BE02B5E31E400407E32 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		89611BE32B5E32AD00407E32 /* TopRoundedShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRoundedShape.swift; sourceTree = "<group>"; };
@@ -115,6 +125,13 @@
 		89740D502B5D6655000ACFBA /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		89740D512B5D6661000ACFBA /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		89740D522B5D66DD000ACFBA /* FIB-Remitt-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FIB-Remitt-Info.plist"; sourceTree = SOURCE_ROOT; };
+		897A10EB2B62401B002CF87D /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		897A10EC2B62401B002CF87D /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		897A10EF2B626B5C002CF87D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		897A10F22B626BF7002CF87D /* LoaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderManager.swift; sourceTree = "<group>"; };
+		897A10F42B626C5C002CF87D /* FIBLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIBLoaderView.swift; sourceTree = "<group>"; };
+		897A10F62B626DF4002CF87D /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		897A10F92B626F20002CF87D /* EmptyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResponse.swift; sourceTree = "<group>"; };
 		8997492D2B60DB1100DEBD8C /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		899749302B60EE7600DEBD8C /* FRImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRImageButton.swift; sourceTree = "<group>"; };
 		899749322B60F16400DEBD8C /* FRHContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRHContainer.swift; sourceTree = "<group>"; };
@@ -122,6 +139,7 @@
 		899749362B61494D00DEBD8C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		899749382B615C4F00DEBD8C /* BeneficiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryViewModel.swift; sourceTree = "<group>"; };
 		8997493A2B615EC200DEBD8C /* TransactionHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewModel.swift; sourceTree = "<group>"; };
+		AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FIB_Remitt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9248954BA1DA9AF72EF8DF96 /* Pods_FIB_Remitt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +176,8 @@
 			children = (
 				40711F632B5CFD1500F966E7 /* FIB Remitt */,
 				40711F622B5CFD1500F966E7 /* Products */,
+				7CEE86CB43A46D0383F2A6CF /* Pods */,
+				57E0E91E2A8318E5F732AE7A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +194,7 @@
 			children = (
 				89740D522B5D66DD000ACFBA /* FIB-Remitt-Info.plist */,
 				89740D332B5D1CC0000ACFBA /* Modules */,
+				897A10E92B623E12002CF87D /* Network */,
 				89740D342B5D1CD2000ACFBA /* SupportFiles */,
 				89740D3A2B5D23C5000ACFBA /* Utils */,
 				40711F6A2B5CFD1600F966E7 /* Preview Content */,
@@ -186,6 +208,23 @@
 				40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		57E0E91E2A8318E5F732AE7A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7CEE86CB43A46D0383F2A6CF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2DA127C8347C3157FCEE541E /* Pods-FIB Remitt.debug.xcconfig */,
+				541E218C4505AE18176251D8 /* Pods-FIB Remitt.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		89611BDD2B5E2A8800407E32 /* Containers */ = {
@@ -214,6 +253,7 @@
 				89611BFC2B5EA66900407E32 /* SimpleDirectedCellView.swift */,
 				2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */,
 				896EA0CF2B5F9B9300FB231A /* FRNavigationBarView.swift */,
+				897A10F42B626C5C002CF87D /* FIBLoaderView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -277,6 +317,7 @@
 		89740D352B5D1EA0000ACFBA /* InitialScene */ = {
 			isa = PBXGroup;
 			children = (
+				897A10F82B626F04002CF87D /* Model */,
 				896EA0D72B5FF12C00FB231A /* SplashView.swift */,
 				89740D312B5D120D000ACFBA /* InitialView.swift */,
 				8997492D2B60DB1100DEBD8C /* AuthViewModel.swift */,
@@ -339,6 +380,7 @@
 				89740D492B5D5639000ACFBA /* Modifiers */,
 				89740D462B5D5515000ACFBA /* Extensions */,
 				89740D3B2B5D25B5000ACFBA /* Constant */,
+				897A10F12B626BD5002CF87D /* Helper */,
 				89611BE02B5E31E400407E32 /* Utils.swift */,
 			);
 			path = Utils;
@@ -347,8 +389,10 @@
 		89740D3B2B5D25B5000ACFBA /* Constant */ = {
 			isa = PBXGroup;
 			children = (
+				897A10EF2B626B5C002CF87D /* Network.swift */,
 				89740D3C2B5D2A0B000ACFBA /* UI.swift */,
 				89740D442B5D4284000ACFBA /* Colour.swift */,
+				897A10F62B626DF4002CF87D /* UserSettings.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -406,6 +450,39 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		897A10E92B623E12002CF87D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				897A10EA2B623E96002CF87D /* APIClient */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		897A10EA2B623E96002CF87D /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				897A10EB2B62401B002CF87D /* APIManager.swift */,
+				897A10EC2B62401B002CF87D /* EndPoint.swift */,
+			);
+			path = APIClient;
+			sourceTree = "<group>";
+		};
+		897A10F12B626BD5002CF87D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				897A10F22B626BF7002CF87D /* LoaderManager.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		897A10F82B626F04002CF87D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				897A10F92B626F20002CF87D /* EmptyResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -413,9 +490,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 40711F742B5CFD1600F966E7 /* Build configuration list for PBXNativeTarget "FIB Remitt" */;
 			buildPhases = (
+				C07631213B82B677704F295F /* [CP] Check Pods Manifest.lock */,
 				40711F5D2B5CFD1500F966E7 /* Sources */,
 				40711F5E2B5CFD1500F966E7 /* Frameworks */,
 				40711F5F2B5CFD1500F966E7 /* Resources */,
+				44D0063A4BF270C709257052 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -474,12 +553,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		44D0063A4BF270C709257052 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FIB Remitt/Pods-FIB Remitt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FIB Remitt/Pods-FIB Remitt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FIB Remitt/Pods-FIB Remitt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C07631213B82B677704F295F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FIB Remitt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		40711F5D2B5CFD1500F966E7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				896EA0D62B5FEE6200FB231A /* FRTextButton.swift in Sources */,
+				897A10F02B626B5C002CF87D /* Network.swift in Sources */,
 				896EA0D82B5FF12C00FB231A /* SplashView.swift in Sources */,
 				896EA0D02B5F9B9300FB231A /* FRNavigationBarView.swift in Sources */,
 				899749372B61494D00DEBD8C /* HomeViewModel.swift in Sources */,
@@ -491,9 +613,11 @@
 				896EA0CC2B5F956100FB231A /* FRBarButton.swift in Sources */,
 				899749352B61150C00DEBD8C /* FRVerticalField.swift in Sources */,
 				2E0F99032B5DAE260094CE9F /* FRBottomBar.swift in Sources */,
+				897A10ED2B62401B002CF87D /* APIManager.swift in Sources */,
 				2E0F99022B5DAE260094CE9F /* FRBottomBarContainer.swift in Sources */,
 				89611BF92B5E9A9F00407E32 /* SimpleHInfoCellView.swift in Sources */,
 				89611BDF2B5E300300407E32 /* SheetHolder.swift in Sources */,
+				897A10FA2B626F21002CF87D /* EmptyResponse.swift in Sources */,
 				89611BEC2B5E4F4300407E32 /* FRCircularRadioButton.swift in Sources */,
 				89611BF02B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift in Sources */,
 				89740D4D2B5D5762000ACFBA /* Image.swift in Sources */,
@@ -504,6 +628,8 @@
 				89611BFB2B5EA5E400407E32 /* HomePayViaFIBView.swift in Sources */,
 				2E91D7072B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift in Sources */,
 				899749312B60EE7600DEBD8C /* FRImageButton.swift in Sources */,
+				897A10EE2B62401B002CF87D /* EndPoint.swift in Sources */,
+				897A10F32B626BF7002CF87D /* LoaderManager.swift in Sources */,
 				896EA0C82B5F8D3200FB231A /* FRTextDropDownButton.swift in Sources */,
 				2E0F98FB2B5D9FCE0094CE9F /* HomeRootView.swift in Sources */,
 				896EA0CA2B5F915500FB231A /* HistoryDetailView.swift in Sources */,
@@ -519,6 +645,7 @@
 				2E91D7092B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift in Sources */,
 				89740D3D2B5D2A0B000ACFBA /* UI.swift in Sources */,
 				89611BFD2B5EA66900407E32 /* SimpleDirectedCellView.swift in Sources */,
+				897A10F52B626C5C002CF87D /* FIBLoaderView.swift in Sources */,
 				89611BF52B5E966000407E32 /* SimpleHInfoView.swift in Sources */,
 				2E0F98FD2B5DA00E0094CE9F /* HistoryRootView.swift in Sources */,
 				896EA0C62B5F863600FB231A /* TransactionHistoryCellView.swift in Sources */,
@@ -527,6 +654,7 @@
 				896EA0BF2B5F811F00FB231A /* EditBeneficiaryBankView.swift in Sources */,
 				8997492E2B60DB1100DEBD8C /* AuthViewModel.swift in Sources */,
 				89740D452B5D4284000ACFBA /* Colour.swift in Sources */,
+				897A10F72B626DF4002CF87D /* UserSettings.swift in Sources */,
 				89611BF32B5E7D0600407E32 /* AccountInfoCellView.swift in Sources */,
 				89740D4B2B5D5669000ACFBA /* ViewModifier.swift in Sources */,
 			);
@@ -656,6 +784,7 @@
 		};
 		40711F752B5CFD1600F966E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DA127C8347C3157FCEE541E /* Pods-FIB Remitt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -664,6 +793,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FIB Remitt/Preview Content\"";
 				DEVELOPMENT_TEAM = 5F92FMJYFX;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "FIB-Remitt-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -671,11 +801,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fib.services;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -686,6 +817,7 @@
 		};
 		40711F762B5CFD1600F966E7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 541E218C4505AE18176251D8 /* Pods-FIB Remitt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -694,6 +826,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FIB Remitt/Preview Content\"";
 				DEVELOPMENT_TEAM = 5F92FMJYFX;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "FIB-Remitt-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -701,11 +834,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fib.services;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

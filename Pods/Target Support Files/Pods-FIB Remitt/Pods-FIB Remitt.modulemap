@@ -1,0 +1,6 @@
+framework module Pods_FIB_Remitt {
+  umbrella header "Pods-FIB Remitt-umbrella.h"
+
+  export *
+  module * { export * }
+}
