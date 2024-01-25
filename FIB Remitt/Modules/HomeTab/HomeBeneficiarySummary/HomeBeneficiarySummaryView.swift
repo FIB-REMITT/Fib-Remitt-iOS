@@ -48,12 +48,12 @@ extension HomeBeneficiarySummaryView{
             FRVContainer (backgroundColor:.frForground){
                 TextBaseMedium(text: "Transfer Summary", fg_color: .text_Mute)
                 VStack(spacing:10){
-                    SimpleHInfoView(title: "Amount to transfer", info: "125,000 IQD")
+                    SimpleHInfoRegularView(title: "Amount to transfer", info: "125,000 IQD")
                     
-                    SimpleHInfoView(title: "Service charge", info: "+ 5,000 IQD")
+                    SimpleHInfoRegularView(title: "Service charge", info: "+ 5,000 IQD")
                     Divider()
-                    SimpleHInfoView(title: "Total payble", info: "130,000 IQD")
-                    SimpleHInfoView(title: "Recipient gets", info: "2,875 TRY", textColor: Color.primary500)
+                    SimpleHModInfoView(title: "Total payble", info: "130,000 IQD",fontStyle: .titleBold)
+                    SimpleHModInfoView(title: "Recipient gets", info: "2,875 TRY", textColor: Color.primary500, fontStyle: .allBold)
                 }
             }
         }
