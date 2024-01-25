@@ -53,7 +53,8 @@ extension HomeBeneficiarySummaryView{
                     SimpleHInfoView(title: "Service charge", info: "+ 5,000 IQD")
                     Divider()
                     SimpleHInfoView(title: "Total payble", info: "130,000 IQD")
-                    SimpleHInfoView(title: "Recipient gets", info: "2,875 TRY")}.foregroundColor(Color.primary500)
+                    SimpleHInfoView(title: "Recipient gets", info: "2,875 TRY", textColor: Color.primary500)
+                }
             }
         }
     }
