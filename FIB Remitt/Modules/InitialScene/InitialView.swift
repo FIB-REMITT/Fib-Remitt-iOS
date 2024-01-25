@@ -10,6 +10,7 @@ import SwiftUI
 struct InitialView: View {
     @ObservedObject var vm = AuthViewModel()
     @State var tapped  = false
+    @State var currentImage: String = "map"
     var body: some View {
         NavigationStack{
             ZStack {
@@ -29,7 +30,13 @@ struct InitialView: View {
                     FRBottomBarContainer()
                 }
             }.navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
-                .onAppear(){}
+                .onAppear {
+//                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+//                        withAnimation(.easeInOut(duration: 0.5)) {
+//                            self.toggleImage()
+//                        }
+//                    }
+                }
         }
     }
 }
@@ -57,7 +64,7 @@ extension InitialView {
     }
     
     private var middaleBgMap: some View{
-        Image("map")
+        Image(currentImage)
             .imageDefaultStyle()
             .padding(29)
     }
@@ -72,12 +79,16 @@ extension InitialView {
             FRTextButton(title: "Download Now", color: .fr_forground, action: {self.downloadNowButtonPressed()})
         }
     }
+    
+//    private func toggleImage() {
+//        currentImage = (currentImage == "map") ? "map2" : "map"
+//    }
 }
 
 //MARK: - ACTIONS
 extension InitialView {
     private func loginWithFIBButtonPressed() {
-       // vm.navigateToHome()
+        // vm.navigateToHome()
         self.tapped = true
     }
     private func downloadNowButtonPressed(){}

@@ -37,6 +37,7 @@ struct FRSimpleDropDownButton: View {
                 .foregroundColor(.text_Mute)
                 
             }
+            .cornerRadius(100)
         })
 
     }

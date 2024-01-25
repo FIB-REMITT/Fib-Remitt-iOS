@@ -26,7 +26,7 @@ struct BeneficiaryAddSuccessfulView: View {
 
             }.padding()
             Spacer()
-        }
+        }.navigationBarHidden(true)
     }
 }
 ////MARK: - VIEW COMPONENTS
@@ -34,12 +34,11 @@ struct BeneficiaryAddSuccessfulView: View {
 //    private var bottomButton : some View{}
 //}
 //
-////MARK: - ACTIONS
-//extension HomePayViaFIBView{
-//    private func notificationBtnPressed() {
-//
-//    }
-//}
+//MARK: - ACTIONS
+extension HomePayViaFIBView{
+    private func okBtnPressed() {
+    }
+}
 #Preview {
     BeneficiaryAddSuccessfulView()
 }

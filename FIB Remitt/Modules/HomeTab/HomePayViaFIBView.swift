@@ -48,9 +48,9 @@ extension HomePayViaFIBView{
     private var middleListContainer : some View{
         VStack{
             TextBaseRegular(text: "Already have FIB on your phone?", fg_color: .textMute).padding(.vertical,15)
-            SimpleDirectedCellView()
-            SimpleDirectedCellView()
-            SimpleDirectedCellView()
+            FRSimpleDirectedCellButton(action: {navigateToSuccessfull()})
+            FRSimpleDirectedCellButton(action: {navigateToSuccessfull()})
+            FRSimpleDirectedCellButton(action: {navigateToSuccessfull()})
         }
     }
     
@@ -63,5 +63,9 @@ extension HomePayViaFIBView{
 extension HomePayViaFIBView{
     private func notificationBtnPressed() {
         
+    }
+    
+    private func navigateToSuccessfull(){
+        vm.navigateToSuccessfulView()
     }
 }

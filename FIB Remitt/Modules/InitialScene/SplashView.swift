@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SplashView: View {
     @State private var isActive = false
-
+    @State var currentImage: String = "map"
+    @State private var rotationAngle: Double = 0
     var body: some View {
         ZStack{
             if isActive{
@@ -24,13 +25,16 @@ struct SplashView: View {
                     self.isActive = true
                 }
             }
+            withAnimation(Animation.linear(duration: 1.0).repeatForever(autoreverses: false)) {
+                                self.rotationAngle = 360
+                            }
         }
     }
 }
 
 extension SplashView{
     private var splashView : some View{
-        ZStack{
+        ZStack(alignment: .bottom){
             Image("initial_scene_bg")
                 .resizable()
                 .ignoresSafeArea(.all)
@@ -47,14 +51,31 @@ extension SplashView{
                     .padding(8)
                     .multilineTextAlignment(.center)
                 
-                Image("map")
-                    .imageDefaultStyle()
+                    Image(currentImage)
+                        .imageDefaultStyle()
                     .padding(29)
                 
                 Spacer()
                 Spacer()
             }
+            Image("loader")
+                .imageDefaultStyle()
+                .frame(width: 30, height: 30)
+                .rotationEffect(.degrees(rotationAngle))
+                .padding(.bottom, 70)
+            
         }
+        .onAppear {
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    self.toggleImage()
+                }
+            }
+        }
+    }
+    
+    private func toggleImage() {
+        currentImage = (currentImage == "map") ? "map2" : "map"
     }
 }
 

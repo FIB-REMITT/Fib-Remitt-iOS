@@ -10,14 +10,17 @@ import SwiftUI
 struct HomeTransferSuccessfulView: View {
     let width = UIScreen.main.bounds.width
     var body: some View {
-        VStack(spacing: 20){
-            Spacer()
-            tickIcon
-            topTitle
-            messageDescription
-            actionButtonContainer
-            Spacer()
-        }.background(Color.fr_background.ignoresSafeArea())
+        ZStack{
+            Color.fr_background.ignoresSafeArea()
+            VStack(spacing: 20){
+                Spacer()
+                tickIcon
+                topTitle
+                messageDescription
+                actionButtonContainer
+                Spacer()
+            }
+        }.navigationBarHidden(true)
     }
 }
 
@@ -59,7 +62,9 @@ extension HomeTransferSuccessfulView{
 
 //MARK: - ACTIONS
 extension HomeTransferSuccessfulView{
-    private func backToHomeBtnPressed() {}
+    private func backToHomeBtnPressed() {
+        loadView(view: FRBottomBarContainer())
+    }
     private func trackMyTransferButtonPressed() {}
 }
 

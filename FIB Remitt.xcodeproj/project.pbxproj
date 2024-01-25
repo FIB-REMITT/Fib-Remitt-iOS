@@ -62,6 +62,8 @@
 		897A10F52B626C5C002CF87D /* FIBLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10F42B626C5C002CF87D /* FIBLoaderView.swift */; };
 		897A10F72B626DF4002CF87D /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10F62B626DF4002CF87D /* UserSettings.swift */; };
 		897A10FA2B626F21002CF87D /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10F92B626F20002CF87D /* EmptyResponse.swift */; };
+		897A10FC2B628285002CF87D /* FRSimpleDirectedCellButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10FB2B628285002CF87D /* FRSimpleDirectedCellButton.swift */; };
+		8988E8EC2B62360100741F58 /* DeliveryMethodEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8988E8EB2B62360100741F58 /* DeliveryMethodEnum.swift */; };
 		8997492E2B60DB1100DEBD8C /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8997492D2B60DB1100DEBD8C /* AuthViewModel.swift */; };
 		899749312B60EE7600DEBD8C /* FRImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899749302B60EE7600DEBD8C /* FRImageButton.swift */; };
 		899749332B60F16400DEBD8C /* FRHContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899749322B60F16400DEBD8C /* FRHContainer.swift */; };
@@ -132,6 +134,8 @@
 		897A10F42B626C5C002CF87D /* FIBLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIBLoaderView.swift; sourceTree = "<group>"; };
 		897A10F62B626DF4002CF87D /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		897A10F92B626F20002CF87D /* EmptyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResponse.swift; sourceTree = "<group>"; };
+		897A10FB2B628285002CF87D /* FRSimpleDirectedCellButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRSimpleDirectedCellButton.swift; sourceTree = "<group>"; };
+		8988E8EB2B62360100741F58 /* DeliveryMethodEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMethodEnum.swift; sourceTree = "<group>"; };
 		8997492D2B60DB1100DEBD8C /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		899749302B60EE7600DEBD8C /* FRImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRImageButton.swift; sourceTree = "<group>"; };
 		899749322B60F16400DEBD8C /* FRHContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRHContainer.swift; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				2E0F98FA2B5D9FCE0094CE9F /* HomeRootView.swift */,
+				8988E8EB2B62360100741F58 /* DeliveryMethodEnum.swift */,
 			);
 			path = HomeRoot;
 			sourceTree = "<group>";
@@ -408,6 +413,7 @@
 				896EA0CB2B5F956100FB231A /* FRBarButton.swift */,
 				896EA0D52B5FEE6200FB231A /* FRTextButton.swift */,
 				899749302B60EE7600DEBD8C /* FRImageButton.swift */,
+				897A10FB2B628285002CF87D /* FRSimpleDirectedCellButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -621,10 +627,12 @@
 				89611BEC2B5E4F4300407E32 /* FRCircularRadioButton.swift in Sources */,
 				89611BF02B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift in Sources */,
 				89740D4D2B5D5762000ACFBA /* Image.swift in Sources */,
+				897A10FC2B628285002CF87D /* FRSimpleDirectedCellButton.swift in Sources */,
 				899749392B615C4F00DEBD8C /* BeneficiaryViewModel.swift in Sources */,
 				40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */,
 				2E0F99062B5DB0B40094CE9F /* SettingsRootView.swift in Sources */,
 				89611BE82B5E3A6D00407E32 /* FRCheckbox.swift in Sources */,
+				8988E8EC2B62360100741F58 /* DeliveryMethodEnum.swift in Sources */,
 				89611BFB2B5EA5E400407E32 /* HomePayViaFIBView.swift in Sources */,
 				2E91D7072B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift in Sources */,
 				899749312B60EE7600DEBD8C /* FRImageButton.swift in Sources */,
@@ -801,6 +809,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -834,6 +843,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

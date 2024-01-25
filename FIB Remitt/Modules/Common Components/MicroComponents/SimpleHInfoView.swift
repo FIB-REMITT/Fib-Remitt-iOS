@@ -10,12 +10,12 @@ import SwiftUI
 struct SimpleHInfoView: View {
     var title:String
     var info:String
-    
+    var textColor = Color.text_Mute
     var body: some View {
         HStack{
-            TextBaseRegular(text: title, fg_color: .textMute)
+            TextBaseRegular(text: title, fg_color: textColor)
             Spacer()
-            TextBaseMedium(text: info, fg_color: .textMute)
+            TextBaseMedium(text: info, fg_color: textColor)
                 
         }
     }
