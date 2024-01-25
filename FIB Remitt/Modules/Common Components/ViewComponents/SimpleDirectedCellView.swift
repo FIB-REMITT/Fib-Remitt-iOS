@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct SimpleDirectedCellView: View {
+    var title : String = "FIB Personal App"
     var body: some View {
         FRVContainer(backgroundColor:.fr_forground) {
             HStack{
-                TextBaseMedium(text: "FIB Personal App")
+                TextBaseMedium(text: title)
                 Spacer()
                 Image("arrow_right_ico")
             }

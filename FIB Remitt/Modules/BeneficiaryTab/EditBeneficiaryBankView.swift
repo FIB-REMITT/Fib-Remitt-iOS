@@ -46,8 +46,9 @@ struct EditBeneficiaryBankView: View {
             bottomSaveButton
         }
         .padding()
-        .background(Color.fr_background.ignoresSafeArea())
         .navigationBarHidden(true)
+        .background(Color.fr_background.ignoresSafeArea())
+
     }
 }
 //MARK: - VIEW COMPONENTS
