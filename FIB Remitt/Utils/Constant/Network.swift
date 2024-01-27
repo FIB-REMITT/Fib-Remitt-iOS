@@ -14,7 +14,6 @@ struct K {
     private init(){}
     
     static let IS_DEV_BUILD = true
-    static let IS_SERVER_COMMUNICATION_ENCRYPTED = true
     
     struct NotificationKey {
         private init(){}
@@ -22,14 +21,14 @@ struct K {
     
     enum BaseURL{
         
-        case IQDX
+        case FIB
         case OKX_SOCKET
         case IQDX_ASSET
         
         var Sandbox: String {
             switch self {
-            case .IQDX:
-                return "https://dev-api.iqd-x.com/"//http://alb-api-1902201270.eu-west-1.elb.amazonaws.com/
+            case .FIB:
+                return "http://api.fibremit.com/"
             case .OKX_SOCKET:
                 return "wss://ws.okx.com:8443/"
             case .IQDX_ASSET:
@@ -39,8 +38,8 @@ struct K {
         
         var Production: String {
             switch self {
-            case .IQDX:
-                return "https://dev-api.iqd-x.com/"////http://alb-api-1902201270.eu-west-1.elb.amazonaws.com/    // https://dev-api.iqd-x.com/
+            case .FIB:
+                return "http://api.fibremit.com/"////http://alb-api-1902201270.eu-west-1.elb.amazonaws.com/    // https://dev-api.iqd-x.com/
             case .OKX_SOCKET:
                 return "wss://ws.okx.com:8443/"
             case .IQDX_ASSET:

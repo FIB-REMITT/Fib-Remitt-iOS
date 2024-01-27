@@ -165,13 +165,13 @@ class UserSettings{
 //        accountTradingLevel = nil
     }
     
-//    func setLoginInfo(loginInfo:SignInResponse) {
-//        apiToken = loginInfo.access_token
-//        refreshToken = loginInfo.refresh_token
-//        tokenExpiredIn = Int(Date().timeIntervalSince1970) + (loginInfo.expires_in ?? 0)
-//        refreshTokenExpiredIn = Int(Date().timeIntervalSince1970) + (loginInfo.refresh_expires_in ?? 0)
-//        isUserLoggedIn = true
-//    }
+    func setLoginInfo(loginInfo:SignInData) {
+        apiToken = loginInfo.access_token
+        refreshToken = loginInfo.refresh_token
+        tokenExpiredIn = Int(Date().timeIntervalSince1970) + (loginInfo.expires_in ?? 0)
+        refreshTokenExpiredIn = Int(Date().timeIntervalSince1970) + (loginInfo.refresh_expires_in ?? 0)
+        isUserLoggedIn = true
+    }
     
     func getAccessToken() -> String{
         if let apiToken = self.apiToken{

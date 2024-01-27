@@ -1,6 +1,6 @@
 //
 //  APIManager.swift
-//  IQDX
+//  FIB
 //
 //  Created by Ainul Kazi on 29/1/23.
 //
@@ -17,7 +17,7 @@ class APIManager{
     
     private var subscribers = Set<AnyCancellable>()
     
-    static let baseUrl: String = K.IS_DEV_BUILD ? K.BaseURL.IQDX.Sandbox : K.BaseURL.IQDX.Production
+    static let baseUrl: String = K.IS_DEV_BUILD ? K.BaseURL.FIB.Sandbox : K.BaseURL.FIB.Production
     
     @available(iOS 13.0, *)
     func getData<T:Decodable>(apiUrl: String = baseUrl,  endPoint: Endpoint, resultType: T.Type, showLoader:Bool = false) -> Future<T, Error> {
@@ -213,25 +213,27 @@ class APIManager{
     }
     
     func updateToken() {
-//        if UserSettings.shared.shouldRefreshTokenCall(){
-//            LoaderManager.shared.hideHud()
-//            self.getData(endPoint: AuthEndPoint.refreshToken(refreshToken: UserSettings.shared.refreshToken ?? ""), resultType: SignInResponse.self)
-//                .sink { completion in
-//                    switch completion{
-//                    case .finished:
-//                        print("Token Update API called")
-//                    case .failure(let error):
-//                        if error.localizedDescription == "Error: {\"error\":\"invalid_grant\",\"error_description\":\"Token is not active\"}"{
-//                            UserSettings.shared.logout()
-//                        }
-//                        print(error.localizedDescription)
-//                    }
-//                } receiveValue: { result in
-//                    UserSettings.shared.setLoginInfo(loginInfo: result)
-//                }.store(in: &subscribers)
-//        }else{
-//            UserSettings.shared.logout()
-//        }
+        if UserSettings.shared.shouldRefreshTokenCall(){
+            LoaderManager.shared.hideHud()
+            self.getData(endPoint: AuthEndPoint.refreshToken(refreshToken: UserSettings.shared.refreshToken ?? ""), resultType: SignInResponse.self)
+                .sink { completion in
+                    switch completion{
+                    case .finished:
+                        print("Token Update API called")
+                    case .failure(let error):
+                        if error.localizedDescription == "Error: {\"error\":\"invalid_grant\",\"error_description\":\"Token is not active\"}"{
+                            UserSettings.shared.logout()
+                        }
+                        print(error.localizedDescription)
+                    }
+                } receiveValue: { result in
+                    if let data = result.data{
+                        UserSettings.shared.setLoginInfo(loginInfo: data)
+                    }
+                }.store(in: &subscribers)
+        }else{
+            UserSettings.shared.logout()
+        }
     }
     
     private func getErrorResponse(data : Data?) -> String? {
