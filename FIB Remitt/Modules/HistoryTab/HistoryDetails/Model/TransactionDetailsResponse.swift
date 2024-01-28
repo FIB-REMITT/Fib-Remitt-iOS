@@ -9,8 +9,10 @@
 
 import Foundation
 
+
 // MARK: - TransactionDetailsResponse
-struct TransactionDetailsResponse: Codable {
+struct TransactionDetailsResponse: Codable,CustomStringConvertible {
+    var description: String{ return "" }
     let transactionNumber: String?
     let receiver: DetailsReceiver?
     let collectionPoint: String?
@@ -19,6 +21,7 @@ struct TransactionDetailsResponse: Codable {
     let status: String?
     let createdAt: String?
     let updatedAt: String?
+    let progress: [DetailsProgress]?
 
     enum CodingKeys: String, CodingKey {
         case transactionNumber = "transactionNumber"
@@ -29,11 +32,33 @@ struct TransactionDetailsResponse: Codable {
         case status = "status"
         case createdAt = "createdAt"
         case updatedAt = "updatedAt"
+        case progress = "progress"
+    }
+}
+
+// MARK: - Progress
+struct DetailsProgress: Codable,CustomStringConvertible {
+    var description: String{ return "" }
+    let id: String?
+    let transactionId: String?
+    let transactionUid: String?
+    let state: String?
+    let message: String?
+    let createdAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case transactionId = "transactionId"
+        case transactionUid = "transactionUid"
+        case state = "state"
+        case message = "message"
+        case createdAt = "createdAt"
     }
 }
 
 // MARK: - Receiver
-struct DetailsReceiver: Codable {
+struct DetailsReceiver: Codable,CustomStringConvertible {
+    var description: String{ return "" }
     let fullName: String?
     let phoneNumber: String?
     let nationality: String?
@@ -58,7 +83,8 @@ struct DetailsReceiver: Codable {
 }
 
 // MARK: - Transaction
-struct DetailsTransaction: Codable {
+struct DetailsTransaction: Codable,CustomStringConvertible {
+    var description: String{ return "" }
     let fromCurrency: String?
     let amountToTransfer: Int?
     let toCurrency: String?
