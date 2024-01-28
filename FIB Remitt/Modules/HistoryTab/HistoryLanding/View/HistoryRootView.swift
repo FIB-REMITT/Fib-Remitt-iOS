@@ -22,7 +22,7 @@ struct HistoryRootView: View {
         .background(Color.frBackground.ignoresSafeArea())
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
         .onAppear(perform: {
-            vm.transactionListFetch()
+            vm.transactionListFetch(page: 0)
         })
     }
 }
@@ -39,10 +39,10 @@ extension HistoryRootView{
     }
     private var contextContainer : some View{
         VStack{
-            TransactionHistoryCellView()
-            TransactionHistoryCellView()
-            TransactionHistoryCellView()
-            TransactionHistoryCellView()
+            
+            ForEach(vm.transactionHistoryDatas) { transactionData in
+                       TransactionHistoryCellView(transaction: transactionData)
+                   }
         }
     }
 }

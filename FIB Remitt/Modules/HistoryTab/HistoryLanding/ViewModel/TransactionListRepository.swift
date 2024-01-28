@@ -10,10 +10,10 @@ import Combine
 class TransactionListRepository {
     private var subscribers = Set<AnyCancellable>()
     
-    @Published var loginInfo:SignInResponse?
-  //  let vm = AuthViewModel()
-    func transactionListApi()  {
-        APIManager.shared.getData(endPoint: TransactionListEndpoint.TransactionList, resultType: TransactionHistoryResponse.self, showLoader: true)
+    @Published var transactionHistoryList : TransactionHistoryResponse?
+  
+    func transactionListApi(page:Int)  {
+        APIManager.shared.getData(endPoint: TransactionListEndpoint.TransactionList(page: page), resultType: TransactionHistoryResponse.self, showLoader: true)
             .sink { completion in
                 switch completion{
                 case .failure(let error):
@@ -31,10 +31,7 @@ class TransactionListRepository {
              
                 if let data = result.content{
                     print(data)
-//                        self.loginInfo = result
-//                        UserSettings.shared.setLoginInfo(loginInfo: data)
-                       // self.presenter?.loginDidAttempedWithSuccess()
-                       // self.vm.successfullyLoggedIn()
+                       self.transactionHistoryList = result
                     }
 
                
