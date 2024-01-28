@@ -9,12 +9,15 @@ import SwiftUI
 
 struct InitialView: View {
     @ObservedObject var vm = AuthViewModel()
-    @State var currentImage: String = "map"
+   // @StateObject var viewModel = AuthViewModel()
+    @State var tapped      = false
 
     var body: some View {
         NavigationStack{
             ZStack {
-                if !vm.tapped{
+                if tapped{
+                    FRBottomBarContainer()
+                }else{
                     backgroundView
                     VStack {
                         Spacer()
@@ -26,17 +29,12 @@ struct InitialView: View {
                         bottomDownloadOptionContainer
                         Spacer()
                     }
-                }else{
-                    FRBottomBarContainer()
                 }
-            }.navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
-                .onAppear {
-//                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-//                        withAnimation(.easeInOut(duration: 0.5)) {
-//                            self.toggleImage()
-//                        }
-//                    }
-                }
+            }.navigationBarHidden(true)
+            .navigationDestination(isPresented: $vm.goToNext, destination: {vm.destinationView})
+//            .onChange(of: vm.loggedIn, perform: { value in
+//                self.tapped = value
+//            })
         }
     }
 }
@@ -64,7 +62,7 @@ extension InitialView {
     }
     
     private var middaleBgMap: some View{
-        Image(currentImage)
+        Image("map")
             .imageDefaultStyle()
             .padding(29)
     }
@@ -80,16 +78,13 @@ extension InitialView {
         }
     }
     
-//    private func toggleImage() {
-//        currentImage = (currentImage == "map") ? "map2" : "map"
-//    }
 }
 
 //MARK: - ACTIONS
 extension InitialView {
     private func loginWithFIBButtonPressed() {
-       // vm.navigateToHome()
-        //self.tapped = true
+//        vm.navigateToHome()
+        self.tapped = true
         vm.login() 
 
     }
