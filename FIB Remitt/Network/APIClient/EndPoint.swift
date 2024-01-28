@@ -469,7 +469,37 @@ enum TransactionListEndpoint: Endpoint{
 }
 
 
+//MARK: - TransactionDetails EndPoints
+enum TransactionDetailsEndpoint: Endpoint{
+    case TransactionDetails(transactionNumber: String)
+  
+    var method: HTTPMethod{
+        switch self{
+        case .TransactionDetails:
+            return .get
+        }
+    }
+    
+    var path: String{
+        switch self {
+        case .TransactionDetails(let transactionNumber):
+            return "api/v1/private/personal/transaction/"
+       
+        }
+    }
+    
+    var query: [String : String]? {
+        switch self {
+        case .TransactionDetails(let transactionNumber):
+            return ["transactionNumber": transactionNumber ]
+        }
+    }
+    
+    var encoder: ParameterEncoder {
+        return JSONParameterEncoder.default
 
+    }
+}
 
 
 
