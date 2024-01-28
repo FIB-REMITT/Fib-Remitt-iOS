@@ -1,22 +1,26 @@
 //
-//  TransactionHistoryViewModel.swift
+//  TransactionDetailsViewModel.swift
 //  FIB Remitt
 //
-//  Created by Ainul Kazi on 24/1/24.
+//  Created by Sabbir Nasir on 28/1/24.
 //
+
 import SwiftUI
 
-class TransactionHistoryViewModel : ObservableObject{
+class TransactionDetailsViewModel : ObservableObject{
     @Published var goToNext        = false
     @Published var destinationView = AnyView(Text("Destination"))
+    let repo = TransactionDetailsRepository()
     
     func navigateToTransactionHistoryDetail() {
-       self.destinationView = AnyView(HistoryDetailView())
+       //self.destinationView = AnyView(HistoryDetailView())
        self.goToNext        = true
    }
     
     func navigateToEditBankBeneficiary() {
-       self.destinationView = AnyView(EditBeneficiaryBankView())
+       //self.destinationView = AnyView(EditBeneficiaryBankView())
        self.goToNext        = true
    }
+    
+    
 }
