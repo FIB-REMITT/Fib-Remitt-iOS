@@ -522,7 +522,7 @@ enum TransactionListEndpoint: Endpoint{
         switch self {
         case .TransactionList:
             return "api/v1/private/personal/transaction"
-        case .TransactionDetails(let transactionNumber):
+        case .TransactionDetails:
             return "api/v1/private/personal/transaction"
             
         }
@@ -533,7 +533,7 @@ enum TransactionListEndpoint: Endpoint{
         case .TransactionList(let page):
             return ["page": "\(page)"]
         case .TransactionDetails(let transactionNumber):
-            return ["transactionNumber": transactionNumber ]
+            return ["transactionNumber": transactionNumber]
             
         }
     }

@@ -12,6 +12,10 @@ class TransactionListRepository {
     
     @Published var transactionHistoryList : TransactionHistoryResponse?
     
+    @Published var transactionDetails : TransactionDetailsResponse?
+    
+    
+    
     func transactionListApi(page:Int)  {
         APIManager.shared.getData(endPoint: TransactionListEndpoint.TransactionList(page: page), resultType: TransactionHistoryResponse.self, showLoader: true)
             .sink { completion in
@@ -52,16 +56,12 @@ class TransactionListRepository {
                     }
                     
                 case .finished:
-                    print("API Called!")
+                    print("API Called!!")
                 }
             } receiveValue: { result in
                 
-                if let data = result.transaction{
-                    print(data)
-                    //                        self.loginInfo = result
-                    //                        UserSettings.shared.setLoginInfo(loginInfo: data)
-                    // self.presenter?.loginDidAttempedWithSuccess()
-                    // self.vm.successfullyLoggedIn()
+                if result != nil {
+                    self.transactionDetails = result
                 }
                 
                 
