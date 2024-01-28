@@ -72,4 +72,30 @@ class HomeViewModel : ObservableObject{
             print(result?.count ?? 0)
         }.store(in: &subscribers)
     }
+    
+    func apiReceivedInBank(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {
+        repo.receivedInBank(beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice)
+            
+        repo.$bankCollectionResponse.sink { result in
+            print(result)
+            
+        }.store(in: &subscribers)
+    }
+    
+    func cashPickUpFromAgent(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {
+        repo.receivedInBank(beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice)
+            
+        repo.$bankCollectionResponse.sink { result in
+            print(result)
+            
+        }.store(in: &subscribers)
+    }
+    
+    func getConfirmationByTransactionId(trxId:String){
+        repo.getConfirmation(trxId: trxId)
+        repo.$ConfirmationResponse.sink { result in
+            print(result)
+        }.store(in: &subscribers)
+    }
+        
 }

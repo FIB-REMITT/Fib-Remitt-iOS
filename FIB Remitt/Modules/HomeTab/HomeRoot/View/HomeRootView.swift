@@ -40,8 +40,30 @@ struct HomeRootView: View {
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
         .onTapGesture {hideKeyboard()}
-        .onAppear(){vm.viewWillAppearCalled()}
+        .onAppear(){vm.viewWillAppearCalled()
+            vm.apiReceivedInBank(beneficiaryId: "76284f97-e50d-402d-b52d-4710f5341c2b", fromCurrency: "IQD", amountToTransfer: "45000", toCurrency: "TRY", paymentMethod: "BANK", collectionPoint: "BANK", purposeId: "2217ff09-e479-4a60-b8f2-297c9912e481", invoice: loadPDF())
+            
+        }
     }
+    
+    
+    func loadPDF() -> Data? {
+        guard let url = Bundle.main.url(forResource: "invoice", withExtension: "pdf") else {
+            print("PDF file not found in bundle.")
+            return nil
+        }
+
+        do {
+            let data = try Data(contentsOf: url)
+            return data
+        } catch {
+            print("Error loading PDF data: \(error)")
+            return nil
+        }
+    }
+   
+
+   
 }
 
 //MARK: - VIEW COMPONENTS
