@@ -9,6 +9,7 @@ import SwiftUI
 class TransactionHistoryViewModel : ObservableObject{
     @Published var goToNext        = false
     @Published var destinationView = AnyView(Text("Destination"))
+    let repo = TransactionListRepository()
     
     func navigateToTransactionHistoryDetail() {
        self.destinationView = AnyView(HistoryDetailView())
@@ -19,4 +20,8 @@ class TransactionHistoryViewModel : ObservableObject{
        self.destinationView = AnyView(EditBeneficiaryBankView())
        self.goToNext        = true
    }
+    
+        func transactionListFetch() {
+            repo.transactionListApi()
+        }
 }
