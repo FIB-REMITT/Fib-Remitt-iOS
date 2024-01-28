@@ -36,9 +36,6 @@ class HomeRepository {
                 
                 if result.count > 0{
                         self.allNationalities = result
-                       // UserSettings.shared.setLoginInfo(loginInfo: data)
-                       // self.presenter?.loginDidAttempedWithSuccess()
-                       // self.vm.successfullyLoggedIn()
                     }
 
             }.store(in: &subscribers)
@@ -64,9 +61,6 @@ class HomeRepository {
                 
                 if result.count > 0{
                         self.allPurposes = result
-                       // UserSettings.shared.setLoginInfo(loginInfo: data)
-                       // self.presenter?.loginDidAttempedWithSuccess()
-                       // self.vm.successfullyLoggedIn()
                     }
 
             }.store(in: &subscribers)
@@ -92,9 +86,6 @@ class HomeRepository {
                 
                 if result.count > 0{
                         self.allBanks = result
-                       // UserSettings.shared.setLoginInfo(loginInfo: data)
-                       // self.presenter?.loginDidAttempedWithSuccess()
-                       // self.vm.successfullyLoggedIn()
                     }
 
             }.store(in: &subscribers)
@@ -120,9 +111,6 @@ class HomeRepository {
                 
                 if result.count > 0{
                         self.allCurrency = result
-                       // UserSettings.shared.setLoginInfo(loginInfo: data)
-                       // self.presenter?.loginDidAttempedWithSuccess()
-                       // self.vm.successfullyLoggedIn()
                     }
 
             }.store(in: &subscribers)
