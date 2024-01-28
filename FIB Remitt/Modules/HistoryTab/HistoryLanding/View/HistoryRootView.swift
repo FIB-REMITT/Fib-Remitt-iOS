@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HistoryRootView: View {
     @ObservedObject var vm = TransactionHistoryViewModel()
+    @ObservedObject var vmTransactionList = TransactionListViewModel()
     var body: some View {
         VStack{
             navigationBar
@@ -19,6 +20,9 @@ struct HistoryRootView: View {
         .padding()
         .background(Color.frBackground.ignoresSafeArea())
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
+        .onAppear(perform: {
+            vmTransactionList.transactionListFetch()
+        })
     }
 }
 //MARK: - VIEW COMPONENTS

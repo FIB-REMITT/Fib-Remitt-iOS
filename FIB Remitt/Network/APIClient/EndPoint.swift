@@ -433,6 +433,47 @@ enum SellCryptoEndpoint: Endpoint{
         }
     }
 }
+
+
+
+//MARK: - TransactionList EndPoints
+enum TransactionListEndpoint: Endpoint{
+    case TransactionList
+  
+    var method: HTTPMethod{
+        switch self{
+        case .TransactionList:
+            return .post
+        }
+    }
+    
+    var path: String{
+        switch self {
+        case .TransactionList:
+            return "api/v1/sell/crypto-currency"
+       
+        }
+    }
+    
+    var query: [String : String]? {
+        switch self {
+        case .TransactionList:
+            return nil
+        }
+    }
+    
+    var encoder: ParameterEncoder {
+        return JSONParameterEncoder.default
+
+    }
+}
+
+
+
+
+
+
+
 /**
  *  Protocol for all endpoints to conform to.
  */
