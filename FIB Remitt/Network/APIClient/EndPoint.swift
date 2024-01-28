@@ -439,11 +439,15 @@ enum SellCryptoEndpoint: Endpoint{
 //MARK: - TransactionList EndPoints
 enum TransactionListEndpoint: Endpoint{
     case TransactionList(page: Int)
-  
+    case TransactionDetails(transactionNumber: String)
+    
     var method: HTTPMethod{
         switch self{
         case .TransactionList:
             return .get
+        case .TransactionDetails:
+            return .get
+            
         }
     }
     
@@ -451,7 +455,9 @@ enum TransactionListEndpoint: Endpoint{
         switch self {
         case .TransactionList:
             return "api/v1/private/personal/transaction"
-       
+        case .TransactionDetails(let transactionNumber):
+            return "api/v1/private/personal/transaction"
+            
         }
     }
     
@@ -459,17 +465,20 @@ enum TransactionListEndpoint: Endpoint{
         switch self {
         case .TransactionList(let page):
             return ["page": "\(page)"]
+        case .TransactionDetails(let transactionNumber):
+            return ["transactionNumber": transactionNumber ]
+            
         }
     }
     
     var encoder: ParameterEncoder {
         return URLEncodedFormParameterEncoder.default
-
+        
     }
 }
 
 
-
+//}
 
 
 

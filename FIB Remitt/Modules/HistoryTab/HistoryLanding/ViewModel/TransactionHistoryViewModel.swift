@@ -23,6 +23,12 @@ class TransactionHistoryViewModel : ObservableObject{
        self.goToNext        = true
    }
     
+    
+    func navigateToTransactionDetails() {
+       self.destinationView = AnyView(HistoryDetailView())
+       self.goToNext        = true
+   }
+    
     func transactionListFetch(page:Int) {
             repo.transactionListApi(page: page)
             repo.$transactionHistoryList.sink { result in

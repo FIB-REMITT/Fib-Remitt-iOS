@@ -42,6 +42,9 @@ extension HistoryRootView{
             
             ForEach(vm.transactionHistoryDatas) { transactionData in
                        TransactionHistoryCellView(transaction: transactionData)
+                    .onTapGesture {
+                        vm.navigateToTransactionDetails()
+                     }
                    }
         }
     }
