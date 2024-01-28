@@ -231,6 +231,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		2EB157A92B66E481004D3199 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2E0F98FE2B5DA0590094CE9F /* BeneficiaryRootView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		40711F582B5CFD1500F966E7 = {
 			isa = PBXGroup;
 			children = (
@@ -396,9 +404,9 @@
 		897228162B6688B2006B4FEE /* BeneficiaryRoot */ = {
 			isa = PBXGroup;
 			children = (
+				2EB157A92B66E481004D3199 /* View */,
 				8972281A2B66890B006B4FEE /* Model */,
 				897228172B6688CB006B4FEE /* BeneficiaryViewModel */,
-				2E0F98FE2B5DA0590094CE9F /* BeneficiaryRootView.swift */,
 			);
 			path = BeneficiaryRoot;
 			sourceTree = "<group>";

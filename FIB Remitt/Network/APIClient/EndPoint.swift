@@ -251,7 +251,7 @@ enum BeneficiaryEndpoint: Endpoint {
     case getCashPickupDetails(id:String)
     case getBankDetails(id:String)
     case createCashPickupPersonalBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, gender:String, relationShip:String)
-    case createBankPersonalBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, gender:String, relationShip:String)
+    case createBankPersonalBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, gender:String, relationShip:String, bankId:String, accNo:String)
     case resetPassword(newPassword: String)
     
     var method: Alamofire.HTTPMethod{
@@ -276,12 +276,12 @@ enum BeneficiaryEndpoint: Endpoint {
             return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank/\(id)"
             
         case .createBankPersonalBeneficiary:
-            return "api/v1/profile/security/send-otp"
+            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank"
         
         case .resetPassword:
             return "api/v1/auth/reset-password"
         case .createCashPickupPersonalBeneficiary:
-            return ""
+            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/cashpickup"
         case .getBankBeneficiaries:
             return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank"
         }
@@ -296,8 +296,8 @@ enum BeneficiaryEndpoint: Endpoint {
         case .createCashPickupPersonalBeneficiary(let fullName, let nationality, let phoneNumber, let address, let gender, let relationShip):
             return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address":address, "typeOfBeneficiary":"Personal","gender":gender, "relationship":relationShip]
             
-        case .createBankPersonalBeneficiary(let fullName, let nationality, let phoneNumber, let address, let gender, let relationShip):
-            return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address":address, "typeOfBeneficiary":"Personal","gender":gender, "relationship":relationShip]
+        case .createBankPersonalBeneficiary(let fullName, let nationality, let phoneNumber, let address, let gender, let relationShip,let bankId, let accNo):
+            return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address":address, "typeOfBeneficiary":"Personal","gender":gender, "relationship":relationShip, "bankId":bankId, "accountNumber":accNo]
             
         case .getCashPickupBeneficiaries, .getBankBeneficiaries:
             return nil

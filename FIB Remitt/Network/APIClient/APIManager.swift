@@ -57,7 +57,7 @@ class APIManager{
                         case .failure(let error):
                             print(path, response.response?.statusCode ?? "STAtus COde MIssing")
                             
-                            if response.response?.statusCode == 200{
+                            if response.response?.statusCode == 200||response.response?.statusCode == 201{
                                 promise(.failure(NetworkError.responseIsEmpty))
                             }else if response.response?.statusCode == 401 && endPoint.headerAuth{
                                 self?.updateToken()
@@ -134,7 +134,7 @@ class APIManager{
                     case .failure(let error):
                            // print(path, response.response?.statusCode)
                             
-                            if response.response?.statusCode == 200{
+                            if response.response?.statusCode == 200 || response.response?.statusCode == 201{
                                 promise(.failure(NetworkError.responseIsEmpty))
                             }else if response.response?.statusCode == 401 && endPoint.headerAuth{
                                 self?.updateToken()
