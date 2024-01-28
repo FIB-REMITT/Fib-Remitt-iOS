@@ -19,7 +19,7 @@ class BeneficiaryViewModel : ObservableObject{
     func viewWillAppearCalled() {
 //        self.getBankBeneficiaryDetails()
 //        self.getCashPickupBeneficiaryDetails()
-        self.addBankBeneficiary()
+//        self.addBankBeneficiary()
     }
     
     //MARK: - NAVIGATION
