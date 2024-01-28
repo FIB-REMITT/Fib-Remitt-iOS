@@ -1,6 +1,6 @@
 //
 //  EndPoint.swift
-//  IQDX
+//  FIB
 //
 //  Created by Ainul Kazi on 29/1/23.
 //
@@ -10,10 +10,9 @@ import Alamofire
 
 
 //MARK: - Authentication EndPoints
-
 enum AuthEndPoint: Endpoint {
     
-    case signIn(username:String, password: String , otp:String)
+    case signIn(username:String, password: String)
     case createAccountSentOtp(username:String, password:String)
     case createAccount(username:String, password:String, otp:String)
     case refreshToken(refreshToken:String)
@@ -23,7 +22,7 @@ enum AuthEndPoint: Endpoint {
     
     var method: HTTPMethod {
         switch self {
-        case .signIn,.createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken :
+        case .signIn, .createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken :
             return .post
         }
     }
@@ -31,7 +30,7 @@ enum AuthEndPoint: Endpoint {
     var path: String {
         switch self {
         case .signIn:
-            return "api/v1/auth/sign-in"
+            return "api/v1/public/auth/signin"
           
         case .createAccountSentOtp:
             return "api/v1/auth/sign-up/send-otp"
@@ -56,12 +55,8 @@ enum AuthEndPoint: Endpoint {
     var query: [String: String]?  {
         switch self {
             
-        case .signIn(let username, let password, let otp):
-            if otp.isEmpty{
-                return ["username": username, "password": password, "grant_type": "password", "client_id": "mobile-app", "client_secret":"rYTLJ0lgPKUHNluGaSDEeyT2hou2KYq5"]
-            }else{
-                return ["username": username, "password": password, "grant_type": "password", "client_id": "mobile-app", "client_secret":"rYTLJ0lgPKUHNluGaSDEeyT2hou2KYq5", "otp":otp]
-            }
+        case .signIn(let username, let password):
+            return ["email": username, "password": password, "grant_type": "password", "client_id": "mobile-app", "client_secret":"ytEoJitvmnEAzvKC5FGJCyYPpDBETCvG", "scope":"openid profile"]
             
         case .createAccountSentOtp(let username, let password):
             return ["username": username, "password": password]
@@ -182,7 +177,6 @@ enum ProfileEndPoint: Endpoint {
 }
 
 //MARK: - Security EndPoint
-
 enum SecurityEndpoint: Endpoint {
     
     case enableTwoFA(verificationType: String, medium: String)
@@ -262,7 +256,6 @@ enum SecurityEndpoint: Endpoint {
 }
 
 //MARK: - Dashboard EndPoints
-
 enum DashboardEndpoint: Endpoint {
     
     case getInstrumentKeywordSearch(searchKey: String)
@@ -319,352 +312,6 @@ enum DashboardEndpoint: Endpoint {
     }
 }
 
-//MARK: - Assets EndPoints
-enum AssetsEndPoint: Endpoint {
-    
-    case getAssetsOverview(currency:String = "")
-    case getFundingBalance
-    case getCurrencies
-    case transferFundFromFunding(ccy:String, amount:String)
-    case transferFundFromTrading(ccy:String, amount:String)
-    case getDepositAddress(ccy:String)
-    case getDepositHistory
-    case getAssetsHistory
-    case getAccountBalance
-    case getPnlData(accountType:String)
-    case fundWithdrawRequest(ccy:String, amount:String, address:String, chain:String, fee:String, areaCode:String)
-    
-    var method: HTTPMethod {
-        switch self {
-        case .getAssetsOverview, .getFundingBalance, .getCurrencies , .getDepositAddress, .getDepositHistory, .getAccountBalance, .getAssetsHistory, .getPnlData:
-            return .get
-        case .transferFundFromFunding, .transferFundFromTrading, .fundWithdrawRequest:
-            return .post
-        }
-    }
-    
-    var path: String {
-        switch self {
-        case .getAssetsOverview(let currency):
-            return "api/v1/funding/asset-overview?ccy=\(currency)"
-        case .getFundingBalance:
-            return "api/v1/funding/funding-balance"
-        case .getCurrencies:
-            return "api/v1/funding/asset-currencies"
-        case .transferFundFromFunding:
-            return "api/v1/funding/transfer/funding-to-trading"
-        case .transferFundFromTrading:
-            return "api/v1/funding/transfer/trading-to-funding"
-        case .getDepositAddress(let ccy):
-            return "api/v1/funding/all-deposit-addresses?ccy=\(ccy)"
-        case .getDepositHistory:
-            return "api/v1/funding/deposit-history"
-        case .getAccountBalance:
-            return "api/v1/account/trading-balance"
-        case .fundWithdrawRequest:
-            return "api/v1/funding/onchain-withdrawal"
-        case .getAssetsHistory:
-            return "api/v1/funding/funding-history"
-        case .getPnlData(let accountType):
-            return "api/v1/funding/calculate-portfolio/asset-overview?typeOfAccount"//=\(accountType)&startDate=\("".todayDate())&endDate=\("".todayDate())"
-        }
-    }
-    
-    var query: [String: String]?  {
-        switch self {
-        case .getAssetsOverview, .getFundingBalance, .getCurrencies, .getDepositAddress, .getDepositHistory, .getAccountBalance, .getAssetsHistory, .getPnlData:
-            return nil
-        case .transferFundFromFunding(let ccy,  let amount), .transferFundFromTrading(let ccy, let amount):
-            return ["ccy": ccy, "amt": amount]
-        case .fundWithdrawRequest(let ccy, let amount, let address, let chain, let fee, let areaCode):
-            return ["ccy": ccy, "amt": amount, "toAddr": address, "chain": chain, "fee": fee, "areaCode": areaCode]
-        }
-    }
-}
-
-//MARK: - AssetWithdraw EndPoints
-
-enum AssetWithdrawEndpoint: Endpoint {
-    case withdrawConfig(ccy: String)
-    case withdrawRequest(ccy: String, amount:String, address:String, chain:String, fee:String)
-    case internalWithdrawRequest(ccy:String, amt:String, withdrawEmail:String, withdrawPhn:String, withdrawUid:String, note:String)
-    case sentWithdrawOTP(withdrawId:String, email:String, phone:String)
-    case verifyWithdrawOTP(withdrawId:String, email:String, emailOtp:String, phone:String, phnOtp:String, googleCode:String)
-    case getWithdrawHistory(clientId:String, txId:String, type:String, state:String, after:String, before:String, limit:String)
-    
-    var method: Alamofire.HTTPMethod{
-        switch self {
-        case .getWithdrawHistory, .withdrawConfig:
-            return .get
-        case .withdrawRequest, .internalWithdrawRequest, .sentWithdrawOTP, .verifyWithdrawOTP:
-            return .post
-        }
-    }
-    
-    var path: String{
-        switch self {
-        case .withdrawConfig(let ccy):
-            return "api/v1/funding/withdraw/withdrawal-config?ccy=\(ccy)"
-        case .withdrawRequest:
-            return "api/v1/funding/onchain-withdrawal"
-        case .internalWithdrawRequest:
-            return "api/v1/funding/internal-withdrawal"
-        case .sentWithdrawOTP:
-            return "api/v1/funding/send-withdrawal-otp"
-        case .verifyWithdrawOTP:
-            return "api/v1/funding/verify-withdraw-otp"
-        case .getWithdrawHistory(let clientId, let txId, let type, let state, let after, let before, let limit):
-            return "api/v1/funding/withdrawal-history?clientId=\(clientId)&txId=\(txId)&type=\(type)&state=\(state)&after=\(after)&before=\(before)&limit=\(limit)"
-        }
-    }
-    
-    var query: [String : String]? {
-        switch self {
-        case .withdrawRequest(let ccy, let amount, let address, let chain, let fee):
-            return ["ccy":ccy, "amt":amount, "toAddr":address, "chain":chain, "fee": fee, "dest":"4"]
-            
-        case .internalWithdrawRequest(let ccy, let  amt, let withdrawEmail, let withdrawPhn, let withdrawUid, let note):
-            return ["ccy":ccy, "amt":amt, "withdrawEmail":withdrawEmail, "withdrawPhone":withdrawPhn, "withdrawUid":withdrawUid, "note": note]
-            
-        case .sentWithdrawOTP(let withdrawId, let email, let phone):
-            if email.isEmpty{
-                return ["withdrawId": withdrawId, "phone": phone]
-            }else if phone.isEmpty{
-                return ["withdrawId": withdrawId, "email": email]
-            }else{
-                return ["withdrawId": withdrawId, "email": email, "phone": phone]
-            }
-            
-        case .verifyWithdrawOTP(let withdrawId, let email, let emailOtp, let phone, let phnOtp, let googleCode):
-            if email.isEmpty{
-                return ["withdrawId":withdrawId, "phone":phone, "phnOtp":phnOtp]
-            }else if phone.isEmpty{
-                if googleCode.isEmpty{
-                    return ["withdrawId":withdrawId, "email":email, "emailOtp":emailOtp]
-                }else{
-                    return ["withdrawId":withdrawId, "email":email, "emailOtp":emailOtp, "tOtp": googleCode]
-                }
-            }else{
-                return ["withdrawId":withdrawId, "email":email, "emailOtp":emailOtp, "phone":phone, "phnOtp":phnOtp]
-            }
-                
-        case .getWithdrawHistory, .withdrawConfig:
-            return nil
-        }
-    }
-    
-    var encoder: ParameterEncoder {
-        switch self{
-        case .withdrawRequest, .sentWithdrawOTP, .verifyWithdrawOTP, .internalWithdrawRequest:
-            return URLEncodedFormParameterEncoder.default
-        default:
-            return JSONParameterEncoder.default
-        }
-    }
-}
-
-//MARK: - Trade EndPoints
-enum TradeEndPoint: Endpoint{
-    
-    case getTradeConfig
-    case getOrderList(instType: String, instId: String)
-    case getOrderDetails(instType: String, instId: String, ordId: String, clOrdId: String)
-    case createSpotOrder(orderType: String, instId: String, side: String, tradeSize: String, orderPrice: String, tradeType:String = "")
-    case createSpotOrderTpSl(orderType: String, instId: String, side: String, tradeSize: String, orderPrice: String, tradeType:String = "", tpTriggerPx:String = "", tpOrdPx:String = "", slTriggerPx:String = "", slOrdPx:String = "",slTriggerPxType:String = "index")
-    case updateSpotOrder(orderMode: String, instId: String, ordId: String, clOrdId: String, newSize: String, newPrice: String, cancelOnFail: Bool)
-    case cancelSpotOrder(orderMode: String, instId: String, ordId: String, clOrdId: String, orderCategory:String)
-    
-    var method: HTTPMethod{
-        switch self {
-        case .getTradeConfig, .getOrderList, .getOrderDetails:
-            return .get
-        case .createSpotOrder, .createSpotOrderTpSl, .updateSpotOrder, .cancelSpotOrder:
-            return .post
-        }
-    }
-    
-    var path: String {
-        switch self {
-        case .getTradeConfig:
-            return "api/v1/trade/trade-config"
-        case .getOrderList(let instType, let instId):
-            return "api/v1/trade/order-list?instType=\(instType)&instId=\(instId)"
-        case .getOrderDetails(let instType, let instId, let ordId, let clOrdId):
-            return "api/v1/trade/order-details?instType=\(instType)&instId=\(instId)&ordId=\(ordId)&clOrdId=\(clOrdId)"
-        case .createSpotOrder, .createSpotOrderTpSl:
-            return "api/v1/trade/spot-order"
-        case .updateSpotOrder:
-            return "api/v1/trade/amend-order"
-        case .cancelSpotOrder:
-            return "api/v1/trade/cancel-order"
-        }
-    }
-    
-    var query: [String : String]? {
-        switch self {
-        case .getTradeConfig, .getOrderList, .getOrderDetails:
-            return nil
-        case .createSpotOrder(let orderType, let instId, let side, let tradeSize, let orderPrice, let tradeType):
-            return ["orderType": orderType, "instId": instId, "side": side, "tradeSize": tradeSize, "orderPrice": orderPrice, "tradeType":tradeType]
-        case .createSpotOrderTpSl(let orderType, let instId, let side, let tradeSize, let orderPrice, let tradeType, let tpTriggerPx, let tpOrdPx, let slTriggerPx, let slOrdPx , let slTriggerPxType):
-            return ["orderType": orderType, "instId": instId, "side": side, "tradeSize": tradeSize, "orderPrice": orderPrice, "tradeType":tradeType, "tpTriggerPx":tpTriggerPx, "tpOrdPx":tpOrdPx, "slTriggerPx":slTriggerPx,"slOrdPx":slOrdPx, "siTriggerPxType":slTriggerPxType]
-        case .updateSpotOrder(let orderMode, let instId, let ordId, let clOrdId, let newSize, let newPrice, let cancelOnFail):
-            return ["orderMode": orderMode, "instId": instId, "ordId": ordId, "clOrdId": clOrdId, "newSize": newSize, "newPrice": newPrice, "cancelOnFail": String(cancelOnFail)]
-        case .cancelSpotOrder(let orderMode, let instId, let ordId, let clOrdId, _): //algoClOrdId:String,algoId:String,orderCategory:String
-            return ["orderMode": orderMode, "instId": instId, "ordId": ordId, "clOrdId": clOrdId,"orderCategory":"regular"]
-        }
-    }
-}
-
-// MARK: - Trade Perpetual EndPoint
-enum TradePerpetualEndpoint: Endpoint {
-    
-    case perpPlaceOrder(tradeType:String, orderType:String, instId:String, tradeMode:String, side:String, posSide:String, tradeSize:String, orderPrice:String, tgtCcy:String, banAmend:String, tpTriggerPx:String, tpOrdPx:String, slTriggerPx:String, slOrdPx:String, tpTriggerPxType:String, slTriggerPxType:String, unit:String, clOrdId:String, reduceOnly:String)
-    case updatePerpOrder(orderMode: String, instId: String, ordId: String, clOrdId: String, newSize: String, newPrice: String, cancelOnFail: String)
-    case subSetAccountLvl(setLvl:String)
-    case getFundingRate(instaId: String)
-    case getLeverage(instaId:String, mngMode:String)
-    case setLeverage(instaId:String, mngMode:String, lever:String, ccy:String, posSide:String)
-    case getPosition(instType:String, instId:String, posId:String)
-    case setPositionMode(posMode:String)
-    case closeAllPosition(orderMode: String, instId: String, posSide: String, mgnMode: String, autoCxl: String)
-    case getAccountAndPosition(instType:String)
-    case getAccountConfiguration
-    case getMaxTradableSizeForInst(instId:String, tdMode:String, ccy:String, px:String, leverage:String, upSpotOffset:String)
-    case getMaxTradableAmount(instId:String, tdMode:String, ccy:String, reduceOnly:String, px:String, unSpotOffset:String)
-    case changeMargin(instId:String, posSide:String, type:String, amt:String, loanTrans:String, ccy:String, auto:String)
-    case getFeeRates(instType:String, instId:String, uly:String, instFamily:String)
-    case getInstrument(instType:String, instId:String, uly:String, instFamily:String)
-    case getMarkPrice(instType:String, instId:String, uly:String, instFamily:String)
-    case cancelOrder(orderMode: String, orderCategory: String, instId: String, ordId: String, clOrdId: String, algoId: String)
-    case getAlgoOrder(algoId: String, instType: String, instId: String, ordType: String)
-    case getOrderDetails(instType: String, instId: String, ordId: String, clOrdId: String)
-    case getOrderHistory(instType: String, uly: String, instId: String, ordType: String, instFamily: String, state: String, category: String, after: String, before: String, limit: String, end: String)
-    
-    var method: Alamofire.HTTPMethod{
-        switch self {
-        case .setLeverage, .setPositionMode, .changeMargin, .subSetAccountLvl, .perpPlaceOrder, .updatePerpOrder, .closeAllPosition, .cancelOrder:
-            return .post
-            
-        case .getFundingRate, .getLeverage, .getPosition, .getAccountAndPosition, .getAccountConfiguration, .getMaxTradableSizeForInst,
-                .getMaxTradableAmount, .getFeeRates, .getInstrument, .getMarkPrice, .getAlgoOrder, .getOrderDetails, .getOrderHistory:
-            return .get
-        }
-    }
-    
-    var path: String{
-        switch self {
-            case .perpPlaceOrder:
-                return "api/v1/trade/swap-order"
-            
-            case .updatePerpOrder:
-                return "api/v1/trade/amend-order"
-                
-            case .subSetAccountLvl:
-                return "api/v1/account/set-account-level"
-                
-            case .getFundingRate(let instId):
-                return "api/v1/broker-connector/public-data/get-funding-rate?instId=\(instId)"
-                
-            case .getLeverage(let instId, let mngMode):
-                return "api/v1/account/get-leverage?instId=\(instId)&mgnMode=\(mngMode)"
-                
-            case .setLeverage:
-                return "api/v1/account/set-leverage"
-                
-            case .getPosition(let instType, let instId, let posId):
-                return "api/v1/account/positions?instType=\(instType)&insId=\(instId)&posId=\(posId)"
-                
-            case .setPositionMode:
-                return "api/v1/account/set-position-mode"
-                
-            case .closeAllPosition:
-                return "api/v1/trade/close-position"
-                
-            case .getAccountAndPosition(let instType):
-                return "api/v1/account/acc-position?instType=\(instType)"
-                
-            case .getAccountConfiguration:
-                return "api/v1/account/acc-configuration"
-                
-            case .getMaxTradableSizeForInst(let instId, let tdMode, let ccy, let px, let leverage, let upSpotOffset):
-                return "api/v1/account/maximum-tradable-size-for-instrument?instId=\(instId)&tdMode=\(tdMode)&ccy=\(ccy)&px=\(px)&leverage=\(leverage)&unSpotOffset=\(upSpotOffset)"
-                
-            case .getMaxTradableAmount(let instId, let tdMode, let ccy, let reduceOnly, let px, let unSpotOffset):
-                return "api/v1/account/maximum-available-tradable-amount?instId=\(instId)&tdMode=\(tdMode)&ccy=\(ccy)&reduceOnly=\(reduceOnly)&px=\(px)&unSpotOffset=\(unSpotOffset)"
-                
-            case .changeMargin:
-                return "api/v1/account/increase-decrease-margin"
-                
-            case .getFeeRates(let instType, let instId, let uly, let instFamily):
-                return "api/v1/account/fee-rates?instType=\(instType)&instId=\(instId)&uly=\(uly)&instFamily=\(instFamily)"
-                
-            case .getInstrument(let instType, let instId,  let uly, let instFamily):
-                return "api/v1/broker-connector/public-data/get-instruments?instType=\(instType)&uly=\(uly)&instFamily=\(instFamily)&instId=\(instId)" //&uly=&instFamily=&instId=BTC-USD-SWAP
-                
-            case .getMarkPrice(let instType, let instId, let uly, let instFamily):
-                return "api/v1/broker-connector/public-data/get-mark-price?instType=\(instType)&uly=\(uly)&instFamily=\(instFamily)&instId=\(instId)"
-                
-            case .cancelOrder:
-                return "api/v1/trade/cancel-order"
-                
-            case .getAlgoOrder(let algoId, let instType, let instId, let ordType):
-                return "api/v1/trade/algo-order-list?algoId=\(algoId)&instType=\(instType)&instId=\(instId)&ordType=\(ordType)"
-                
-            case .getOrderDetails(let instType, let instId, let ordId, let clOrdId):
-                return "api/v1/trade/order-details?instType=\(instType)&instId=\(instId)&ordId=\(ordId)&clOrdId=\(clOrdId)"
-        
-            case .getOrderHistory(let instType, let uly, let instId, let ordType, let instFamily, let state, let category, let after, let before, let limit, let end):
-                    return "api/v1/trade/order-history-3months?instType=\(instType)&uly=\(uly)&instId=\(instId)&ordType=\(ordType)&instFamily=\(instFamily)&state=\(state)&category=\(category)&after=\(after)&before=\(before)&limit=\(limit)&end=\(end)"
-              
-        }
-    }
-    
-    var query: [String : String]? {
-        switch self {
-            case  .getFundingRate, .getLeverage, .getPosition, .getAccountAndPosition, .getAccountConfiguration, .getMaxTradableSizeForInst, .getMaxTradableAmount,
-                .getInstrument, .getMarkPrice, .getAlgoOrder, .getOrderDetails, .getOrderHistory:
-                return nil
-                
-            case .subSetAccountLvl(let setLvl):
-                return ["accountLevel": setLvl]
-                
-            case .setLeverage(let instaId, let mngMode, let lever, let ccy, let posSide):
-                return ["instId": instaId, "lever": lever, "mgnMode": mngMode, "ccy":ccy, "posSide":posSide]
-                
-            case .setPositionMode(let posMode):
-                return ["posMode":posMode]
-                
-            case .closeAllPosition(let orderMode, let instId, let posSide, let mgnMode, let autoCxl):
-                return ["orderMode": orderMode, "instId": instId, "posSide": posSide, "mgnMode": mgnMode, "autoCxl": autoCxl]
-                
-            case .changeMargin(let instId, let posSide, let type, let amt, let loanTrans, let ccy, let auto):
-                return ["instId":instId, "posSide":posSide, "type":type, "amt":amt, "loanTrans":loanTrans, "ccy":ccy, "auto":auto]
-                
-            case .getFeeRates(let instType, let instId, let uly, let instFamily):
-                return ["instType":instType, "instId":instId, "uly":uly, "instFamily":instFamily]
-                
-            case .perpPlaceOrder( let tradeType, let orderType, let instId, let tradeMode, let side, let posSide, let tradeSize, let orderPrice, let tgtCcy, let banAmend, let tpTriggerPx, let tpOrdPx, let slTriggerPx, let slOrdPx, let tpTriggerPxType, let slTriggerPxType, let unit, let clOrdId, let reduceOnly):
-                return ["tradeType":tradeType, "orderType":orderType, "instId":instId, "tradeMode":tradeMode, "side":side, "posSide":posSide, "tradeSize":tradeSize, "orderPrice":orderPrice, "tgtCcy":tgtCcy, "banAmend":banAmend, "tpTriggerPx":tpTriggerPx, "tpOrdPx":tpOrdPx, "slTriggerPx":slTriggerPx, "slOrdPx":slOrdPx, "tpTriggerPxType":tpTriggerPxType, "slTriggerPxType":slTriggerPxType, "unit": unit, "clOrdId":clOrdId, "reduceOnly":reduceOnly]
-
-            case .updatePerpOrder(let orderMode, let instId, let ordId, let clOrdId, let newSize, let newPrice, let cancelOnFail):
-                return ["orderMode": orderMode, "instId": instId, "ordId": ordId, "clOrdId": clOrdId, "newSize": newSize, "newPrice": newPrice, "cancelOnFail": cancelOnFail]
-
-            case .cancelOrder(let orderMode, let orderCategory, let instId, let ordId, let clOrdId, let algoId):
-                return ["orderMode": orderMode, "orderCategory": orderCategory, "instId": instId, "ordId": ordId, "clOrdId": clOrdId, "algoId": algoId]
-        }
-    }
-    
-    var encoder: ParameterEncoder {
-        switch self{
-        case .setLeverage, .setPositionMode, .changeMargin, .subSetAccountLvl, .perpPlaceOrder, .updatePerpOrder, .cancelOrder:
-            return URLEncodedFormParameterEncoder.default
-            
-        default:
-            return JSONParameterEncoder.default
-        }
-    }
-}
 
 //MARK: - FIAT EndPoints
 enum FiatEndpoint: Endpoint{

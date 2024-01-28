@@ -9,12 +9,12 @@ import SwiftUI
 
 struct InitialView: View {
     @ObservedObject var vm = AuthViewModel()
-    @State var tapped  = false
     @State var currentImage: String = "map"
+
     var body: some View {
         NavigationStack{
             ZStack {
-                if !tapped{
+                if !vm.tapped{
                     backgroundView
                     VStack {
                         Spacer()
@@ -88,8 +88,10 @@ extension InitialView {
 //MARK: - ACTIONS
 extension InitialView {
     private func loginWithFIBButtonPressed() {
-        // vm.navigateToHome()
-        self.tapped = true
+       // vm.navigateToHome()
+        //self.tapped = true
+        vm.login() 
+
     }
     private func downloadNowButtonPressed(){}
 }
