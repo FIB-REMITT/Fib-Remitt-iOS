@@ -24,4 +24,6 @@ extension Color{
     static var fr_forground       : Color     { return  UI.AppThemeColor(name: "FR-Forground")}//
     static var text_Mute            : Color     { return  UI.AppThemeColor(name: "Text-Mute")}//
     static var text_Regula          : Color     { return  UI.AppThemeColor(name: "Text-Regula")} //
+    static var logout_red          : Color     { return  UI.AppThemeColor(name: "red-cream")} //
+    
 }

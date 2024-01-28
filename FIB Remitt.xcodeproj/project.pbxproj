@@ -71,6 +71,7 @@
 		899749372B61494D00DEBD8C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899749362B61494D00DEBD8C /* HomeViewModel.swift */; };
 		899749392B615C4F00DEBD8C /* BeneficiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899749382B615C4F00DEBD8C /* BeneficiaryViewModel.swift */; };
 		8997493B2B615EC200DEBD8C /* TransactionHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8997493A2B615EC200DEBD8C /* TransactionHistoryViewModel.swift */; };
+		89A5D1FB2B6628FF00C19F92 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A5D1FA2B6628FF00C19F92 /* ProfileView.swift */; };
 		9248954BA1DA9AF72EF8DF96 /* Pods_FIB_Remitt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +144,7 @@
 		899749362B61494D00DEBD8C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		899749382B615C4F00DEBD8C /* BeneficiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryViewModel.swift; sourceTree = "<group>"; };
 		8997493A2B615EC200DEBD8C /* TransactionHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewModel.swift; sourceTree = "<group>"; };
+		89A5D1FA2B6628FF00C19F92 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FIB_Remitt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -298,6 +300,7 @@
 		89740D332B5D1CC0000ACFBA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				89A5D1F92B6628BD00C19F92 /* Profile */,
 				89740D352B5D1EA0000ACFBA /* InitialScene */,
 				89740D362B5D1EBB000ACFBA /* HomeTab */,
 				89740D372B5D1ED0000ACFBA /* BeneficiaryTab */,
@@ -489,6 +492,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		89A5D1F92B6628BD00C19F92 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				89A5D1FA2B6628FF00C19F92 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -658,6 +669,7 @@
 				2E0F98FD2B5DA00E0094CE9F /* HistoryRootView.swift in Sources */,
 				896EA0C62B5F863600FB231A /* TransactionHistoryCellView.swift in Sources */,
 				89740D402B5D3883000ACFBA /* FRVerticalButton.swift in Sources */,
+				89A5D1FB2B6628FF00C19F92 /* ProfileView.swift in Sources */,
 				89740D482B5D558D000ACFBA /* View.swift in Sources */,
 				896EA0BF2B5F811F00FB231A /* EditBeneficiaryBankView.swift in Sources */,
 				8997492E2B60DB1100DEBD8C /* AuthViewModel.swift in Sources */,

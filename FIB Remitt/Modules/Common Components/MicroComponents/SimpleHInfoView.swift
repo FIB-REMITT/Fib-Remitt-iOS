@@ -87,6 +87,21 @@ struct SimpleHColonInfoView: View {
     }
 }
 
+struct SimpleHColonModInfoView: View {
+    var title:String
+    var info:String
+    
+    var body: some View {
+        HStack(spacing: 16){
+            TextBaseMedium(text: title, fg_color: .textMute)
+                .frame(width: 75, alignment: .leading)
+            TextBaseRegular(text: ":", fg_color: .textMute)
+            TextBaseRegular(text: info, fg_color: .textRegula)
+            Spacer()
+        }
+    }
+}
+
 #Preview {
     VStack(spacing:20){
         SimpleHInfoView(title: "Delivery Method", info: "Bank Transfer")
