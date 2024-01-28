@@ -36,11 +36,11 @@ struct HomeRootView: View {
                 }
             }
             .padding()
-            
-            
-        }.navigationBarHidden(true)
-            .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
-            .onTapGesture {hideKeyboard()}
+        }
+        .navigationBarHidden(true)
+        .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
+        .onTapGesture {hideKeyboard()}
+        .onAppear(){vm.viewWillAppearCalled()}
     }
 }
 

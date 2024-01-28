@@ -102,6 +102,73 @@ enum AuthEndPoint: Endpoint {
     }
 }
 
+//MARK: - Basic EndPoints
+enum BasicEndPoint: Endpoint {
+    
+    case getNationalities
+    case getPurposes
+    case getAllBanks
+    case getAllCurrencies
+    
+    var method: HTTPMethod {
+        switch self {
+
+        case .getNationalities, .getPurposes, .getAllBanks, .getAllCurrencies:
+            return .get
+        }
+    }
+    
+    var path: String {
+        switch self {
+        case .getNationalities:
+            return "api/v1/private/nationalities"
+          
+        case .getPurposes:
+            return "api/v1/private/purposes"
+            
+        case .getAllBanks:
+            return "api/v1/public/bank"
+            
+            
+        case .getAllCurrencies:
+            return "api/v1/private/currencies"
+        }
+    }
+    
+    var query: [String: String]?  {
+        switch self {
+            
+        case .getNationalities, .getAllBanks, .getPurposes, .getAllCurrencies:
+            return nil
+            
+
+        }
+    }
+    
+//    var encoder: ParameterEncoder {
+//        switch self{
+//        case .forgotPassSendOTP:
+//            return URLEncodedFormParameterEncoder.default
+//            
+//        default:
+//            return JSONParameterEncoder.default
+//        }
+//    }
+    
+//    var contentType: String{
+//        switch self{
+//        case .forgotPassSendOTP:
+//            return ContentType.urlEncoded.rawValue
+//        default:
+//            return ContentType.json.rawValue
+//        }
+//    }
+    
+    var headerAuth: Bool{
+        return false
+    }
+}
+
 //MARK: - Profile EndPoints
 
 enum ProfileEndPoint: Endpoint {

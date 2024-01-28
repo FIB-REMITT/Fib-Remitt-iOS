@@ -18,10 +18,10 @@ extension Color{
     static var primary_700          : Color     { return  UI.AppThemeColor(name: "primary-700")} //
     static var primary_800          : Color     { return  UI.AppThemeColor(name: "primary-800")} //
     static var primary_900          : Color     { return  UI.AppThemeColor(name: "primary-900")} //
-    static var fr_background      : Color     { return  UI.AppThemeColor(name: "FR-Background")} //
-    static var fr_border          : Color     { return  UI.AppThemeColor(name: "FR-Border")} //
+    static var fr_background        : Color     { return  UI.AppThemeColor(name: "FR-Background")} //
+    static var fr_border            : Color     { return  UI.AppThemeColor(name: "FR-Border")} //
     static var text_fade            : Color     { return  UI.AppThemeColor(name: "Text-Fade")} //
-    static var fr_forground       : Color     { return  UI.AppThemeColor(name: "FR-Forground")}//
+    static var fr_forground         : Color     { return  UI.AppThemeColor(name: "FR-Forground")}//
     static var text_Mute            : Color     { return  UI.AppThemeColor(name: "Text-Mute")}//
     static var text_Regula          : Color     { return  UI.AppThemeColor(name: "Text-Regula")} //
 }

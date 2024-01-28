@@ -40,6 +40,6 @@ class AuthRepository {
 
                 }
             }.store(in: &subscribers)
-
     }
+    
 }

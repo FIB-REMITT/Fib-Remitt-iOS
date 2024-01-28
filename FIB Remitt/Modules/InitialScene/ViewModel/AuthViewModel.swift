@@ -36,4 +36,5 @@ class AuthViewModel : ObservableObject{
         loggedIn = true
         //self.navigateToHome()
     }
+    
 }
