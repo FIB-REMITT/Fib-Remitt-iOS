@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HistoryRootView: View {
-    @ObservedObject var vm = TransactionHistoryViewModel()
+    
+    @ObservedObject var vm = TransactionHistoryViewModel() // history view model
    
     var body: some View {
         VStack{
