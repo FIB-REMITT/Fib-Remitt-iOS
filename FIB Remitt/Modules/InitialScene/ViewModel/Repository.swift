@@ -19,7 +19,7 @@ class AuthRepository {
                 case .failure(let error):
                     print(error.localizedDescription)
                     if let err = error as? NetworkError{
-                        //self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: true)
+                        // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: true)
                     }else{
                        // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: false)
                     }

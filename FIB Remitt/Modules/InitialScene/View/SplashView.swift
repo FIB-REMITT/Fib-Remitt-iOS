@@ -12,22 +12,24 @@ struct SplashView: View {
     @State var currentImage: String = "map"
     @State private var rotationAngle: Double = 0
     var body: some View {
-        ZStack{
-            if isActive{
-                InitialView()
-//                splashView
-            }else{
-                splashView
-            }
-        }.onAppear(){
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                withAnimation {
-                    self.isActive = true
+        NavigationStack{
+            ZStack{
+                if isActive{
+                    InitialView()
+                    //                splashView
+                }else{
+                    splashView
+                }
+            }.onAppear(){
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    withAnimation {
+                        self.isActive = true
+                    }
+                }
+                withAnimation(Animation.linear(duration: 1.0).repeatForever(autoreverses: false)) {
+                    self.rotationAngle = 360
                 }
             }
-            withAnimation(Animation.linear(duration: 1.0).repeatForever(autoreverses: false)) {
-                                self.rotationAngle = 360
-                            }
         }
     }
 }

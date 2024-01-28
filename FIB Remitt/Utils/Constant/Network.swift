@@ -28,7 +28,7 @@ struct K {
         var Sandbox: String {
             switch self {
             case .FIB:
-                return "http://api.fibremit.com/"
+                return "https://api.fibremit.com/"
             case .OKX_SOCKET:
                 return "wss://ws.okx.com:8443/"
             case .IQDX_ASSET:
@@ -39,7 +39,7 @@ struct K {
         var Production: String {
             switch self {
             case .FIB:
-                return "http://api.fibremit.com/"////http://alb-api-1902201270.eu-west-1.elb.amazonaws.com/    // https://dev-api.iqd-x.com/
+                return "https://api.fibremit.com/"////http://alb-api-1902201270.eu-west-1.elb.amazonaws.com/    // https://dev-api.iqd-x.com/
             case .OKX_SOCKET:
                 return "wss://ws.okx.com:8443/"
             case .IQDX_ASSET:

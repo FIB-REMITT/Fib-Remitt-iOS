@@ -16,7 +16,7 @@ struct FRBottomBarContainer: View {
     }
 
     var body: some View {
-        NavigationStack {
+       // NavigationStack {
             VStack (spacing: 0){
                 ZStack {
                     TabView(selection: $selected) {
@@ -34,7 +34,7 @@ struct FRBottomBarContainer: View {
                 FRBottomBar(tabs: [TabBarItem.data.first!, TabBarItem.data[1], TabBarItem.data[3], TabBarItem.data[4]], selected: $selected)
                 
             }.ignoresSafeArea(.keyboard,edges: .bottom)
-        }
+        //}
     }
 }
 
