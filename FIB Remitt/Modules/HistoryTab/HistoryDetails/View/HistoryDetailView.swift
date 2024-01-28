@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HistoryDetailView: View {
+    @ObservedObject var vm = TransactionHistoryViewModel()
+    var id : String
     var body: some View {
         VStack(spacing: 12){
             navigationBar
@@ -20,6 +22,9 @@ struct HistoryDetailView: View {
         }.padding()
             .background(Color.fr_background.ignoresSafeArea())
             .navigationBarHidden(true)
+            .onAppear(perform: {
+                vm.transactionDetailsFetch(transactionNumber: id)
+            })
     }
 }
 //MARK: - VIEW COMPONENTS
@@ -35,5 +40,5 @@ extension HistoryDetailView{
     }
 }
 #Preview {
-    HistoryDetailView()
+    HistoryDetailView( id: "")
 }

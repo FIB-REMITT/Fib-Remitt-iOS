@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct HistoryRootView: View {
-    @ObservedObject var vm = TransactionHistoryViewModel()
+    
+    @ObservedObject var vm = TransactionHistoryViewModel() // history view model
+   
     var body: some View {
         VStack{
             navigationBar
@@ -19,6 +21,9 @@ struct HistoryRootView: View {
         .padding()
         .background(Color.frBackground.ignoresSafeArea())
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
+        .onAppear(perform: {
+            vm.transactionListFetch(page: 0)
+        })
     }
 }
 //MARK: - VIEW COMPONENTS
@@ -34,10 +39,13 @@ extension HistoryRootView{
     }
     private var contextContainer : some View{
         VStack{
-            TransactionHistoryCellView()
-            TransactionHistoryCellView()
-            TransactionHistoryCellView()
-            TransactionHistoryCellView()
+            
+            ForEach(vm.transactionHistoryDatas) { transactionData in
+                       TransactionHistoryCellView(transaction: transactionData)
+                    .onTapGesture {
+                        vm.navigateToTransactionDetails(transactionNumber: transactionData.transactionNumber ?? "")
+                     }
+                   }
         }
     }
 }

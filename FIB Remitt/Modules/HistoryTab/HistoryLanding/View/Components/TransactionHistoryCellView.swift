@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TransactionHistoryCellView: View {
     @ObservedObject var vm = TransactionHistoryViewModel()
+    let transaction: TransactionListContent
     var body: some View {
         FRVContainer (backgroundColor: .frForground){
             HStack (spacing:15){
@@ -26,29 +27,29 @@ struct TransactionHistoryCellView: View {
                 
                 VStack(alignment:.leading, spacing: 5){
                     HStack {
-                        TextBaseMedium(text:"John Doe", fg_color: .textRegula)
+                        TextBaseMedium(text:"\(transaction.receiver?.fullName ?? "")", fg_color: .text_Regula)
                         Image("beneficiary_ico")
                             .imageDefaultStyle()
                             .frame(width: 15)
                     }
                     HStack {
-                        TextSmallRegular(text:"Ref: 02748869", fg_color: .textFade)
+                        TextSmallRegular(text:"Ref: \(transaction.transactionNumber ?? "")", fg_color: .textFade)
                         Image("beneficiary_ico")
                             .imageDefaultStyle()
                             .frame(width: 15)
                     }
-                    TextSmallRegular(text:"10/1/2023 | 10:00 PM", fg_color: .textFade)
+                    TextSmallRegular(text: formatDateString(dateString: transaction.createdAt ?? "", format: "M/d/yyyy | h:mm a") ?? "", fg_color: .textFade)
                 }
                 Spacer()
                 VStack(alignment:.trailing, spacing: 5){
                     HStack {
-                        TextSmallRegular(text:"125,000 IQD", fg_color: .textRegula)
+                        TextSmallRegular(text:"\(transaction.transaction?.amountToTransfer ?? 0) IQD", fg_color: .textRegula)
                         Image("beneficiary_ico")
                             .imageDefaultStyle()
                             .frame(width: 15)
                     }
                     HStack {
-                        TextSmallRegular(text:"2,875 TRY")
+                        TextSmallRegular(text:"\(transaction.transaction?.amountReceivable ?? 0) TRY")
                         Image("beneficiary_ico")
                             .imageDefaultStyle()
                             .frame(width: 15)
@@ -66,11 +67,23 @@ struct TransactionHistoryCellView: View {
             }
         }
     }
+    
+    func formatDateString(dateString: String, format: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+        
+        if let date = dateFormatter.date(from: dateString) {
+            dateFormatter.dateFormat = format
+            return dateFormatter.string(from: date)
+        }
+        
+        return nil // Return nil for invalid input
+    }
 }
 
 #Preview {
     ZStack{
         Color.fr_background.ignoresSafeArea()
-        TransactionHistoryCellView()
+        TransactionHistoryCellView(transaction: TransactionListContent(transactionNumber: "", receiver: Receiver(fullName: "", phoneNumber: "", nationality: "", address: "", gender: "", typeOfBeneficiary: "", relationship: "", accountNumber: "", bankName: ""), collectionPoint: "", purposeTitle: "", transaction: Transaction(fromCurrency: "", amountToTransfer: 0, toCurrency: "", totalPayable: 0, charge: 0, amountReceivable: 0.0), status: "", createdAt: "", updatedAt: ""))
     }
 }
