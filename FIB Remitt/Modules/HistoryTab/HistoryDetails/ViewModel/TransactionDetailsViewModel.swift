@@ -22,7 +22,5 @@ class TransactionDetailsViewModel : ObservableObject{
        self.goToNext        = true
    }
     
-    func transactionDetailsFetch(transactionNumber: String) {
-            repo.transactionDetailsApi(transactionNumber: transactionNumber)
-        }
+    
 }
