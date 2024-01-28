@@ -243,67 +243,63 @@ enum ProfileEndPoint: Endpoint {
     }
 }
 
-//MARK: - Security EndPoint
-enum SecurityEndpoint: Endpoint {
+//MARK: - Beneficiary EndPoint
+enum BeneficiaryEndpoint: Endpoint {
     
-    case enableTwoFA(verificationType: String, medium: String)
-    case verifyTwoFA(verificationType: String, medium: String, otp:String)
-    case disableTwoFA(otp: String)
-    case getGoogleAuthSecret
-    case submitAuthentictorSecret(authenticator:String, secret:String, otp:String, totp:String)
-    case sentOTPSecurityUpdate(verificationType:String, medium:String)
+    case getCashPickupBeneficiaries
+    case getBankBeneficiaries
+    case getCashPickupDetails(id:String)
+    case getBankDetails(id:String)
+    case createCashPickupPersonalBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, gender:String, relationShip:String)
+    case createBankPersonalBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, gender:String, relationShip:String)
     case resetPassword(newPassword: String)
     
     var method: Alamofire.HTTPMethod{
         switch self {
-        case .enableTwoFA, .verifyTwoFA, .disableTwoFA, .submitAuthentictorSecret, .sentOTPSecurityUpdate, .resetPassword:
+        case .createCashPickupPersonalBeneficiary, .createBankPersonalBeneficiary, .resetPassword:
             return .post
             
-        case .getGoogleAuthSecret:
+        case .getCashPickupBeneficiaries, .getBankBeneficiaries, .getCashPickupDetails , .getBankDetails:
             return .get
         }
     }
     
     var path: String{
         switch self {
-        case .enableTwoFA:
-            return "api/v1/auth/verify-selected-2fa"
+        case .getCashPickupBeneficiaries:
+            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/cashpickup"
             
-        case .verifyTwoFA:
-            return "api/v1/auth/add-2fa"
+        case .getCashPickupDetails(let id):
+            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/cashpickup/\(id)"
         
-        case .disableTwoFA:
-            return "api/v1/auth/reset-2fa"
-
-        case .getGoogleAuthSecret, .submitAuthentictorSecret:
-            return "api/v1/auth/authenticator"
+        case .getBankDetails(let id):
+            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank/\(id)"
             
-        case .sentOTPSecurityUpdate:
+        case .createBankPersonalBeneficiary:
             return "api/v1/profile/security/send-otp"
         
         case .resetPassword:
             return "api/v1/auth/reset-password"
+        case .createCashPickupPersonalBeneficiary:
+            return ""
+        case .getBankBeneficiaries:
+            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank"
         }
     }
     
     var query: [String : String]? {
         switch self {
-        case .enableTwoFA(let verificationType, let medium):
-            return ["verificationType": "\(verificationType)", "twoFactorAuthMedium": "\(medium)"]
             
-        case .verifyTwoFA(let verificationType, let medium, let otp):
-            return ["verificationType": "\(verificationType)", "twoFactorAuthMedium": "\(medium)", "otp":"\(otp)"]
-            
-        case .disableTwoFA(let otp):
-            return ["otp": "\(otp)"]
+        case .getCashPickupDetails, .getBankDetails:
+            return nil
 
-        case .submitAuthentictorSecret(let authenticator, let secret, let otp, let totp):
-            return ["authenticatorApp":authenticator, "secret":secret, "otp":otp, "totp":totp]
+        case .createCashPickupPersonalBeneficiary(let fullName, let nationality, let phoneNumber, let address, let gender, let relationShip):
+            return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address":address, "typeOfBeneficiary":"Personal","gender":gender, "relationship":relationShip]
             
-        case .sentOTPSecurityUpdate(let verificationType, _ ):
-            return ["verificationType":verificationType, "medium": ""]
+        case .createBankPersonalBeneficiary(let fullName, let nationality, let phoneNumber, let address, let gender, let relationShip):
+            return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address":address, "typeOfBeneficiary":"Personal","gender":gender, "relationship":relationShip]
             
-        case .getGoogleAuthSecret:
+        case .getCashPickupBeneficiaries, .getBankBeneficiaries:
             return nil
             
         case .resetPassword(let newPassword):
@@ -313,7 +309,7 @@ enum SecurityEndpoint: Endpoint {
     
     var encoder: ParameterEncoder {
         switch self{
-        case .enableTwoFA, .verifyTwoFA, .disableTwoFA:
+        case .resetPassword, .createCashPickupPersonalBeneficiary, .createBankPersonalBeneficiary:
             return URLEncodedFormParameterEncoder.default
             
         default:

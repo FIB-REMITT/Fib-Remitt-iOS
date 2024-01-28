@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CountryCodePickerBtn: View {
-    @Binding var selectedCountry:CurrencyResponse
+    @Binding var selectedCountry:CountryPickerItem
     var body: some View {
         Button {
             let vc = UIHostingController(rootView: PickerView(selected: $selectedCountry))
@@ -30,7 +30,7 @@ struct CountryCodePickerBtn: View {
 }
 
 struct CountryCodePickerBtn_Previews: PreviewProvider {
-    @State static var selectedCountry:CurrencyResponse = CurrencyResponse(countryName: "Iraq", countryCode: "+964", flag: "🇮🇶")
+    @State static var selectedCountry:CountryPickerItem = CountryPickerItem(countryName: "Iraq", countryCode: "+964", flag: "🇮🇶")
     static var previews: some View {
         CountryCodePickerBtn(selectedCountry: $selectedCountry)
     }

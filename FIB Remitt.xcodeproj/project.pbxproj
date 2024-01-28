@@ -53,6 +53,11 @@
 		8972280E2B667744006B4FEE /* HomeRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972280D2B667744006B4FEE /* HomeRepo.swift */; };
 		897228132B667D9E006B4FEE /* CountryCodePickerBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228112B667D9E006B4FEE /* CountryCodePickerBtn.swift */; };
 		897228142B667D9E006B4FEE /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228122B667D9E006B4FEE /* PickerView.swift */; };
+		8972281C2B668943006B4FEE /* CashPickupBeneficiariesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972281B2B668943006B4FEE /* CashPickupBeneficiariesResponse.swift */; };
+		8972281E2B6689ED006B4FEE /* BeneficiaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972281D2B6689ED006B4FEE /* BeneficiaryRepository.swift */; };
+		897228202B669938006B4FEE /* CashPickupBeneficiaryDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972281F2B669938006B4FEE /* CashPickupBeneficiaryDetailResponse.swift */; };
+		897228222B66A21A006B4FEE /* BankBeneficiariesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228212B66A21A006B4FEE /* BankBeneficiariesResponse.swift */; };
+		897228242B66A71C006B4FEE /* BankBeneficiaryDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228232B66A71C006B4FEE /* BankBeneficiaryDetailResponse.swift */; };
 		89740D322B5D120D000ACFBA /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D312B5D120D000ACFBA /* InitialView.swift */; };
 		89740D3D2B5D2A0B000ACFBA /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D3C2B5D2A0B000ACFBA /* UI.swift */; };
 		89740D402B5D3883000ACFBA /* FRVerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89740D3F2B5D3883000ACFBA /* FRVerticalButton.swift */; };
@@ -133,6 +138,11 @@
 		8972280D2B667744006B4FEE /* HomeRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepo.swift; sourceTree = "<group>"; };
 		897228112B667D9E006B4FEE /* CountryCodePickerBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodePickerBtn.swift; sourceTree = "<group>"; };
 		897228122B667D9E006B4FEE /* PickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		8972281B2B668943006B4FEE /* CashPickupBeneficiariesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashPickupBeneficiariesResponse.swift; sourceTree = "<group>"; };
+		8972281D2B6689ED006B4FEE /* BeneficiaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryRepository.swift; sourceTree = "<group>"; };
+		8972281F2B669938006B4FEE /* CashPickupBeneficiaryDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashPickupBeneficiaryDetailResponse.swift; sourceTree = "<group>"; };
+		897228212B66A21A006B4FEE /* BankBeneficiariesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankBeneficiariesResponse.swift; sourceTree = "<group>"; };
+		897228232B66A71C006B4FEE /* BankBeneficiaryDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankBeneficiaryDetailResponse.swift; sourceTree = "<group>"; };
 		89740D312B5D120D000ACFBA /* InitialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		89740D3C2B5D2A0B000ACFBA /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		89740D3F2B5D3883000ACFBA /* FRVerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRVerticalButton.swift; sourceTree = "<group>"; };
@@ -373,6 +383,36 @@
 			path = CountryPicker;
 			sourceTree = "<group>";
 		};
+		897228162B6688B2006B4FEE /* BeneficiaryRoot */ = {
+			isa = PBXGroup;
+			children = (
+				8972281A2B66890B006B4FEE /* Model */,
+				897228172B6688CB006B4FEE /* BeneficiaryViewModel */,
+				2E0F98FE2B5DA0590094CE9F /* BeneficiaryRootView.swift */,
+			);
+			path = BeneficiaryRoot;
+			sourceTree = "<group>";
+		};
+		897228172B6688CB006B4FEE /* BeneficiaryViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				899749382B615C4F00DEBD8C /* BeneficiaryViewModel.swift */,
+				8972281D2B6689ED006B4FEE /* BeneficiaryRepository.swift */,
+			);
+			path = BeneficiaryViewModel;
+			sourceTree = "<group>";
+		};
+		8972281A2B66890B006B4FEE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8972281B2B668943006B4FEE /* CashPickupBeneficiariesResponse.swift */,
+				8972281F2B669938006B4FEE /* CashPickupBeneficiaryDetailResponse.swift */,
+				897228212B66A21A006B4FEE /* BankBeneficiariesResponse.swift */,
+				897228232B66A71C006B4FEE /* BankBeneficiaryDetailResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		89740D332B5D1CC0000ACFBA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,12 +462,11 @@
 		89740D372B5D1ED0000ACFBA /* BeneficiaryTab */ = {
 			isa = PBXGroup;
 			children = (
-				2E0F98FE2B5DA0590094CE9F /* BeneficiaryRootView.swift */,
+				897228162B6688B2006B4FEE /* BeneficiaryRoot */,
 				2E91D70A2B5F094B002983F1 /* BeneficiaryDetailView.swift */,
 				896EA0BE2B5F811F00FB231A /* EditBeneficiaryBankView.swift */,
 				896EA0C02B5F816100FB231A /* EditBeneficiaryCashPickupView.swift */,
 				896EA0C22B5F820500FB231A /* BeneficiaryAddSuccessfulView.swift */,
-				899749382B615C4F00DEBD8C /* BeneficiaryViewModel.swift */,
 			);
 			path = BeneficiaryTab;
 			sourceTree = "<group>";
@@ -702,12 +741,14 @@
 				89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */,
 				2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */,
 				896EA0CC2B5F956100FB231A /* FRBarButton.swift in Sources */,
+				897228222B66A21A006B4FEE /* BankBeneficiariesResponse.swift in Sources */,
 				899749352B61150C00DEBD8C /* FRVerticalField.swift in Sources */,
 				2E0F99032B5DAE260094CE9F /* FRBottomBar.swift in Sources */,
 				897A10ED2B62401B002CF87D /* APIManager.swift in Sources */,
 				2E0F99022B5DAE260094CE9F /* FRBottomBarContainer.swift in Sources */,
 				89611BF92B5E9A9F00407E32 /* SimpleHInfoCellView.swift in Sources */,
 				89611BDF2B5E300300407E32 /* SheetHolder.swift in Sources */,
+				897228242B66A71C006B4FEE /* BankBeneficiaryDetailResponse.swift in Sources */,
 				897A10FA2B626F21002CF87D /* EmptyResponse.swift in Sources */,
 				89611BEC2B5E4F4300407E32 /* FRCircularRadioButton.swift in Sources */,
 				89611BF02B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift in Sources */,
@@ -718,13 +759,16 @@
 				2E0F99062B5DB0B40094CE9F /* SettingsRootView.swift in Sources */,
 				89611BE82B5E3A6D00407E32 /* FRCheckbox.swift in Sources */,
 				8988E8EC2B62360100741F58 /* DeliveryMethodEnum.swift in Sources */,
+				8972281E2B6689ED006B4FEE /* BeneficiaryRepository.swift in Sources */,
 				89611BFB2B5EA5E400407E32 /* HomePayViaFIBView.swift in Sources */,
 				2E91D7072B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift in Sources */,
 				899749312B60EE7600DEBD8C /* FRImageButton.swift in Sources */,
+				897228202B669938006B4FEE /* CashPickupBeneficiaryDetailResponse.swift in Sources */,
 				897A10EE2B62401B002CF87D /* EndPoint.swift in Sources */,
 				897A10F32B626BF7002CF87D /* LoaderManager.swift in Sources */,
 				2E71DB992B65A7DB000A6471 /* AuthRepository.swift in Sources */,
 				896EA0C82B5F8D3200FB231A /* FRTextDropDownButton.swift in Sources */,
+				8972281C2B668943006B4FEE /* CashPickupBeneficiariesResponse.swift in Sources */,
 				2E0F98FB2B5D9FCE0094CE9F /* HomeRootView.swift in Sources */,
 				896EA0CA2B5F915500FB231A /* HistoryDetailView.swift in Sources */,
 				2E0F98FF2B5DA0590094CE9F /* BeneficiaryRootView.swift in Sources */,
