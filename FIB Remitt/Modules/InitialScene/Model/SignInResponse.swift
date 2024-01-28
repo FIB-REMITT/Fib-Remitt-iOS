@@ -23,9 +23,7 @@ struct SignInResponse: Codable, CustomStringConvertible {
 }
 
 struct SignInData: Codable, CustomStringConvertible {
-    var description: String{
-        return ""
-    }
+    var description: String{ return "" }
     var access_token:String?
     var refresh_token:String?
     var token_type: String?

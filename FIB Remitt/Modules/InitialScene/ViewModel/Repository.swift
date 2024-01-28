@@ -11,7 +11,7 @@ class AuthRepository {
     private var subscribers = Set<AnyCancellable>()
     
     @Published var loginInfo:SignInResponse?
-    let vm = AuthViewModel()
+  //  let vm = AuthViewModel()
     func loginAPICall(username:String, pass:String)  {
         APIManager.shared.getData(endPoint: AuthEndPoint.signIn(username: username, password: pass), resultType: SignInResponse.self, showLoader: true)
             .sink { completion in
@@ -35,7 +35,7 @@ class AuthRepository {
                         self.loginInfo = result
                         UserSettings.shared.setLoginInfo(loginInfo: data)
                        // self.presenter?.loginDidAttempedWithSuccess()
-                        self.vm.successfullyLoggedIn()
+                       // self.vm.successfullyLoggedIn()
                     }
 
                 }

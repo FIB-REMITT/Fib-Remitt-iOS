@@ -22,7 +22,7 @@ enum AuthEndPoint: Endpoint {
     
     var method: HTTPMethod {
         switch self {
-        case .signIn,.createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken :
+        case .signIn, .createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken :
             return .post
         }
     }
@@ -56,7 +56,7 @@ enum AuthEndPoint: Endpoint {
         switch self {
             
         case .signIn(let username, let password):
-            return ["username": username, "password": password, "grant_type": "password", "client_id": "mobile-app", "client_secret":"ytEoJitvmnEAzvKC5FGJCyYPpDBETCvG", "scope":"openid profile"]
+            return ["email": username, "password": password, "grant_type": "password", "client_id": "mobile-app", "client_secret":"ytEoJitvmnEAzvKC5FGJCyYPpDBETCvG", "scope":"openid profile"]
             
         case .createAccountSentOtp(let username, let password):
             return ["username": username, "password": password]
