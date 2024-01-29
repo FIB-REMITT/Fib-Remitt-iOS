@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 class BeneficiaryRepository {
     private var subscribers = Set<AnyCancellable>()
@@ -139,6 +140,22 @@ class BeneficiaryRepository {
             } receiveValue: { result in
             }.store(in: &subscribers)
     }
-
     
+    func createCashPickupBusinessAPICall(fullName:String, nationality:String, phoneNumber:String, address:String, invoice:Data?) {
+        APIManager.shared.uploadBeneficiaryDocs(fullName: fullName, nationalityId: nationality, phoneNumber: phoneNumber, address: address, invoice: invoice)
+          .sink { completion in
+            switch completion{
+            case .failure(let error):
+              if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
+                  print("Successfully Created CashPickup Beneficiary")
+              }else{
+                  print("Failed!")
+              }
+            case .finished:
+                print("API Called!")
+            }
+          } receiveValue: { result in
+            print(result)
+          }.store(in: &subscribers)
+      }
 }
