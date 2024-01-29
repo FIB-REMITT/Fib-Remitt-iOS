@@ -327,6 +327,7 @@ enum DashboardEndpoint: Endpoint {
     case getCurrencyClass
     case getCoins
     case sendFcm(fcmKey:String)
+    case confirmationByTrx(trxId:String)
     
     var method: Alamofire.HTTPMethod{
         switch self {
@@ -334,6 +335,11 @@ enum DashboardEndpoint: Endpoint {
             return .get
         case .sendFcm:
             return .put
+//        case .bankReceivedInBank:
+//            return .post
+        case .confirmationByTrx:
+            return .post
+       
         }
     }
     
@@ -351,6 +357,10 @@ enum DashboardEndpoint: Endpoint {
             return "api/v1/broker-connector/crypto/coin-list"
         case .sendFcm:
             return "api/v1/notification/fcm-registration"
+
+        case .confirmationByTrx(trxId: let transactionId):
+            return "api/v1/private/transfer/personal/transaction/\(transactionId)"
+            
         }
     }
     
@@ -362,6 +372,9 @@ enum DashboardEndpoint: Endpoint {
             return ["instType": instType, "instId": instId, "baseCcy": baseCcy, "settleCcy": settleCcy, "searchKey":"USDT"]
         case .sendFcm(fcmKey: let token):
             return ["registrationToken":token]
+            
+        case .confirmationByTrx:
+            return nil
         }
     }
     

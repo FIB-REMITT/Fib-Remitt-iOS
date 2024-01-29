@@ -156,29 +156,40 @@ class APIManager{
         }
     }
     
-    func makeAPICall(name: String, profilePicture: UIImage?) -> Future<EmptyResponse, Error> {
+    func makeAPICallReceivedInBank(isBankbeneficiary:Bool,beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) -> Future<BankCollectionResponse, Error> {
         let headers: HTTPHeaders = [
             "Authorization": UserSettings.shared.getAccessToken(),
             "Content-Type": "multipart/form-data"
         ]
+        let path = isBankbeneficiary ? "api/v1/private/transfer/personal/receive-in-bank" : "api/v1/private/transfer/personal/receive-in-cash"
+      
         
-        let url = "http://3.253.124.248:8080/api/v1/profile/user-profile"
+        let url = "\(K.IS_DEV_BUILD ? K.BaseURL.FIB.Sandbox : K.BaseURL.FIB.Production)\(path)"
         
-        let parameters: Parameters = [
-            "nickname": name,
+        
+        var parameters : Parameters = [String: Any]()
+      
+         parameters = [
+            "fromCurrency": fromCurrency,"amountToTransfer": amountToTransfer, "toCurrency" : toCurrency, "paymentMethod": paymentMethod, "collectionPoint": collectionPoint,"purposeId": purposeId
         ]
+        if isBankbeneficiary == true{
+            parameters["bankBeneficiaryId"] = beneficiaryId
+        }else{
+            parameters["cashPickupBeneficiaryId"] = beneficiaryId
+        }
         
-        return Future<EmptyResponse, Error> { promise in
+        return Future<BankCollectionResponse, Error> { promise in
             AF.upload(multipartFormData: { multipartFormData in
                 for (key, value) in parameters {
                     multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
                 }
-                if let imageData = profilePicture?.jpegData(compressionQuality: 0.5) {
-                    multipartFormData.append(imageData, withName: "profilePicture", fileName: "image.jpg", mimeType: "image/jpeg")
+               
+                if let invoiceData = invoice {
+                    multipartFormData.append(invoiceData, withName: "invoice", fileName: "invoice.pdf", mimeType: "application/pdf")
                 }
-            }, to: url, method: .put, headers: headers)
+            }, to: url, method: .post, headers: headers)
             .validate(statusCode: 200...299)
-            .publishDecodable(type: EmptyResponse.self)
+            .publishDecodable(type: BankCollectionResponse.self)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
