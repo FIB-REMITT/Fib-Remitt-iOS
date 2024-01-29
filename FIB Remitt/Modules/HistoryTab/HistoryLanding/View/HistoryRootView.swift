@@ -53,12 +53,8 @@ extension HistoryRootView{
 
 //MARK: - ACTIONS
 extension HistoryRootView{
-    private func notificationBtnPressed() {
-
-    }
-    private func filterBtnPressed() {
-
-    }
+    private func notificationBtnPressed() {}
+    private func filterBtnPressed() {}
 }
 #Preview {
     HistoryRootView()
