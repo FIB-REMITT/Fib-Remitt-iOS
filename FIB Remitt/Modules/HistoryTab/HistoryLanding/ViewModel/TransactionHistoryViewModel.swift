@@ -8,7 +8,7 @@ class TransactionHistoryViewModel : ObservableObject{
     @Published var goToNext        = false
     @Published var destinationView = AnyView(Text("Destination"))
     @Published var transactionHistoryDatas: [TransactionListContent] = []
-   
+    @Published var transactionDetails : TransactionDetailsResponse?
     
     
     private var subscribers = Set<AnyCancellable>()
@@ -28,6 +28,9 @@ class TransactionHistoryViewModel : ObservableObject{
     
     func transactionDetailsFetch(transactionNumber:String) {
             repo.transactionDetailsApi(transactionNumber: transactionNumber)
+        repo.$transactionDetails.sink { result in
+            self.transactionDetails = result
+        }.store(in: &subscribers)
         }
     
     func transactionListFetch(page:Int) {
