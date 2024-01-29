@@ -82,30 +82,22 @@ struct HistoryDetailView: View {
                             TextBaseMedium(text: "Progress", fg_color: .text_Mute)
                             Spacer()
                         }
-                        ZStack{
-                            HStack{
-                                Divider()
-                                    .frame(width: 1)
-                                    .frame(maxHeight: 240)
-                                    .overlay(Color.gray.opacity(0.5))
+                            VStack(spacing: 20){
+                                ProgressComponentWithDivider(status: "Pending", timeDat: "9th March 2023 | 10:00 PM", iconName: "pending", cellColor: Color.warning_regular, alignmentStyle: .left)
+                                
+                                ProgressComponentWithDivider(status: "Hold", timeDat: "9th March 2023 | 10:00 PM", iconName: "pause", cellColor: Color.red, alignmentStyle: .right)
+                                
+                                ProgressComponent(status: "Hold", timeDat: "9th March 2023 | 10:00 PM", iconName: "pause", cellColor: Color.red, alignmentStyle: .right)
+                                
+//                                ProgressComponent(status: "Approved", timeDat: "9th March 2023 | 10:00 PM", iconName: "approved", cellColor: Color.green, alignmentStyle: .right)
+//                                
+//                                ProgressComponent(status: "Canceled", timeDat: "9th March 2023 | 10:00 PM", iconName: "close", cellColor: Color.red, alignmentStyle: .right)
+//                                
+//                                ProgressComponent(status: "Paid", timeDat: "9th March 2023 | 10:00 PM", iconName: "paid", cellColor: Color.green, alignmentStyle: .left)
                             }
-                            VStack(spacing: 25){
-                                ProgressLeftComponent(status: "Pending", timeDat: "9th March 2023 | 10:00 PM", iconName: "pending", cellColor: Color.warning_regular)
-                                ProgressRightComponent(status: "Hold", timeDat: "9th March 2023 | 10:00 PM", iconName: "pause", cellColor: Color.red)
-                                
-                                ProgressLeftComponent(status: "Approved", timeDat: "9th March 2023 | 10:00 PM", iconName: "approved", cellColor: Color.green)
-                                
-                                ProgressRightComponent(status: "Canceled", timeDat: "9th March 2023 | 10:00 PM", iconName: "close", cellColor: Color.red)
-                                
-                                ProgressLeftComponent(status: "Paid", timeDat: "9th March 2023 | 10:00 PM", iconName: "paid", cellColor: Color.green)
-                            }
-                            .frame(width: 275)
-                        }
-                        .frame(minHeight: 280, maxHeight:200)
+                            .frame(maxWidth: 275)
                     }
-                    
                 }
-                
                 Spacer()
             }.padding()
                 .navigationBarHidden(true)
@@ -131,49 +123,59 @@ extension HistoryDetailView{
 #Preview {
     HistoryDetailView(id: "")
 }
-
-struct ProgressLeftComponent: View {
+enum ProgressComponentAlignment {
+    case left
+    case right
+}
+struct ProgressComponentWithDivider: View {
     var status: String
     var timeDat: String
     var iconName: String
     var cellColor = Color.warning_regular
-    var alignmentStyle: HorizontalAlignment = .leading
+    var alignmentStyle: ProgressComponentAlignment
     var body: some View {
-        HStack(spacing: 6){
-            VStack(alignment: .trailing, spacing: 5){
-                Text(status)
-                    .foregroundColor(cellColor)
-                    .font(UI.FRAppDesignedFont(style: .smallRegular))
-                    .padding(.horizontal, 7)
-                    .padding(.vertical, 1)
-                    .background(cellColor.opacity(0.1))
-                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(cellColor, lineWidth: 1))
+        VStack{
+            ZStack(alignment: .center){
+                HStack{
+                    Divider()
+                        .frame(width: 1)
+                        .frame(height: 40)
+                        .overlay(Color.gray.opacity(0.5))
+                        .padding(.bottom, -150)
+                }
+                ProgressComponent(status: status, timeDat: timeDat, iconName: iconName, cellColor: cellColor, alignmentStyle: alignmentStyle)
                 
-                Text(timeDat)
-                    .foregroundColor(Color.text_Mute)
-                    .font(UI.FRAppDesignedFont(style: .smallRegular))
             }
-            Image(iconName)
-                .imageDefaultStyle()
-                .frame(width:16, height: 16)
-                .padding(4)
-                .background(cellColor.opacity(0.1))
-                .background(Color.white)
-                .cornerRadius(100)
-            Spacer()
         }
     }
 }
 
-struct ProgressRightComponent: View {
+struct ProgressComponent: View {
     var status: String
     var timeDat: String
     var iconName: String
     var cellColor = Color.warning_regular
-    var alignmentStyle: HorizontalAlignment = .leading
+    var alignmentStyle: ProgressComponentAlignment
     var body: some View {
-        HStack(spacing: 6){
-            Spacer()
+        HStack(spacing: 6) {
+            if alignmentStyle == .left {
+                VStack(alignment: .trailing, spacing: 5) {
+                    Text(status)
+                        .foregroundColor(cellColor)
+                        .font(UI.FRAppDesignedFont(style: .smallRegular))
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 1)
+                        .background(cellColor.opacity(0.1))
+                        .overlay(RoundedRectangle(cornerRadius: 100).stroke(cellColor, lineWidth: 1))
+                    
+                    Text(timeDat)
+                        .foregroundColor(Color.text_Mute)
+                        .font(UI.FRAppDesignedFont(style: .smallRegular))
+                }
+            }
+            if alignmentStyle == .right{
+                Spacer()
+            }
             Image(iconName)
                 .imageDefaultStyle()
                 .frame(width:16, height: 16)
@@ -181,20 +183,26 @@ struct ProgressRightComponent: View {
                 .background(cellColor.opacity(0.1))
                 .background(Color.white)
                 .cornerRadius(100)
-            VStack(alignment: .leading, spacing: 5){
-                Text(status)
-                    .foregroundColor(cellColor)
-                    .font(UI.FRAppDesignedFont(style: .smallRegular))
-                    .padding(.horizontal, 7)
-                    .padding(.vertical, 1)
-                    .background(cellColor.opacity(0.1))
-                    .overlay(RoundedRectangle(cornerRadius: 100).stroke(cellColor, lineWidth: 1))
-                
-                Text(timeDat)
-                    .foregroundColor(Color.text_Mute)
-                    .font(UI.FRAppDesignedFont(style: .smallRegular))
+            
+            if alignmentStyle == .right {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text(status)
+                            .foregroundColor(cellColor)
+                            .font(UI.FRAppDesignedFont(style: .smallRegular))
+                            .padding(.horizontal, 7)
+                            .padding(.vertical, 1)
+                            .background(cellColor.opacity(0.1))
+                            .overlay(RoundedRectangle(cornerRadius: 100).stroke(cellColor, lineWidth: 1))
+                        
+                        Text(timeDat)
+                            .foregroundColor(Color.text_Mute)
+                            .font(UI.FRAppDesignedFont(style: .smallRegular))
+                    }
             }
             
+            if alignmentStyle == .left {
+                Spacer()
+            }
         }
     }
 }
