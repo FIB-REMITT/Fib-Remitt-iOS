@@ -14,9 +14,10 @@ struct HistoryRootView: View {
     var body: some View {
         VStack{
             navigationBar
-            topFilterDropdown
-            contextContainer
-            Spacer()
+            ScrollView{
+                topFilterDropdown
+                contextContainer
+            }
         }
         .padding()
         .background(Color.frBackground.ignoresSafeArea())
