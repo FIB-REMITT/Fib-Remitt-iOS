@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CashPickupBeneficiariesResponse: Codable, CustomStringConvertible {
+struct CashPickupBeneficiariesResponse: Codable, CustomStringConvertible,Identifiable {
     var description: String{ return "" }
     
     var id:String?

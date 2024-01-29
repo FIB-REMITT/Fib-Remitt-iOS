@@ -27,6 +27,7 @@ struct BankBeneficiariesResponse: Codable, CustomStringConvertible {
         case id
         case fullName
         case phoneNumber
+        case accountNumber
         case nationality
         case address
         case gender
@@ -40,12 +41,12 @@ struct BankBeneficiariesDTO : Codable, CustomStringConvertible {
     var description: String{ return "" }
     
     var id:String?
-    var fullName:String?
+    var name:String?
     var status: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
-        case fullName
+        case name
         case status
     }
 }

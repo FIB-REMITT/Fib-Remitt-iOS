@@ -9,13 +9,15 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct HomeSelectBeneficiaryView: View {
-    @State var isSelected : Bool = true
+    @State var isSelected : Bool = false
     @State var isNotSelected : Bool = false
     @State var isFilePickerPresented = false
     @State private var isPickerShown = false
     
     @State private var selectedFileURL: URL?
     @ObservedObject var vm = HomeViewModel()
+    @ObservedObject var beneficiaryVM = BeneficiaryViewModel()
+    @State var type : SelectBeneficiaryType = .BankTransfer
     
     var body: some View {
         
@@ -37,14 +39,26 @@ struct HomeSelectBeneficiaryView: View {
             VStack (spacing: 25){
                 navigationBar
                 topAccountCreation
-                contexContainer
-                Spacer()
+                ScrollView{
+                    contexContainer
+                }
+              
                 bottomButton
             }
             .padding()
             .background(Color.frBackground.ignoresSafeArea())
             .navigationBarHidden(true)
             .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
+            .onAppear{
+                if HomeDataHandler.shared.deliveryMethodType.lowercased() == "bank transfer"{
+                    beneficiaryVM.getBankBeneficiaries()
+                    self.type = .BankTransfer
+                    
+                }else{
+                    beneficiaryVM.getCashPickBeneficiaries()
+                    self.type = .CashPickup
+                }
+            }
             
             if isFilePickerPresented {
                 // Blur background
@@ -89,15 +103,44 @@ extension HomeSelectBeneficiaryView{
             })}
     }
     private var contexContainer : some View{
-        VStack{
-            AccountInfoCellView(selected: $isSelected)
-            AccountInfoCellView(selected: $isNotSelected)
-                .onTapGesture {
-                    isFilePickerPresented = true
+        Group{
+            if type == .BankTransfer{
+                VStack {
+                    ForEach(beneficiaryVM.BankBeneficiaries ?? [], id: \.id) { beneficiary in
+                        
+                        AccountInfoCellView(selected: $isSelected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.accountNumber ?? "" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
+                            .onTapGesture{
+                                if  beneficiary.typeOfBeneficiary?.lowercased() == "personal"{
+                                    isFilePickerPresented = true
+                                }
+                            }
+                    
+                    }
                 }
-            AccountInfoCellView(selected: $isNotSelected)
-            AccountInfoCellView(selected: $isNotSelected)
+            }else{
+                VStack {
+                    ForEach(beneficiaryVM.CashPickUpBeneficiaries ?? [], id: \.id) { beneficiary in
+                        AccountInfoCellView(selected: $isSelected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.phoneNumber ?? "" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
+                            .onTapGesture{
+                                if  beneficiary.typeOfBeneficiary?.lowercased() == "personal"{
+                                    isFilePickerPresented = true
+                                }
+                            }
+                    
+                    }
+                }
+            }
         }
+        
+       
+        
+        //            AccountInfoCellView(selected: $isSelected)
+        //            AccountInfoCellView(selected: $isNotSelected)
+        //                .onTapGesture {
+        //                    isFilePickerPresented = true
+        //                }
+        //            AccountInfoCellView(selected: $isNotSelected)
+        //            AccountInfoCellView(selected: $isNotSelected)
     }
     private var bottomButton : some View{
         FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}

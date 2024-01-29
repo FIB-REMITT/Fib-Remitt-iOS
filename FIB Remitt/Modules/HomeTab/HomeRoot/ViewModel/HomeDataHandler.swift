@@ -13,8 +13,9 @@ class HomeDataHandler{
     private init(){}
 
     var purposes: [PurposeResponse] = []
-    
+    var deliveryMethodType = "Bank Transfer"
     func clear(){
         purposes.removeAll()
+        deliveryMethodType = ""
     }
 }
