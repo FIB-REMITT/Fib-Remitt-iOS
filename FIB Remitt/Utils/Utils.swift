@@ -87,6 +87,18 @@ func getWindow() -> UIWindow{
     }
 }
 
+func formatDateString(incomingFormate :String = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ",dateString: String, convertFormat: String) -> String? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = incomingFormate
+    
+    if let date = dateFormatter.date(from: dateString) {
+        dateFormatter.dateFormat = convertFormat
+        return dateFormatter.string(from: date)
+    }
+    
+    return nil // Return nil for invalid input
+}
+
 
 func showToast(message : String, font: UIFont = .systemFont(ofSize: 14), after:Double = 0.0, isTopToast:Bool = false) {
     let scnSize = UIScreen.main.bounds

@@ -38,7 +38,7 @@ struct TransactionHistoryCellView: View {
                             .imageDefaultStyle()
                             .frame(width: 15)
                     }
-                    TextSmallRegular(text: formatDateString(dateString: transaction.createdAt ?? "", format: "M/d/yyyy | h:mm a") ?? "", fg_color: .textFade)
+                    TextSmallRegular(text: formatDateString(dateString: transaction.createdAt ?? "",  convertFormat:  "M/d/yyyy | h:mm a") ?? "", fg_color: .textFade)
                 }
                 Spacer()
                 VStack(alignment:.trailing, spacing: 5){
@@ -66,19 +66,10 @@ struct TransactionHistoryCellView: View {
 
             }
         }
+       
     }
     
-    func formatDateString(dateString: String, format: String) -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-        
-        if let date = dateFormatter.date(from: dateString) {
-            dateFormatter.dateFormat = format
-            return dateFormatter.string(from: date)
-        }
-        
-        return nil // Return nil for invalid input
-    }
+  
 }
 
 #Preview {
