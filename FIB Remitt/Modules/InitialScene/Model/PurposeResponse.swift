@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PurposeResponse: Codable, CustomStringConvertible {
+struct PurposeResponse: Codable, CustomStringConvertible, Identifiable {
     var description: String{ return "" }
     
     var id:String?
@@ -17,6 +17,16 @@ struct PurposeResponse: Codable, CustomStringConvertible {
     var status: Bool?
     var createdAt: String?
     var updatedAt: String?
+    
+    init(id: String? = nil, code: String? = nil, name: String? = nil, gateway: String? = nil, status: Bool? = nil, createdAt: String? = nil, updatedAt: String? = nil) {
+        self.id = id
+        self.code = code
+        self.name = name
+        self.gateway = gateway
+        self.status = status
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
     
     enum CodingKeys: String, CodingKey {
         case id

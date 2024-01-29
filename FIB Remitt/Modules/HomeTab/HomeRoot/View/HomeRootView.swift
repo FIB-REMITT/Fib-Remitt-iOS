@@ -12,10 +12,8 @@ struct HomeRootView: View {
     @State var isNotSelected = true
     
     @State var selectedDeliveryMethod = "Bank Transfer"
-    
-    
     @State var transferAmount = ""
-    
+        
     @ObservedObject var vm = HomeViewModel()
     
     var body: some View {
@@ -79,7 +77,7 @@ extension HomeRootView{
     private var topProfileContainer : some View{
         FRHContainer(backgroundColor: Color.primary500){
             HStack{
-                Image("turkey")
+                Image("profile_img")
                     .imageDefaultStyle()
                     .frame(width: 40)
                 TextBaseMedium(text: "Oscar Pruitt", fg_color: .fr_forground)
@@ -98,16 +96,15 @@ extension HomeRootView{
             TextBaseMedium(text: "Transfer amount", fg_color: .text_Mute)
             HStack{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $transferAmount)
-                    .frame(width: 188)
+                    .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
-                    
-                FRSimpleDropDownButton(title: "IQD", icon: "turkey")
+                FRSimpleDropDownButton(title: "IQD", icon: "iraq_flag")
             }
             
             TextBaseMedium(text: "Recipient gets", fg_color: .text_Mute)
             HStack{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $transferAmount)
-                    .frame(width: 188)
+                    .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
                 FRSimpleDropDownButton(title: "IQD", icon: "turkey")
             }
@@ -121,6 +118,7 @@ extension HomeRootView{
             }
         }
     }
+    
     private var deliveryMethodContainer : some View{
         FRVContainer (spacing: 7, backgroundColor: .frForground){
             TextBaseMedium(text: "Delivery Method", fg_color: .text_Mute)
@@ -129,7 +127,6 @@ extension HomeRootView{
                     FRCircularRadioButton(isSelected: Binding(get: { selectedDeliveryMethod == item.title },
                                                               set: { newValue in
                         if newValue {
-                            // Update your selectedDeliveryMethod here if needed
                             selectedDeliveryMethod = item.title
                         }
                     }),
@@ -139,12 +136,30 @@ extension HomeRootView{
             }
         }
     }
+    
     private var purposeContainer : some View{
         FRVContainer (backgroundColor: .frForground){
             TextBaseMedium(text: "Purpose", fg_color: .text_Mute)
-            FRSimpleDropDownButton()
+            Button(action: {
+                purposeButtonPressed()
+            }, label: {
+                FRVContainer (backgroundColor: .fr_background){
+                    HStack{
+                        TextBaseRegular(text:vm.selectedPurpose.name ?? "Family Support", fg_color: .text_Mute)
+                        Spacer()
+                        Image(systemName: "chevron.down")
+                    }
+                    .foregroundColor(.text_Mute)
+                    
+                }
+                .cornerRadius(100)
+            })
+//            FRSimpleDropDownButton {
+//                purposeButtonPressed()
+//            }
         }
     }
+    
     private var termsAndConditionContainer : some View{
         HStack(){
             FRCheckbox(isSelected: $isSelected)
@@ -152,6 +167,7 @@ extension HomeRootView{
             Spacer()
         }
     }
+    
     private var bottomProccedButton : some View{
         FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}
     }
@@ -161,7 +177,11 @@ extension HomeRootView{
 extension HomeRootView{
     private func notificationBtnPressed() {}
     private func proccedBtnPressed() {vm.navigateSelectBeneficiary()}
-    private func termsAndConditionBtnPressed() {
+    private func termsAndConditionBtnPressed() {}
+    private func purposeButtonPressed(){
+        showSheet(view: AnyView(PurposePicker(purposes: HomeDataHandler.shared.purposes, itemSelect: { selectedItem in
+            self.vm.selectedPurpose = selectedItem
+        })))
     }
 }
 

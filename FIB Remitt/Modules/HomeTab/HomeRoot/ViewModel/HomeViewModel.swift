@@ -15,6 +15,8 @@ class HomeViewModel : ObservableObject{
     @Published var goToNext         = false
     @Published var destinationView  = AnyView(Text("Destination"))
     
+    @Published var selectedPurpose:PurposeResponse = PurposeResponse()
+    
     
     //MARK: - VIEWCONTROLLER LIFICYCLE
     func viewWillAppearCalled() {
@@ -54,16 +56,20 @@ class HomeViewModel : ObservableObject{
     }
     
     func getPurposes() {
-        repo.getPurposesAPICall()
-        repo.$allPurposes.sink { result in
-            print(result?.count ?? 0)
-        }.store(in: &subscribers)
+        if HomeDataHandler.shared.purposes.isEmpty{
+            repo.getPurposesAPICall()
+            repo.$allPurposes.sink { result in
+                if result?.count ?? 0 > 0 {
+                    HomeDataHandler.shared.purposes = result ?? []
+                }
+            }.store(in: &subscribers)
+        }
     }
     
     func getBanks() {
         repo.getBanksAPICall()
         repo.$allBanks.sink { result in
-            print(result?.first?.name)
+            
         }.store(in: &subscribers)
     }
     

@@ -69,6 +69,12 @@
 		89740D532B5D6915000ACFBA /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D512B5D6661000ACFBA /* Roboto-Bold.ttf */; };
 		89740D542B5D6918000ACFBA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D502B5D6655000ACFBA /* Roboto-Regular.ttf */; };
 		89740D552B5D691B000ACFBA /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89740D4F2B5D6646000ACFBA /* Roboto-Medium.ttf */; };
+		8974F90E2B6786CD007F2522 /* PurposeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8974F90D2B6786CD007F2522 /* PurposeCellView.swift */; };
+		8974F9102B67A3F2007F2522 /* HomeDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8974F90F2B67A3F2007F2522 /* HomeDataHandler.swift */; };
+		8974F9132B67A91C007F2522 /* FRSimplePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8974F9122B67A91C007F2522 /* FRSimplePicker.swift */; };
+		8974F9152B67AAA1007F2522 /* PurposePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8974F9142B67AAA1007F2522 /* PurposePicker.swift */; };
+		8974F9182B67ADDC007F2522 /* FRSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8974F9172B67ADDC007F2522 /* FRSearchBar.swift */; };
+		8974F91A2B67AE3D007F2522 /* FRTitledSearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8974F9192B67AE3D007F2522 /* FRTitledSearchField.swift */; };
 		897A10ED2B62401B002CF87D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10EB2B62401B002CF87D /* APIManager.swift */; };
 		897A10EE2B62401B002CF87D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10EC2B62401B002CF87D /* EndPoint.swift */; };
 		897A10F02B626B5C002CF87D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A10EF2B626B5C002CF87D /* Network.swift */; };
@@ -163,6 +169,12 @@
 		89740D502B5D6655000ACFBA /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		89740D512B5D6661000ACFBA /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		89740D522B5D66DD000ACFBA /* FIB-Remitt-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FIB-Remitt-Info.plist"; sourceTree = SOURCE_ROOT; };
+		8974F90D2B6786CD007F2522 /* PurposeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurposeCellView.swift; sourceTree = "<group>"; };
+		8974F90F2B67A3F2007F2522 /* HomeDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataHandler.swift; sourceTree = "<group>"; };
+		8974F9122B67A91C007F2522 /* FRSimplePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRSimplePicker.swift; sourceTree = "<group>"; };
+		8974F9142B67AAA1007F2522 /* PurposePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurposePicker.swift; sourceTree = "<group>"; };
+		8974F9172B67ADDC007F2522 /* FRSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRSearchBar.swift; sourceTree = "<group>"; };
+		8974F9192B67AE3D007F2522 /* FRTitledSearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRTitledSearchField.swift; sourceTree = "<group>"; };
 		897A10EB2B62401B002CF87D /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		897A10EC2B62401B002CF87D /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		897A10EF2B626B5C002CF87D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -329,6 +341,7 @@
 				2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */,
 				896EA0CF2B5F9B9300FB231A /* FRNavigationBarView.swift */,
 				897A10F42B626C5C002CF87D /* FIBLoaderView.swift */,
+				8974F90D2B6786CD007F2522 /* PurposeCellView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -380,6 +393,7 @@
 			children = (
 				899749362B61494D00DEBD8C /* HomeViewModel.swift */,
 				8972280D2B667744006B4FEE /* HomeRepo.swift */,
+				8974F90F2B67A3F2007F2522 /* HomeDataHandler.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -396,6 +410,8 @@
 			isa = PBXGroup;
 			children = (
 				897228152B668047006B4FEE /* CountryPicker */,
+				8974F9122B67A91C007F2522 /* FRSimplePicker.swift */,
+				8974F9142B67AAA1007F2522 /* PurposePicker.swift */,
 			);
 			path = Pickers;
 			sourceTree = "<group>";
@@ -509,6 +525,7 @@
 		89740D392B5D226C000ACFBA /* Common Components */ = {
 			isa = PBXGroup;
 			children = (
+				8974F9162B67ADC3007F2522 /* Search */,
 				897228102B667D7F006B4FEE /* Pickers */,
 				89740D432B5D3958000ACFBA /* MicroComponents */,
 				89611BF12B5E7CA000407E32 /* ViewComponents */,
@@ -595,6 +612,15 @@
 				89740D4F2B5D6646000ACFBA /* Roboto-Medium.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		8974F9162B67ADC3007F2522 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				8974F9172B67ADDC007F2522 /* FRSearchBar.swift */,
+				8974F9192B67AE3D007F2522 /* FRTitledSearchField.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		897A10E92B623E12002CF87D /* Network */ = {
@@ -844,19 +870,20 @@
 				89611BE62B5E338900407E32 /* FRVContainer.swift in Sources */,
 				897228022B665BBD006B4FEE /* NationalityResponse.swift in Sources */,
 				89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */,
+				8974F9102B67A3F2007F2522 /* HomeDataHandler.swift in Sources */,
 				2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */,
 				896EA0CC2B5F956100FB231A /* FRBarButton.swift in Sources */,
-
 				A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */,
-
 				897228222B66A21A006B4FEE /* BankBeneficiariesResponse.swift in Sources */,
-
+				8974F91A2B67AE3D007F2522 /* FRTitledSearchField.swift in Sources */,
 				899749352B61150C00DEBD8C /* FRVerticalField.swift in Sources */,
+				8974F9132B67A91C007F2522 /* FRSimplePicker.swift in Sources */,
 				2E0F99032B5DAE260094CE9F /* FRBottomBar.swift in Sources */,
 				897A10ED2B62401B002CF87D /* APIManager.swift in Sources */,
 				2E0F99022B5DAE260094CE9F /* FRBottomBarContainer.swift in Sources */,
 				89611BF92B5E9A9F00407E32 /* SimpleHInfoCellView.swift in Sources */,
 				89611BDF2B5E300300407E32 /* SheetHolder.swift in Sources */,
+				8974F9182B67ADDC007F2522 /* FRSearchBar.swift in Sources */,
 				897228242B66A71C006B4FEE /* BankBeneficiaryDetailResponse.swift in Sources */,
 				897A10FA2B626F21002CF87D /* EmptyResponse.swift in Sources */,
 				89611BEC2B5E4F4300407E32 /* FRCircularRadioButton.swift in Sources */,
@@ -900,6 +927,7 @@
 				89611BFD2B5EA66900407E32 /* SimpleDirectedCellView.swift in Sources */,
 				897A10F52B626C5C002CF87D /* FIBLoaderView.swift in Sources */,
 				89611BF52B5E966000407E32 /* SimpleHInfoView.swift in Sources */,
+				8974F9152B67AAA1007F2522 /* PurposePicker.swift in Sources */,
 				897228082B665DFD006B4FEE /* CurrencyResponse.swift in Sources */,
 				2E0F98FD2B5DA00E0094CE9F /* HistoryRootView.swift in Sources */,
 				896EA0C62B5F863600FB231A /* TransactionHistoryCellView.swift in Sources */,
@@ -916,6 +944,7 @@
 				897A10F72B626DF4002CF87D /* UserSettings.swift in Sources */,
 				89611BF32B5E7D0600407E32 /* AccountInfoCellView.swift in Sources */,
 				89740D4B2B5D5669000ACFBA /* ViewModifier.swift in Sources */,
+				8974F90E2B6786CD007F2522 /* PurposeCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,4 +28,14 @@ extension View{
             .frame(maxWidth: .infinity)
             .cornerRadius(6)
     }
+    
+    func searchbarStyle() -> some View {
+        self
+        //.frame(height:50)
+            .padding(.horizontal, 10)
+            .background(Color.fr_background)
+            .cornerRadius(7)
+            .foregroundColor(.textMute)
+        
+    }
 }

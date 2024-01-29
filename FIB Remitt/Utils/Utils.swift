@@ -65,6 +65,23 @@ func hideSheet( after:Double = 0.0) {
         getWindow().rootViewController?.dismiss(animated: true)}
 }
 
+
+func showSheet(view: AnyView, isFullScreen: Bool = false) {
+    let vc = UIHostingController(rootView: view)
+    if isFullScreen { vc.modalPresentationStyle = .overFullScreen }
+    vc.view.backgroundColor = UIColor.clear
+    getWindow().rootViewController?.present(vc, animated: true)
+}
+
+func showSheet(view: AnyView, after:Double) {
+    let vc = UIHostingController(rootView: view)
+    //    vc.modalPresentationStyle = .overFullScreen
+    vc.view.backgroundColor = UIColor.clear
+    DispatchQueue.main.asyncAfter(deadline: .now() + after) {
+        getWindow().rootViewController?.present(vc, animated: true)
+    }
+}
+
 func getInitialView() -> AnyView {
 //    if let isUserLoggedIn = UserSettings.shared.isUserLoggedIn{
 //        if isUserLoggedIn{
