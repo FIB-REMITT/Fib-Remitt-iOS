@@ -25,4 +25,6 @@ extension Color{
     static var text_Mute            : Color     { return  UI.AppThemeColor(name: "Text-Mute")}//
     static var text_Regula          : Color     { return  UI.AppThemeColor(name: "Text-Regula")} //
     static var warning_regular      : Color     { return  UI.AppThemeColor(name: "Color-Warning-Regular")} //
+    static var secondary_10      : Color     { return  UI.AppThemeColor(name: "secondary-10")} //
+    static var color_info_10      : Color     { return  UI.AppThemeColor(name: "color-Info-10")} //
 }
