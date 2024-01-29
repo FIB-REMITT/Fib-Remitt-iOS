@@ -13,18 +13,23 @@ struct HistoryDetailView: View {
     @State var benDetails : Bool = false
     @State var traSummary : Bool = false
     
+    let screenWidth = UIScreen.main.bounds.width
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 12){
                 navigationBar
-                SimpleHInfoCellView(title: "Delivery Method", info: "Bank Transfer")
-                SimpleHInfoCellView(title: "Purpose", info:  "Family Support")
+                SimpleHInfoCellView(title: "Delivery Method", info: vm.transactionDetails?.collectionPoint ?? "")
+                SimpleHInfoCellView(title: "Purpose", info:  vm.transactionDetails?.purposeTitle ?? "")
                 
                 FRVContainer (spacing: 12,backgroundColor: .fr_forground){
                     HStack{
                         TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
                         Spacer()
                         Image(systemName: benDetails ? "chevron.up" : "chevron.down")
+                            .imageDefaultStyle()
+                            .foregroundColor(Color.text_Mute)
+                            .frame(width: 16, height: 8)
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
@@ -35,15 +40,14 @@ struct HistoryDetailView: View {
                     
                     if benDetails{
                         VStack(spacing: 12){
-                            
-                            SimpleHColonInfoView(title: "Name", info:  "")
-                            SimpleHColonInfoView(title: "Bank Name", info: "Ziraat Bank")
-                            SimpleHColonInfoView(title: "Account No.", info: "124 458 458 856")
-                            SimpleHColonInfoView(title: "Ref No.", info: "02748869")
+                            SimpleHColonInfoView(title: "Name", info:  vm.transactionDetails?.receiver?.fullName ?? "")
+                            SimpleHColonInfoView(title: "Bank Name", info: vm.transactionDetails?.receiver?.bankName ?? "")
+                            SimpleHColonInfoView(title: "Account No.", info: vm.transactionDetails?.receiver?.accountNumber ?? "")
+                            SimpleHColonInfoView(title: "Ref No.", info: vm.transactionDetails?.transactionNumber ?? "")
                             SimpleHColonInfoView(title: "Type", info: "Personal")
-                            SimpleHColonInfoView(title: "Relation", info: "Uncle")
-                            SimpleHColonInfoView(title: "Phone", info: "+90 212 555 1212")
-                            SimpleHColonInfoView(title: "Address", info: "Ankara, Turkey")
+                            SimpleHColonInfoView(title: "Relation", info: vm.transactionDetails?.receiver?.relationship ?? "-")
+                            SimpleHColonInfoView(title: "Phone", info: vm.transactionDetails?.receiver?.phoneNumber ?? "")
+                            SimpleHColonInfoView(title: "Address", info: vm.transactionDetails?.receiver?.address ?? "")
                         }
                     }
                 }
@@ -53,6 +57,9 @@ struct HistoryDetailView: View {
                         TextBaseMedium(text: "Transfer Summary", fg_color: .text_Mute)
                         Spacer()
                         Image(systemName: traSummary ? "chevron.up" : "chevron.down")
+                            .imageDefaultStyle()
+                            .frame(width: 16, height: 8)
+                            .foregroundColor(Color.text_Mute)
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
@@ -63,15 +70,15 @@ struct HistoryDetailView: View {
                     
                     if traSummary{
                         VStack(alignment: .leading,spacing: 12){
-                            Text("10/1/2023 | 10:00 PM")
+                            Text(formatDateString(incomingFormate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ",dateString: vm.transactionDetails?.createdAt ?? "", convertFormat: "M/d/yyyy | h:mm a") ?? "")
                                 .foregroundColor(Color.text_Mute)
                                 .font(UI.FRAppDesignedFont(style: .smallRegular))
                             
-                            SimpleHInfoRegularView(title: "Amount to transfer", info: "125,000 IQD")
-                            SimpleHInfoRegularView(title: "Service charge", info: "+ 5,000 IQD")
+                            SimpleHInfoRegularView(title: "Amount to transfer", info: "\(vm.transactionDetails?.transaction?.amountToTransfer ?? 0.0) " + (vm.transactionDetails?.transaction?.fromCurrency ?? ""))
+                            SimpleHInfoRegularView(title: "Service charge", info: "\(vm.transactionDetails?.transaction?.charge ?? 0.0) "+(vm.transactionDetails?.transaction?.fromCurrency ?? ""))
                             Divider()
-                            SimpleHModInfoView(title: "Total payble", info: "130,000 IQD",fontStyle: .titleBold)
-                            SimpleHModInfoView(title: "Recipient gets", info: "2,875 TRY", textColor: Color.primary500, fontStyle: .allBold)
+                            SimpleHModInfoView(title: "Total payble", info: "\(vm.transactionDetails?.transaction?.totalPayable ?? 0.0) ",fontStyle: .titleBold)
+                            SimpleHModInfoView(title: "Recipient gets", info: "\(vm.transactionDetails?.transaction?.amountReceivable ?? 0.0) "+(vm.transactionDetails?.transaction?.toCurrency ?? ""), textColor: Color.primary500, fontStyle: .allBold)
                         }
                     }
                 }
@@ -95,7 +102,7 @@ struct HistoryDetailView: View {
 //                                
 //                                ProgressComponent(status: "Paid", timeDat: "9th March 2023 | 10:00 PM", iconName: "paid", cellColor: Color.green, alignmentStyle: .left)
                             }
-                            .frame(maxWidth: 275)
+                            .padding(.horizontal, screenWidth * 0.065)
                     }
                 }
                 Spacer()
@@ -158,7 +165,6 @@ struct ProgressComponent: View {
     var alignmentStyle: ProgressComponentAlignment
     var body: some View {
         HStack(spacing: 6) {
-            if alignmentStyle == .left {
                 VStack(alignment: .trailing, spacing: 5) {
                     Text(status)
                         .foregroundColor(cellColor)
@@ -171,11 +177,11 @@ struct ProgressComponent: View {
                     Text(timeDat)
                         .foregroundColor(Color.text_Mute)
                         .font(UI.FRAppDesignedFont(style: .smallRegular))
+                    
+                    
                 }
-            }
-            if alignmentStyle == .right{
-                Spacer()
-            }
+                .opacity(alignmentStyle == .right ? 0 : 1)
+
             Image(iconName)
                 .imageDefaultStyle()
                 .frame(width:16, height: 16)
@@ -184,25 +190,19 @@ struct ProgressComponent: View {
                 .background(Color.white)
                 .cornerRadius(100)
             
-            if alignmentStyle == .right {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(status)
-                            .foregroundColor(cellColor)
-                            .font(UI.FRAppDesignedFont(style: .smallRegular))
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 1)
-                            .background(cellColor.opacity(0.1))
-                            .overlay(RoundedRectangle(cornerRadius: 100).stroke(cellColor, lineWidth: 1))
-                        
-                        Text(timeDat)
-                            .foregroundColor(Color.text_Mute)
-                            .font(UI.FRAppDesignedFont(style: .smallRegular))
-                    }
-            }
-            
-            if alignmentStyle == .left {
-                Spacer()
-            }
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(status)
+                        .foregroundColor(cellColor)
+                        .font(UI.FRAppDesignedFont(style: .smallRegular))
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 1)
+                        .background(cellColor.opacity(0.1))
+                        .overlay(RoundedRectangle(cornerRadius: 100).stroke(cellColor, lineWidth: 1))
+                    
+                    Text(timeDat)
+                        .foregroundColor(Color.text_Mute)
+                        .font(UI.FRAppDesignedFont(style: .smallRegular))
+                }.opacity(alignmentStyle == .left ? 0 : 1)
         }
     }
 }
