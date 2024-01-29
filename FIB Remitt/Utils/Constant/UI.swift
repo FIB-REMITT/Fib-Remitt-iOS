@@ -14,6 +14,9 @@ struct UI {
     static let designScreenHeight : CGFloat = 812*0.75
     static let pt : CGFloat = 0.75
     
+    static let scnWidth = UIScreen.main.bounds.width
+    static let scnHeight = UIScreen.main.bounds.width
+    
     static func FRAppFont(ofSize size: CGFloat, style: FontStyle) -> Font{
         let calculatedSize = ((size*pt) * UIScreen.main.bounds.height)/designScreenHeight
         switch style {

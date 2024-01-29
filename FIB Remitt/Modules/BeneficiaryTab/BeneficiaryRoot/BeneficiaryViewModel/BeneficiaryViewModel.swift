@@ -20,6 +20,7 @@ class BeneficiaryViewModel : ObservableObject{
 //        self.getBankBeneficiaryDetails()
 //        self.getCashPickupBeneficiaryDetails()
 //        self.addBankBeneficiary()
+//        self.addCashPickupBeneficiaryBusiness()
     }
     
     //MARK: - NAVIGATION
@@ -66,8 +67,27 @@ class BeneficiaryViewModel : ObservableObject{
         repo.createCashPickupBeneficiaryAPICall(fullName: "Izak l0", nationality: "87d62a40-2dff-4e98-94b5-a1402cf95179", phone: "+88016785638888", address: "RDuk 90 uhb", gender: "Male", relationShip: "dfghj")
     }
     
+    private func addCashPickupBeneficiaryBusiness() {
+        repo.createCashPickupBusinessAPICall(fullName: "Izak uu", nationality: "87d62a40-2dff-4e98-94b5-a1402cf95179", phoneNumber: "+88016999938888", address: "DLKFJ dkjf", invoice: loadPDF())
+    }
+    
     private func addBankBeneficiary() {
         repo.createBankBeneficiaryAPICall(fullName: "Izak l0", nationality: "87d62a40-2dff-4e98-94b5-a1402cf95179", phone: "+88016785638888", address: "RDuk 90 uhb", gender: "Male", relationShip: "dfghj", bankId: "af459441-f577-4c85-8e07-d9245c8c7b45", accNo: "0999584567")
+    }
+    
+    func loadPDF() -> Data? {
+        guard let url = Bundle.main.url(forResource: "invoice", withExtension: "pdf") else {
+            print("PDF file not found in bundle.")
+            return nil
+        }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            return data
+        } catch {
+            print("Error loading PDF data: \(error)")
+            return nil
+        }
     }
 
 }

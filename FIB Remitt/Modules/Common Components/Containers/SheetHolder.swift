@@ -28,23 +28,19 @@ struct SheetHolder<Content:View>: View {
             VStack (spacing:0){
                 Spacer()
                 VStack (spacing:spacing){
-                    Rectangle()
-                        .foregroundColor(Color.textFade)
-                        .frame(width: UIScreen.main.bounds.width * 0.11, height: 4)
-                        .cornerRadius(4)
-                        .offset(y:-7)
+                    Image("sheet_holder_top_line_ico")
                     content
                         .onTapGesture {}
                 }
                 .padding()
                 .frame(width: UIScreen.main.bounds.width )
-                .background(Color.text_Mute)
+                .background(Color.fr_forground)
                 .clipShape(TopRoundedShape(radius: 12))
                 
                 //This Rectangle is using for ignoring safe area
                 Rectangle()
                     .frame(width: UIScreen.main.bounds.width , height: 0)
-                    .background(Color.text_Mute.edgesIgnoringSafeArea(.bottom))
+                    .background(Color.fr_forground.edgesIgnoringSafeArea(.bottom))
                 
             }.onTapGesture {hideKeyboard()}
         }.background(Color.clear)
