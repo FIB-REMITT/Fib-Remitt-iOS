@@ -94,6 +94,7 @@
 		A8CA78602B66ABA700C383C8 /* BankCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */; };
 		A8CA78622B66B97400C383C8 /* invoice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8CA78612B66B97300C383C8 /* invoice.pdf */; };
 		A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */; };
+		A8CA78672B677C8200C383C8 /* FilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78662B677C8200C383C8 /* FilePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +188,7 @@
 		A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCollectionResponse.swift; sourceTree = "<group>"; };
 		A8CA78612B66B97300C383C8 /* invoice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = invoice.pdf; sourceTree = "<group>"; };
 		A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationByTransactionResponse.swift; sourceTree = "<group>"; };
+		A8CA78662B677C8200C383C8 /* FilePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerView.swift; sourceTree = "<group>"; };
 		AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FIB_Remitt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -395,6 +397,7 @@
 		897228102B667D7F006B4FEE /* Pickers */ = {
 			isa = PBXGroup;
 			children = (
+				A8CA78652B677C5F00C383C8 /* FilePicker */,
 				897228152B668047006B4FEE /* CountryPicker */,
 			);
 			path = Pickers;
@@ -715,6 +718,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		A8CA78652B677C5F00C383C8 /* FilePicker */ = {
+			isa = PBXGroup;
+			children = (
+				A8CA78662B677C8200C383C8 /* FilePickerView.swift */,
+			);
+			path = FilePicker;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -835,6 +846,7 @@
 			files = (
 				896EA0D62B5FEE6200FB231A /* FRTextButton.swift in Sources */,
 				897A10F02B626B5C002CF87D /* Network.swift in Sources */,
+				A8CA78672B677C8200C383C8 /* FilePickerView.swift in Sources */,
 				896EA0D82B5FF12C00FB231A /* SplashView.swift in Sources */,
 				896EA0D02B5F9B9300FB231A /* FRNavigationBarView.swift in Sources */,
 				2E71DB952B659E6F000A6471 /* SignInResponse.swift in Sources */,
@@ -846,11 +858,8 @@
 				89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */,
 				2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */,
 				896EA0CC2B5F956100FB231A /* FRBarButton.swift in Sources */,
-
 				A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */,
-
 				897228222B66A21A006B4FEE /* BankBeneficiariesResponse.swift in Sources */,
-
 				899749352B61150C00DEBD8C /* FRVerticalField.swift in Sources */,
 				2E0F99032B5DAE260094CE9F /* FRBottomBar.swift in Sources */,
 				897A10ED2B62401B002CF87D /* APIManager.swift in Sources */,
