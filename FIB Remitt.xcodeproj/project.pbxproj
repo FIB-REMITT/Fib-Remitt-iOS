@@ -95,6 +95,7 @@
 		A8CA78622B66B97400C383C8 /* invoice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8CA78612B66B97300C383C8 /* invoice.pdf */; };
 		A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */; };
 		A8CA78672B677C8200C383C8 /* FilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78662B677C8200C383C8 /* FilePickerView.swift */; };
+		A8CA78692B67854800C383C8 /* FilePickerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78682B67854800C383C8 /* FilePickerCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -189,6 +190,7 @@
 		A8CA78612B66B97300C383C8 /* invoice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = invoice.pdf; sourceTree = "<group>"; };
 		A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationByTransactionResponse.swift; sourceTree = "<group>"; };
 		A8CA78662B677C8200C383C8 /* FilePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerView.swift; sourceTree = "<group>"; };
+		A8CA78682B67854800C383C8 /* FilePickerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerCellView.swift; sourceTree = "<group>"; };
 		AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FIB_Remitt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -331,6 +333,7 @@
 				2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */,
 				896EA0CF2B5F9B9300FB231A /* FRNavigationBarView.swift */,
 				897A10F42B626C5C002CF87D /* FIBLoaderView.swift */,
+				A8CA78682B67854800C383C8 /* FilePickerCellView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 				89740D482B5D558D000ACFBA /* View.swift in Sources */,
 				899F1D3A2B66721000E7B35F /* TransactionDetailsViewModel.swift in Sources */,
 				896EA0BF2B5F811F00FB231A /* EditBeneficiaryBankView.swift in Sources */,
+				A8CA78692B67854800C383C8 /* FilePickerCellView.swift in Sources */,
 				8997492E2B60DB1100DEBD8C /* AuthViewModel.swift in Sources */,
 				89740D452B5D4284000ACFBA /* Colour.swift in Sources */,
 				897A10F72B626DF4002CF87D /* UserSettings.swift in Sources */,

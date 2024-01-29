@@ -16,3 +16,25 @@ struct XVerticalShapeStyle : ViewModifier{
             .buttonStyle(.plain)
     }
 }
+
+
+struct DottedBorderModifier: ViewModifier {
+    var color: Color = .black
+    var lineWidth: CGFloat = 1
+    var dash: [CGFloat] = [5, 3]
+
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .strokeBorder(style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, dash: dash))
+                    .foregroundColor(color)
+            )
+    }
+}
+
+extension View {
+    func dottedBorder(color: Color = .black, lineWidth: CGFloat = 1, dash: [CGFloat] = [5, 3]) -> some View {
+        self.modifier(DottedBorderModifier(color: color, lineWidth: lineWidth, dash: dash))
+    }
+}
