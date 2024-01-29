@@ -86,10 +86,10 @@ struct DetailsReceiver: Codable,CustomStringConvertible {
 struct DetailsTransaction: Codable,CustomStringConvertible {
     var description: String{ return "" }
     let fromCurrency: String?
-    let amountToTransfer: Int?
+    let amountToTransfer: Double?
     let toCurrency: String?
-    let totalPayable: Int?
-    let charge: Int?
+    let totalPayable: Double?
+    let charge: Double?
     let amountReceivable: Double?
 
     enum CodingKeys: String, CodingKey {
