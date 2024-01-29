@@ -510,9 +510,7 @@ enum TransactionListEndpoint: Endpoint{
     
     var method: HTTPMethod{
         switch self{
-        case .TransactionList:
-            return .get
-        case .TransactionDetails:
+        case .TransactionList,.TransactionDetails:
             return .get
             
         }
@@ -522,8 +520,8 @@ enum TransactionListEndpoint: Endpoint{
         switch self {
         case .TransactionList:
             return "api/v1/private/personal/transaction"
-        case .TransactionDetails:
-            return "api/v1/private/personal/transaction"
+        case .TransactionDetails(transactionNumber: let trxNumber):
+            return "api/v1/private/personal/transaction/\(trxNumber)"
             
         }
     }
@@ -532,14 +530,20 @@ enum TransactionListEndpoint: Endpoint{
         switch self {
         case .TransactionList(let page):
             return ["page": "\(page)"]
-        case .TransactionDetails(let transactionNumber):
-            return ["transactionNumber": transactionNumber]
+        case .TransactionDetails:
+            return nil
             
         }
     }
     
     var encoder: ParameterEncoder {
-        return URLEncodedFormParameterEncoder.default
+       
+        switch self{
+        case .TransactionList:
+            return  URLEncodedFormParameterEncoder.default
+        default:
+            return JSONParameterEncoder.default
+        }
         
     }
 }
