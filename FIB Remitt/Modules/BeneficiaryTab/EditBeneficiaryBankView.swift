@@ -19,10 +19,10 @@ struct EditBeneficiaryBankView: View {
                 FRVContainer (backgroundColor:.frForground){
                     VStack(alignment:.leading, spacing: 12){
                         TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
-                        FRVerticalField(placeholder: "Full Name", inputText: $text)
+                        FRVerticalField(placeholder: "Full Name", placeholderIcon: "user_ico", inputText: $text)
                         FRSimpleDropDownButton(title: "Nationality", icon: "nationality_ico")
-                        FRVerticalField(placeholder: "Phone number", inputText: $text)
-                        FRVerticalField(placeholder: "Address", inputText: $text)}
+                        FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $text)
+                        FRVerticalField(placeholder: "Address", placeholderIcon: "location_ico", inputText: $text)}
                     VStack(alignment:.leading){
                         TextMediumMedium(text: "Type of Beneficiary", fg_color: .text_fade)
                         HStack{
@@ -41,8 +41,8 @@ struct EditBeneficiaryBankView: View {
                     
                     VStack(alignment:.leading, spacing: 10){
                         TextBaseMedium(text: "Bank Details", fg_color: .text_Mute)
-                        FRVerticalField(placeholder: "Bank Name", inputText: $text)
-                        FRVerticalField(placeholder: "Account Number", inputText: $text)
+                        FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_ico", inputText: $text)
+                        FRVerticalField(placeholder: "Account Number", placeholderIcon: "acc_no", inputText: $text)
                     }
                 }
                 bottomSaveButton

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FRTextField: View {
-    var placeholder: Text
+    var placeholder: AnyView
     @Binding var text: String
     @FocusState var isEditing
     

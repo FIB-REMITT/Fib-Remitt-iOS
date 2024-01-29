@@ -14,7 +14,7 @@ struct XTitledSearchField : View{
     var height: CGFloat = 50
     
     func customTextField() -> some View {
-        FRTextField(placeholder: Text(placeholder), text: $value, isEditing: _isEditing)
+        FRTextField(placeholder: AnyView(Text(placeholder)), text: $value, isEditing: _isEditing)
             .frame(height:height)
             .searchbarStyle()
     }
