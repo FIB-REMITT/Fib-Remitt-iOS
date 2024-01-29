@@ -9,10 +9,11 @@ import SwiftUI
 import Combine
 
 class HomeViewModel : ObservableObject{
-    private var subscribers = Set<AnyCancellable>()
-    private let repo = HomeRepository()
-    @Published var goToNext        = false
-    @Published var destinationView = AnyView(Text("Destination"))
+    private var subscribers         = Set<AnyCancellable>()
+    private let repo                = HomeRepository()
+    
+    @Published var goToNext         = false
+    @Published var destinationView  = AnyView(Text("Destination"))
     
     
     //MARK: - VIEWCONTROLLER LIFICYCLE

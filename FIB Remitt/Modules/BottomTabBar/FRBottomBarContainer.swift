@@ -24,14 +24,14 @@ struct FRBottomBarContainer: View {
                             .tag(TabBarItem.data[0])
                         AnyView(BeneficiaryRootView())
                             .tag(TabBarItem.data[1])
-                        AnyView(SettingsRootView())
-                            .tag(TabBarItem.data[3])
+//                        AnyView(SettingsRootView())
+//                            .tag(TabBarItem.data[3])
                         AnyView(HistoryRootView())
                             .tag(TabBarItem.data[4])
                     }
                 }
                 
-                FRBottomBar(tabs: [TabBarItem.data.first!, TabBarItem.data[1], TabBarItem.data[3], TabBarItem.data[4]], selected: $selected)
+                FRBottomBar(tabs: [TabBarItem.data.first!, TabBarItem.data[1], TabBarItem.data[4]], selected: $selected)
                 
             }.ignoresSafeArea(.keyboard,edges: .bottom)
         //}
