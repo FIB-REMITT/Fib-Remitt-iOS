@@ -50,6 +50,9 @@ extension HistoryRootView{
     private var topFilterDropdown : some View {
         HStack{
             FRTextDropDownButton(title: vm.selectedFilterValue, action: {self.filterBtnPressed()}).padding(.vertical,5)
+//                .frame(width: 50,height: 50)
+                .padding(.trailing,20)
+                .padding(.vertical,10)
             Spacer()
         }
     }

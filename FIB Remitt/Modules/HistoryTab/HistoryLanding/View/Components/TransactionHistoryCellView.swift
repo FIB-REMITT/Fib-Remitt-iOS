@@ -15,15 +15,34 @@ struct TransactionHistoryCellView: View {
         FRVContainer (backgroundColor: .frForground){
             HStack (spacing:15){
                 ZStack (alignment: .bottomTrailing){
-                    Image("bank_ico")
+                    if transaction.collectionPoint == "BANK"{
+                        Image("bank_ico")
                         .padding(14)
                         .overlay {
                             RoundedRectangle(cornerRadius: 25)
                             .strokeBorder(Color.frBorder, lineWidth: 1)
+                            .frame(width: 50, height: 50)
                         }
-                    Image("turkey")
-                        .imageDefaultStyle()
-                        .frame(width: 15)
+                    }else{
+                        TextH4Medium(text: String(transaction.receiver?.fullName?.prefix(1) ?? ""), fg_color: .primary500 )
+                            .padding(14)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 25)
+                                .strokeBorder(Color.frBorder, lineWidth: 1)
+                                .frame(width: 50, height: 50)
+                                
+                            }
+                    }
+                    
+//                    Image("bank_ico")
+//                        .padding(14)
+//                        .overlay {
+//                            RoundedRectangle(cornerRadius: 25)
+//                            .strokeBorder(Color.frBorder, lineWidth: 1)
+//                        }
+//                    Image("turkey")
+//                        .imageDefaultStyle()
+//                        .frame(width: 15)
                 }
                 
                 VStack(alignment:.leading, spacing: 5){
