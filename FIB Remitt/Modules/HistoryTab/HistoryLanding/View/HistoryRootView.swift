@@ -10,7 +10,8 @@ import SwiftUI
 struct HistoryRootView: View {
     
     @ObservedObject var vm = TransactionHistoryViewModel() // history view model
-   
+    @State var showFilter : Bool = false
+    //@State var selectedFilterValue: String = "All"
     var body: some View {
         VStack{
             navigationBar
@@ -34,7 +35,7 @@ extension HistoryRootView{
     }
     private var topFilterDropdown : some View {
         HStack{
-            FRTextDropDownButton(title: "Today", action: {self.filterBtnPressed()}).padding(.vertical,5)
+            FRTextDropDownButton(title: vm.selectedFilterValue, action: {self.filterBtnPressed()}).padding(.vertical,5)
             Spacer()
         }
     }
@@ -55,8 +56,13 @@ extension HistoryRootView{
 //MARK: - ACTIONS
 extension HistoryRootView{
     private func notificationBtnPressed() {}
-    private func filterBtnPressed() {}
+    private func filterBtnPressed() {
+        showSheet(view: AnyView(FilterOptionsView(selectedValue: vm.selectedFilterValue) { selectedItem in
+            self.vm.selectedFilterValue = selectedItem
+        }))
+    }
 }
+
 #Preview {
     HistoryRootView()
 }
