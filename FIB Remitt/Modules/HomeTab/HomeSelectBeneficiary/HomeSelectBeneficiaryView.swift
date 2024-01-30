@@ -19,6 +19,10 @@ struct HomeSelectBeneficiaryView: View {
     @ObservedObject var vm = HomeViewModel()
     @ObservedObject var beneficiaryVM = BeneficiaryViewModel()
     @State var type : SelectBeneficiaryType = .BankTransfer
+    
+    @State var isProceedEnable = false
+    @State private var resetSelection = false
+    
     var homeData = HomeDataHandler.shared
     var body: some View {
         
@@ -76,6 +80,7 @@ struct HomeSelectBeneficiaryView: View {
                     .onTapGesture {
                         filePickerView.hidePicker()
                         isFilePickerPresented = false
+                        resetSelection = true
                     }
                 
                 // Your FilePickerCellView centered
@@ -133,16 +138,19 @@ extension HomeSelectBeneficiaryView{
             if type == .BankTransfer{
                 VStack {
                     ForEach(beneficiaryVM.bankBeneficiaries ?? [], id: \.id) { beneficiary in
-                        let selected = (beneficiary.id == selectedBeneficiaryID)
+                        let selected = !resetSelection && (beneficiary.id == selectedBeneficiaryID)
                         AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.accountNumber ?? "" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico",type: homeData.collectionPoint.lowercased() == "bank" ? .BankTransfer : .CashPickup)
                             .onTapGesture{
-                                selectedBeneficiaryID = beneficiary.id
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "business"{
                                     isFilePickerPresented = true
                                     selectedBeneficiaryID = beneficiary.id
+                                    isProceedEnable = false
+                                    resetSelection = false
                                 }else{
                                    //
                                     selectedBeneficiaryID = beneficiary.id
+                                    isProceedEnable = true
+                                    resetSelection = false
                                 }
                             }
                     }
@@ -150,16 +158,17 @@ extension HomeSelectBeneficiaryView{
             }else{
                 VStack {
                     ForEach(beneficiaryVM.cashPickUpBeneficiaries ?? [], id: \.id) { beneficiary in
-                        let selected = (beneficiary.id == selectedBeneficiaryID)
+                        let selected = !resetSelection && (beneficiary.id == selectedBeneficiaryID)
                         AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.phoneNumber ?? "" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico",type: homeData.collectionPoint.lowercased() == "bank" ? .BankTransfer : .CashPickup)
                             .onTapGesture{
-                                selectedBeneficiaryID = beneficiary.id
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "business"{
                                     isFilePickerPresented = true
                                     selectedBeneficiaryID = beneficiary.id
+                                    resetSelection = false
                                 }else{
                                   //
                                     selectedBeneficiaryID = beneficiary.id
+                                    resetSelection = false
                                 }
                             }
                     }
@@ -171,7 +180,10 @@ extension HomeSelectBeneficiaryView{
     
    
     private var bottomButton : some View{
-        FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}
+//        FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}
+        FRVerticalControlBtn(isDisabled: $isProceedEnable, title: "Procced") {
+            self.proccedBtnPressed()
+        }
     }
 }
 
