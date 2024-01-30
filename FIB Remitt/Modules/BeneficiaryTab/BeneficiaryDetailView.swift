@@ -45,9 +45,9 @@ extension BeneficiaryDetailView{
                         RoundedRectangle(cornerRadius: 25)
                         .strokeBorder(Color.frBorder, lineWidth: 1)
                     }
-                Image("turkey")
-                    .imageDefaultStyle()
-                    .frame(width: 15)
+//                Image("turkey")
+//                    .imageDefaultStyle()
+//                    .frame(width: 15)
             }
             TextBaseMedium(text:BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.fullName ?? "": vm.selectedBankBeneficiary?.fullName ?? "", fg_color: .textRegula)
             Spacer()

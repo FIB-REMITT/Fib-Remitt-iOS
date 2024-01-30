@@ -12,6 +12,7 @@ class BeneficiaryViewModel : ObservableObject{
     private var subscribers = Set<AnyCancellable>()
     private let repo        = BeneficiaryRepository()
     private let homeRepo    = HomeRepository()
+    private let beneficiaryData = BenficiaryDataHandler.shared
     @Published var selectedCollectionPoint : CollectionPoint = .all
     
     @Published var goToNext        = false
@@ -65,6 +66,16 @@ class BeneficiaryViewModel : ObservableObject{
        self.destinationView = AnyView(EditBeneficiaryBankView())
        self.goToNext        = true
    }
+    
+    func navigateToEditCashPickupBeneficiary() {
+       self.destinationView = AnyView(EditBeneficiaryCashPickupView())
+       self.goToNext        = true
+   }
+    
+    func navigateToSelectBeneficiarySheet() {
+        self.destinationView = AnyView(SelectBeneficiaryTypeBottomSheet())
+        self.goToNext        = true
+    }
     
     //MARK: - API CALL
     func getCashPickBeneficiaries() {
@@ -123,12 +134,48 @@ class BeneficiaryViewModel : ObservableObject{
         }.store(in: &subscribers)
     }
     
-    private func addCashPickupBeneficiary() {
-        repo.createCashPickupBeneficiaryAPICall(fullName: "Izak l0", nationality: "87d62a40-2dff-4e98-94b5-a1402cf95179", phone: "+88016785638888", address: "RDuk 90 uhb", gender: "Male", relationShip: "dfghj")
+    func addCashPickupBeneficiary() {
+        repo.createCashPickupBeneficiaryAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phone: phone, address: address, gender: selectedGenderType.title, relationShip: relation)
+        repo.$cashPickupBeneficiaryNormalCreationStatus.sink { status in
+            if let isCreated = status{
+                if isCreated{
+                    showToast( message: "Account Created Successfully!")
+                    loadView(view: FRBottomBarContainer())
+                }else{
+                    showToast(message: "Failed to create Account")
+                }
+            }
+        }.store(in: &subscribers)
     }
     
-    private func addCashPickupBeneficiaryBusiness() {
-        repo.createCashPickupBusinessAPICall(fullName: "Izak uu", nationality: "87d62a40-2dff-4e98-94b5-a1402cf95179", phoneNumber: "+88016999938888", address: "DLKFJ dkjf", invoice: loadPDF())
+    func addCashPickupBeneficiaryBusiness() {
+        let pdfContractDoc  = pdfData(from: URL(string: beneficiaryData.contractPath) ?? URL(fileURLWithPath: ""))
+        repo.createCashPickupBusinessAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phoneNumber: phone, address: address, invoice: pdfContractDoc)
+        repo.$cashPickupBeneficiaryBusinessCreationStatus.sink { status in
+            if let isCreated = status{
+                if isCreated{
+                    showToast( message: "Account Created Successfully!")
+                    loadView(view: FRBottomBarContainer())
+                }else{
+                    showToast(message: "Failed to create Account")
+                }
+            }
+        }.store(in: &subscribers)
+    }
+    
+    func addBankBeneficiaryBusiness() {
+        let pdfContractDoc  = pdfData(from: URL(string: beneficiaryData.contractPath) ?? URL(fileURLWithPath: ""))
+        repo.createBankBeneficiaryBusinessAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phone: phone, address: address, bankId:  selectedBankName.id ?? "", accNo: accountNo, invoice: pdfContractDoc)
+        repo.$bankBeneficiaryBusinessCreationStatus.sink { status in
+            if let isCreated = status{
+                if isCreated{
+                    showToast( message: "Account Created Successfully!")
+                    loadView(view: FRBottomBarContainer())
+                }else{
+                    showToast(message: "Failed to create Account")
+                }
+            }
+        }.store(in: &subscribers)
     }
     
     func addBankBeneficiary() {

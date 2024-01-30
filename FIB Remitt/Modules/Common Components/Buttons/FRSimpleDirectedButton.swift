@@ -12,6 +12,7 @@ struct FRSimpleDirectedButton: View {
     var icon   : String?
     var bg_color: Color = .fr_background
     var isContextMedium : Bool = false
+    var cornerRadius : CGFloat = 100.0
     var action : () -> Void = {}
     var body: some View {
         
@@ -37,7 +38,7 @@ struct FRSimpleDirectedButton: View {
                 .foregroundColor(.text_Mute)
                 
             }
-            .cornerRadius(100)
+            .cornerRadius(cornerRadius)
         })
 
     }

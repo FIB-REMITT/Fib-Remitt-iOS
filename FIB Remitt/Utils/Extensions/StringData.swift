@@ -28,4 +28,11 @@ extension String {
         let uiimage = UIImage(ciImage: scaledCIImage)
         return uiimage.pngData()!
     }
+    
+    func extractFileName() -> String {
+        if let url = URL(string: self) {
+            return url.lastPathComponent.removingPercentEncoding ?? ""
+        }
+        return ""
+    }
 }

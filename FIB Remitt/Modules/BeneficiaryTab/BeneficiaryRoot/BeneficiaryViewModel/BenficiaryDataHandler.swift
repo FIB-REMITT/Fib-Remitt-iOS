@@ -14,12 +14,12 @@ class BenficiaryDataHandler{
 
     var nationalities   : [NationalityResponse]  = []
     var banks           : [BankResponse]         = []
+    var contractPath    : String                 = ""
     var selectedBenficiaryId : String            = ""
     var beneficiaryType      : CollectionPoint   = .all
 
     func clear(){
         selectedBenficiaryId  = ""
         beneficiaryType       = .all
-
     }
 }

@@ -32,6 +32,25 @@ enum CollectionPoint:String, CaseIterable{
     }
 }
 
+enum AvailableBeneficiaryType : String, CaseIterable{
+    case bank_Transfer
+    case cash_Pickup
+
+    var title: String{
+        switch self {
+        case .bank_Transfer : return "Bank Beneficiary"
+        case .cash_Pickup   : return "Cash Pickup Beneficiary"
+        }
+    }
+    
+    var icon: String{
+        switch self {
+        case .bank_Transfer : return "bank_ico"
+        case .cash_Pickup   : return ""
+        }
+    }
+}
+
 enum Gender:String, CaseIterable{
     case male
     case female

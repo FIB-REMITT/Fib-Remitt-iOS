@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DocPickerView: View {
+    var title  = "Please upload contract document"
     var body: some View {
         HStack (spacing:15){
             ZStack (alignment: .bottomTrailing){
@@ -18,7 +19,7 @@ struct DocPickerView: View {
                 HStack {
                     TextBaseMedium(text:"Browse", fg_color: .primary500)
                 }
-                TextBaseRegular(text:"Please upload contract document", fg_color: .textMute)
+                TextBaseRegular(text: title, fg_color: .textMute)
             }
             Spacer()
         }.dottedBorder(color: .primary500, lineWidth: 1, dash: [5,3])

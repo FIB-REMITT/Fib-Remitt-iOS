@@ -97,7 +97,7 @@ extension BeneficiaryRootView{
 //MARK: - ACTIONS
 extension BeneficiaryRootView{
     private func addNewBtnPressed() {
-        vm.navigateToEditBankBeneficiary()
+        vm.navigateToSelectBeneficiarySheet()
     }
 }
 #Preview {
