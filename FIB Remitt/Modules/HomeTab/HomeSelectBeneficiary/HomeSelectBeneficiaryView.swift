@@ -140,15 +140,6 @@ extension HomeSelectBeneficiaryView{
             }
         }
         
-       
-        
-        //            AccountInfoCellView(selected: $isSelected)
-        //            AccountInfoCellView(selected: $isNotSelected)
-        //                .onTapGesture {
-        //                    isFilePickerPresented = true
-        //                }
-        //            AccountInfoCellView(selected: $isNotSelected)
-        //            AccountInfoCellView(selected: $isNotSelected)
     }
     
     func bankCellView(beneficiary: BankBeneficiariesResponse){

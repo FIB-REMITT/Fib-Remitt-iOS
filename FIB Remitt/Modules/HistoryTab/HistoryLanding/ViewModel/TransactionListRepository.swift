@@ -16,8 +16,8 @@ class TransactionListRepository {
     
     
     
-    func transactionListApi(page:Int)  {
-        APIManager.shared.getData(endPoint: TransactionListEndpoint.TransactionList(page: page), resultType: TransactionHistoryResponse.self, showLoader: true)
+    func transactionListApi(page:Int, from:String,to:String)  {
+        APIManager.shared.getData(endPoint: TransactionListEndpoint.TransactionList(page: page,from:from,to: to), resultType: TransactionHistoryResponse.self, showLoader: true)
             .sink { completion in
                 switch completion{
                 case .failure(let error):

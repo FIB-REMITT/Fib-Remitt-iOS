@@ -98,6 +98,7 @@
 		899F1D3A2B66721000E7B35F /* TransactionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D392B66721000E7B35F /* TransactionDetailsViewModel.swift */; };
 		899F1D3C2B66722800E7B35F /* TransactionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D3B2B66722800E7B35F /* TransactionDetailsRepository.swift */; };
 		9248954BA1DA9AF72EF8DF96 /* Pods_FIB_Remitt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */; };
+		A8737DFF2B68D531008A2465 /* StringData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8737DFE2B68D531008A2465 /* StringData.swift */; };
 		A8CA78602B66ABA700C383C8 /* BankCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */; };
 		A8CA78622B66B97400C383C8 /* invoice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8CA78612B66B97300C383C8 /* invoice.pdf */; };
 		A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */; };
@@ -201,6 +202,7 @@
 		899F1D372B66687A00E7B35F /* TransactionDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsResponse.swift; sourceTree = "<group>"; };
 		899F1D392B66721000E7B35F /* TransactionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewModel.swift; sourceTree = "<group>"; };
 		899F1D3B2B66722800E7B35F /* TransactionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsRepository.swift; sourceTree = "<group>"; };
+		A8737DFE2B68D531008A2465 /* StringData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringData.swift; sourceTree = "<group>"; };
 		A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCollectionResponse.swift; sourceTree = "<group>"; };
 		A8CA78612B66B97300C383C8 /* invoice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = invoice.pdf; sourceTree = "<group>"; };
 		A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationByTransactionResponse.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 			children = (
 				89740D472B5D558D000ACFBA /* View.swift */,
 				89740D4C2B5D5761000ACFBA /* Image.swift */,
+				A8737DFE2B68D531008A2465 /* StringData.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -883,6 +886,7 @@
 				897A10F02B626B5C002CF87D /* Network.swift in Sources */,
 				A8CA78672B677C8200C383C8 /* FilePickerView.swift in Sources */,
 				896EA0D82B5FF12C00FB231A /* SplashView.swift in Sources */,
+				A8737DFF2B68D531008A2465 /* StringData.swift in Sources */,
 				896EA0D02B5F9B9300FB231A /* FRNavigationBarView.swift in Sources */,
 				2E71DB952B659E6F000A6471 /* SignInResponse.swift in Sources */,
 				899749372B61494D00DEBD8C /* HomeViewModel.swift in Sources */,
