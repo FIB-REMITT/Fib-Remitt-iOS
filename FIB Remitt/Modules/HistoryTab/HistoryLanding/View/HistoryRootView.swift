@@ -10,8 +10,8 @@ import SwiftUI
 struct HistoryRootView: View {
     
     @ObservedObject var vm = TransactionHistoryViewModel() // history view model
-    @State var showFilter : Bool = false
     //@State var selectedFilterValue: String = "All"
+   @State var pageNo = 0
     var body: some View {
         VStack{
             navigationBar
@@ -24,9 +24,23 @@ struct HistoryRootView: View {
         .background(Color.frBackground.ignoresSafeArea())
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
         .onAppear(perform: {
-            vm.transactionListFetch(page: 0,from: "",to: "")
+            
+           initialDataAll()
         })
     }
+    
+    func initialDataAll(from:String = "",to:String = ""){
+        vm.transactionHistoryDataOnly = []
+        pageNo = 0
+        transactionListApi(from: from, to:to)
+       
+    }
+    
+    //MARK: - API CALL
+    func transactionListApi(from:String = "",to:String = ""){
+        vm.transactionListFetch(page: self.pageNo,from: from,to: to)
+    }
+    
 }
 //MARK: - VIEW COMPONENTS
 extension HistoryRootView{
@@ -42,7 +56,7 @@ extension HistoryRootView{
     private var contextContainer : some View{
         VStack{
             
-            ForEach(vm.transactionHistoryDatas) { transactionData in
+            ForEach(vm.transactionHistoryDataOnly) { transactionData in
                        TransactionHistoryCellView(transaction: transactionData)
                     
                     .onTapGesture {

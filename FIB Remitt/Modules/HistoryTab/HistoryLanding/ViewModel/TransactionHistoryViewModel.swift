@@ -8,7 +8,8 @@ class TransactionHistoryViewModel : ObservableObject{
     @Published var goToNext        = false
     
     @Published var destinationView = AnyView(Text("Destination"))
-    @Published var transactionHistoryDatas: [TransactionListContent] = []
+    @Published var transactionHistoryResponse: TransactionHistoryResponse?
+    @Published var transactionHistoryDataOnly: [TransactionListContent] = []
     @Published var transactionDetails : TransactionDetailsResponse?
     
     @Published var selectedFilterValue : String = "All"
@@ -49,7 +50,8 @@ class TransactionHistoryViewModel : ObservableObject{
     func transactionListFetch(page:Int, from: String, to : String) {
         repo.transactionListApi(page:page ,from:from, to:to)
         repo.$transactionHistoryList.sink { result in
-            self.transactionHistoryDatas = result?.content ?? []
+            self.transactionHistoryResponse = result
+            self.transactionHistoryDataOnly =  self.transactionHistoryDataOnly + (result?.content ?? []) 
         }.store(in: &subscribers)
         
     }
