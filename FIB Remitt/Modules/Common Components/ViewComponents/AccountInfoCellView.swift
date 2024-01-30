@@ -13,21 +13,39 @@ struct AccountInfoCellView: View {
     var subtitle1 = "A/C No. 124 458 458 856"
     var subtitle2 = "Ziraat Bank"
     var icon = ""
+    var type : SelectBeneficiaryType = .BankTransfer
 
+    
+    // Define a variable to store the image name
+    
     
     var body: some View {
         FRVContainer (backgroundColor: .frForground){
             HStack (spacing:15){
                 ZStack (alignment: .bottomTrailing){
-                    Image("bank_ico")
+                    if type == .BankTransfer{
+                        Image("bank_ico")
                         .padding(14)
                         .overlay {
                             RoundedRectangle(cornerRadius: 25)
                             .strokeBorder(Color.frBorder, lineWidth: 1)
+                            .frame(width: 50, height: 50)
                         }
-                    Image("turkey")
-                        .imageDefaultStyle()
-                        .frame(width: 15)
+                    }else{
+                        TextH4Medium(text: String(title.prefix(1)), fg_color: .primary500 )
+                            .padding(14)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 25)
+                                .strokeBorder(Color.frBorder, lineWidth: 1)
+                                .frame(width: 50, height: 50)
+                                
+                            }
+                    }
+                       
+                        
+//                    Image("turkey")
+//                        .imageDefaultStyle()
+//                        .frame(width: 15)
                 }
                 
                 VStack(alignment:.leading){

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 
 //Show alert Dialog
@@ -116,6 +117,20 @@ func formatDateString(incomingFormate :String = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
     return nil // Return nil for invalid input
 }
 
+
+func pdfData(from url: URL) -> Data? {
+    if url.startAccessingSecurityScopedResource() == true{
+        do {
+           
+            let data = try Data(contentsOf: url)
+            return data
+        } catch {
+            print("Error loading PDF data: \(error)")
+            return nil
+        }
+    }
+   return nil
+}
 
 func showToast(message : String, font: UIFont = .systemFont(ofSize: 14), after:Double = 0.0, isTopToast:Bool = false) {
     let scnSize = UIScreen.main.bounds
