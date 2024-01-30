@@ -19,6 +19,7 @@ class HomeDataHandler{
     var paymentMethod      : String = ""
     var collectionPoint    : String = ""
     var purposeId          : String = ""
+    var invoicePath        : String = ""
     
     func clear(){
         purposes.removeAll()
@@ -28,5 +29,6 @@ class HomeDataHandler{
         paymentMethod       = ""
         collectionPoint     = ""
         purposeId           = ""
+        invoicePath         = ""
     }
 }

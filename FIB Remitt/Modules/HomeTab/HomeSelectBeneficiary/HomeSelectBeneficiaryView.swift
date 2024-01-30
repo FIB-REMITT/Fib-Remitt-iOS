@@ -29,6 +29,9 @@ struct HomeSelectBeneficiaryView: View {
                 selectedFileURL = url
                 print("Selected file: \(url)")
                 isFilePickerPresented = false
+//                let homeData = HomeDataHandler.shared
+//                vm.apiReceivedInBank(beneficiaryId: selectedBeneficiaryID, fromCurrency: homeData.fromCurrency, amountToTransfer: homeData., toCurrency: <#T##String#>, paymentMethod: <#T##String#>, collectionPoint: <#T##String#>, purposeId: <#T##String#>, invoice: <#T##Data?#>)
+                
             },
             onError: { error in
                 print("Error: \(error.localizedDescription)")
@@ -114,6 +117,7 @@ extension HomeSelectBeneficiaryView{
                                 selectedBeneficiaryID = beneficiary.id
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "personal"{
                                     isFilePickerPresented = true
+                                    selectedBeneficiaryID = beneficiary.id
                                 }else{
                                    //
                                     selectedBeneficiaryID = beneficiary.id
@@ -130,6 +134,7 @@ extension HomeSelectBeneficiaryView{
                                 selectedBeneficiaryID = beneficiary.id
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "personal"{
                                     isFilePickerPresented = true
+                                    selectedBeneficiaryID = beneficiary.id
                                 }else{
                                   //
                                     selectedBeneficiaryID = beneficiary.id
