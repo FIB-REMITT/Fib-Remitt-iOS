@@ -107,7 +107,7 @@ extension HomeSelectBeneficiaryView{
         Group{
             if type == .BankTransfer{
                 VStack {
-                    ForEach(beneficiaryVM.BankBeneficiaries ?? [], id: \.id) { beneficiary in
+                    ForEach(beneficiaryVM.bankBeneficiaries ?? [], id: \.id) { beneficiary in
                         let selected = (beneficiary.id == selectedBeneficiaryID)
                         AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.accountNumber ?? "" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
                             .onTapGesture{
@@ -123,7 +123,7 @@ extension HomeSelectBeneficiaryView{
                 }
             }else{
                 VStack {
-                    ForEach(beneficiaryVM.CashPickUpBeneficiaries ?? [], id: \.id) { beneficiary in
+                    ForEach(beneficiaryVM.cashPickUpBeneficiaries ?? [], id: \.id) { beneficiary in
                         let selected = (beneficiary.id == selectedBeneficiaryID)
                         AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.phoneNumber ?? "" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
                             .onTapGesture{

@@ -11,9 +11,7 @@ struct HomeRootView: View {
     @State var isSelected = false
     @State var isNotSelected = true
     
-   
-    @State var transferAmount = ""
-        
+ 
     @ObservedObject var vm = HomeViewModel()
     
     var body: some View {
@@ -95,7 +93,7 @@ extension HomeRootView{
         FRVContainer (spacing: 7, backgroundColor: .frForground){
             TextBaseMedium(text: "Transfer amount", fg_color: .text_Mute)
             HStack{
-                FRVerticalField(placeholder: "Enter Amount", inputText: $transferAmount)
+                FRVerticalField(placeholder: "Enter Amount", inputText: $vm.transferAmount)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
                 FRSimpleDropDownButton(title: "IQD", icon: "iraq_flag")
@@ -103,7 +101,7 @@ extension HomeRootView{
             
             TextBaseMedium(text: "Recipient gets", fg_color: .text_Mute)
             HStack{
-                FRVerticalField(placeholder: "Enter Amount", inputText: $transferAmount)
+                FRVerticalField(placeholder: "Enter Amount", inputText: $vm.recipentAmount)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
                 FRSimpleDropDownButton(title: "IQD", icon: "turkey")
@@ -177,7 +175,10 @@ extension HomeRootView{
 //MARK: - ACTIONS
 extension HomeRootView{
     private func notificationBtnPressed() {}
-    private func proccedBtnPressed() {vm.navigateSelectBeneficiary()}
+    private func proccedBtnPressed() {
+        vm.storeHomeData()
+        vm.navigateSelectBeneficiary()
+    }
     private func termsAndConditionBtnPressed() {}
     private func purposeButtonPressed(){
         showSheet(view: AnyView(PurposePicker(purposes: HomeDataHandler.shared.purposes, itemSelect: { selectedItem in

@@ -18,6 +18,9 @@ class HomeViewModel : ObservableObject{
     @Published var selectedPurpose:PurposeResponse = PurposeResponse()
     @Published var selectedDeliveryMethod = "Bank Transfer"
     
+    @Published var transferAmount = ""
+    @Published var recipentAmount = ""
+    
     //MARK: - VIEWCONTROLLER LIFICYCLE
     func viewWillAppearCalled() {
         self.getNationalities()
@@ -45,7 +48,15 @@ class HomeViewModel : ObservableObject{
         self.goToNext        = true
     }
     
+    //MARK: - CUSTOM METHODS
     
+    func  storeHomeData() {
+        HomeDataHandler.shared.toCurrency       = "TRK"
+        HomeDataHandler.shared.purposeId        = selectedPurpose.id ?? ""
+        HomeDataHandler.shared.paymentMethod    = "BANK"
+        HomeDataHandler.shared.collectionPoint  = selectedDeliveryMethod == "Bank Transfer" ? "BANK" : "AGENT"
+        
+    }
     
     //MARK: - API CALLs
     func getNationalities() {
