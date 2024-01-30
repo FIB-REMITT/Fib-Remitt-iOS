@@ -13,6 +13,7 @@ struct HomeSelectBeneficiaryView: View {
     @State var isNotSelected : Bool = false
     @State var isFilePickerPresented = false
     @State private var isPickerShown = false
+    @State private var selectedBeneficiaryID: String?
     
     @State private var selectedFileURL: URL?
     @ObservedObject var vm = HomeViewModel()
@@ -67,7 +68,7 @@ struct HomeSelectBeneficiaryView: View {
                     .blur(radius: 3)
                     .onTapGesture {
                         filePickerView.hidePicker()
-                        isFilePickerPresented = true
+                        isFilePickerPresented = false
                     }
                 
                 // Your FilePickerCellView centered
@@ -107,26 +108,33 @@ extension HomeSelectBeneficiaryView{
             if type == .BankTransfer{
                 VStack {
                     ForEach(beneficiaryVM.BankBeneficiaries ?? [], id: \.id) { beneficiary in
-                        
-                        AccountInfoCellView(selected: $isSelected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.accountNumber ?? "" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
+                        let selected = (beneficiary.id == selectedBeneficiaryID)
+                        AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.accountNumber ?? "" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
                             .onTapGesture{
+                                selectedBeneficiaryID = beneficiary.id
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "personal"{
                                     isFilePickerPresented = true
+                                }else{
+                                   //
+                                    selectedBeneficiaryID = beneficiary.id
                                 }
                             }
-                    
                     }
                 }
             }else{
                 VStack {
                     ForEach(beneficiaryVM.CashPickUpBeneficiaries ?? [], id: \.id) { beneficiary in
-                        AccountInfoCellView(selected: $isSelected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.phoneNumber ?? "" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
+                        let selected = (beneficiary.id == selectedBeneficiaryID)
+                        AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.phoneNumber ?? "" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
                             .onTapGesture{
+                                selectedBeneficiaryID = beneficiary.id
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "personal"{
                                     isFilePickerPresented = true
+                                }else{
+                                  //
+                                    selectedBeneficiaryID = beneficiary.id
                                 }
                             }
-                    
                     }
                 }
             }
@@ -141,6 +149,14 @@ extension HomeSelectBeneficiaryView{
         //                }
         //            AccountInfoCellView(selected: $isNotSelected)
         //            AccountInfoCellView(selected: $isNotSelected)
+    }
+    
+    func bankCellView(beneficiary: BankBeneficiariesResponse){
+       
+    }
+    
+    func cashPickCellVIew(beneficiary: BankBeneficiariesResponse){
+       
     }
     private var bottomButton : some View{
         FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}

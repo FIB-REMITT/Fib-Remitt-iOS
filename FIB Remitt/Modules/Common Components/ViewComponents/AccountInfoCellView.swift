@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AccountInfoCellView: View {
-    @Binding var selected: Bool
+    var selected: Bool = false
     var title = ""
     var subtitle1 = ""
     var subtitle2 = ""
@@ -61,7 +61,7 @@ struct AccountInfoCellView_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
             Spacer()
-            AccountInfoCellView(selected: $selection)
+            AccountInfoCellView(selected: selection)
             Spacer()
         }.background(Color.textMute.ignoresSafeArea())
     }
