@@ -47,6 +47,8 @@
 		896EA0D62B5FEE6200FB231A /* FRTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EA0D52B5FEE6200FB231A /* FRTextButton.swift */; };
 		896EA0D82B5FF12C00FB231A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EA0D72B5FF12C00FB231A /* SplashView.swift */; };
 		89705A672B68D61100307E3E /* CommonBeneficiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A662B68D61100307E3E /* CommonBeneficiaryModel.swift */; };
+		89705A692B68F06900307E3E /* CurrencyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A682B68F06900307E3E /* CurrencyPicker.swift */; };
+		89705A6B2B68F56200307E3E /* FRSimpleDirectedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A6A2B68F56200307E3E /* FRSimpleDirectedButton.swift */; };
 		897228022B665BBD006B4FEE /* NationalityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228012B665BBD006B4FEE /* NationalityResponse.swift */; };
 		897228042B665CE9006B4FEE /* PurposeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228032B665CE9006B4FEE /* PurposeResponse.swift */; };
 		897228062B665D8B006B4FEE /* BankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228052B665D8B006B4FEE /* BankResponse.swift */; };
@@ -152,6 +154,8 @@
 		896EA0D52B5FEE6200FB231A /* FRTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRTextButton.swift; sourceTree = "<group>"; };
 		896EA0D72B5FF12C00FB231A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		89705A662B68D61100307E3E /* CommonBeneficiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonBeneficiaryModel.swift; sourceTree = "<group>"; };
+		89705A682B68F06900307E3E /* CurrencyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPicker.swift; sourceTree = "<group>"; };
+		89705A6A2B68F56200307E3E /* FRSimpleDirectedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRSimpleDirectedButton.swift; sourceTree = "<group>"; };
 		897228012B665BBD006B4FEE /* NationalityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalityResponse.swift; sourceTree = "<group>"; };
 		897228032B665CE9006B4FEE /* PurposeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurposeResponse.swift; sourceTree = "<group>"; };
 		897228052B665D8B006B4FEE /* BankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankResponse.swift; sourceTree = "<group>"; };
@@ -426,6 +430,7 @@
 				A8CA78652B677C5F00C383C8 /* FilePicker */,
 				897228152B668047006B4FEE /* CountryPicker */,
 				8974F9122B67A91C007F2522 /* FRSimplePicker.swift */,
+				89705A682B68F06900307E3E /* CurrencyPicker.swift */,
 				8974F9142B67AAA1007F2522 /* PurposePicker.swift */,
 			);
 			path = Pickers;
@@ -584,6 +589,7 @@
 				89611BE72B5E3A6D00407E32 /* FRCheckbox.swift */,
 				89611BEB2B5E4F4300407E32 /* FRCircularRadioButton.swift */,
 				89611BE92B5E464B00407E32 /* FRSimpleDropDownButton.swift */,
+				89705A6A2B68F56200307E3E /* FRSimpleDirectedButton.swift */,
 				896EA0C72B5F8D3200FB231A /* FRTextDropDownButton.swift */,
 				896EA0CB2B5F956100FB231A /* FRBarButton.swift */,
 				896EA0D52B5FEE6200FB231A /* FRTextButton.swift */,
@@ -918,6 +924,7 @@
 				89611BF02B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift in Sources */,
 				89740D4D2B5D5762000ACFBA /* Image.swift in Sources */,
 				897A10FC2B628285002CF87D /* FRSimpleDirectedCellButton.swift in Sources */,
+				89705A692B68F06900307E3E /* CurrencyPicker.swift in Sources */,
 				899749392B615C4F00DEBD8C /* BeneficiaryViewModel.swift in Sources */,
 				40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */,
 				2E0F99062B5DB0B40094CE9F /* SettingsRootView.swift in Sources */,
@@ -959,6 +966,7 @@
 				8974F9152B67AAA1007F2522 /* PurposePicker.swift in Sources */,
 				897228082B665DFD006B4FEE /* CurrencyResponse.swift in Sources */,
 				A8CA786B2B67D24600C383C8 /* Enums.swift in Sources */,
+				89705A6B2B68F56200307E3E /* FRSimpleDirectedButton.swift in Sources */,
 				2E0F98FD2B5DA00E0094CE9F /* HistoryRootView.swift in Sources */,
 				896EA0C62B5F863600FB231A /* TransactionHistoryCellView.swift in Sources */,
 				897228132B667D9E006B4FEE /* CountryCodePickerBtn.swift in Sources */,

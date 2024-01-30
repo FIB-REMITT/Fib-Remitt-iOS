@@ -15,7 +15,8 @@ class HomeViewModel : ObservableObject{
     @Published var goToNext         = false
     @Published var destinationView  = AnyView(Text("Destination"))
     
-    @Published var selectedPurpose:PurposeResponse = PurposeResponse()
+    @Published var selectedPurpose:PurposeResponse            = PurposeResponse()
+    @Published var selectedRecipientCurrency:CurrencyResponse = CurrencyResponse()
     @Published var selectedDeliveryMethod = "Bank Transfer"
     
     @Published var transferAmount = ""
@@ -51,11 +52,11 @@ class HomeViewModel : ObservableObject{
     //MARK: - CUSTOM METHODS
     
     func  storeHomeData() {
-        HomeDataHandler.shared.toCurrency       = "TRK"
+        HomeDataHandler.shared.toCurrency       = selectedRecipientCurrency.code ?? ""
         HomeDataHandler.shared.purposeId        = selectedPurpose.id ?? ""
         HomeDataHandler.shared.paymentMethod    = "BANK"
         HomeDataHandler.shared.collectionPoint  = selectedDeliveryMethod == "Bank Transfer" ? "BANK" : "AGENT"
-        
+        HomeDataHandler.shared.amountToTransfer = transferAmount
     }
     
     //MARK: - API CALLs
@@ -85,10 +86,12 @@ class HomeViewModel : ObservableObject{
     }
     
     func getCurrencies() {
-        repo.getCurrencisAPICall()
-        repo.$allCurrency.sink { result in
-            print(result?.count ?? 0)
-        }.store(in: &subscribers)
+        if HomeDataHandler.shared.purposes.isEmpty{
+            repo.getCurrencisAPICall()
+            repo.$allCurrency.sink { result in
+                HomeDataHandler.shared.currencies = result ?? []
+            }.store(in: &subscribers)
+        }
     }
     
     func apiReceivedInBank(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {

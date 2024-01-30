@@ -104,7 +104,7 @@ extension HomeRootView{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $vm.recipentAmount)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
-                FRSimpleDropDownButton(title: "IQD", icon: "turkey")
+                FRSimpleDropDownButton(title: vm.selectedRecipientCurrency.code ?? "", icon: vm.selectedRecipientCurrency.code == "TRY" ? "turkey" : "", action: {selectRecipientCurrencyPressed()})
             }
             Divider().padding(.horizontal)
                 .padding(.top, 5)
@@ -183,6 +183,11 @@ extension HomeRootView{
     private func purposeButtonPressed(){
         showSheet(view: AnyView(PurposePicker(purposes: HomeDataHandler.shared.purposes, itemSelect: { selectedItem in
             self.vm.selectedPurpose = selectedItem
+        })))
+    }
+    private func selectRecipientCurrencyPressed(){
+        showSheet(view: AnyView(CurrencyPicker(currencies: HomeDataHandler.shared.currencies, itemSelect: { selectedItem in
+            self.vm.selectedRecipientCurrency = selectedItem
         })))
     }
 }
