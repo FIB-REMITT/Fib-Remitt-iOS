@@ -11,7 +11,7 @@ struct HistoryRootView: View {
     
     @ObservedObject var vm = TransactionHistoryViewModel() // history view model
     //@State var selectedFilterValue: String = "All"
-   @State var pageNo = 0
+    @State var pageNo = 0
     var body: some View {
         VStack{
             navigationBar
@@ -24,8 +24,8 @@ struct HistoryRootView: View {
         .background(Color.frBackground.ignoresSafeArea())
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
         .onAppear(perform: {
-            
-           initialDataAll()
+            vm.selectedFilterValue = "All"
+            initialDataAll()
         })
     }
     
@@ -33,7 +33,7 @@ struct HistoryRootView: View {
         vm.transactionHistoryDataOnly = []
         pageNo = 0
         transactionListApi(from: from, to:to)
-       
+        
     }
     
     //MARK: - API CALL
@@ -57,12 +57,12 @@ extension HistoryRootView{
         VStack{
             
             ForEach(vm.transactionHistoryDataOnly) { transactionData in
-                       TransactionHistoryCellView(transaction: transactionData)
-                    
+                TransactionHistoryCellView(transaction: transactionData)
+                
                     .onTapGesture {
                         vm.navigateToTransactionDetails(transactionNumber: transactionData.transactionNumber ?? "")
-                     }
-                   }
+                    }
+            }
         }
     }
 }
@@ -73,7 +73,25 @@ extension HistoryRootView{
     private func filterBtnPressed() {
         showSheet(view: AnyView(FilterOptionsView(selectedValue: vm.selectedFilterValue) { selectedItem in
             self.vm.selectedFilterValue = selectedItem
+            filterTheData()
         }))
+    }
+    
+    func filterTheData(){
+        if vm.selectedFilterValue == "All"{
+            initialDataAll() //from:String = "",to:String = ""
+        }else if vm.selectedFilterValue == "Today" {
+            
+        } else if vm.selectedFilterValue == "This Week" {
+            let dateRangeLast7Days = vm.getDateRange(for: .last7Days)
+            initialDataAll(from:"\(dateRangeLast7Days.from)",to: "\(dateRangeLast7Days.to)")
+        } else if vm.selectedFilterValue == "This Months" {
+            let currentMonthRange = vm.getDateRange(for: .currentMonth)
+            initialDataAll(from:"\(currentMonthRange.from)",to: "\(currentMonthRange.to)")
+        } else {
+            let currentYearRange = vm.getDateRange(for: .currentYear)
+            initialDataAll(from:"\(currentYearRange.from)",to: "\(currentYearRange.to)")
+        }
     }
 }
 
