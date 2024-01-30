@@ -134,7 +134,7 @@ extension HomeSelectBeneficiaryView{
                 VStack {
                     ForEach(beneficiaryVM.bankBeneficiaries ?? [], id: \.id) { beneficiary in
                         let selected = (beneficiary.id == selectedBeneficiaryID)
-                        AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.accountNumber ?? "" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
+                        AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.accountNumber ?? "" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico",type: homeData.collectionPoint.lowercased() == "bank" ? .BankTransfer : .CashPickup)
                             .onTapGesture{
                                 selectedBeneficiaryID = beneficiary.id
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "business"{
@@ -151,7 +151,7 @@ extension HomeSelectBeneficiaryView{
                 VStack {
                     ForEach(beneficiaryVM.cashPickUpBeneficiaries ?? [], id: \.id) { beneficiary in
                         let selected = (beneficiary.id == selectedBeneficiaryID)
-                        AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.phoneNumber ?? "" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
+                        AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.phoneNumber ?? "" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico",type: homeData.collectionPoint.lowercased() == "bank" ? .BankTransfer : .CashPickup)
                             .onTapGesture{
                                 selectedBeneficiaryID = beneficiary.id
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "business"{
