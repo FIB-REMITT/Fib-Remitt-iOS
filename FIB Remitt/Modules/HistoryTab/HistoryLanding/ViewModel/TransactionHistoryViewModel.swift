@@ -46,8 +46,8 @@ class TransactionHistoryViewModel : ObservableObject{
     }
 
     
-    func transactionListFetch(page:Int) {
-        repo.transactionListApi(page: page)
+    func transactionListFetch(page:Int, from: String, to : String) {
+        repo.transactionListApi(page:page ,from:from, to:to)
         repo.$transactionHistoryList.sink { result in
             self.transactionHistoryDatas = result?.content ?? []
         }.store(in: &subscribers)

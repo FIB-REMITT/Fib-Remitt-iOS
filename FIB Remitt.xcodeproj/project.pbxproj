@@ -48,6 +48,7 @@
 		896EA0D02B5F9B9300FB231A /* FRNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EA0CF2B5F9B9300FB231A /* FRNavigationBarView.swift */; };
 		896EA0D62B5FEE6200FB231A /* FRTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EA0D52B5FEE6200FB231A /* FRTextButton.swift */; };
 		896EA0D82B5FF12C00FB231A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EA0D72B5FF12C00FB231A /* SplashView.swift */; };
+		89705A672B68D61100307E3E /* CommonBeneficiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A662B68D61100307E3E /* CommonBeneficiaryModel.swift */; };
 		897228022B665BBD006B4FEE /* NationalityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228012B665BBD006B4FEE /* NationalityResponse.swift */; };
 		897228042B665CE9006B4FEE /* PurposeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228032B665CE9006B4FEE /* PurposeResponse.swift */; };
 		897228062B665D8B006B4FEE /* BankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228052B665D8B006B4FEE /* BankResponse.swift */; };
@@ -100,6 +101,7 @@
 		899F1D3A2B66721000E7B35F /* TransactionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D392B66721000E7B35F /* TransactionDetailsViewModel.swift */; };
 		899F1D3C2B66722800E7B35F /* TransactionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D3B2B66722800E7B35F /* TransactionDetailsRepository.swift */; };
 		9248954BA1DA9AF72EF8DF96 /* Pods_FIB_Remitt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */; };
+		A8737DFF2B68D531008A2465 /* StringData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8737DFE2B68D531008A2465 /* StringData.swift */; };
 		A8CA78602B66ABA700C383C8 /* BankCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */; };
 		A8CA78622B66B97400C383C8 /* invoice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8CA78612B66B97300C383C8 /* invoice.pdf */; };
 		A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */; };
@@ -153,6 +155,7 @@
 		896EA0CF2B5F9B9300FB231A /* FRNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRNavigationBarView.swift; sourceTree = "<group>"; };
 		896EA0D52B5FEE6200FB231A /* FRTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRTextButton.swift; sourceTree = "<group>"; };
 		896EA0D72B5FF12C00FB231A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		89705A662B68D61100307E3E /* CommonBeneficiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonBeneficiaryModel.swift; sourceTree = "<group>"; };
 		897228012B665BBD006B4FEE /* NationalityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalityResponse.swift; sourceTree = "<group>"; };
 		897228032B665CE9006B4FEE /* PurposeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurposeResponse.swift; sourceTree = "<group>"; };
 		897228052B665D8B006B4FEE /* BankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankResponse.swift; sourceTree = "<group>"; };
@@ -205,6 +208,7 @@
 		899F1D372B66687A00E7B35F /* TransactionDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsResponse.swift; sourceTree = "<group>"; };
 		899F1D392B66721000E7B35F /* TransactionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewModel.swift; sourceTree = "<group>"; };
 		899F1D3B2B66722800E7B35F /* TransactionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsRepository.swift; sourceTree = "<group>"; };
+		A8737DFE2B68D531008A2465 /* StringData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringData.swift; sourceTree = "<group>"; };
 		A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCollectionResponse.swift; sourceTree = "<group>"; };
 		A8CA78612B66B97300C383C8 /* invoice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = invoice.pdf; sourceTree = "<group>"; };
 		A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationByTransactionResponse.swift; sourceTree = "<group>"; };
@@ -467,6 +471,7 @@
 				8972281F2B669938006B4FEE /* CashPickupBeneficiaryDetailResponse.swift */,
 				897228212B66A21A006B4FEE /* BankBeneficiariesResponse.swift */,
 				897228232B66A71C006B4FEE /* BankBeneficiaryDetailResponse.swift */,
+				89705A662B68D61100307E3E /* CommonBeneficiaryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -609,6 +614,7 @@
 			children = (
 				89740D472B5D558D000ACFBA /* View.swift */,
 				89740D4C2B5D5761000ACFBA /* Image.swift */,
+				A8737DFE2B68D531008A2465 /* StringData.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -889,6 +895,7 @@
 				897A10F02B626B5C002CF87D /* Network.swift in Sources */,
 				A8CA78672B677C8200C383C8 /* FilePickerView.swift in Sources */,
 				896EA0D82B5FF12C00FB231A /* SplashView.swift in Sources */,
+				A8737DFF2B68D531008A2465 /* StringData.swift in Sources */,
 				896EA0D02B5F9B9300FB231A /* FRNavigationBarView.swift in Sources */,
 				2E71DB952B659E6F000A6471 /* SignInResponse.swift in Sources */,
 				899749372B61494D00DEBD8C /* HomeViewModel.swift in Sources */,
@@ -955,6 +962,7 @@
 				89611BFD2B5EA66900407E32 /* SimpleDirectedCellView.swift in Sources */,
 				897A10F52B626C5C002CF87D /* FIBLoaderView.swift in Sources */,
 				89611BF52B5E966000407E32 /* SimpleHInfoView.swift in Sources */,
+				89705A672B68D61100307E3E /* CommonBeneficiaryModel.swift in Sources */,
 				8974F9152B67AAA1007F2522 /* PurposePicker.swift in Sources */,
 				897228082B665DFD006B4FEE /* CurrencyResponse.swift in Sources */,
 				A8CA786B2B67D24600C383C8 /* Enums.swift in Sources */,

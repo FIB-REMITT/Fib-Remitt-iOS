@@ -24,7 +24,7 @@ struct HistoryRootView: View {
         .background(Color.frBackground.ignoresSafeArea())
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
         .onAppear(perform: {
-            vm.transactionListFetch(page: 0)
+            vm.transactionListFetch(page: 0,from: "",to: "")
         })
     }
 }

@@ -41,7 +41,7 @@ struct EditBeneficiaryBankView: View {
                     
                     VStack(alignment:.leading, spacing: 10){
                         TextBaseMedium(text: "Bank Details", fg_color: .text_Mute)
-                        FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_ico", inputText: $text)
+                        FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_gry_ico", inputText: $text)
                         FRVerticalField(placeholder: "Account Number", placeholderIcon: "acc_no", inputText: $text)
                     }
                 }

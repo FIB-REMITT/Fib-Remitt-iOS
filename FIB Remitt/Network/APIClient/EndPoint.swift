@@ -514,7 +514,7 @@ enum SellCryptoEndpoint: Endpoint{
 
 //MARK: - TransactionList EndPoints
 enum TransactionListEndpoint: Endpoint{
-    case TransactionList(page: Int)
+    case TransactionList(page: Int, from:String, to:String)
     case TransactionDetails(transactionNumber: String)
     
     var method: HTTPMethod{
@@ -537,8 +537,17 @@ enum TransactionListEndpoint: Endpoint{
     
     var query: [String : String]? {
         switch self {
-        case .TransactionList(let page):
-            return ["page": "\(page)"]
+        case .TransactionList(let page, let from , let to):
+            var parameters  = [String: String]()
+            parameters["page"] = "\(page)"
+            
+            if from.isBlankOrEmpty == false && to.isBlankOrEmpty == false{
+                parameters["from"] = "\(from)"
+                parameters["to"] = "\(to)"
+            }
+            
+            return parameters
+            
         case .TransactionDetails:
             return nil
             

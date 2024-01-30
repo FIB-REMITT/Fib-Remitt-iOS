@@ -29,6 +29,9 @@ struct HomeSelectBeneficiaryView: View {
                 selectedFileURL = url
                 print("Selected file: \(url)")
                 isFilePickerPresented = false
+//                let homeData = HomeDataHandler.shared
+//                vm.apiReceivedInBank(beneficiaryId: selectedBeneficiaryID, fromCurrency: homeData.fromCurrency, amountToTransfer: homeData., toCurrency: <#T##String#>, paymentMethod: <#T##String#>, collectionPoint: <#T##String#>, purposeId: <#T##String#>, invoice: <#T##Data?#>)
+                
             },
             onError: { error in
                 print("Error: \(error.localizedDescription)")
@@ -107,13 +110,14 @@ extension HomeSelectBeneficiaryView{
         Group{
             if type == .BankTransfer{
                 VStack {
-                    ForEach(beneficiaryVM.BankBeneficiaries ?? [], id: \.id) { beneficiary in
+                    ForEach(beneficiaryVM.bankBeneficiaries ?? [], id: \.id) { beneficiary in
                         let selected = (beneficiary.id == selectedBeneficiaryID)
                         AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.accountNumber ?? "" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
                             .onTapGesture{
                                 selectedBeneficiaryID = beneficiary.id
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "personal"{
                                     isFilePickerPresented = true
+                                    selectedBeneficiaryID = beneficiary.id
                                 }else{
                                    //
                                     selectedBeneficiaryID = beneficiary.id
@@ -123,13 +127,14 @@ extension HomeSelectBeneficiaryView{
                 }
             }else{
                 VStack {
-                    ForEach(beneficiaryVM.CashPickUpBeneficiaries ?? [], id: \.id) { beneficiary in
+                    ForEach(beneficiaryVM.cashPickUpBeneficiaries ?? [], id: \.id) { beneficiary in
                         let selected = (beneficiary.id == selectedBeneficiaryID)
                         AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.phoneNumber ?? "" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
                             .onTapGesture{
                                 selectedBeneficiaryID = beneficiary.id
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "personal"{
                                     isFilePickerPresented = true
+                                    selectedBeneficiaryID = beneficiary.id
                                 }else{
                                   //
                                     selectedBeneficiaryID = beneficiary.id
@@ -140,15 +145,6 @@ extension HomeSelectBeneficiaryView{
             }
         }
         
-       
-        
-        //            AccountInfoCellView(selected: $isSelected)
-        //            AccountInfoCellView(selected: $isNotSelected)
-        //                .onTapGesture {
-        //                    isFilePickerPresented = true
-        //                }
-        //            AccountInfoCellView(selected: $isNotSelected)
-        //            AccountInfoCellView(selected: $isNotSelected)
     }
     
     func bankCellView(beneficiary: BankBeneficiariesResponse){
