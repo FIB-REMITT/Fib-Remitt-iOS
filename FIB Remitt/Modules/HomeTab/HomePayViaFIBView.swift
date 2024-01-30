@@ -17,6 +17,8 @@ struct HomePayViaFIBView: View {
             Spacer()
             bottomCancelButton
 
+        }.onAppear{
+            vm.getConfirmationByTransactionId(trxId: HomeDataHandler.shared.beneficiaryCollectionResponse?.transactionNumber ?? "")
         }
         .padding()
         .background(Color.frBackground.ignoresSafeArea())
