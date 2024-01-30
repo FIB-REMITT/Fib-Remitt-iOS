@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TransactionHistoryCellView: View {
     @ObservedObject var vm = TransactionHistoryViewModel()
+    @State var tempColor = Color.text_Mute
     let transaction: TransactionListContent
     var body: some View {
         FRVContainer (backgroundColor: .frForground){
@@ -28,15 +29,23 @@ struct TransactionHistoryCellView: View {
                 VStack(alignment:.leading, spacing: 5){
                     HStack {
                         TextBaseMedium(text:"\(transaction.receiver?.fullName ?? "")", fg_color: .text_Regula)
-                        Image("beneficiary_ico")
+                        Image(transaction.collectionPoint == "BANK" ? "bank": "personal")
                             .imageDefaultStyle()
-                            .frame(width: 15)
+                            .frame(width: 12, height: 12)
+                            .padding(4)
+                            .background(Color.secondary_10)
+                            .cornerRadius(100)
+                        
                     }
                     HStack {
                         TextSmallRegular(text:"Ref: \(transaction.transactionNumber ?? "")", fg_color: .textFade)
-                        Image("beneficiary_ico")
+                        Image("copy")
                             .imageDefaultStyle()
-                            .frame(width: 15)
+                            .frame(width: 10, height: 10)
+                            .padding(4)
+                            .background(Color.color_info_10)
+                            .cornerRadius(100)
+                        
                     }
                     TextSmallRegular(text: formatDateString(dateString: transaction.createdAt ?? "",  convertFormat:  "M/d/yyyy | h:mm a") ?? "", fg_color: .textFade)
                 }
@@ -44,26 +53,36 @@ struct TransactionHistoryCellView: View {
                 VStack(alignment:.trailing, spacing: 5){
                     HStack {
                         TextSmallRegular(text:"\(transaction.transaction?.amountToTransfer ?? 0) IQD", fg_color: .textRegula)
-                        Image("beneficiary_ico")
+                        Image("red-arrow-up")
                             .imageDefaultStyle()
-                            .frame(width: 15)
+                            .frame(width: 12, height: 12)
                     }
                     HStack {
                         TextSmallRegular(text:"\(transaction.transaction?.amountReceivable ?? 0) TRY")
-                        Image("beneficiary_ico")
+                        Image("green-arrow-down")
                             .imageDefaultStyle()
-                            .frame(width: 15)
+                            .frame(width: 12, height: 12)
                     }
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                        TextSmallRegular(text: "Paid")
-                            .padding(4)
-                            .border(.green)
-                            .cornerRadius(12)
-                           
-                    })
+                    //Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    TextSmallRegular(
+                        text: transaction.status ?? "Unknown",
+                        fg_color: tempColor)
+                        .padding(.horizontal,4)
+                        .padding(.vertical, 2)
+                        .background(tempColor.opacity(0.1))
+                        .overlay(RoundedRectangle(cornerRadius: 100).stroke(tempColor, lineWidth: 1))
                         
                 }
 
+            }
+            .onAppear{
+                if transaction.status == "Paid" {
+                    tempColor = Color.green
+                } else if transaction.status == "Pending" {
+                    tempColor = Color.warning_regular
+                } else {
+                    tempColor = Color.red
+                }
             }
         }
        

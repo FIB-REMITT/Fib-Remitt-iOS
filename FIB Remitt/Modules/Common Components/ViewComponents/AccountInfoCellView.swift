@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct AccountInfoCellView: View {
-    @Binding var selected: Bool
+    var selected: Bool = false
+    var title = ""
+    var subtitle1 = ""
+    var subtitle2 = ""
+    var icon = ""
+
+    
     var body: some View {
         FRVContainer (backgroundColor: .frForground){
             HStack (spacing:15){
@@ -26,13 +32,13 @@ struct AccountInfoCellView: View {
                 
                 VStack(alignment:.leading){
                     HStack {
-                        TextBaseMedium(text:"John Doe", fg_color: .textRegula)
-                        Image("beneficiary_ico")
+                        TextBaseMedium(text: title, fg_color: .textRegula)
+                        Image(icon)
                             .imageDefaultStyle()
                             .frame(width: 15)
                     }
-                    TextBaseRegular(text:"A/C No. 124 458 458 856", fg_color: .textFade)
-                    TextBaseRegular(text:"Ziraat Bank", fg_color: .textFade)
+                    TextBaseRegular(text: subtitle1, fg_color: .textFade)
+                    TextBaseRegular(text: subtitle2, fg_color: .textFade)
                 }
                 Spacer()
                 if selected{
@@ -55,7 +61,7 @@ struct AccountInfoCellView_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
             Spacer()
-            AccountInfoCellView(selected: $selection)
+            AccountInfoCellView(selected: selection)
             Spacer()
         }.background(Color.textMute.ignoresSafeArea())
     }

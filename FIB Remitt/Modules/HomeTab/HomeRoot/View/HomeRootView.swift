@@ -11,7 +11,7 @@ struct HomeRootView: View {
     @State var isSelected = false
     @State var isNotSelected = true
     
-    @State var selectedDeliveryMethod = "Bank Transfer"
+   
     @State var transferAmount = ""
         
     @ObservedObject var vm = HomeViewModel()
@@ -124,10 +124,11 @@ extension HomeRootView{
             TextBaseMedium(text: "Delivery Method", fg_color: .text_Mute)
             HStack{
                 ForEach(DeliveryMethodEnum.allCases, id: \.self) { item in
-                    FRCircularRadioButton(isSelected: Binding(get: { selectedDeliveryMethod == item.title },
+                    FRCircularRadioButton(isSelected: Binding(get: { vm.selectedDeliveryMethod == item.title },
                                                               set: { newValue in
                         if newValue {
-                            selectedDeliveryMethod = item.title
+                            vm.selectedDeliveryMethod = item.title
+                            HomeDataHandler.shared.deliveryMethodType = item.title
                         }
                     }),
                                           title: item.title)

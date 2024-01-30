@@ -16,7 +16,7 @@ class HomeViewModel : ObservableObject{
     @Published var destinationView  = AnyView(Text("Destination"))
     
     @Published var selectedPurpose:PurposeResponse = PurposeResponse()
-    
+    @Published var selectedDeliveryMethod = "Bank Transfer"
     
     //MARK: - VIEWCONTROLLER LIFICYCLE
     func viewWillAppearCalled() {

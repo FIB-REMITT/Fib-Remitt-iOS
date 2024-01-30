@@ -16,6 +16,9 @@ class BeneficiaryViewModel : ObservableObject{
     @Published var goToNext        = false
     @Published var destinationView = AnyView(Text("Destination"))
     
+    @Published var CashPickUpBeneficiaries:[CashPickupBeneficiariesResponse]? = []
+    @Published var BankBeneficiaries:[BankBeneficiariesResponse]? = []
+    
     //MARK: - VIEWLIFECYCLE
     func viewWillAppearCalled() {
 //        self.getBankBeneficiaryDetails()
@@ -36,10 +39,11 @@ class BeneficiaryViewModel : ObservableObject{
    }
     
     //MARK: - API CALL
-   private func getCashPickBeneficiaries() {
+    func getCashPickBeneficiaries() {
         repo.getCashPickUpBeneficiariesAPICall()
         repo.$allCashPickUpBeneficiaries.sink { result in
             print(result?.first ?? 0)
+            self.CashPickUpBeneficiaries = result
         }.store(in: &subscribers)
     }
     
@@ -50,10 +54,11 @@ class BeneficiaryViewModel : ObservableObject{
         }.store(in: &subscribers)
     }
     
-    private func getBankBeneficiaries() {
+     func getBankBeneficiaries() {
         repo.getBankBeneficiariesAPICall()
         repo.$allBankBeneficiaries.sink { result in
             print(result?.first ?? 0)
+            self.BankBeneficiaries = result
         }.store(in: &subscribers)
     }
     

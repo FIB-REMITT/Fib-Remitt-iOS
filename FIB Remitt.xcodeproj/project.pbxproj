@@ -103,6 +103,7 @@
 		A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */; };
 		A8CA78672B677C8200C383C8 /* FilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78662B677C8200C383C8 /* FilePickerView.swift */; };
 		A8CA78692B67854800C383C8 /* FilePickerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78682B67854800C383C8 /* FilePickerCellView.swift */; };
+		A8CA786B2B67D24600C383C8 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA786A2B67D24600C383C8 /* Enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -205,6 +206,7 @@
 		A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationByTransactionResponse.swift; sourceTree = "<group>"; };
 		A8CA78662B677C8200C383C8 /* FilePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerView.swift; sourceTree = "<group>"; };
 		A8CA78682B67854800C383C8 /* FilePickerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerCellView.swift; sourceTree = "<group>"; };
+		A8CA786A2B67D24600C383C8 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FIB_Remitt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -565,6 +567,7 @@
 				89740D3C2B5D2A0B000ACFBA /* UI.swift */,
 				89740D442B5D4284000ACFBA /* Colour.swift */,
 				897A10F62B626DF4002CF87D /* UserSettings.swift */,
+				A8CA786A2B67D24600C383C8 /* Enums.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -947,6 +950,7 @@
 				89611BF52B5E966000407E32 /* SimpleHInfoView.swift in Sources */,
 				8974F9152B67AAA1007F2522 /* PurposePicker.swift in Sources */,
 				897228082B665DFD006B4FEE /* CurrencyResponse.swift in Sources */,
+				A8CA786B2B67D24600C383C8 /* Enums.swift in Sources */,
 				2E0F98FD2B5DA00E0094CE9F /* HistoryRootView.swift in Sources */,
 				896EA0C62B5F863600FB231A /* TransactionHistoryCellView.swift in Sources */,
 				897228132B667D9E006B4FEE /* CountryCodePickerBtn.swift in Sources */,

@@ -45,10 +45,10 @@ extension BeneficiaryRootView{
     
     private var contextContainer : some View{
         VStack{
-            AccountInfoCellView(selected: $isNotSelected)
-            AccountInfoCellView(selected: $isNotSelected)
-            AccountInfoCellView(selected: $isNotSelected)
-            AccountInfoCellView(selected: $isNotSelected)
+            AccountInfoCellView(selected: isNotSelected)
+            AccountInfoCellView(selected: isNotSelected)
+            AccountInfoCellView(selected: isNotSelected)
+            AccountInfoCellView(selected: isNotSelected)
         }.onTapGesture {
             vm.navigateToBeneficiaryDetail()
         }
