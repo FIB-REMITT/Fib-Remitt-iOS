@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BankResponse: Codable, CustomStringConvertible {
+struct BankResponse: Codable, CustomStringConvertible, Identifiable {
     var description: String{ return "" }
     
     var id:String?

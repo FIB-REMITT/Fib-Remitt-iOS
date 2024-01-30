@@ -122,6 +122,7 @@ class BeneficiaryRepository {
             }.store(in: &subscribers)
     }
     
+    @Published var bankBeneficiaryNormalCreationStatus:Bool?
     func createBankBeneficiaryAPICall(fullName:String, nationality:String, phone:String, address:String, gender:String, relationShip:String, bankId:String, accNo:String)  {
         APIManager.shared.uploadFormData(endPoint: BeneficiaryEndpoint.createBankPersonalBeneficiary(fullName: fullName, nationality: nationality, phoneNumber: phone, address: address, gender: gender, relationShip: relationShip, bankId: bankId, accNo: accNo), resultType: EmptyResponse.self, showLoader: true)
             .sink { completion in
@@ -130,7 +131,9 @@ class BeneficiaryRepository {
                     print(error.localizedDescription)
                     if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                         print("Successfully Created CashPickup Beneficiary")
+                        self.bankBeneficiaryNormalCreationStatus = true
                     }else{
+                        self.bankBeneficiaryNormalCreationStatus = false
                         print("Failed!")
                     }
                     

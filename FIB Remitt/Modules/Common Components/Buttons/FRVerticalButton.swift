@@ -34,3 +34,29 @@ struct FRVerticalBtn: View {
         })
     }
 }
+
+struct FRVerticalControlBtn: View {
+    
+    @Binding var isDisabled:Bool
+    
+    var title: String
+    var action : ()->Void
+    var icon : String?
+    var body: some View {
+        Button(action: action, label: {
+            HStack(spacing: 12){
+                if icon != nil {
+                    Image(systemName: icon ?? "")
+                        .imageDefaultStyle()
+                        .frame(maxWidth: 15, maxHeight: 17)
+                        .foregroundColor(.white)
+                }
+                FRTextButton(title: title)
+            }
+            .frVerticalShapeStyle()
+            .background(!isDisabled ? Color.gray : Color.primary500)
+            .cornerRadius(25)
+            
+        }).disabled(!isDisabled)
+    }
+}

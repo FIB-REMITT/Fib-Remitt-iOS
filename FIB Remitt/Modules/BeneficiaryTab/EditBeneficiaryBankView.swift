@@ -9,7 +9,6 @@ import SwiftUI
 
 struct EditBeneficiaryBankView: View {
     @ObservedObject var vm = BeneficiaryViewModel()
-    
 
     var body: some View {
         ZStack{
@@ -25,7 +24,8 @@ struct EditBeneficiaryBankView: View {
                                 FRVerticalField(placeholder: "Last Name", placeholderIcon: "user_ico", inputText: $vm.lastName)
                             }
                             
-                            FRSimpleDropDownButton(title: "Nationality", icon: "nationality_ico",action: {nationalityBtnPressed()})
+                            FRSimpleDropDownButton(title: vm.selectedNationality.name
+                                                   ?? "Select Nationality", icon: "nationality_ico",action: {nationalityBtnPressed()})
                             FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $vm.phone)
                             FRVerticalField(placeholder: "Address", placeholderIcon: "location_ico", inputText: $vm.address)}
                         
@@ -51,7 +51,7 @@ struct EditBeneficiaryBankView: View {
                         VStack(alignment:.leading, spacing: 10){
                             TextBaseMedium(text: "Bank Details", fg_color: .text_Mute)
                           //  FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_gry_ico", inputText: $vm.bankName)
-                            FRSimpleDropDownButton(title: "Bank Name", icon: "bank_gry_ico", action: {bankNameBtnPressed()})
+                            FRSimpleDropDownButton(title: vm.selectedBankName.name ?? "Select Bank", icon: "bank_gry_ico", action: {bankNameBtnPressed()})
                             FRVerticalField(placeholder: "Account Number", placeholderIcon: "acc_no", inputText: $vm.accountNo)
                         }
                     }
@@ -106,10 +106,20 @@ extension EditBeneficiaryBankView{
 //MARK: - ACTIONS
 extension EditBeneficiaryBankView{
     private func notificationBtnPressed() {}
-    private func bankNameBtnPressed() {}
-    private func nationalityBtnPressed() {}
+    private func bankNameBtnPressed() {
+        showSheet(view: AnyView(BankPicker(banks: BenficiaryDataHandler.shared.banks, itemSelect: { item in
+            self.vm.selectedBankName = item
+        })))
+    }
+    private func nationalityBtnPressed() {
+        showSheet(view: AnyView(NationalityPicker(nations: BenficiaryDataHandler.shared.nationalities, itemSelect: { item in
+            self.vm.selectedNationality = item
+        })))
+    }
     private func saveBtnPressed() {
-
+        if vm.selectedBeneficaryAccountType == .personal{
+            vm.addBankBeneficiary()
+        }
     }
 }
 #Preview {

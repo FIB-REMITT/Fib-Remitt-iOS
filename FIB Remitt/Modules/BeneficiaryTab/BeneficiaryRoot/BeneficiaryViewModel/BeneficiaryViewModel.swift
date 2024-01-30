@@ -34,7 +34,8 @@ class BeneficiaryViewModel : ObservableObject{
     @Published var phone     : String = ""
     @Published var address   : String = ""
     //@Published var bankName  : String = ""
-    @Published var selectedBankName : String = ""
+    @Published var selectedBankName : BankResponse = BankResponse(name: "Select Bank")
+    @Published var selectedNationality : NationalityResponse = NationalityResponse(name: "Select Nationality")
     @Published var accountNo : String = ""
     @Published var relation : String = ""
     
@@ -130,8 +131,18 @@ class BeneficiaryViewModel : ObservableObject{
         repo.createCashPickupBusinessAPICall(fullName: "Izak uu", nationality: "87d62a40-2dff-4e98-94b5-a1402cf95179", phoneNumber: "+88016999938888", address: "DLKFJ dkjf", invoice: loadPDF())
     }
     
-    private func addBankBeneficiary() {
-        repo.createBankBeneficiaryAPICall(fullName: firstName, nationality: "87d62a40-2dff-4e98-94b5-a1402cf95179", phone: phone, address: address, gender: selectedGenderType.title, relationShip: relation, bankId: "af459441-f577-4c85-8e07-d9245c8c7b45", accNo: "0999584567")
+    func addBankBeneficiary() {
+        repo.createBankBeneficiaryAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phone: phone, address: address, gender: selectedGenderType.title, relationShip: relation, bankId: selectedBankName.id ?? "", accNo: accountNo)
+        repo.$bankBeneficiaryNormalCreationStatus.sink { status in
+            if let isCreated = status{
+                if isCreated{
+                    showToast( message: "Account Created Successfully!")
+                    loadView(view: FRBottomBarContainer())
+                }else{
+                    showToast(message: "Failed to create Account")
+                }
+            }
+        }.store(in: &subscribers)
     }
     
     //MARK: - CUSTOME METHODS

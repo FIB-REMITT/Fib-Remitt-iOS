@@ -17,7 +17,6 @@ struct BeneficiaryRootView: View {
             navigationBar
             topCollectionPointTypeContianer
             contextContainer
-           // Spacer()
         }
         .padding()
         .background(Color.fr_background.ignoresSafeArea())
