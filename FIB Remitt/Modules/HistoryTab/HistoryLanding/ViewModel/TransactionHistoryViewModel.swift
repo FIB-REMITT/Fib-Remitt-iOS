@@ -55,4 +55,66 @@ class TransactionHistoryViewModel : ObservableObject{
         }.store(in: &subscribers)
         
     }
+    
+    
+    //MARK: FOR FILTER
+    
+    enum DateRangeType {
+        case last7Days
+        case currentMonth
+        case currentYear
+    }
+
+    func getDateRange(for rangeType: DateRangeType) -> (from: String, to: String) {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        switch rangeType {
+        case .last7Days:
+            guard let sevenDaysAgo = calendar.date(byAdding: .day, value: -7, to: currentDate) else {
+                fatalError("Failed to calculate the date for 7 days ago.")
+            }
+            return (dateFormatter.string(from: sevenDaysAgo), dateFormatter.string(from: currentDate))
+
+        case .currentMonth:
+            let components = calendar.dateComponents([.year, .month], from: currentDate)
+            guard let startOfMonth = calendar.date(from: components),
+                  let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth) else {
+                fatalError("Failed to calculate the start or end of the month.")
+            }
+            return (dateFormatter.string(from: startOfMonth), dateFormatter.string(from: endOfMonth))
+
+        case .currentYear:
+            let yearStartComponents = calendar.dateComponents([.year], from: currentDate)
+            guard let startOfYear = calendar.date(from: yearStartComponents),
+                  let endOfYear = calendar.date(byAdding: DateComponents(year: 1, day: -1), to: startOfYear) else {
+                fatalError("Failed to calculate the start or end of the year.")
+            }
+            return (dateFormatter.string(from: startOfYear), dateFormatter.string(from: endOfYear))
+        }
+    }
+
+    func getTodayDateString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: Date())
+    }
+
+    // Usage Today
+//    let todayDateString = getTodayDateString()
+//    print("Today: \(todayDateString)")
+//
+//
+//
+//    // Usage others range
+//    let last7DaysRange = getDateRange(for: .last7Days)
+//    print("Last 7 Days: From \(last7DaysRange.from) to \(last7DaysRange.to)")
+//
+//    let currentMonthRange = getDateRange(for: .currentMonth)
+//    print("Current Month: From \(currentMonthRange.from) to \(currentMonthRange.to)")
+//
+//    let currentYearRange = getDateRange(for: .currentYear)
+//    print("Current Year: From \(currentYearRange.from) to \(currentYearRange.to)")
 }
