@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct BankBeneficiariesResponse: Codable, CustomStringConvertible {
+struct BankBeneficiariesResponse: Codable, CustomStringConvertible, Hashable {
+    static func == (lhs: BankBeneficiariesResponse, rhs: BankBeneficiariesResponse) -> Bool { lhs.id == rhs.id }
+    func hash(into hasher: inout Hasher) { }
+    
     var description: String{ return "" }
     
     var bankBeneficiaryBankDTO:BankBeneficiariesDTO?

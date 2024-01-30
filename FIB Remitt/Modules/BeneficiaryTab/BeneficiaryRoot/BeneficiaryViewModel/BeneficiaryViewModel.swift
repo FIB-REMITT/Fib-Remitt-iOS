@@ -10,21 +10,20 @@ import Combine
 
 class BeneficiaryViewModel : ObservableObject{
     private var subscribers = Set<AnyCancellable>()
-    private let repo = BeneficiaryRepository()
+    private let repo        = BeneficiaryRepository()
     @Published var selectedCollectionPoint : CollectionPoint = .all
     
     @Published var goToNext        = false
     @Published var destinationView = AnyView(Text("Destination"))
     
-    @Published var CashPickUpBeneficiaries:[CashPickupBeneficiariesResponse]? = []
-    @Published var BankBeneficiaries:[BankBeneficiariesResponse]? = []
+    @Published var allBeneficiaries         : [CommonBeneficiaryModel]?          = []
+    @Published var cashPickUpBeneficiaries  : [CashPickupBeneficiariesResponse]? = []
+    @Published var bankBeneficiaries        : [BankBeneficiariesResponse]?       = []
     
     //MARK: - VIEWLIFECYCLE
     func viewWillAppearCalled() {
-//        self.getBankBeneficiaryDetails()
-//        self.getCashPickupBeneficiaryDetails()
-//        self.addBankBeneficiary()
-//        self.addCashPickupBeneficiaryBusiness()
+        self.getBankBeneficiaries()
+        self.getCashPickBeneficiaries()
     }
     
     //MARK: - NAVIGATION
@@ -42,8 +41,10 @@ class BeneficiaryViewModel : ObservableObject{
     func getCashPickBeneficiaries() {
         repo.getCashPickUpBeneficiariesAPICall()
         repo.$allCashPickUpBeneficiaries.sink { result in
-            print(result?.first ?? 0)
-            self.CashPickUpBeneficiaries = result
+            self.cashPickUpBeneficiaries = result
+            if result?.count ?? 0 > 0{
+                self.getMergedAllBeneficiaries()
+            }
         }.store(in: &subscribers)
     }
     
@@ -57,8 +58,10 @@ class BeneficiaryViewModel : ObservableObject{
      func getBankBeneficiaries() {
         repo.getBankBeneficiariesAPICall()
         repo.$allBankBeneficiaries.sink { result in
-            print(result?.first ?? 0)
-            self.BankBeneficiaries = result
+            self.bankBeneficiaries = result
+            if result?.count ?? 0 > 0{
+                self.getMergedAllBeneficiaries()
+            }
         }.store(in: &subscribers)
     }
     
@@ -94,6 +97,20 @@ class BeneficiaryViewModel : ObservableObject{
             print("Error loading PDF data: \(error)")
             return nil
         }
+    }
+    
+    private func getMergedAllBeneficiaries()  {
+        self.allBeneficiaries = []
+        
+        for item in bankBeneficiaries ?? []{
+            allBeneficiaries?.append(CommonBeneficiaryModel(id: item.id, title: item.fullName, subTitle: "A/C no: \(item.accountNumber ?? "")", address: item.address, accTypeIsBuiessness: item.typeOfBeneficiary  == "Business"))
+        }
+        
+        for item in cashPickUpBeneficiaries ?? []{
+            allBeneficiaries?.append(CommonBeneficiaryModel(id: item.id, title: item.fullName, subTitle: "Phone : \(item.phoneNumber ?? "")", address: item.address, accTypeIsBuiessness: item.typeOfBeneficiary  == "Business"))
+        }
+        
+
     }
 
 }

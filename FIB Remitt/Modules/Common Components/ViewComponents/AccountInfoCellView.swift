@@ -9,9 +9,9 @@ import SwiftUI
 
 struct AccountInfoCellView: View {
     var selected: Bool = false
-    var title = ""
-    var subtitle1 = ""
-    var subtitle2 = ""
+    var title = "John Doe"
+    var subtitle1 = "A/C No. 124 458 458 856"
+    var subtitle2 = "Ziraat Bank"
     var icon = ""
 
     

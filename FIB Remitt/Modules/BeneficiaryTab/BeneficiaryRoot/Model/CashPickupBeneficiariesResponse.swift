@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct CashPickupBeneficiariesResponse: Codable, CustomStringConvertible,Identifiable {
+struct CashPickupBeneficiariesResponse: Codable, CustomStringConvertible,Hashable {
+    static func == (lhs: CashPickupBeneficiariesResponse, rhs: CashPickupBeneficiariesResponse) -> Bool { lhs.id == rhs.id }
+    func hash(into hasher: inout Hasher) { }
     var description: String{ return "" }
     
     var id:String?
