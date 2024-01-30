@@ -35,4 +35,20 @@ extension String {
         }
         return ""
     }
+   
+    func getBase64StrQRcodeToImage() -> UIImage? {
+        // Ensure the base64 string is not prefixed with any data URI scheme
+        let sanitizedBase64String = self
+            .replacingOccurrences(of: "data:image/png;base64,", with: "")
+            .replacingOccurrences(of: "data:image/jpeg;base64,", with: "")
+            // Include other mime types if necessary
+
+        guard let imageData = Data(base64Encoded: sanitizedBase64String) else {
+            print("Error: Couldn't decode data from base64 string")
+            return nil
+        }
+
+        return UIImage(data: imageData)
+    }
+
 }
