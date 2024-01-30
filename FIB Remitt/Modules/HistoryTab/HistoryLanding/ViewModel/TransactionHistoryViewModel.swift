@@ -6,9 +6,12 @@ import Combine
 
 class TransactionHistoryViewModel : ObservableObject{
     @Published var goToNext        = false
+    
     @Published var destinationView = AnyView(Text("Destination"))
     @Published var transactionHistoryDatas: [TransactionListContent] = []
     @Published var transactionDetails : TransactionDetailsResponse?
+    
+    @Published var selectedFilterValue : String = "All"
     
     
     private var subscribers = Set<AnyCancellable>()
