@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FilterOptionsView: View {
     @Environment(\.presentationMode) var presentationMode
-    let options: [String] = ["All", "Today", "This Week", "This Months", "This Year"]
+    let options: [String] = ["All", "Today", "Last 7 Days", "This Month", "This Year"]
     @State var selectedValue : String
     
     var onSelected: (String) -> Void

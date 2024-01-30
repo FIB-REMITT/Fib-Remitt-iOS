@@ -81,11 +81,12 @@ extension HistoryRootView{
         if vm.selectedFilterValue == "All"{
             initialDataAll() //from:String = "",to:String = ""
         }else if vm.selectedFilterValue == "Today" {
-            
-        } else if vm.selectedFilterValue == "This Week" {
+            let dateRangeToday = vm.getDateRange(for: .today)
+            initialDataAll(from:"\(dateRangeToday.from)",to: "\(dateRangeToday.to)")
+        } else if vm.selectedFilterValue == "Last 7 Days" {
             let dateRangeLast7Days = vm.getDateRange(for: .last7Days)
             initialDataAll(from:"\(dateRangeLast7Days.from)",to: "\(dateRangeLast7Days.to)")
-        } else if vm.selectedFilterValue == "This Months" {
+        } else if vm.selectedFilterValue == "This Month" {
             let currentMonthRange = vm.getDateRange(for: .currentMonth)
             initialDataAll(from:"\(currentMonthRange.from)",to: "\(currentMonthRange.to)")
         } else {
