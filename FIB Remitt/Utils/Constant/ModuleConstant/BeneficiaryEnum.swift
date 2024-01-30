@@ -31,3 +31,27 @@ enum CollectionPoint:String, CaseIterable{
         }
     }
 }
+
+enum Gender:String, CaseIterable{
+    case male
+    case female
+
+    var title: String{
+        switch self {
+        case .male : return "Male"
+        case .female   : return "Female"
+        }
+    }
+}
+
+enum BeneficiaryAccountType:String, CaseIterable{
+    case personal
+    case buissness
+
+    var title: String{
+        switch self {
+        case .personal : return "Personal"
+        case .buissness   : return "Buisness"
+        }
+    }
+}

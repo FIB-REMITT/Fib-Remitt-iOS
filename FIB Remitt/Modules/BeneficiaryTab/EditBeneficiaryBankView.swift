@@ -8,41 +8,52 @@
 import SwiftUI
 
 struct EditBeneficiaryBankView: View {
-    @State var text : String = ""
-    @State var isSelected : Bool = true
-    @State var isNotSelected : Bool = true
+    @ObservedObject var vm = BeneficiaryViewModel()
+    
+
     var body: some View {
         ZStack{
             Color.fr_background.ignoresSafeArea()
             VStack(spacing: 15){
                 navigationBar
-                FRVContainer (backgroundColor:.frForground){
-                    VStack(alignment:.leading, spacing: 12){
-                        TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
-                        FRVerticalField(placeholder: "Full Name", placeholderIcon: "user_ico", inputText: $text)
-                        FRSimpleDropDownButton(title: "Nationality", icon: "nationality_ico")
-                        FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $text)
-                        FRVerticalField(placeholder: "Address", placeholderIcon: "location_ico", inputText: $text)}
-                    VStack(alignment:.leading){
-                        TextMediumMedium(text: "Type of Beneficiary", fg_color: .text_fade)
-                        HStack{
-                            FRCircularRadioButton(isSelected: $isSelected, title: "Personal")
-                            FRCircularRadioButton(isSelected: $isNotSelected, title: "Business")
+                ScrollView{
+                    FRVContainer (backgroundColor:.frForground){
+                        VStack(alignment:.leading, spacing: 12){
+                            TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
+                            HStack{
+                                FRVerticalField(placeholder: "First Name", placeholderIcon: "user_ico", inputText: $vm.firstName)
+                                FRVerticalField(placeholder: "Last Name", placeholderIcon: "user_ico", inputText: $vm.lastName)
+                            }
+                            
+                            FRSimpleDropDownButton(title: "Nationality", icon: "nationality_ico",action: {nationalityBtnPressed()})
+                            FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $vm.phone)
+                            FRVerticalField(placeholder: "Address", placeholderIcon: "location_ico", inputText: $vm.address)}
+                        
+                        VStack(alignment:.leading){
+                            TextMediumMedium(text: "Type of Beneficiary", fg_color: .text_fade)
+                            HStack{
+                                ForEach(BeneficiaryAccountType.allCases, id: \.self) { item in
+                                    FRCircularRadioButton(isSelected: Binding(get: { vm.selectedBeneficaryAccountType == item },
+                                                                              set: { newValue in
+                                        if newValue {
+                                            vm.selectedBeneficaryAccountType = item
+                                            HomeDataHandler.shared.deliveryMethodType = item.title
+                                        }
+                                    }), title: item.title)
+                                    
+                                }
+                            }
                         }
-                    }
-                    
-                    VStack(alignment:.leading){
-                        TextMediumMedium(text: "Gender", fg_color: .text_fade)
-                        HStack{
-                            FRCircularRadioButton(isSelected: $isSelected, title: "Male")
-                            FRCircularRadioButton(isSelected: $isNotSelected, title: "Female")
+                        
+                        typeOfBeneficiarySubView
+                        FRVerticalField(placeholder: "Relation (Optional)", placeholderIcon: "nationality_ico", inputText: $vm.relation)
+                        
+                        VStack(alignment:.leading, spacing: 10){
+                            TextBaseMedium(text: "Bank Details", fg_color: .text_Mute)
+                          //  FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_gry_ico", inputText: $vm.bankName)
+                            FRSimpleDropDownButton(title: "Bank Name", icon: "bank_gry_ico", action: {bankNameBtnPressed()})
+                            FRVerticalField(placeholder: "Account Number", placeholderIcon: "acc_no", inputText: $vm.accountNo)
                         }
-                    }
-                    
-                    VStack(alignment:.leading, spacing: 10){
-                        TextBaseMedium(text: "Bank Details", fg_color: .text_Mute)
-                        FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_gry_ico", inputText: $text)
-                        FRVerticalField(placeholder: "Account Number", placeholderIcon: "acc_no", inputText: $text)
                     }
                 }
                 bottomSaveButton
@@ -61,13 +72,43 @@ extension EditBeneficiaryBankView{
         FRNavigationBarView(title: "Bank Beneficiary")
     }
     private var bottomSaveButton : some View{
-        FRVerticalBtn(title: "Save", btnColor: .primary500) {}
+        FRVerticalBtn(title: "Save", btnColor: .primary500) {self.saveBtnPressed()}
+    }
+    
+    private var typeOfBeneficiarySubView : some View{
+        ZStack{
+            if vm.selectedBeneficaryAccountType == .personal{
+                VStack(alignment:.leading){
+                    TextMediumMedium(text: "Gender", fg_color: .text_fade)
+                    HStack{
+                        ForEach(Gender.allCases, id: \.self) { item in
+                            FRCircularRadioButton(isSelected: Binding(get: { vm.selectedGenderType == item },
+                                                                      set: { newValue in
+                                if newValue {
+                                    vm.selectedGenderType = item
+                                    HomeDataHandler.shared.deliveryMethodType = item.title
+                                }
+                            }), title: item.title)
+                        }
+                    }
+                }
+            }else{
+                Button(action: {
+                    
+                }, label: {
+                    DocPickerView()
+                })
+            }
+        }
     }
 }
 
 //MARK: - ACTIONS
 extension EditBeneficiaryBankView{
-    private func notificationBtnPressed() {
+    private func notificationBtnPressed() {}
+    private func bankNameBtnPressed() {}
+    private func nationalityBtnPressed() {}
+    private func saveBtnPressed() {
 
     }
 }
