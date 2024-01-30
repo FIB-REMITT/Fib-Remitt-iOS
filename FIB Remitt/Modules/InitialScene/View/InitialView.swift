@@ -10,13 +10,13 @@ import SwiftUI
 struct InitialView: View {
     @ObservedObject var vm = AuthViewModel()
    // @StateObject var viewModel = AuthViewModel()
-    @State var tapped      = false
+    @State var tapped = false
 
     var body: some View {
         NavigationStack{
             ZStack {
                 if tapped{
-                    FRBottomBarContainer()
+                    WebContentView()
                 }else{
                     backgroundView
                     VStack {
@@ -85,7 +85,6 @@ extension InitialView {
     private func loginWithFIBButtonPressed() {
 //        vm.navigateToHome()
         self.tapped = true
-        vm.login() 
 
     }
     private func downloadNowButtonPressed(){}

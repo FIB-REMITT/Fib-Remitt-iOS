@@ -10,7 +10,8 @@ import Combine
 class AuthRepository {
     private var subscribers = Set<AnyCancellable>()
     
-    @Published var loginInfo:SignInResponse?
+    @Published var loginInfo: SignInResponse?
+    @Published var ssoLoginResponse: SignInResponse?
   //  let vm = AuthViewModel()
     func loginAPICall(username:String, pass:String)  {
         APIManager.shared.getData(endPoint: AuthEndPoint.signIn(username: username, password: pass), resultType: SignInResponse.self, showLoader: true)
@@ -34,6 +35,37 @@ class AuthRepository {
                     if let data = result.data{
                         self.loginInfo = result
                         UserSettings.shared.setLoginInfo(loginInfo: data)
+                       // self.presenter?.loginDidAttempedWithSuccess()
+                       // self.vm.successfullyLoggedIn()
+                    }
+
+                }
+            }.store(in: &subscribers)
+    }
+    
+    func ssoLoginAPICall(code: String)  {
+        APIManager.shared.uploadFormData(apiUrl: "https://fib.stage.fib.iq/",endPoint: AuthEndPoint.ssoLogin(code: code), resultType: SignInResponse.self, showLoader: true)
+            .sink { completion in
+                switch completion{
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    if error is NetworkError{
+                        // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: true)
+                    }else{
+                       // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: false)
+                    }
+                 
+                case .finished:
+                    print("API Called!")// kabbo+81@newroztech.com //Password100@
+                }
+            } receiveValue: { result in
+                if result.data?.access_token == nil{
+                    //self.presenter?.loginDidAttempedWithTwoFactorRequired()
+                }else{
+                    if result.data != nil{
+                        self.ssoLoginResponse = result
+                        print("Here is the login response: \(String(describing: self.ssoLoginResponse))")
+                        //UserSettings.shared.setLoginInfo(loginInfo: data)
                        // self.presenter?.loginDidAttempedWithSuccess()
                        // self.vm.successfullyLoggedIn()
                     }

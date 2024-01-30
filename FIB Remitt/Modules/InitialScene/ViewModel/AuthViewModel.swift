@@ -31,6 +31,18 @@ class AuthViewModel : ObservableObject{
             }
         }.store(in: &subscribers)
     }
+
+    func ssoLogin(code: String){
+        repo.ssoLoginAPICall(code: code)
+        repo.$ssoLoginResponse.sink{ result in
+            
+        }.store(in: &subscribers)
+    }
+    
+    func toWebView(){
+        self.destinationView = AnyView(WebContentView())
+        self.goToNext        = true
+    }
     
     func successfullyLoggedIn() {
         loggedIn = true

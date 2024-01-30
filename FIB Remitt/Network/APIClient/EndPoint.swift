@@ -19,10 +19,11 @@ enum AuthEndPoint: Endpoint {
     case forgotPassSendOTP(username:String)
     case forgotPassVerifyOTP(username:String, otp:String)
     case forgotPassReset(username:String, otp:String, password:String)
+    case ssoLogin(code: String)
     
     var method: HTTPMethod {
         switch self {
-        case .signIn, .createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken :
+        case .signIn, .createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken, .ssoLogin :
             return .post
         }
     }
@@ -49,6 +50,8 @@ enum AuthEndPoint: Endpoint {
             
         case .refreshToken:
             return "api/v1/auth/refresh-token"
+        case .ssoLogin:
+            return "auth/realms/fib-business-application/protocol/openid-connect/token"
         }
     }
     
@@ -75,6 +78,8 @@ enum AuthEndPoint: Endpoint {
             
         case .refreshToken(let refreshToken):
             return ["grant_type":"refresh_token", "client_id":"mobile-app", "client_secret":"rYTLJ0lgPKUHNluGaSDEeyT2hou2KYq5", "refresh_token":refreshToken]
+        case .ssoLogin(let code):
+            return ["grant_type":"authorization_code", "client_id":"sso-fib-pos", "client_secret":"8f363003-407c-4f8c-b704-8a9ea2327a95", "redirect_uri":Constant.redirect_url, "code": code ]
         }
     }
     

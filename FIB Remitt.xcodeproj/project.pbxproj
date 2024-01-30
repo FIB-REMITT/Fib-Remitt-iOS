@@ -18,6 +18,8 @@
 		2E91D7072B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D7062B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift */; };
 		2E91D7092B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */; };
 		2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D70A2B5F094B002983F1 /* BeneficiaryDetailView.swift */; };
+		401CA4B12B68D64B00589966 /* WebLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401CA4B02B68D64B00589966 /* WebLoginView.swift */; };
+		401CA4B32B68EDB000589966 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401CA4B22B68EDB000589966 /* Constant.swift */; };
 		40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */; };
 		40711F692B5CFD1600F966E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F682B5CFD1600F966E7 /* Assets.xcassets */; };
 		40711F6C2B5CFD1600F966E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */; };
@@ -119,6 +121,8 @@
 		2E91D7062B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTransferSuccessfulView.swift; sourceTree = "<group>"; };
 		2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryTypeCellView.swift; sourceTree = "<group>"; };
 		2E91D70A2B5F094B002983F1 /* BeneficiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryDetailView.swift; sourceTree = "<group>"; };
+		401CA4B02B68D64B00589966 /* WebLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLoginView.swift; sourceTree = "<group>"; };
+		401CA4B22B68EDB000589966 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		40711F612B5CFD1500F966E7 /* FIB Remitt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FIB Remitt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIB_RemittApp.swift; sourceTree = "<group>"; };
 		40711F682B5CFD1600F966E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 			children = (
 				89740D312B5D120D000ACFBA /* InitialView.swift */,
 				896EA0D72B5FF12C00FB231A /* SplashView.swift */,
+				401CA4B02B68D64B00589966 /* WebLoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -568,6 +573,7 @@
 				89740D442B5D4284000ACFBA /* Colour.swift */,
 				897A10F62B626DF4002CF87D /* UserSettings.swift */,
 				A8CA786A2B67D24600C383C8 /* Enums.swift */,
+				401CA4B22B68EDB000589966 /* Constant.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -945,6 +951,7 @@
 				2E91D7092B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift in Sources */,
 				89740D3D2B5D2A0B000ACFBA /* UI.swift in Sources */,
 				897228042B665CE9006B4FEE /* PurposeResponse.swift in Sources */,
+				401CA4B12B68D64B00589966 /* WebLoginView.swift in Sources */,
 				89611BFD2B5EA66900407E32 /* SimpleDirectedCellView.swift in Sources */,
 				897A10F52B626C5C002CF87D /* FIBLoaderView.swift in Sources */,
 				89611BF52B5E966000407E32 /* SimpleHInfoView.swift in Sources */,
@@ -957,6 +964,7 @@
 				89740D402B5D3883000ACFBA /* FRVerticalButton.swift in Sources */,
 				897228062B665D8B006B4FEE /* BankResponse.swift in Sources */,
 				A8CA78602B66ABA700C383C8 /* BankCollectionResponse.swift in Sources */,
+				401CA4B32B68EDB000589966 /* Constant.swift in Sources */,
 				897228142B667D9E006B4FEE /* PickerView.swift in Sources */,
 				89740D482B5D558D000ACFBA /* View.swift in Sources */,
 				899F1D3A2B66721000E7B35F /* TransactionDetailsViewModel.swift in Sources */,
