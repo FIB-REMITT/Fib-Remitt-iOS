@@ -19,18 +19,22 @@ struct HomeSelectBeneficiaryView: View {
     @ObservedObject var vm = HomeViewModel()
     @ObservedObject var beneficiaryVM = BeneficiaryViewModel()
     @State var type : SelectBeneficiaryType = .BankTransfer
-    
+    var homeData = HomeDataHandler.shared
     var body: some View {
         
         let filePickerView = FilePickerView(
             isPickerShown: $isPickerShown,
             allowedContentTypes: [UTType.pdf],
             onSelect: { url in
-                selectedFileURL = url
+                homeData.invoicePath = url.absoluteString
                 print("Selected file: \(url)")
                 isFilePickerPresented = false
-//                let homeData = HomeDataHandler.shared
-//                vm.apiReceivedInBank(beneficiaryId: selectedBeneficiaryID, fromCurrency: homeData.fromCurrency, amountToTransfer: homeData., toCurrency: <#T##String#>, paymentMethod: <#T##String#>, collectionPoint: <#T##String#>, purposeId: <#T##String#>, invoice: <#T##Data?#>)
+                if homeData.collectionPoint.lowercased() == "bank"{
+                    bankReceivedApi()
+                }else{
+                    agentReceivedApi()
+                }
+              
                 
             },
             onError: { error in
@@ -54,7 +58,7 @@ struct HomeSelectBeneficiaryView: View {
             .navigationBarHidden(true)
             .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
             .onAppear{
-                if HomeDataHandler.shared.deliveryMethodType.lowercased() == "bank transfer"{
+                if homeData.deliveryMethodType.lowercased() == "bank transfer"{
                     beneficiaryVM.getBankBeneficiaries()
                     self.type = .BankTransfer
                     
@@ -91,6 +95,24 @@ struct HomeSelectBeneficiaryView: View {
     }
     
     
+    func bankReceivedApi(){
+      
+         let pdfData  = pdfData(from: URL(string: homeData.invoicePath) ?? URL(fileURLWithPath: ""))  //URL(string: urlString)
+        
+        vm.apiReceivedInBank(beneficiaryId: selectedBeneficiaryID ?? "" , fromCurrency: homeData.fromCurrency, amountToTransfer: homeData.amountToTransfer, toCurrency: homeData.toCurrency, paymentMethod: "Bank".uppercased(), collectionPoint: homeData.collectionPoint.uppercased(), purposeId: homeData.purposeId, invoice: pdfData)
+        
+    }
+    
+    
+    func agentReceivedApi(){
+        
+       let pdfData  = pdfData(from: URL(string: homeData.invoicePath) ?? URL(fileURLWithPath: ""))  //URL(string: urlString)
+        
+        vm.apiCashPickUpFromAgent(beneficiaryId: selectedBeneficiaryID ?? "" , fromCurrency: homeData.fromCurrency, amountToTransfer: homeData.amountToTransfer, toCurrency: homeData.toCurrency, paymentMethod: "Bank".uppercased(), collectionPoint: homeData.collectionPoint.uppercased(), purposeId: homeData.purposeId, invoice: pdfData)
+        
+    }
+    
+    
 }
 
 //MARK: - View Components
@@ -100,7 +122,7 @@ extension HomeSelectBeneficiaryView{
     }
     private var topAccountCreation : some View{
         HStack{
-            TextBaseMedium(text: "Select Bank Account",fg_color: .textMute)
+            TextBaseMedium(text: homeData.collectionPoint.lowercased() == "bank" ? "Select Bank Account" : "Select Beneficiary Account",fg_color: .textMute)
             Spacer()
             Button(action: { self.createAccountBtnPressed()}, label: {
                 TextBaseMedium(text: "+Add New",fg_color: .primary500).underline()
@@ -115,7 +137,7 @@ extension HomeSelectBeneficiaryView{
                         AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.accountNumber ?? "" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
                             .onTapGesture{
                                 selectedBeneficiaryID = beneficiary.id
-                                if  beneficiary.typeOfBeneficiary?.lowercased() == "personal"{
+                                if  beneficiary.typeOfBeneficiary?.lowercased() == "business"{
                                     isFilePickerPresented = true
                                     selectedBeneficiaryID = beneficiary.id
                                 }else{
@@ -132,7 +154,7 @@ extension HomeSelectBeneficiaryView{
                         AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.phoneNumber ?? "" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico")
                             .onTapGesture{
                                 selectedBeneficiaryID = beneficiary.id
-                                if  beneficiary.typeOfBeneficiary?.lowercased() == "personal"{
+                                if  beneficiary.typeOfBeneficiary?.lowercased() == "business"{
                                     isFilePickerPresented = true
                                     selectedBeneficiaryID = beneficiary.id
                                 }else{
@@ -147,13 +169,7 @@ extension HomeSelectBeneficiaryView{
         
     }
     
-    func bankCellView(beneficiary: BankBeneficiariesResponse){
-       
-    }
-    
-    func cashPickCellVIew(beneficiary: BankBeneficiariesResponse){
-       
-    }
+   
     private var bottomButton : some View{
         FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}
     }
@@ -168,7 +184,12 @@ extension HomeSelectBeneficiaryView{
         
     }
     private func proccedBtnPressed() {
-        vm.navigateToBeneficiarySummary()
+        //vm.navigateToBeneficiarySummary()
+        if homeData.collectionPoint.lowercased() == "bank"{
+            bankReceivedApi()
+        }else{
+            agentReceivedApi()
+        }
     }
 }
 

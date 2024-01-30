@@ -14,6 +14,7 @@ class HomeDataHandler{
 
     var purposes   : [PurposeResponse]  = []
     var currencies : [CurrencyResponse] = []
+    var beneficiaryCollectionResponse:BankCollectionResponse?
     var deliveryMethodType : String = "Bank Transfer"
     var fromCurrency       : String = "IQD"
     var amountToTransfer   : String = ""
@@ -32,5 +33,6 @@ class HomeDataHandler{
         collectionPoint     = ""
         purposeId           = ""
         invoicePath         = ""
+        beneficiaryCollectionResponse = nil
     }
 }
