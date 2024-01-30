@@ -34,9 +34,12 @@ extension BeneficiaryRootView{
     private var topCollectionPointTypeContianer : some View{
         ScrollView(.horizontal){
             HStack{
-                BeneficiaryTypeCellView(selected: $isSelected, title: "All")
-                BeneficiaryTypeCellView(selected: $isNotSelected, title: "Bank Transfer", icon: "bank_ico")
-                BeneficiaryTypeCellView(selected: $isNotSelected, title: "Cash Pick-up")
+                ForEach(CollectionPoint.allCases, id: \.self) { item in
+                    BeneficiaryTypeCellView(selected: vm.selectedCollectionPoint == item, title: item.title, icon: item.icon.isEmpty ? nil: item.icon)
+                        .onTapGesture {
+                            self.vm.selectedCollectionPoint = item
+                        }
+                }
             }}
     }
     

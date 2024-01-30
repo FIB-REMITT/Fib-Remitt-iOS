@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct BeneficiaryTypeCellView: View {
-    @Binding var selected: Bool
+    var selected: Bool
     var title : String
     var icon : String?
     var body: some View {
-        HStack(alignment:.center){
+        HStack(alignment:.bottom){
             if let icn = icon{
                 Image(icn)
                     .imageDefaultStyle()
@@ -21,13 +21,13 @@ struct BeneficiaryTypeCellView: View {
             TextBaseMedium(text: title, fg_color: .textFade)
         }
         .padding(10)
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 8)
         .background(selected ? Color.primary_50 : Color.fr_forground)
-        .cornerRadius(15)
+        .cornerRadius(100)
         .shadow(radius: 0.2)
         .overlay {
             if selected{
-                RoundedRectangle(cornerRadius: 15)
+                RoundedRectangle(cornerRadius: 100)
                 .strokeBorder(Color.primary500, lineWidth: 1)
             }
         }
@@ -40,7 +40,7 @@ struct BeneficiaryTypeCellView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack{
             Color.fr_background.ignoresSafeArea()
-            BeneficiaryTypeCellView(selected: $selection, title: "All", icon: "bank_ico")
+            BeneficiaryTypeCellView(selected: selection, title: "All", icon: "bank_ico")
         }
     }
 }

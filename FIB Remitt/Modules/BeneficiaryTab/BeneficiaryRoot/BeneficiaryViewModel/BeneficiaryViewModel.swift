@@ -11,6 +11,7 @@ import Combine
 class BeneficiaryViewModel : ObservableObject{
     private var subscribers = Set<AnyCancellable>()
     private let repo = BeneficiaryRepository()
+    @Published var selectedCollectionPoint : CollectionPoint = .all
     
     @Published var goToNext        = false
     @Published var destinationView = AnyView(Text("Destination"))

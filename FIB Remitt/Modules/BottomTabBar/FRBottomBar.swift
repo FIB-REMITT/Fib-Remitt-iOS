@@ -23,7 +23,7 @@ struct FRBottomBar: View {
         }
         .padding(6)
         .background(Color.frBackground.edgesIgnoringSafeArea(.bottom))
-        .shadow(radius: 3)
+        .shadow(radius: 0.3)
     }
 }
 
@@ -38,7 +38,7 @@ extension FRBottomBar{
                 .font(.system(size: 10, weight: .semibold, design: .rounded))
                 .scaleEffect(selected == tab ? 1.1 : 1)
         }
-        .foregroundColor(selected == tab ? Color.primary_500 : Color.text_Regula)
+        .foregroundColor(selected == tab ? Color.primary_500 : Color.text_Mute)
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity)
         .cornerRadius(6)

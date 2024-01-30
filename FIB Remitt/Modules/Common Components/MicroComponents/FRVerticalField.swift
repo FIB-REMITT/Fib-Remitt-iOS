@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct FRVerticalField: View {
-    var placeholder : String
-    @Binding var inputText:String
+    var placeholder         : String
+    var placeholderIcon     : String?
+    @Binding var inputText  : String
+    
     var paddingValue : CGFloat = 15
     var body: some View {
         VStack {
-            FRTextField(placeholder: Text(placeholder), text: $inputText)
+            FRTextField(placeholder: AnyView( 
+                HStack{
+                    if let ico = placeholderIcon{ Image(ico)}
+                    Text(placeholder)
+                }), text: $inputText)
         }   .padding(paddingValue)
             .background(Color.fr_background)
             .cornerRadius(100)
