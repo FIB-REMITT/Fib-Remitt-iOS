@@ -178,6 +178,7 @@ class APIManager{
             parameters["cashPickupBeneficiaryId"] = beneficiaryId
         }
         
+        print("--------- > \(parameters)")
         return Future<BankCollectionResponse, Error> { promise in
             AF.upload(multipartFormData: { multipartFormData in
                 for (key, value) in parameters {
@@ -212,6 +213,7 @@ class APIManager{
                                 let errorResponse = try JSONDecoder().decode(RequestFailed.self, from: data)
                                 promise(.failure(errorResponse.errors?.joined(separator: " ") ?? ""))
                                 showToast(message: errorResponse.errors?.joined(separator: " ") ?? "")
+                                
                             } catch {
                                 promise(.failure(error.localizedDescription))
                                 showAlert(message: "Failed!")

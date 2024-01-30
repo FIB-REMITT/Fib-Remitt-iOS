@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct CurrencyResponse: Codable, CustomStringConvertible {
+struct CurrencyResponse: Codable, CustomStringConvertible, Identifiable {
     var description: String{ return "" }
     
-    var id:String?
-    var name: String?
+    var id:String?     =  "c7448546-0978-4f22-80d0-05e6807a0851"
+    var name: String?  =  "Bangladeshi Taka"
     var symbol:String?
-    var code: String?
+    var code: String?  = "BDT"
 
     enum CodingKeys: String, CodingKey {
         case id

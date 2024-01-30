@@ -15,8 +15,10 @@ class HomeViewModel : ObservableObject{
     @Published var goToNext         = false
     @Published var destinationView  = AnyView(Text("Destination"))
     
-    @Published var selectedPurpose:PurposeResponse = PurposeResponse()
+    @Published var selectedPurpose:PurposeResponse            = PurposeResponse()
+    @Published var selectedRecipientCurrency:CurrencyResponse = CurrencyResponse()
     @Published var selectedDeliveryMethod = "Bank Transfer"
+    @Published var beneficiaryCollectionResponse:BankCollectionResponse?
     
     @Published var transferAmount = ""
     @Published var recipentAmount = ""
@@ -39,6 +41,7 @@ class HomeViewModel : ObservableObject{
         self.destinationView = AnyView(HomeBeneficiarySummaryView())
         self.goToNext        = true
     }
+    
     func navigateToPayViaFIB() {
         self.destinationView = AnyView(HomePayViaFIBView())
         self.goToNext        = true
@@ -51,11 +54,11 @@ class HomeViewModel : ObservableObject{
     //MARK: - CUSTOM METHODS
     
     func  storeHomeData() {
-        HomeDataHandler.shared.toCurrency       = "TRK"
+        HomeDataHandler.shared.toCurrency       = selectedRecipientCurrency.code ?? ""
         HomeDataHandler.shared.purposeId        = selectedPurpose.id ?? ""
         HomeDataHandler.shared.paymentMethod    = "BANK"
         HomeDataHandler.shared.collectionPoint  = selectedDeliveryMethod == "Bank Transfer" ? "BANK" : "AGENT"
-        
+        HomeDataHandler.shared.amountToTransfer = transferAmount
     }
     
     //MARK: - API CALLs
@@ -85,27 +88,39 @@ class HomeViewModel : ObservableObject{
     }
     
     func getCurrencies() {
-        repo.getCurrencisAPICall()
-        repo.$allCurrency.sink { result in
-            print(result?.count ?? 0)
-        }.store(in: &subscribers)
+        if HomeDataHandler.shared.purposes.isEmpty{
+            repo.getCurrencisAPICall()
+            repo.$allCurrency.sink { result in
+                HomeDataHandler.shared.currencies = result ?? []
+            }.store(in: &subscribers)
+        }
     }
     
     func apiReceivedInBank(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {
-        repo.receivedInBank(beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice)
+        repo.receivedInBank(beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod.uppercased(), collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice)
             
         repo.$bankCollectionResponse.sink { result in
             print(result)
+            if result != nil{
+                HomeDataHandler.shared.beneficiaryCollectionResponse = result
+                self.navigateToBeneficiarySummary()
+            }
             
         }.store(in: &subscribers)
     }
     
-    func cashPickUpFromAgent(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {
-        repo.receivedInBank(beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice)
+    func apiCashPickUpFromAgent(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {
+        repo.cashPickUpFromAgent(beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice)
             
         repo.$bankCollectionResponse.sink { result in
             print(result)
+            //self.beneficiaryCollectionResponse = result
             
+            if result != nil{
+                HomeDataHandler.shared.beneficiaryCollectionResponse = result
+                self.navigateToBeneficiarySummary()
+            }
+   
         }.store(in: &subscribers)
     }
     
