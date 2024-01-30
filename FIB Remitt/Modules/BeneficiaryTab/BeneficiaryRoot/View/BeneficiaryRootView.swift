@@ -17,7 +17,6 @@ struct BeneficiaryRootView: View {
             navigationBar
             topCollectionPointTypeContianer
             contextContainer
-            Spacer()
         }
         .padding()
         .background(Color.fr_background.ignoresSafeArea())
@@ -61,30 +60,36 @@ extension BeneficiaryRootView{
     private var cashPickupContainer : some View{
         LazyVStack{
             ForEach(vm.cashPickUpBeneficiaries ?? [], id: \.self) { item in
-                AccountInfoCellView(selected: isNotSelected, title: item.fullName ?? "", subtitle1: "Phone \(item.phoneNumber ?? "")", subtitle2: item.address ?? "", icon: item.typeOfBeneficiary  == "Business" ? "business_ico": "personal_user_ico")
+                AccountInfoCellViewButton(selected: isNotSelected, title: item.fullName ?? "", subtitle1: "Phone \(item.phoneNumber ?? "")", subtitle2: item.address ?? "", icon: item.typeOfBeneficiary  == "Business" ? "business_ico": "personal_user_ico") {
+                    BenficiaryDataHandler.shared.beneficiaryType = .cash_Pickup
+                    BenficiaryDataHandler.shared.selectedBenficiaryId = item.id ?? ""
+                    vm.navigateToBeneficiaryDetail()
+                }
             }
-        }.onTapGesture {
-            vm.navigateToBeneficiaryDetail()
         }
     }
     
     private var allBeneficiariesContainer : some View{
         LazyVStack{
             ForEach(vm.allBeneficiaries ?? [], id: \.self) { item in
-                AccountInfoCellView(selected: isNotSelected, title: item.title ?? "", subtitle1: "\(item.subTitle ?? "")", subtitle2: item.address ?? "", icon: item.accTypeIsBuiessness ?? false ? "business_ico": "personal_user_ico")
+                AccountInfoCellViewButton(selected: isNotSelected, title: item.title ?? "", subtitle1: "\(item.subTitle ?? "")", subtitle2: item.address ?? "", icon: item.accTypeIsBuiessness ?? false ? "business_ico": "personal_user_ico") {
+                    BenficiaryDataHandler.shared.beneficiaryType = item.beneficiaryType
+                    BenficiaryDataHandler.shared.selectedBenficiaryId = item.id ?? ""
+                    vm.navigateToBeneficiaryDetail()
+                }
             }
-        }.onTapGesture {
-            vm.navigateToBeneficiaryDetail()
         }
     }
     
     private var bankBeneficiariesContainer : some View{
         LazyVStack{
             ForEach(vm.bankBeneficiaries ?? [], id: \.self) { item in
-                AccountInfoCellView(selected: isNotSelected, title: item.fullName ?? "", subtitle1: "A/C no: \(item.accountNumber ?? "")", subtitle2: item.address ?? "", icon: item.typeOfBeneficiary  == "Business" ? "business_ico": "personal_user_ico")
+                AccountInfoCellViewButton(selected: isNotSelected, title: item.fullName ?? "", subtitle1: "A/C no: \(item.accountNumber ?? "")", subtitle2: item.address ?? "", icon: item.typeOfBeneficiary  == "Business" ? "business_ico": "personal_user_ico", action: {
+                    BenficiaryDataHandler.shared.beneficiaryType = .bank_Transfer
+                    BenficiaryDataHandler.shared.selectedBenficiaryId = item.id ?? ""
+                    vm.navigateToBeneficiaryDetail()
+                })
             }
-        }.onTapGesture {
-            vm.navigateToBeneficiaryDetail()
         }
     }
 }

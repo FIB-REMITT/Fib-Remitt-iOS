@@ -16,6 +16,7 @@ struct CommonBeneficiaryModel:Hashable {
     var title:String?
     var subTitle: String?
     var address:String?
+    var beneficiaryType : CollectionPoint
     var accTypeIsBuiessness: Bool?
     
 }

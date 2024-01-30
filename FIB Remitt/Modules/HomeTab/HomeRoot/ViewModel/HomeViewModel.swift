@@ -25,8 +25,6 @@ class HomeViewModel : ObservableObject{
     
     //MARK: - VIEWCONTROLLER LIFICYCLE
     func viewWillAppearCalled() {
-        self.getNationalities()
-        self.getBanks()
         self.getPurposes()
         self.getCurrencies()
     }
@@ -62,12 +60,6 @@ class HomeViewModel : ObservableObject{
     }
     
     //MARK: - API CALLs
-    func getNationalities() {
-        repo.getNationalitiesAPICall()
-        repo.$allNationalities.sink { result in
-            print(result?.first ?? 0)
-        }.store(in: &subscribers)
-    }
     
     func getPurposes() {
         if HomeDataHandler.shared.purposes.isEmpty{
@@ -79,14 +71,7 @@ class HomeViewModel : ObservableObject{
             }.store(in: &subscribers)
         }
     }
-    
-    func getBanks() {
-        repo.getBanksAPICall()
-        repo.$allBanks.sink { result in
-            
-        }.store(in: &subscribers)
-    }
-    
+
     func getCurrencies() {
         if HomeDataHandler.shared.purposes.isEmpty{
             repo.getCurrencisAPICall()

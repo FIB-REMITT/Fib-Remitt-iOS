@@ -142,8 +142,8 @@ func showToast(message : String, font: UIFont = .systemFont(ofSize: 14), after:D
     let width = scnSize.width * 0.80
     
     let toastLabel = UILabel(frame: CGRect(x: xCoOrdinate, y: yCoOrdinate, width: width, height: 35))
-    toastLabel.backgroundColor = UIColor.white.withAlphaComponent(0.9)
-    toastLabel.textColor = UIColor.black
+    toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+    toastLabel.textColor = UIColor.white
     toastLabel.font = font
     toastLabel.textAlignment = NSTextAlignment.center;
     toastLabel.text = message

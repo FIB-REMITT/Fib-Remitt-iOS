@@ -1,35 +1,35 @@
 //
-//  PurposePicker.swift
+//  FRSimpleDirectedPicker.swift
 //  FIB Remitt
 //
-//  Created by Ainul Kazi on 29/1/24.
+//  Created by Ainul Kazi on 30/1/24.
 //
 
 import SwiftUI
 
-struct PurposePicker: View {
+struct NationalityPicker: View {
     
     @Environment(\.presentationMode) var presentationMode
     @State var searchText: String = ""
     
-    var purposes : [PurposeResponse]
-    var itemSelect: (PurposeResponse) -> Void
+    var nations : [NationalityResponse]
+    var itemSelect: (NationalityResponse) -> Void
     
     var body: some View {
         SheetHolder {
             VStack(spacing: 10){
-                TextBaseMedium(text: "Purpose", fg_color: .textMute).padding(.bottom, 10)
+                TextBaseMedium(text: "Select Nationality", fg_color: .textMute).padding(.bottom, 10)
                 searchBarContainer
                     .padding(.bottom, 10)
                 ScrollView {
-                    ForEach(searchText.isEmpty ? purposes : purposes.filter({ $0.name!.localizedCaseInsensitiveContains(searchText)
+                    ForEach(searchText.isEmpty ? nations : nations.filter({ $0.name!.localizedCaseInsensitiveContains(searchText)
                     })) { data in
-                        Button {
+                        
+                        FRSimpleDirectedButton(title: data.name ?? "", icon: "") {
                             itemSelect(data)
                             hideSheet()
-                        } label: {
-                            PurposeCellView(title: data.code ?? "", description: data.name ?? "")
                         }
+                        
                     }
                 }
             }
@@ -38,7 +38,7 @@ struct PurposePicker: View {
     }
 }
 
-extension PurposePicker{
+extension NationalityPicker{
     
     //MARK: VIEW PARTS
     private var searchBarContainer : some View {
@@ -53,9 +53,9 @@ extension PurposePicker{
     private func cancelBtnPressed() { presentationMode.wrappedValue.dismiss() }
 }
 
-struct SellCryptoPickerView_Previews: PreviewProvider {
+struct NationalityPicker_Previews: PreviewProvider {
     static var previews: some View {
-        PurposePicker(purposes: [PurposeResponse(name: "Family Support"),PurposeResponse(name: "Account Opening")], itemSelect: { item in } )
+        NationalityPicker(nations: [NationalityResponse(name: "Bangladesh"), NationalityResponse(name:"Pakisthan")], itemSelect: { item in } )
             .background(Color.textFade)
     }
 }

@@ -55,7 +55,7 @@ extension CurrencyPicker{
 
 struct CurrencyPicker_Previews: PreviewProvider {
     static var previews: some View {
-        CurrencyPicker(currencies: [CurrencyResponse(name: "IQD"), CurrencyResponse(name:"BDT")], itemSelect: { CurrencyTypesItems in } )
+        CurrencyPicker(currencies: [CurrencyResponse(name: "IQD"), CurrencyResponse(name:"BDT")], itemSelect: { item in } )
             .background(Color.textFade)
     }
 }

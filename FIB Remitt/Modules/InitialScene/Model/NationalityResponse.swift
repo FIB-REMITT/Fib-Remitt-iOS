@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NationalityResponse: Codable, CustomStringConvertible {
+struct NationalityResponse: Codable, CustomStringConvertible, Identifiable {
     var description: String{ return "" }
     
     var id:String?

@@ -19,6 +19,7 @@ struct BeneficiaryDetailView: View {
         .background(Color.fr_background.ignoresSafeArea())
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
+        .onAppear(){self.viewWillAppearCall()}
         
     }
 }
@@ -48,30 +49,32 @@ extension BeneficiaryDetailView{
                     .imageDefaultStyle()
                     .frame(width: 15)
             }
-            TextBaseMedium(text:"John Doe", fg_color: .textRegula)
+            TextBaseMedium(text:BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.fullName ?? "": vm.selectedBankBeneficiary?.fullName ?? "", fg_color: .textRegula)
             Spacer()
             
-            Button {self.trashBtnPressed()} label: { Image("trash_red_ico") }.padding(10)
-            Button {self.editBtnPressed()} label: { Image("edit_ico") }
+            //Button {self.trashBtnPressed()} label: { Image("trash_red_ico") }.padding(10)
+          //  Button {self.editBtnPressed()} label: { Image("edit_ico") }
         }
     }
     
     private var contextMiddleInfoSection : some View{
         VStack (spacing:10){
-            SimpleHColonInfoView(title: "Phone number", info: "+96455989898")
-            SimpleHColonInfoView(title: "Nationality", info: "Ankara.Turkey")
-            SimpleHColonInfoView(title: "Phone number", info: "+96455989898")
-            SimpleHColonInfoView(title: "Gender", info: "Male")
-            SimpleHColonInfoView(title: "Type of Beneficiary", info: "Personal")
+            SimpleHColonInfoView(title: "Phone number", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.phoneNumber ?? "": vm.selectedBankBeneficiary?.phoneNumber ?? "")
+            SimpleHColonInfoView(title: "Nationality", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.nationality ?? "": vm.selectedBankBeneficiary?.nationality ?? "")
+            SimpleHColonInfoView(title: "Address", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.address ?? "": vm.selectedBankBeneficiary?.address ?? "")
+            SimpleHColonInfoView(title: "Gender", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.gender ?? "": vm.selectedBankBeneficiary?.gender ?? "")
+            SimpleHColonInfoView(title: "Type of Beneficiary", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.typeOfBeneficiary ?? "": vm.selectedBankBeneficiary?.typeOfBeneficiary ?? "")
         }
     }
     
     private var bankDetail : some View{
         VStack(alignment: .leading, spacing: 12){
-            TextBaseMedium(text: "Bank Details", fg_color: .textRegula)
-            VStack (spacing:10){
-                SimpleHColonInfoView(title: "Bank Name", info: "Ziraat Bank")
-                SimpleHColonInfoView(title: "Account Number", info: "124 458 458 856")
+            if BenficiaryDataHandler.shared.beneficiaryType == .bank_Transfer{
+                TextBaseMedium(text: "Bank Details", fg_color: .textRegula)
+                VStack (spacing:10){
+                    SimpleHColonInfoView(title: "Bank Name", info: vm.selectedBankBeneficiary?.bankBeneficiaryBankDTO?.name ?? "")
+                    SimpleHColonInfoView(title: "Account Number", info: vm.selectedBankBeneficiary?.accountNumber ?? "")
+                }
             }
         }
     }
@@ -79,11 +82,14 @@ extension BeneficiaryDetailView{
 
 //MARK: - ACTIONS
 extension BeneficiaryDetailView{
-    private func trashBtnPressed() {
-
-    }
+//    private func trashBtnPressed() {
+//
+//    }
     private func editBtnPressed() {
         vm.navigateToEditBankBeneficiary()
+    }
+    private func viewWillAppearCall(){
+        vm.detailViewOnAppear(beneficiaryType: BenficiaryDataHandler.shared.beneficiaryType)
     }
 }
 #Preview {
