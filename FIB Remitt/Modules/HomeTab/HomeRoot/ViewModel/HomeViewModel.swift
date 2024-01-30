@@ -19,6 +19,7 @@ class HomeViewModel : ObservableObject{
     @Published var selectedRecipientCurrency:CurrencyResponse = CurrencyResponse()
     @Published var selectedDeliveryMethod = "Bank Transfer"
     @Published var beneficiaryCollectionResponse:BankCollectionResponse?
+    @Published var ConfirmationResponse : ConfirmationByTransactionResponse?
     
     @Published var transferAmount = ""
     @Published var recipentAmount = ""
@@ -48,6 +49,14 @@ class HomeViewModel : ObservableObject{
         self.destinationView = AnyView(HomeTransferSuccessfulView())
         self.goToNext        = true
     }
+    
+     func navigateToWebAppLink(urlStr:String){
+        if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+   
     
     //MARK: - CUSTOM METHODS
     
@@ -113,6 +122,9 @@ class HomeViewModel : ObservableObject{
         repo.getConfirmation(trxId: trxId)
         repo.$ConfirmationResponse.sink { result in
             print(result)
+            if result != nil{
+                self.ConfirmationResponse = result
+            }
         }.store(in: &subscribers)
     }
         

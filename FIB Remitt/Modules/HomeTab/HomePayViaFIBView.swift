@@ -39,8 +39,15 @@ extension HomePayViaFIBView{
     private var qrInfoContainer : some View{
         VStack {
             TextBaseRegular(text: "Scan bellow QR using FIB App", fg_color: .textMute)
-            Image("QR_Img")
-            TextMediumRegular(text: "EFGH-ABCD-IJKL-MNOP", fg_color: .textMute)
+            if let qrDataImg = vm.ConfirmationResponse?.qrCode?.getBase64StrQRcodeToImage(){
+                Image(uiImage:qrDataImg )
+                    .padding(12)
+                    .background(Color.white)
+                    .cornerRadius(12)
+                
+            }
+           
+            TextMediumRegular(text: vm.ConfirmationResponse?.readableCode ?? "", fg_color: .textMute)
                 .padding(10)
                 .background(.frForground)
                 .cornerRadius(18)
@@ -50,14 +57,16 @@ extension HomePayViaFIBView{
     private var middleListContainer : some View{
         VStack{
             TextBaseRegular(text: "Already have FIB on your phone?", fg_color: .textMute).padding(.vertical,15)
-            FRSimpleDirectedCellButton(action: {navigateToSuccessfull()})
-            FRSimpleDirectedCellButton(action: {navigateToSuccessfull()})
-            FRSimpleDirectedCellButton(action: {navigateToSuccessfull()})
+            FRSimpleDirectedCellButton(title:"FIB Personal App",action: {navigateToWebApp(urlStr: vm.ConfirmationResponse?.personalAppLink ?? "")})
+            FRSimpleDirectedCellButton(title:"FIB Business App",action: {navigateToWebApp(urlStr: vm.ConfirmationResponse?.businessAppLink ?? "")})
+            FRSimpleDirectedCellButton(title:"FIB Corporate App",action: {navigateToWebApp(urlStr: vm.ConfirmationResponse?.corporateAppLink ?? "")})
         }
     }
     
     private var bottomCancelButton : some View{
-        FRTextButton(title: "Cancel", color: .red) { }
+        FRTextButton(title: "Cancel", color: .red) { 
+            
+        }
     }
 }
 
@@ -67,7 +76,9 @@ extension HomePayViaFIBView{
         
     }
     
-    private func navigateToSuccessfull(){
-        vm.navigateToSuccessfulView()
+    private func navigateToWebApp(urlStr:String){
+        vm.navigateToWebAppLink(urlStr: urlStr)
     }
+    
+
 }
