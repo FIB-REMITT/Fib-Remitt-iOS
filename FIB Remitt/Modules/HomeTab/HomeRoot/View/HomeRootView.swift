@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct HomeRootView: View {
-    @State var isSelected = false
     @State var isNotSelected = true
-    
- 
     @ObservedObject var vm = HomeViewModel()
     
     var body: some View {
         ZStack{
             Color.frBackground.ignoresSafeArea()
             VStack (spacing: 16){
-                //Spacer()
                 topBarContainer
                 ScrollView{
                     VStack(spacing:16){
@@ -104,6 +100,7 @@ extension HomeRootView{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $vm.recipentAmount)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
+                    .disabled(true)
                 FRSimpleDropDownButton(title: vm.selectedRecipientCurrency.code ?? "", icon: vm.selectedRecipientCurrency.code == "TRY" ? "turkey" : "", action: {selectRecipientCurrencyPressed()})
             }
             Divider().padding(.horizontal)
@@ -161,14 +158,14 @@ extension HomeRootView{
     
     private var termsAndConditionContainer : some View{
         HStack(){
-            FRCheckbox(isSelected: $isSelected)
+            FRCheckbox(isSelected: $vm.isTermsSelected)
             FRTextButton(title: "Terms and Conditions", action: {self.termsAndConditionBtnPressed()})
             Spacer()
         }
     }
     
     private var bottomProccedButton : some View{
-        FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}
+        FRVerticalControlBtn(isDisabled: $vm.isProceedValidated, title: "Procced") {self.proccedBtnPressed()}
     }
 }
 
@@ -188,6 +185,7 @@ extension HomeRootView{
     private func selectRecipientCurrencyPressed(){
         showSheet(view: AnyView(CurrencyPicker(currencies: HomeDataHandler.shared.currencies, itemSelect: { selectedItem in
             self.vm.selectedRecipientCurrency = selectedItem
+            self.vm.convertCurrency()
         })))
     }
 }

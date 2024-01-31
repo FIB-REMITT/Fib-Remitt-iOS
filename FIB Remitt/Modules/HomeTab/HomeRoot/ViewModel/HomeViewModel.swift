@@ -21,13 +21,18 @@ class HomeViewModel : ObservableObject{
     @Published var beneficiaryCollectionResponse:BankCollectionResponse?
     @Published var ConfirmationResponse : ConfirmationByTransactionResponse?
     
-    @Published var transferAmount = ""
-    @Published var recipentAmount = ""
+    @Published var transferAmount     = "1.0"
+    @Published var recipentAmount     = "0.023148"
+    @Published var isTermsSelected    = false
+    @Published var isProceedValidated = false
     
     //MARK: - VIEWCONTROLLER LIFICYCLE
     func viewWillAppearCalled() {
         self.getPurposes()
         self.getCurrencies()
+        self.getConversionRates()
+        self.observeValidationScopes()
+        self.convertCurrency()
     }
     
     //MARK: - NAVIGATIONS
@@ -59,13 +64,46 @@ class HomeViewModel : ObservableObject{
    
     
     //MARK: - CUSTOM METHODS
-    
     func  storeHomeData() {
         HomeDataHandler.shared.toCurrency       = selectedRecipientCurrency.code ?? ""
         HomeDataHandler.shared.purposeId        = selectedPurpose.id ?? ""
         HomeDataHandler.shared.paymentMethod    = "BANK"
         HomeDataHandler.shared.collectionPoint  = selectedDeliveryMethod == "Bank Transfer" ? "BANK" : "AGENT"
         HomeDataHandler.shared.amountToTransfer = transferAmount
+    }
+    
+    private func observeValidationScopes() {
+        Publishers.CombineLatest($transferAmount, $isTermsSelected)
+            .map { amount, terms in
+                return self.validate(transferAmount: self.transferAmount, termsAndCondition: self.isTermsSelected)
+            }
+            .sink(receiveValue: { isValidate in
+               // self.isProceedValidated = isValidate
+                self.convertCurrency()
+            })
+            .store(in: &subscribers)
+    }
+    
+    private func validate(transferAmount:String, termsAndCondition:Bool) -> Bool {
+        if transferAmount.isEmpty {
+            self.isProceedValidated = false
+            return false
+        }/*else if termsAndCondition == false{
+            self.isProceedValidated = false
+            return false
+        }*/else{
+            self.isProceedValidated = true
+            return true
+        }
+    }
+    
+    func convertCurrency(){
+        if let conversionRates = HomeDataHandler.shared.conversionRates{
+            let targetRate = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
+            
+          let recipentAmountDouble =  (Double(self.transferAmount) ?? 1.0) * (targetRate ?? 1.0)
+            self.recipentAmount = "\(recipentAmountDouble)"
+        }
     }
     
     //MARK: - API CALLs
@@ -86,6 +124,15 @@ class HomeViewModel : ObservableObject{
             repo.getCurrencisAPICall()
             repo.$allCurrency.sink { result in
                 HomeDataHandler.shared.currencies = result ?? []
+            }.store(in: &subscribers)
+        }
+    }
+    
+    func getConversionRates() {
+        if HomeDataHandler.shared.conversionRates == nil{
+            repo.getConverionRatesAPICall()
+            repo.$conversionRates.sink { result in
+                HomeDataHandler.shared.conversionRates = result
             }.store(in: &subscribers)
         }
     }

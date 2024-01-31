@@ -14,6 +14,7 @@ class HomeDataHandler{
 
     var purposes   : [PurposeResponse]  = []
     var currencies : [CurrencyResponse] = []
+    var conversionRates : ConversionRateResponse?
     var beneficiaryCollectionResponse:BankCollectionResponse?
     var deliveryMethodType : String = "Bank Transfer"
     var fromCurrency       : String = "IQD"

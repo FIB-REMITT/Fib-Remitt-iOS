@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct SelectBeneficiaryTypeBottomSheet: View {
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var vm = BeneficiaryViewModel()
     var body: some View {
-        SheetHolder {
+        SheetHolder (onClickOutSide: {
+            presentationMode.wrappedValue.dismiss()
+        }){
             VStack(spacing: 10){
                 TextBaseMedium(text: "Add Beneficiary", fg_color: .textMute).padding(.bottom, 10)
  

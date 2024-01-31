@@ -57,6 +57,7 @@
 		89705A742B69360200307E3E /* NationalityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A732B69360200307E3E /* NationalityPicker.swift */; };
 		89705A762B69373A00307E3E /* BankPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A752B69373A00307E3E /* BankPicker.swift */; };
 		89705A7A2B69518000307E3E /* SelectBeneficiaryTypeBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A792B69517F00307E3E /* SelectBeneficiaryTypeBottomSheet.swift */; };
+		89705A7C2B6A22C600307E3E /* ConversionRateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A7B2B6A22C600307E3E /* ConversionRateResponse.swift */; };
 		897228022B665BBD006B4FEE /* NationalityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228012B665BBD006B4FEE /* NationalityResponse.swift */; };
 		897228042B665CE9006B4FEE /* PurposeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228032B665CE9006B4FEE /* PurposeResponse.swift */; };
 		897228062B665D8B006B4FEE /* BankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228052B665D8B006B4FEE /* BankResponse.swift */; };
@@ -172,6 +173,7 @@
 		89705A732B69360200307E3E /* NationalityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalityPicker.swift; sourceTree = "<group>"; };
 		89705A752B69373A00307E3E /* BankPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankPicker.swift; sourceTree = "<group>"; };
 		89705A792B69517F00307E3E /* SelectBeneficiaryTypeBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBeneficiaryTypeBottomSheet.swift; sourceTree = "<group>"; };
+		89705A7B2B6A22C600307E3E /* ConversionRateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionRateResponse.swift; sourceTree = "<group>"; };
 		897228012B665BBD006B4FEE /* NationalityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalityResponse.swift; sourceTree = "<group>"; };
 		897228032B665CE9006B4FEE /* PurposeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurposeResponse.swift; sourceTree = "<group>"; };
 		897228052B665D8B006B4FEE /* BankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankResponse.swift; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 			children = (
 				A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */,
 				A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */,
+				89705A7B2B6A22C600307E3E /* ConversionRateResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -939,6 +942,7 @@
 				89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */,
 				8974F9102B67A3F2007F2522 /* HomeDataHandler.swift in Sources */,
 				2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */,
+				89705A7C2B6A22C600307E3E /* ConversionRateResponse.swift in Sources */,
 				896EA0CC2B5F956100FB231A /* FRBarButton.swift in Sources */,
 				A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */,
 				897228222B66A21A006B4FEE /* BankBeneficiariesResponse.swift in Sources */,

@@ -10,10 +10,10 @@ import Foundation
 struct CurrencyResponse: Codable, CustomStringConvertible, Identifiable {
     var description: String{ return "" }
     
-    var id:String?     =  "c7448546-0978-4f22-80d0-05e6807a0851"
-    var name: String?  =  "Bangladeshi Taka"
+    var id:String?     =  "cdfde334-099b-41be-9333-8c1e6147675e"
+    var name: String?  =  "Turkish Lira"
     var symbol:String?
-    var code: String?  = "BDT"
+    var code: String?  = "TRY"
 
     enum CodingKeys: String, CodingKey {
         case id
