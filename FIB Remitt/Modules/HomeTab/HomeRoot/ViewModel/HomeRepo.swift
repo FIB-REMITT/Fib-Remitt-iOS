@@ -116,6 +116,27 @@ class HomeRepository {
             }.store(in: &subscribers)
     }
     
+    @Published var conversionRates:ConversionRateResponse?
+    func getConverionRatesAPICall()  {
+        APIManager.shared.getData(endPoint: BasicEndPoint.currencyConversion, resultType: ConversionRateResponse.self, showLoader: true)
+            .sink { completion in
+                switch completion{
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    if let err = error as? NetworkError{
+                        // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: true)
+                    }else{
+                       // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: false)
+                    }
+                 
+                case .finished:
+                    print("API Called!")
+                }
+            } receiveValue: { result in
+                self.conversionRates = result
+            }.store(in: &subscribers)
+    }
+    
     func receivedInBank(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {
         APIManager.shared.makeAPICallReceivedInBank(isBankbeneficiary:true,beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice)
           .sink { completion in

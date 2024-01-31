@@ -22,8 +22,8 @@ struct FRBottomBar: View {
             }
         }
         .padding(6)
-        .background(Color.frBackground.edgesIgnoringSafeArea(.bottom))
-        .shadow(radius: 0.3)
+        .background(Color.fr_forground.edgesIgnoringSafeArea(.bottom))
+        .shadow(color: .white, radius: 4)
     }
 }
 

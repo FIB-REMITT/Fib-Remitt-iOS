@@ -103,6 +103,7 @@ class BeneficiaryRepository {
             }.store(in: &subscribers)
     }
     
+    @Published var cashPickupBeneficiaryNormalCreationStatus:Bool?
     func createCashPickupBeneficiaryAPICall(fullName:String, nationality:String, phone:String, address:String, gender:String, relationShip:String)  {
         APIManager.shared.uploadFormData(endPoint: BeneficiaryEndpoint.createCashPickupPersonalBeneficiary(fullName: fullName, nationality: nationality, phoneNumber: phone, address: address, gender: gender, relationShip: relationShip), resultType: EmptyResponse.self, showLoader: true)
             .sink { completion in
@@ -111,8 +112,10 @@ class BeneficiaryRepository {
                     print(error.localizedDescription)
                     if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                         print("Successfully Created CashPickup Beneficiary")
+                        self.cashPickupBeneficiaryNormalCreationStatus = true
                     }else{
                         print("Failed!")
+                        self.cashPickupBeneficiaryNormalCreationStatus = false
                     }
                     
                 case .finished:
@@ -122,6 +125,9 @@ class BeneficiaryRepository {
             }.store(in: &subscribers)
     }
     
+
+    
+    @Published var bankBeneficiaryNormalCreationStatus:Bool?
     func createBankBeneficiaryAPICall(fullName:String, nationality:String, phone:String, address:String, gender:String, relationShip:String, bankId:String, accNo:String)  {
         APIManager.shared.uploadFormData(endPoint: BeneficiaryEndpoint.createBankPersonalBeneficiary(fullName: fullName, nationality: nationality, phoneNumber: phone, address: address, gender: gender, relationShip: relationShip, bankId: bankId, accNo: accNo), resultType: EmptyResponse.self, showLoader: true)
             .sink { completion in
@@ -130,7 +136,9 @@ class BeneficiaryRepository {
                     print(error.localizedDescription)
                     if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                         print("Successfully Created CashPickup Beneficiary")
+                        self.bankBeneficiaryNormalCreationStatus = true
                     }else{
+                        self.bankBeneficiaryNormalCreationStatus = false
                         print("Failed!")
                     }
                     
@@ -141,15 +149,18 @@ class BeneficiaryRepository {
             }.store(in: &subscribers)
     }
     
+    @Published var cashPickupBeneficiaryBusinessCreationStatus:Bool?
     func createCashPickupBusinessAPICall(fullName:String, nationality:String, phoneNumber:String, address:String, invoice:Data?) {
         APIManager.shared.uploadBeneficiaryDocs(fullName: fullName, nationalityId: nationality, phoneNumber: phoneNumber, address: address, invoice: invoice)
           .sink { completion in
             switch completion{
             case .failure(let error):
               if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
-                  print("Successfully Created CashPickup Beneficiary")
+                  print("Successfully Created CashPickup Beneficiary Business")
+                  self.cashPickupBeneficiaryBusinessCreationStatus = true
               }else{
                   print("Failed!")
+                  self.cashPickupBeneficiaryBusinessCreationStatus = false
               }
             case .finished:
                 print("API Called!")
@@ -158,4 +169,27 @@ class BeneficiaryRepository {
             print(result)
           }.store(in: &subscribers)
       }
+    
+    @Published var bankBeneficiaryBusinessCreationStatus:Bool?
+    func createBankBeneficiaryBusinessAPICall(fullName:String, nationality:String, phone:String, address:String, bankId:String, accNo:String, invoice:Data?)  {
+        APIManager.shared.uploadBankBeneficiaryDocs(fullName: fullName, nationalityId: nationality, phoneNumber: phone, address: address, bankId: bankId, accountNo: accNo, invoice: invoice)
+            .sink { completion in
+                switch completion{
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
+                        print("Successfully Created Bank Beneficiary Business type")
+                        self.bankBeneficiaryNormalCreationStatus = true
+                    }else{
+                        self.bankBeneficiaryNormalCreationStatus = false
+                        print("Failed!")
+                    }
+                    
+                case .finished:
+                    print("API Called!")
+                }
+            } receiveValue: { result in
+            }.store(in: &subscribers)
+    }
+    
 }

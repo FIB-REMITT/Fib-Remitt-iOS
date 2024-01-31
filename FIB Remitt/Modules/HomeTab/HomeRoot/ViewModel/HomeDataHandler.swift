@@ -12,10 +12,28 @@ class HomeDataHandler{
     static let shared = HomeDataHandler()
     private init(){}
 
-    var purposes: [PurposeResponse] = []
-    var deliveryMethodType = "Bank Transfer"
+    var purposes   : [PurposeResponse]  = []
+    var currencies : [CurrencyResponse] = []
+    var conversionRates : ConversionRateResponse?
+    var beneficiaryCollectionResponse:BankCollectionResponse?
+    var deliveryMethodType : String = "Bank Transfer"
+    var fromCurrency       : String = "IQD"
+    var amountToTransfer   : String = ""
+    var toCurrency         : String = ""
+    var paymentMethod      : String = ""
+    var collectionPoint    : String = ""
+    var purposeId          : String = ""
+    var invoicePath        : String = ""
+    
     func clear(){
         purposes.removeAll()
-        deliveryMethodType = ""
+        deliveryMethodType  = ""
+        fromCurrency        = ""
+        toCurrency          = ""
+        paymentMethod       = ""
+        collectionPoint     = ""
+        purposeId           = ""
+        invoicePath         = ""
+        beneficiaryCollectionResponse = nil
     }
 }

@@ -13,7 +13,7 @@ struct FRTextButton: View {
     var action: () -> Void = {}
     var body: some View {
         Button(action: { action()}, label: {
-            TextBaseMedium(text: title,fg_color: color).underline()
+            TextBaseMedium(text: title,fg_color: color)
         })
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeBeneficiarySummaryView: View {
     @ObservedObject var vm = HomeViewModel()
+    var beneficiaryResponse = HomeDataHandler.shared.beneficiaryCollectionResponse
     var body: some View {
         VStack(spacing:15){
             navigationBar
@@ -31,29 +32,29 @@ extension HomeBeneficiarySummaryView{
     
     private var contextContainer : some View{
         VStack{
-            SimpleHInfoCellView()
-            SimpleHInfoCellView(title: "Purpose", info: "Family Support")
+            SimpleHInfoCellView(info: HomeDataHandler.shared.deliveryMethodType)
+            SimpleHInfoCellView(title: "Purpose", info: beneficiaryResponse?.purposeTitle ?? "")
             FRVContainer (backgroundColor:.frForground){
                 TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
                 VStack(spacing:10){
-                    SimpleHColonInfoView(title: "Name", info: "Mehmet Öztürk")
-                    SimpleHColonInfoView(title: "Bank Name", info: "Ziraat Bank")
-                    SimpleHColonInfoView(title: "Account No.", info: "124 458 458 856")
-                    SimpleHColonInfoView(title: "Type", info: "Individual")
-                    SimpleHColonInfoView(title: "Relation", info: "Uncle")
-                    SimpleHColonInfoView(title: "Phone", info: "+90 212 555 1212")
-                    SimpleHColonInfoView(title: "Address", info: "Ankara, Turkey")}
+                    SimpleHColonInfoView(title: "Name", info: beneficiaryResponse?.receiver?.fullName ?? "")
+                    SimpleHColonInfoView(title: "Bank Name", info: beneficiaryResponse?.receiver?.bankName ?? "N/A")
+                    SimpleHColonInfoView(title: "Account No.", info:  beneficiaryResponse?.receiver?.accountNumber ?? "N/A")
+                    SimpleHColonInfoView(title: "Type", info: beneficiaryResponse?.receiver?.typeOfBeneficiary ?? "")
+                    SimpleHColonInfoView(title: "Relation", info: beneficiaryResponse?.receiver?.relationship ?? "")
+                    SimpleHColonInfoView(title: "Phone", info: beneficiaryResponse?.receiver?.phoneNumber ?? "")
+                    SimpleHColonInfoView(title: "Address", info: beneficiaryResponse?.receiver?.address ?? "")}
             }
             
             FRVContainer (backgroundColor:.frForground){
                 TextBaseMedium(text: "Transfer Summary", fg_color: .text_Mute)
                 VStack(spacing:10){
-                    SimpleHInfoRegularView(title: "Amount to transfer", info: "125,000 IQD")
+                    SimpleHInfoRegularView(title: "Amount to transfer", info: "\(beneficiaryResponse?.transaction?.amountToTransfer ?? 0)")
                     
-                    SimpleHInfoRegularView(title: "Service charge", info: "+ 5,000 IQD")
+                    SimpleHInfoRegularView(title: "Service charge", info: "+ \(beneficiaryResponse?.transaction?.charge ?? 0)")
                     Divider()
-                    SimpleHModInfoView(title: "Total payble", info: "130,000 IQD",fontStyle: .titleBold)
-                    SimpleHModInfoView(title: "Recipient gets", info: "2,875 TRY", textColor: Color.primary500, fontStyle: .allBold)
+                    SimpleHModInfoView(title: "Total payble", info: "\(beneficiaryResponse?.transaction?.totalPayable ?? 0)",fontStyle: .titleBold)
+                    SimpleHModInfoView(title: "Recipient gets", info: "\(beneficiaryResponse?.transaction?.amountReceivable ?? 0)", textColor: Color.primary500, fontStyle: .allBold)
                 }
             }
         }

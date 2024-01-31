@@ -6,69 +6,152 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct EditBeneficiaryBankView: View {
-    @State var text : String = ""
-    @State var isSelected : Bool = true
-    @State var isNotSelected : Bool = true
+    @ObservedObject var vm = BeneficiaryViewModel()
+    @State var isPickerShown = false
+    
     var body: some View {
+        let filePickerView = FilePickerView(
+            isPickerShown: $isPickerShown,
+            allowedContentTypes: [UTType.pdf],
+            onSelect: { url in
+                BenficiaryDataHandler.shared.contractPath = url.absoluteString
+                print("Selected file: \(url.lastPathComponent.removingPercentEncoding ?? "")")
+            },
+            onError: { error in
+                print("Error: \(error.localizedDescription)")
+            }
+        )
+        
         ZStack{
             Color.fr_background.ignoresSafeArea()
             VStack(spacing: 15){
                 navigationBar
-                FRVContainer (backgroundColor:.frForground){
-                    VStack(alignment:.leading, spacing: 12){
-                        TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
-                        FRVerticalField(placeholder: "Full Name", placeholderIcon: "user_ico", inputText: $text)
-                        FRSimpleDropDownButton(title: "Nationality", icon: "nationality_ico")
-                        FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $text)
-                        FRVerticalField(placeholder: "Address", placeholderIcon: "location_ico", inputText: $text)}
-                    VStack(alignment:.leading){
-                        TextMediumMedium(text: "Type of Beneficiary", fg_color: .text_fade)
-                        HStack{
-                            FRCircularRadioButton(isSelected: $isSelected, title: "Personal")
-                            FRCircularRadioButton(isSelected: $isNotSelected, title: "Business")
+                ScrollView{
+                    FRVContainer (backgroundColor:.frForground){
+                        VStack(alignment:.leading, spacing: 12){
+                            TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
+                            HStack{
+                                FRVerticalField(placeholder: "First Name", placeholderIcon: "user_ico", inputText: $vm.firstName)
+                                FRVerticalField(placeholder: "Last Name", placeholderIcon: "user_ico", inputText: $vm.lastName)
+                            }
+                            
+                            FRSimpleDropDownButton(title: vm.selectedNationality.name
+                                                   ?? "Select Nationality", icon: "nationality_ico",action: {nationalityBtnPressed()})
+                            FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $vm.phone)
+                            FRVerticalField(placeholder: "Address", placeholderIcon: "location_ico", inputText: $vm.address)}
+                        
+                        beneficiaryTypeSelectionRadioStack
+                        ZStack{
+                            if vm.selectedBeneficaryAccountType == .personal{
+                                genderSelectionContainer
+                            }else{
+                                Button(action: {
+                                    self.isPickerShown = true
+                                }, label: {
+                                    DocPickerView(title: BenficiaryDataHandler.shared.contractPath.extractFileName().isEmpty ? "Please upload contract document" : BenficiaryDataHandler.shared.contractPath.extractFileName())
+                                        .fileImporter(
+                                            isPresented: $isPickerShown,
+                                            allowedContentTypes: filePickerView.allowedContentTypes,
+                                            onCompletion: filePickerView.handleResult
+                                        )
+                                })
+                            }
                         }
-                    }
-                    
-                    VStack(alignment:.leading){
-                        TextMediumMedium(text: "Gender", fg_color: .text_fade)
-                        HStack{
-                            FRCircularRadioButton(isSelected: $isSelected, title: "Male")
-                            FRCircularRadioButton(isSelected: $isNotSelected, title: "Female")
-                        }
-                    }
-                    
-                    VStack(alignment:.leading, spacing: 10){
-                        TextBaseMedium(text: "Bank Details", fg_color: .text_Mute)
-                        FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_ico", inputText: $text)
-                        FRVerticalField(placeholder: "Account Number", placeholderIcon: "acc_no", inputText: $text)
+                        
+                        bankDetailContainer
                     }
                 }
                 bottomSaveButton
             }
             .padding()
             .navigationBarHidden(true)
-           
+            .onTapGesture {hideKeyboard()}
+            .onAppear(){self.viewOnAppearCalled()}
         }
-
+        
     }
 }
 //MARK: - VIEW COMPONENTS
 extension EditBeneficiaryBankView{
-//    private var bottomButton : some View{}
     private var navigationBar : some View {
         FRNavigationBarView(title: "Bank Beneficiary")
     }
+    private var genderSelectionContainer : some View{
+        VStack(alignment:.leading){
+            TextMediumMedium(text: "Gender", fg_color: .text_fade)
+            HStack{
+                ForEach(Gender.allCases, id: \.self) { item in
+                    FRCircularRadioButton(isSelected: Binding(get: { vm.selectedGenderType == item },
+                                                              set: { newValue in
+                        if newValue {
+                            vm.selectedGenderType = item
+                            HomeDataHandler.shared.deliveryMethodType = item.title
+                        }
+                    }), title: item.title)
+                }
+            }
+            
+            FRVerticalField(placeholder: "Relation (Optional)", placeholderIcon: "nationality_ico", inputText: $vm.relation)
+        }
+    }
+    private var beneficiaryTypeSelectionRadioStack : some View{
+        VStack(alignment:.leading){
+            TextMediumMedium(text: "Type of Beneficiary", fg_color: .text_fade)
+            HStack{
+                ForEach(BeneficiaryAccountType.allCases, id: \.self) { item in
+                    FRCircularRadioButton(isSelected: Binding(get: { vm.selectedBeneficaryAccountType == item },
+                                                              set: { newValue in
+                        if newValue {
+                            vm.selectedBeneficaryAccountType = item
+                            HomeDataHandler.shared.deliveryMethodType = item.title
+                        }
+                    }), title: item.title)
+                    
+                }
+            }
+        }
+    }
+    
+    private var bankDetailContainer : some View{
+        VStack(alignment:.leading, spacing: 10){
+            TextBaseMedium(text: "Bank Details", fg_color: .text_Mute)
+            //  FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_gry_ico", inputText: $vm.bankName)
+            FRSimpleDropDownButton(title: vm.selectedBankName.name ?? "Select Bank", icon: "bank_gry_ico", action: {bankNameBtnPressed()})
+            FRVerticalField(placeholder: "Account Number", placeholderIcon: "acc_no", inputText: $vm.accountNo)
+        }
+    }
+    
     private var bottomSaveButton : some View{
-        FRVerticalBtn(title: "Save", btnColor: .primary500) {}
+        FRVerticalControlBtn(isDisabled:$vm.isBankSaveValidated, title: "Save") {self.saveBtnPressed()}
     }
 }
 
 //MARK: - ACTIONS
 extension EditBeneficiaryBankView{
-    private func notificationBtnPressed() {
-
+    private func notificationBtnPressed() {}
+    private func bankNameBtnPressed() {
+        showSheet(view: AnyView(BankPicker(banks: BenficiaryDataHandler.shared.banks, itemSelect: { item in
+            self.vm.selectedBankName = item
+        })))
+    }
+    private func nationalityBtnPressed() {
+        showSheet(view: AnyView(NationalityPicker(nations: BenficiaryDataHandler.shared.nationalities, itemSelect: { item in
+            self.vm.selectedNationality = item
+        })))
+    }
+    private func saveBtnPressed() {
+        if vm.selectedBeneficaryAccountType == .personal{
+            vm.addBankBeneficiary()
+        }else if vm.selectedBeneficaryAccountType == .buissness{
+            vm.addBankBeneficiaryBusiness()
+        }
+    }
+    
+    private func viewOnAppearCalled() {
+        vm.addBankBeneficiaryOnAppear()
     }
 }
 #Preview {

@@ -8,19 +8,13 @@
 import SwiftUI
 
 struct HomeRootView: View {
-    @State var isSelected = false
     @State var isNotSelected = true
-    
-   
-    @State var transferAmount = ""
-        
     @ObservedObject var vm = HomeViewModel()
     
     var body: some View {
         ZStack{
             Color.frBackground.ignoresSafeArea()
             VStack (spacing: 16){
-                //Spacer()
                 topBarContainer
                 ScrollView{
                     VStack(spacing:16){
@@ -95,7 +89,7 @@ extension HomeRootView{
         FRVContainer (spacing: 7, backgroundColor: .frForground){
             TextBaseMedium(text: "Transfer amount", fg_color: .text_Mute)
             HStack{
-                FRVerticalField(placeholder: "Enter Amount", inputText: $transferAmount)
+                FRVerticalField(placeholder: "Enter Amount", inputText: $vm.transferAmount)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
                 FRSimpleDropDownButton(title: "IQD", icon: "iraq_flag")
@@ -103,10 +97,11 @@ extension HomeRootView{
             
             TextBaseMedium(text: "Recipient gets", fg_color: .text_Mute)
             HStack{
-                FRVerticalField(placeholder: "Enter Amount", inputText: $transferAmount)
+                FRVerticalField(placeholder: "Enter Amount", inputText: $vm.recipentAmount)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
-                FRSimpleDropDownButton(title: "IQD", icon: "turkey")
+                    .disabled(true)
+                FRSimpleDropDownButton(title: vm.selectedRecipientCurrency.code ?? "", icon: vm.selectedRecipientCurrency.code == "TRY" ? "turkey" : "", action: {selectRecipientCurrencyPressed()})
             }
             Divider().padding(.horizontal)
                 .padding(.top, 5)
@@ -163,25 +158,34 @@ extension HomeRootView{
     
     private var termsAndConditionContainer : some View{
         HStack(){
-            FRCheckbox(isSelected: $isSelected)
+            FRCheckbox(isSelected: $vm.isTermsSelected)
             FRTextButton(title: "Terms and Conditions", action: {self.termsAndConditionBtnPressed()})
             Spacer()
         }
     }
     
     private var bottomProccedButton : some View{
-        FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}
+        FRVerticalControlBtn(isDisabled: $vm.isProceedValidated, title: "Procced") {self.proccedBtnPressed()}
     }
 }
 
 //MARK: - ACTIONS
 extension HomeRootView{
     private func notificationBtnPressed() {}
-    private func proccedBtnPressed() {vm.navigateSelectBeneficiary()}
+    private func proccedBtnPressed() {
+        vm.storeHomeData()
+        vm.navigateSelectBeneficiary()
+    }
     private func termsAndConditionBtnPressed() {}
     private func purposeButtonPressed(){
         showSheet(view: AnyView(PurposePicker(purposes: HomeDataHandler.shared.purposes, itemSelect: { selectedItem in
             self.vm.selectedPurpose = selectedItem
+        })))
+    }
+    private func selectRecipientCurrencyPressed(){
+        showSheet(view: AnyView(CurrencyPicker(currencies: HomeDataHandler.shared.currencies, itemSelect: { selectedItem in
+            self.vm.selectedRecipientCurrency = selectedItem
+            self.vm.convertCurrency()
         })))
     }
 }

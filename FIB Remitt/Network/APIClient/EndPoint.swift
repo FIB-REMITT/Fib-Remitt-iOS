@@ -114,11 +114,12 @@ enum BasicEndPoint: Endpoint {
     case getPurposes
     case getAllBanks
     case getAllCurrencies
+    case currencyConversion
     
     var method: HTTPMethod {
         switch self {
 
-        case .getNationalities, .getPurposes, .getAllBanks, .getAllCurrencies:
+        case .getNationalities, .getPurposes, .getAllBanks, .getAllCurrencies, .currencyConversion:
             return .get
         }
     }
@@ -137,37 +138,20 @@ enum BasicEndPoint: Endpoint {
             
         case .getAllCurrencies:
             return "api/v1/private/currencies"
+            
+        case .currencyConversion:
+            return "api/v1/private/currency/IQD/all"
         }
     }
     
     var query: [String: String]?  {
         switch self {
             
-        case .getNationalities, .getAllBanks, .getPurposes, .getAllCurrencies:
+        case .getNationalities, .getAllBanks, .getPurposes, .getAllCurrencies, .currencyConversion:
             return nil
             
-
         }
     }
-    
-//    var encoder: ParameterEncoder {
-//        switch self{
-//        case .forgotPassSendOTP:
-//            return URLEncodedFormParameterEncoder.default
-//            
-//        default:
-//            return JSONParameterEncoder.default
-//        }
-//    }
-    
-//    var contentType: String{
-//        switch self{
-//        case .forgotPassSendOTP:
-//            return ContentType.urlEncoded.rawValue
-//        default:
-//            return ContentType.json.rawValue
-//        }
-//    }
     
     var headerAuth: Bool{
         return false
@@ -519,7 +503,7 @@ enum SellCryptoEndpoint: Endpoint{
 
 //MARK: - TransactionList EndPoints
 enum TransactionListEndpoint: Endpoint{
-    case TransactionList(page: Int)
+    case TransactionList(page: Int, from:String, to:String)
     case TransactionDetails(transactionNumber: String)
     
     var method: HTTPMethod{
@@ -542,8 +526,17 @@ enum TransactionListEndpoint: Endpoint{
     
     var query: [String : String]? {
         switch self {
-        case .TransactionList(let page):
-            return ["page": "\(page)"]
+        case .TransactionList(let page, let from , let to):
+            var parameters  = [String: String]()
+            parameters["page"] = "\(page)"
+            
+            if from.isBlankOrEmpty == false && to.isBlankOrEmpty == false{
+                parameters["from"] = "\(from)"
+                parameters["to"] = "\(to)"
+            }
+            
+            return parameters
+            
         case .TransactionDetails:
             return nil
             
@@ -558,15 +551,8 @@ enum TransactionListEndpoint: Endpoint{
         default:
             return JSONParameterEncoder.default
         }
-        
     }
 }
-
-
-//}
-
-
-
 
 /**
  *  Protocol for all endpoints to conform to.

@@ -1,5 +1,5 @@
 //
-//  FRSimplePicker.swift
+//  FRSimpleStaticPicker.swift
 //  FIB Remitt
 //
 //  Created by Ainul Kazi on 29/1/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SimpleSelctionView<T: RawRepresentable & CaseIterable & Hashable>: View where T.RawValue == String {
+struct FRSimpleStaticPicker<T: RawRepresentable & CaseIterable & Hashable>: View where T.RawValue == String {
     let type: T.Type
     @Binding var selected: T
     
