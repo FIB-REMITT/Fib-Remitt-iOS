@@ -12,7 +12,7 @@ struct FRCheckbox: View {
     @Binding var isSelected : Bool
     var radioColor = Color.primary_500
     var body: some View {
-        HStack(alignment: .center, spacing: 13){
+        HStack(alignment: .center, spacing: 5){
             Toggle("", isOn: $isSelected)
                 .toggleStyle(SquareRadioButtonStyle(size: 22, color: radioColor))
             
