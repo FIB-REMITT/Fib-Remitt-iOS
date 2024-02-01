@@ -141,7 +141,7 @@ extension HomeSelectBeneficiaryView{
                 VStack {
                     ForEach(beneficiaryVM.bankBeneficiaries ?? [], id: \.id) { beneficiary in
                         let selected = !resetSelection && (beneficiary.id == selectedBeneficiaryID)
-                        AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.accountNumber ?? "" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico",type: homeData.collectionPoint.lowercased() == "bank" ? .BankTransfer : .CashPickup)
+                        AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:"A/C No: \(beneficiary.accountNumber ?? "")" , subtitle2: beneficiary.bankBeneficiaryBankDTO?.name ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico",type: homeData.collectionPoint.lowercased() == "bank" ? .BankTransfer : .CashPickup)
                             .onTapGesture{
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "business"{
                                     isFilePickerPresented = true
@@ -161,7 +161,7 @@ extension HomeSelectBeneficiaryView{
                 VStack {
                     ForEach(beneficiaryVM.cashPickUpBeneficiaries ?? [], id: \.id) { beneficiary in
                         let selected = !resetSelection && (beneficiary.id == selectedBeneficiaryID)
-                        AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1:beneficiary.phoneNumber ?? "" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico",type: homeData.collectionPoint.lowercased() == "bank" ? .BankTransfer : .CashPickup)
+                        AccountInfoCellView(selected: selected, title: beneficiary.fullName ?? "", subtitle1: "A/C No: \(beneficiary.phoneNumber ?? "")" , subtitle2:  beneficiary.address ?? "", icon: beneficiary.typeOfBeneficiary?.lowercased() == "personal" ? "personal_ico" : "business_ico",type: homeData.collectionPoint.lowercased() == "bank" ? .BankTransfer : .CashPickup)
                             .onTapGesture{
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "business"{
                                     isFilePickerPresented = true
