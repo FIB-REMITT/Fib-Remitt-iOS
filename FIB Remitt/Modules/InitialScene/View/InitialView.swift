@@ -27,7 +27,7 @@ struct InitialView: View {
                         Spacer()
                         bottomLoginButton
                         bottomDownloadOptionContainer
-                        Spacer()
+
                     }
                 }
             }.navigationBarHidden(true)
