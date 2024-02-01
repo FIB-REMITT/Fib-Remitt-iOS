@@ -15,7 +15,7 @@ class HomeViewModel : ObservableObject{
     @Published var goToNext         = false
     @Published var destinationView  = AnyView(Text("Destination"))
     
-    @Published var selectedPurpose : PurposeResponse            = PurposeResponse()
+    @Published var selectedPurpose : PurposeResponse            = PurposeResponse(id: "7bd96326-c76d-4920-adff-9f03b2fd0df3",code: "Account Opening",name: "Account Opening",gateway: "PARAGRAM",status: true)
     @Published var selectedRecipientCurrency : CurrencyResponse = CurrencyResponse()
     @Published var selectedDeliveryMethod                       = "Bank Transfer"
     @Published var selectedLanguage          : Language         = .Eng
