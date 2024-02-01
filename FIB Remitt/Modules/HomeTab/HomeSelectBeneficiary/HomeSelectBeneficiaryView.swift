@@ -200,6 +200,8 @@ extension HomeSelectBeneficiaryView{
 //MARK: - ACTIONS
 extension HomeSelectBeneficiaryView{
     private func createAccountBtnPressed() {
+        beneficiaryVM.getBanks()
+        beneficiaryVM.getNationalities()
         vm.navigateToSelectBeneficiarySheet()
     }
     private func notificationBtnPressed() {
