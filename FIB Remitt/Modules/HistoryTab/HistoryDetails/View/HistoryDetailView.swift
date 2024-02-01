@@ -93,17 +93,30 @@ struct HistoryDetailView: View {
                                 Spacer()
                             }
                                 VStack(spacing: 20){
-                                    
+                                  
                                     if let progresses = vm.transactionDetails?.progress {
-                                        ForEach(progresses.indices, id: \.self) { index in
+                                        let sortedProgress = progresses.sorted { (progress1, progress2) in
+                                            if let state1 = Int(progress1.state ?? "0"), let state2 = Int(progress2.state ?? "0") {
+                                                        if state1 == state2 {
+                                                            // If states are equal, compare by createdDate
+                                                            if let date1 = progress1.createdAt, let date2 = progress2.createdAt {
+                                                                return date1 < date2
+                                                            }
+                                                        }
+                                                        return state1 > state2
+                                                    }
+                                                    return false // Handle cases where conversion to Int fails
+                                                }
+                                        
+                                        ForEach(sortedProgress.indices, id: \.self) { index in
                                             let progressData = progresses[index]
                                           
                                             let icon =  viewForProgressState(progressData: progressData)
-                                       
-                                            let side : ProgressComponentAlignment = (index % 2 == 0) ? .left : .right
-
                                             
-                                            ProgressComponentWithDivider(status: icon, timeDat:formatDateString(incomingFormate: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS",dateString: progressData.createdAt ?? "", convertFormat: "d MMMM yyyy | h:mm a") ?? "", iconName: icon, cellColor: Color.warning_regular, alignmentStyle: side)
+                                            let side : ProgressComponentAlignment = (index % 2 == 0) ? .left : .right
+                                            let textColor = viewForProgressTextColor(progressData: progressData)
+                                            
+                                            ProgressComponentWithDivider(status: icon, timeDat:formatDateString(incomingFormate: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS",dateString: progressData.createdAt ?? "", convertFormat: "d MMMM yyyy | h:mm a") ?? "", iconName: icon, cellColor: textColor, alignmentStyle: side)
                                            //
                                         }
                                     }
@@ -138,6 +151,36 @@ struct HistoryDetailView: View {
                return ""
            }
        }
+    
+    
+    private func viewForProgressTextColor(progressData:DetailsProgress) -> Color {
+           switch progressData.state {
+           case "1":
+               return Color.warning_regular
+           case "2":
+               return Color.green
+           case "3":
+               return Color.green
+           case "4":
+               return Color.red
+           case "5":
+               return Color.red
+           default:
+               return Color.black
+           }
+       }
+    
+//    ProgressComponentWithDivider(status: "Pending", timeDat: "9th March 2023 | 10:00 PM", iconName: "pending", cellColor: Color.warning_regular, alignmentStyle: .left)
+//    
+//    ProgressComponentWithDivider(status: "Hold", timeDat: "9th March 2023 | 10:00 PM", iconName: "pause", cellColor: Color.red, alignmentStyle: .right)
+//    
+//    ProgressComponent(status: "Hold", timeDat: "9th March 2023 | 10:00 PM", iconName: "pause", cellColor: Color.red, alignmentStyle: .right)
+//    
+////                                ProgressComponent(status: "Approved", timeDat: "9th March 2023 | 10:00 PM", iconName: "approved", cellColor: Color.green, alignmentStyle: .right)
+////
+////                                ProgressComponent(status: "Canceled", timeDat: "9th March 2023 | 10:00 PM", iconName: "close", cellColor: Color.red, alignmentStyle: .right)
+////
+////                                ProgressComponent(status: "Paid", timeDat: "9th March 2023 | 10:00 PM", iconName: "paid", cellColor: Color.green, alignmentStyle: .left)
 }
 //MARK: - VIEW COMPONENTS
 extension HistoryDetailView{
