@@ -12,7 +12,7 @@ import Alamofire
 //MARK: - Authentication EndPoints
 enum AuthEndPoint: Endpoint {
     
-    case signIn(username:String, password: String)
+    //case signIn(username:String, password: String)
     case createAccountSentOtp(username:String, password:String)
     case createAccount(username:String, password:String, otp:String)
     case refreshToken(refreshToken:String)
@@ -24,15 +24,15 @@ enum AuthEndPoint: Endpoint {
     
     var method: HTTPMethod {
         switch self {
-        case .signIn, .createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken, .ssoLogin, .authWithFIB :
+        case  .createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken, .ssoLogin, .authWithFIB :
             return .post
         }
     }
     
     var path: String {
         switch self {
-        case .signIn:
-            return "api/v1/public/auth/signin"
+//        case .signIn:
+//            return "api/v1/public/auth/signin"
           
         case .createAccountSentOtp:
             return "api/v1/auth/sign-up/send-otp"
@@ -61,8 +61,8 @@ enum AuthEndPoint: Endpoint {
     var query: [String: String]?  {
         switch self {
             
-        case .signIn(let username, let password):
-            return ["email": username, "password": password, "grant_type": "password", "client_id": "mobile-app", "client_secret":"ytEoJitvmnEAzvKC5FGJCyYPpDBETCvG", "scope":"openid profile"]
+//        case .signIn(let username, let password):
+//            return ["email": username, "password": password, "grant_type": "password", "client_id": "mobile-app", "client_secret":"ytEoJitvmnEAzvKC5FGJCyYPpDBETCvG", "scope":"openid profile"]
             
         case .createAccountSentOtp(let username, let password):
             return ["username": username, "password": password]
@@ -82,7 +82,7 @@ enum AuthEndPoint: Endpoint {
         case .refreshToken(let refreshToken):
             return ["grant_type":"refresh_token", "client_id":"mobile-app", "client_secret":"rYTLJ0lgPKUHNluGaSDEeyT2hou2KYq5", "refresh_token":refreshToken]
         case .ssoLogin(let code):
-            return ["grant_type":"authorization_code", "client_id":"sso-fib-pos", "client_secret":"8f363003-407c-4f8c-b704-8a9ea2327a95", "redirect_uri":Constant.redirect_url, "code": code ]
+            return ["grant_type":Constant.grant_type, "client_id":Constant.client_id, "client_secret":Constant.client_secret, "redirect_uri":Constant.redirect_url, "code": code ]
         case .authWithFIB(let idToken ,let accessToken):
             return ["idToken":idToken, "accessToken":accessToken]
         }
@@ -318,7 +318,7 @@ enum BeneficiaryEndpoint: Endpoint {
     var encoder: ParameterEncoder {
         switch self{
         case .resetPassword, .createCashPickupPersonalBeneficiary, .createBankPersonalBeneficiary:
-            return URLEncodedFormParameterEncoder.default
+            return MultipartFormData() as! ParameterEncoder
             
         default:
             return JSONParameterEncoder.default
