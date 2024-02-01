@@ -62,7 +62,7 @@ extension InitialView {
     }
     
     private var middaleBgMap: some View{
-        Image("map")
+        Image("map3")
             .imageDefaultStyle()
             .padding(29)
     }
@@ -85,7 +85,6 @@ extension InitialView {
     private func loginWithFIBButtonPressed() {
 //        vm.navigateToHome()
         self.tapped = true
-
     }
     private func downloadNowButtonPressed(){}
 }
