@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct HomeRootView: View {
-    @State var isNotSelected = true
     @ObservedObject var vm = HomeViewModel()
+    @FocusState var recepientIsFofused
+    @FocusState var transferIsFocused
     
     var body: some View {
         ZStack{
@@ -34,8 +35,9 @@ struct HomeRootView: View {
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
         .onTapGesture {hideKeyboard()}
-        .onAppear(){vm.viewWillAppearCalled()
-        }
+        .onChange(of: vm.transferAmount, perform: {newValue in recipientAmountUpdate()})
+        .onChange(of: vm.recipentAmount, perform: {newValue in transferAmountUpdate()})
+        .onAppear(){vm.viewWillAppearCalled()}
     }
    
 }
@@ -47,7 +49,7 @@ extension HomeRootView{
             Image("logo_horizantal")
             Spacer()
             FRTextDropDownButton(title: vm.selectedLanguage.title, action: {languageButtonPressed()})
-            FRBarButton(icon: "bell_ico")
+            FRBarButton(icon: "bell_ico", action: {notificationBtnPressed()})
         }
     }
     private var topProfileContainer : some View{
@@ -72,6 +74,7 @@ extension HomeRootView{
             TextBaseMedium(text: "Transfer amount", fg_color: .text_Mute)
             HStack{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $vm.transferAmount)
+                    .focused($transferIsFocused)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
                 FRSimpleDropDownButton(title: "IQD", icon: "iraq_flag", action: {self.selectTransferCurrencyPressed()})
@@ -80,6 +83,7 @@ extension HomeRootView{
             TextBaseMedium(text: "Recipient gets", fg_color: .text_Mute)
             HStack{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $vm.recipentAmount)
+                    .focused($recepientIsFofused)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
                 FRSimpleDropDownButton(title: vm.selectedRecipientCurrency.code ?? "", icon: vm.selectedRecipientCurrency.code == "TRY" ? "turkey" : "", action: {selectRecipientCurrencyPressed()})
@@ -106,8 +110,7 @@ extension HomeRootView{
                             vm.selectedDeliveryMethod = item.title
                             HomeDataHandler.shared.deliveryMethodType = item.title
                         }
-                    }),
-                                          title: item.title)
+                    }), title: item.title)
                     
                 }
             }
@@ -152,7 +155,7 @@ extension HomeRootView{
 
 //MARK: - ACTIONS
 extension HomeRootView{
-    private func notificationBtnPressed() {}
+    private func notificationBtnPressed() {showToast(message: "No notification found!")}
     private func proccedBtnPressed() {
         vm.storeHomeData()
         vm.navigateSelectBeneficiary()
@@ -179,6 +182,24 @@ extension HomeRootView{
     private func languageButtonPressed(){
         showSheet(view: AnyView(FRSimpleStaticPicker(type: Language.self, selected: $vm.selectedLanguage)))
     }
+    
+    private func recipientAmountUpdate() {
+        if !recepientIsFofused{
+            vm.convertCurrencyForTransfer()
+        }
+    }
+    
+    private func transferAmountUpdate() {
+        if !transferIsFocused{
+            vm.convertCurrencyForRecipient()
+        }
+    }
+    
+//    private func recepientAmountUpdate() {
+//        if !recepientIsFofused{
+//            vm.convertCurrencyForRecipient()
+//        }
+//    }
 }
 
 #Preview {

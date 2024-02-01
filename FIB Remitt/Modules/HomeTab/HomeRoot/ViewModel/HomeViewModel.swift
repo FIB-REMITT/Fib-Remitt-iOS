@@ -23,7 +23,7 @@ class HomeViewModel : ObservableObject{
     @Published var ConfirmationResponse          : ConfirmationByTransactionResponse?
     
     @Published var transferAmount     = "1.0"
-    @Published var recipentAmount     = "0.023148"
+    @Published var recipentAmount     = ""
     @Published var isTermsSelected    = false
     @Published var isProceedValidated = false
     
@@ -33,7 +33,6 @@ class HomeViewModel : ObservableObject{
         self.getCurrencies()
         self.getConversionRates()
         self.observeValidationScopes()
-        self.convertCurrencyForTransfer()
     }
     
     //MARK: - NAVIGATIONS
@@ -106,16 +105,16 @@ class HomeViewModel : ObservableObject{
             let targetRate           = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
             let defaultValue         = transferAmount.isEmpty ? 0.0 : 1.0
             let recipentAmountDouble =  (Double(self.transferAmount) ?? defaultValue) * (targetRate ?? 1.0)
-            self.recipentAmount      = "\(recipentAmountDouble)"
+            self.recipentAmount      = String(format: "%.4f", recipentAmountDouble)// "\(recipentAmountDouble)"
         }
     }
     
     func convertCurrencyForRecipient(){
         if let conversionRates       = HomeDataHandler.shared.conversionRates{
-            let targetRate           = conversionRates.toDictionary()["IQD"]
-            let defaultValue         = transferAmount.isEmpty ? 0.0 : 1.0
-            let transferAmountDouble =  (Double(self.recipentAmount) ?? defaultValue) * (targetRate ?? 1.0)
-            self.transferAmount      = "\(transferAmountDouble)"
+            let targetRate           = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
+            let defaultValue         = recipentAmount.isEmpty ? 0.0 : 1.0
+            let transferAmountDouble =  (Double(self.recipentAmount) ?? defaultValue) / (targetRate ?? 1.0)//String(format: "%.4f", myDoubleValue)
+            self.transferAmount      = String(format: "%.4f", transferAmountDouble)
         }
     }
     
@@ -147,6 +146,7 @@ class HomeViewModel : ObservableObject{
             repo.getConverionRatesAPICall()
             repo.$conversionRates.sink { result in
                 HomeDataHandler.shared.conversionRates = result
+               self.convertCurrencyForTransfer()
             }.store(in: &subscribers)
         }
     }
