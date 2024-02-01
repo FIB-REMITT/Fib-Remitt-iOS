@@ -44,11 +44,24 @@ struct WebLoginView: UIViewRepresentable {
         
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            let zoom = webView.bounds.size.width * 6
-            webView.scrollView.setZoomScale(zoom, animated: false)
-        }
-        
-        
+                    // JavaScript to set the username (phone number) and password
+                    let phoneNumber = "7854545454"  // Replace with the actual phone number
+                    let password = "Ibrahim1997"   // Replace with the actual password
+                    let script = """
+                        document.getElementById('username').value = '\(phoneNumber)';
+                        document.getElementById('password').value = '\(password)';
+                        // Optionally, you can submit the form if needed
+                        // document.getElementById('loginForm').submit();
+                    """
+
+                    webView.evaluateJavaScript(script) { result, error in
+                        if let error = error {
+                            print("JavaScript execution error: \(error)")
+                        } else {
+                            print("JavaScript executed successfully")
+                        }
+                    }
+                }
         
         func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
     

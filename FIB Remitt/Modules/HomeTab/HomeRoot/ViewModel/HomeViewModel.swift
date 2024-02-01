@@ -46,6 +46,12 @@ class HomeViewModel : ObservableObject{
         self.goToNext        = true
     }
     
+    
+    func navigateToSelectBeneficiarySheet() {
+        self.destinationView = AnyView(SelectBeneficiaryTypeBottomSheet())
+        self.goToNext        = true
+    }
+    
     func navigateToPayViaFIB() {
         self.destinationView = AnyView(HomePayViaFIBView())
         self.goToNext        = true
