@@ -21,6 +21,7 @@ class HomeViewModel : ObservableObject{
     @Published var selectedLanguage          : Language         = .Eng
     @Published var beneficiaryCollectionResponse : BankCollectionResponse?
     @Published var ConfirmationResponse : ConfirmationByTransactionResponse?
+    @Published var PaymentConfirmationResponse : PaymentCheckResponse?
     
     @Published var transferAmount     = "1.0"
     @Published var recipentAmount     = "0.023148"
@@ -58,12 +59,31 @@ class HomeViewModel : ObservableObject{
         self.goToNext        = true
     }
     func navigateToSuccessfulView() {
-        self.destinationView = AnyView(HomeTransferSuccessfulView())
+        self.destinationView = AnyView(HomeTransferSuccessfulOrFailedView(isSuccess: true))
         self.goToNext        = true
     }
     
+    func navigateToFailedView() {
+        self.destinationView = AnyView(HomeTransferSuccessfulOrFailedView(isSuccess: false,trxId: HomeDataHandler.shared.beneficiaryCollectionResponse?.transactionNumber ?? "" ))
+        self.goToNext        = true
+    }
+    
+    
+    func navigateToFibPAymentCheck(){
+        self.destinationView = AnyView(FibPaymentCheckView())
+        self.goToNext        = true
+    }
+    
+    
+    func navigateToHistoryDetails(trxID:String){
+        self.destinationView = AnyView(HistoryDetailView(id: trxID, fromPaymentSuccess: true))
+        self.goToNext        = true
+    }
+    
+    
      func navigateToWebAppLink(urlStr:String){
         if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
+            navigateToFibPAymentCheck()
             UIApplication.shared.open(url)
         }
     }
@@ -179,6 +199,16 @@ class HomeViewModel : ObservableObject{
             print(result)
             if result != nil{
                 self.ConfirmationResponse = result
+            }
+        }.store(in: &subscribers)
+    }
+    
+    func paymentCheck(trxId:String){
+        repo.getPaymentConfirmation(trxId: trxId)
+        repo.$PaymentCheckResponseData.sink { result in
+            print(result)
+            if result != nil{
+                self.PaymentConfirmationResponse = result
             }
         }.store(in: &subscribers)
     }

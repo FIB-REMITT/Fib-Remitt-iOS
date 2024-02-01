@@ -17,6 +17,8 @@ class HomeRepository {
     
     @Published var ConfirmationResponse : ConfirmationByTransactionResponse?
     
+    @Published var PaymentCheckResponseData : PaymentCheckResponse?
+    
     func getNationalitiesAPICall()  {
         APIManager.shared.getData(endPoint: BasicEndPoint.getNationalities, resultType: [NationalityResponse].self, showLoader: true)
             .sink { completion in
@@ -196,6 +198,29 @@ class HomeRepository {
             } receiveValue: { result in
                 print(result)
                 self.ConfirmationResponse = result
+
+            }.store(in: &subscribers)
+    }
+    
+    
+    func getPaymentConfirmation(trxId:String)  {
+        APIManager.shared.getData(endPoint: DashboardEndpoint.confirmationPaymentByTrx(trxId: trxId), resultType: PaymentCheckResponse.self, showLoader: false)
+            .sink { completion in
+                switch completion{
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    if let err = error as? NetworkError{
+                        // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: true)
+                    }else{
+                       // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: false)
+                    }
+                 
+                case .finished:
+                    print("API Called!")
+                }
+            } receiveValue: { result in
+                print(result)
+                self.PaymentCheckResponseData = result
 
             }.store(in: &subscribers)
     }
