@@ -15,10 +15,11 @@ class HomeViewModel : ObservableObject{
     @Published var goToNext         = false
     @Published var destinationView  = AnyView(Text("Destination"))
     
-    @Published var selectedPurpose:PurposeResponse            = PurposeResponse()
-    @Published var selectedRecipientCurrency:CurrencyResponse = CurrencyResponse()
-    @Published var selectedDeliveryMethod = "Bank Transfer"
-    @Published var beneficiaryCollectionResponse:BankCollectionResponse?
+    @Published var selectedPurpose : PurposeResponse            = PurposeResponse()
+    @Published var selectedRecipientCurrency : CurrencyResponse = CurrencyResponse()
+    @Published var selectedDeliveryMethod                       = "Bank Transfer"
+    @Published var selectedLanguage          : Language         = .Eng
+    @Published var beneficiaryCollectionResponse : BankCollectionResponse?
     @Published var ConfirmationResponse : ConfirmationByTransactionResponse?
     
     @Published var transferAmount     = "1.0"
@@ -100,8 +101,8 @@ class HomeViewModel : ObservableObject{
     func convertCurrency(){
         if let conversionRates = HomeDataHandler.shared.conversionRates{
             let targetRate = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
-            
-          let recipentAmountDouble =  (Double(self.transferAmount) ?? 1.0) * (targetRate ?? 1.0)
+            let defaultValue = transferAmount.isEmpty ? 0.0 : 1.0
+            let recipentAmountDouble =  (Double(self.transferAmount) ?? defaultValue) * (targetRate ?? 1.0)
             self.recipentAmount = "\(recipentAmountDouble)"
         }
     }
@@ -124,6 +125,7 @@ class HomeViewModel : ObservableObject{
             repo.getCurrencisAPICall()
             repo.$allCurrency.sink { result in
                 HomeDataHandler.shared.currencies = result ?? []
+                HomeDataHandler.shared.currencies.removeAll { currency in currency.code == "IQD"}
             }.store(in: &subscribers)
         }
     }

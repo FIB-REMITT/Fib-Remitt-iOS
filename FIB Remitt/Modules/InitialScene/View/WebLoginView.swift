@@ -51,7 +51,7 @@ struct WebLoginView: UIViewRepresentable {
         
         
         func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-    
+            
             guard let redirectURL = navigationAction.request.url else {
                 decisionHandler(.cancel)
                 return
@@ -68,24 +68,29 @@ struct WebContentView: View {
     @StateObject private var redirectModel = RedirectModel()
     @ObservedObject var viewModel = AuthViewModel()
     let urlLink = "https://fib.stage.fib.iq/auth/realms/fib-business-application/protocol/openid-connect/auth?redirect_uri="+Constant.redirect_url+"&response_type=code&client_id=sso-fib-pos&scope=openid"
+    @State var webViewShouldShow = true
     var body: some View {
         //        WebLoginView(url: URL(string: urlLink)!) { url in
         //            self.redirectURL = url
         //        }
         HStack(alignment:.top){
-            WebLoginView(url: URL(string: urlLink)!,scale: 4.0, redirectModel: redirectModel)
-                .onReceive(redirectModel.$redirectURL, perform: { url in
-                    
-                    let urlStr: String = url?.absoluteString ?? ""
-                    if urlStr.contains(Constant.redirect_url) && urlStr.contains("code="){
-                        let code = urlStr.split(separator: "code=")
-                        print("Here is the code = \(code[1])")
-                        viewModel.ssoLogin(code: String(code[1]))
-                        return
-                        
-                    }
-                    print("Here is the urls: \(String(describing: url))")
-                })
+            if webViewShouldShow{
+                WebLoginView(url: URL(string: urlLink)!,scale: 4.0, redirectModel: redirectModel)
+                    .onReceive(redirectModel.$redirectURL, perform: { url in
+                        let urlStr: String = url?.absoluteString ?? ""
+                        if urlStr.contains(Constant.redirect_url) && urlStr.contains("code="){
+                            self.webViewShouldShow = false
+                            let code = urlStr.split(separator: "code=")
+                            print("Here is the code = \(code[1])")
+                            viewModel.ssoLogin(code: String(code[1]))
+                            return
+                            
+                        }
+                        print("Here is the urls: \(String(describing: url))")
+                    })
+            }else{
+                VStack{}
+            }
             
         }//.frame(width: UI.scnWidth * 1.1)
     }

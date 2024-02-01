@@ -115,6 +115,7 @@
 		899F1D382B66687A00E7B35F /* TransactionDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D372B66687A00E7B35F /* TransactionDetailsResponse.swift */; };
 		899F1D3A2B66721000E7B35F /* TransactionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D392B66721000E7B35F /* TransactionDetailsViewModel.swift */; };
 		899F1D3C2B66722800E7B35F /* TransactionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D3B2B66722800E7B35F /* TransactionDetailsRepository.swift */; };
+		89C1C96A2B6B826000DA70AF /* HomeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C1C9692B6B826000DA70AF /* HomeEnum.swift */; };
 		9248954BA1DA9AF72EF8DF96 /* Pods_FIB_Remitt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */; };
 		A8737DFF2B68D531008A2465 /* StringData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8737DFE2B68D531008A2465 /* StringData.swift */; };
 		A8CA78602B66ABA700C383C8 /* BankCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */; };
@@ -238,6 +239,7 @@
 		899F1D372B66687A00E7B35F /* TransactionDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsResponse.swift; sourceTree = "<group>"; };
 		899F1D392B66721000E7B35F /* TransactionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewModel.swift; sourceTree = "<group>"; };
 		899F1D3B2B66722800E7B35F /* TransactionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsRepository.swift; sourceTree = "<group>"; };
+		89C1C9692B6B826000DA70AF /* HomeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEnum.swift; sourceTree = "<group>"; };
 		A8737DFE2B68D531008A2465 /* StringData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringData.swift; sourceTree = "<group>"; };
 		A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCollectionResponse.swift; sourceTree = "<group>"; };
 		A8CA78612B66B97300C383C8 /* invoice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = invoice.pdf; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 			children = (
 				8988E8EB2B62360100741F58 /* DeliveryMethodEnum.swift */,
 				8974F91B2B67D305007F2522 /* BeneficiaryEnum.swift */,
+				89C1C9692B6B826000DA70AF /* HomeEnum.swift */,
 			);
 			path = ModuleConstant;
 			sourceTree = "<group>";
@@ -1039,6 +1042,7 @@
 				897228062B665D8B006B4FEE /* BankResponse.swift in Sources */,
 				A8CA78602B66ABA700C383C8 /* BankCollectionResponse.swift in Sources */,
 				401CA4B32B68EDB000589966 /* Constant.swift in Sources */,
+				89C1C96A2B6B826000DA70AF /* HomeEnum.swift in Sources */,
 				897228142B667D9E006B4FEE /* PickerView.swift in Sources */,
 				89740D482B5D558D000ACFBA /* View.swift in Sources */,
 				899F1D3A2B66721000E7B35F /* TransactionDetailsViewModel.swift in Sources */,
