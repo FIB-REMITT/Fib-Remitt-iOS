@@ -150,8 +150,8 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$cashPickupBeneficiaryNormalCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    showToast( message: "Account Created Successfully!")
-                    loadView(view: FRBottomBarContainer())
+//                    showToast( message: "Account Created Successfully!")
+//                    loadView(view: FRBottomBarContainer())
                 }else{
                     showToast(message: "Failed to create Account")
                 }
@@ -165,8 +165,8 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$cashPickupBeneficiaryBusinessCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    showToast( message: "Account Created Successfully!")
-                    loadView(view: FRBottomBarContainer())
+//                    showToast( message: "Account Created Successfully!")
+//                    loadView(view: FRBottomBarContainer())
                 }else{
                     showToast(message: "Failed to create Account")
                 }
@@ -180,8 +180,8 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$bankBeneficiaryBusinessCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    showToast( message: "Account Created Successfully!")
-                    loadView(view: FRBottomBarContainer())
+//                    showToast( message: "Account Created Successfully!")
+//                    loadView(view: FRBottomBarContainer())
                 }else{
                     showToast(message: "Failed to create Account")
                 }
@@ -194,8 +194,7 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$bankBeneficiaryNormalCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    showToast( message: "Account Created Successfully!")
-                    loadView(view: FRBottomBarContainer())
+                    
                 }else{
                     showToast(message: "Failed to create Account")
                 }

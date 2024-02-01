@@ -15,12 +15,12 @@ class HomeViewModel : ObservableObject{
     @Published var goToNext         = false
     @Published var destinationView  = AnyView(Text("Destination"))
     
-    @Published var selectedPurpose : PurposeResponse            = PurposeResponse(id: "7bd96326-c76d-4920-adff-9f03b2fd0df3",code: "Account Opening",name: "Account Opening",gateway: "PARAGRAM",status: true)
+    @Published var selectedPurpose           : PurposeResponse  = PurposeResponse(id: "7bd96326-c76d-4920-adff-9f03b2fd0df3",code: "Account Opening",name: "Account Opening",gateway: "PARAGRAM",status: true)
     @Published var selectedRecipientCurrency : CurrencyResponse = CurrencyResponse()
     @Published var selectedDeliveryMethod                       = "Bank Transfer"
-    @Published var selectedLanguage          : Language         = .Eng
+    @Published var selectedLanguage              : Language     = .Eng
     @Published var beneficiaryCollectionResponse : BankCollectionResponse?
-    @Published var ConfirmationResponse : ConfirmationByTransactionResponse?
+    @Published var ConfirmationResponse          : ConfirmationByTransactionResponse?
     
     @Published var transferAmount     = "1.0"
     @Published var recipentAmount     = "0.023148"
@@ -33,7 +33,7 @@ class HomeViewModel : ObservableObject{
         self.getCurrencies()
         self.getConversionRates()
         self.observeValidationScopes()
-        self.convertCurrency()
+        self.convertCurrencyForTransfer()
     }
     
     //MARK: - NAVIGATIONS
@@ -84,10 +84,7 @@ class HomeViewModel : ObservableObject{
             .map { amount, terms in
                 return self.validate(transferAmount: self.transferAmount, termsAndCondition: self.isTermsSelected)
             }
-            .sink(receiveValue: { isValidate in
-               // self.isProceedValidated = isValidate
-                self.convertCurrency()
-            })
+            .sink(receiveValue: { isValidate in })
             .store(in: &subscribers)
     }
     
@@ -104,12 +101,21 @@ class HomeViewModel : ObservableObject{
         }
     }
     
-    func convertCurrency(){
-        if let conversionRates = HomeDataHandler.shared.conversionRates{
-            let targetRate = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
-            let defaultValue = transferAmount.isEmpty ? 0.0 : 1.0
+    func convertCurrencyForTransfer(){
+        if let conversionRates       = HomeDataHandler.shared.conversionRates{
+            let targetRate           = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
+            let defaultValue         = transferAmount.isEmpty ? 0.0 : 1.0
             let recipentAmountDouble =  (Double(self.transferAmount) ?? defaultValue) * (targetRate ?? 1.0)
-            self.recipentAmount = "\(recipentAmountDouble)"
+            self.recipentAmount      = "\(recipentAmountDouble)"
+        }
+    }
+    
+    func convertCurrencyForRecipient(){
+        if let conversionRates       = HomeDataHandler.shared.conversionRates{
+            let targetRate           = conversionRates.toDictionary()["IQD"]
+            let defaultValue         = transferAmount.isEmpty ? 0.0 : 1.0
+            let transferAmountDouble =  (Double(self.recipentAmount) ?? defaultValue) * (targetRate ?? 1.0)
+            self.transferAmount      = "\(transferAmountDouble)"
         }
     }
     

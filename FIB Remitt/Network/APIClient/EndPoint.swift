@@ -237,6 +237,8 @@ enum ProfileEndPoint: Endpoint {
     }
 }
 
+//(fullName:String,nationalityId:String,phoneNumber:String, address:String, invoice:Data?)
+
 //MARK: - Beneficiary EndPoint
 enum BeneficiaryEndpoint: Endpoint {
     
@@ -245,12 +247,14 @@ enum BeneficiaryEndpoint: Endpoint {
     case getCashPickupDetails(id:String)
     case getBankDetails(id:String)
     case createCashPickupPersonalBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, gender:String, relationShip:String)
+    case createCashPickupBusinessBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String)
+    case createBankBusinessBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, bankId:String, accNo:String)
     case createBankPersonalBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, gender:String, relationShip:String, bankId:String, accNo:String)
     case resetPassword(newPassword: String)
     
     var method: Alamofire.HTTPMethod{
         switch self {
-        case .createCashPickupPersonalBeneficiary, .createBankPersonalBeneficiary, .resetPassword:
+        case .createCashPickupPersonalBeneficiary, .createBankPersonalBeneficiary, .resetPassword, .createCashPickupBusinessBeneficiary, .createBankBusinessBeneficiary:
             return .post
             
         case .getCashPickupBeneficiaries, .getBankBeneficiaries, .getCashPickupDetails , .getBankDetails:
@@ -278,6 +282,10 @@ enum BeneficiaryEndpoint: Endpoint {
             return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup"
         case .getBankBeneficiaries:
             return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank"
+        case .createCashPickupBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address):
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup"
+        case .createBankBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address, bankId: let bankId, accNo: let accNo):
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank"
         }
     }
     
@@ -298,6 +306,12 @@ enum BeneficiaryEndpoint: Endpoint {
             
         case .resetPassword(let newPassword):
             return ["newPassword": newPassword, "confirmNewPassword": newPassword]
+        case .createCashPickupBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address):
+            return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address": address, "typeOfBeneficiary":"Business"]
+            //"fullName": fullName,"nationalityId": nationalityId, "phoneNumber" : phoneNumber, "address": address, "typeOfBeneficiary":"Business"
+        case .createBankBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address, bankId: let bankId, accNo: let accNo):
+            return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address":address,"typeOfBeneficiary":"Business","bankId":bankId, "accountNumber":accNo]
+           // "fullName": fullName,"nationalityId": nationalityId, "phoneNumber" : phoneNumber, "address": address, "typeOfBeneficiary":"Business", "bankId" : bankId, "accountNumber" : accountNo
         }
     }
     

@@ -40,7 +40,7 @@ struct EditBeneficiaryBankView: View {
                             
                             FRSimpleDropDownButton(title: vm.selectedNationality.name
                                                    ?? "Select Nationality", icon: "nationality_ico",action: {nationalityBtnPressed()})
-                            FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $vm.phone)
+                            FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $vm.phone).keyboardType(.numberPad)
                             FRVerticalField(placeholder: "Address", placeholderIcon: "location_ico", inputText: $vm.address)}
                         
                         beneficiaryTypeSelectionRadioStack
@@ -120,7 +120,7 @@ extension EditBeneficiaryBankView{
             TextBaseMedium(text: "Bank Details", fg_color: .text_Mute)
             //  FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_gry_ico", inputText: $vm.bankName)
             FRSimpleDropDownButton(title: vm.selectedBankName.name ?? "Select Bank", icon: "bank_gry_ico", action: {bankNameBtnPressed()})
-            FRVerticalField(placeholder: "Account Number", placeholderIcon: "acc_no", inputText: $vm.accountNo)
+            FRVerticalField(placeholder: "Account Number", placeholderIcon: "acc_no", inputText: $vm.accountNo).keyboardType(.numberPad)
         }
     }
     

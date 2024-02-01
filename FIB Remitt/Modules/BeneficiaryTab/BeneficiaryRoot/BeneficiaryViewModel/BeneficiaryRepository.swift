@@ -113,6 +113,8 @@ class BeneficiaryRepository {
                     if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                         print("Successfully Created CashPickup Beneficiary")
                         self.cashPickupBeneficiaryNormalCreationStatus = true
+                        showToast( message: "Account Created Successfully!",after: 0.2)
+                        loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
                     }else{
                         print("Failed!")
                         self.cashPickupBeneficiaryNormalCreationStatus = false
@@ -137,6 +139,8 @@ class BeneficiaryRepository {
                     if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                         print("Successfully Created CashPickup Beneficiary")
                         self.bankBeneficiaryNormalCreationStatus = true
+                        showToast( message: "Account Created Successfully!",after: 0.2)
+                        loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
                     }else{
                         self.bankBeneficiaryNormalCreationStatus = false
                         print("Failed!")
@@ -151,13 +155,15 @@ class BeneficiaryRepository {
     
     @Published var cashPickupBeneficiaryBusinessCreationStatus:Bool?
     func createCashPickupBusinessAPICall(fullName:String, nationality:String, phoneNumber:String, address:String, invoice:Data?) {
-        APIManager.shared.uploadBeneficiaryDocs(fullName: fullName, nationalityId: nationality, phoneNumber: phoneNumber, address: address, invoice: invoice)
+        APIManager.shared.uploadPdfDocs(endPoint: BeneficiaryEndpoint.createCashPickupBusinessBeneficiary(fullName: fullName, nationality: nationality, phoneNumber: phoneNumber, address: address), invoice: invoice, resultType:  EmptyResponse.self, showLoader: true)
           .sink { completion in
             switch completion{
             case .failure(let error):
               if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                   print("Successfully Created CashPickup Beneficiary Business")
                   self.cashPickupBeneficiaryBusinessCreationStatus = true
+                  showToast( message: "Account Created Successfully!",after: 0.2)
+                  loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
               }else{
                   print("Failed!")
                   self.cashPickupBeneficiaryBusinessCreationStatus = false
@@ -172,7 +178,7 @@ class BeneficiaryRepository {
     
     @Published var bankBeneficiaryBusinessCreationStatus:Bool?
     func createBankBeneficiaryBusinessAPICall(fullName:String, nationality:String, phone:String, address:String, bankId:String, accNo:String, invoice:Data?)  {
-        APIManager.shared.uploadBankBeneficiaryDocs(fullName: fullName, nationalityId: nationality, phoneNumber: phone, address: address, bankId: bankId, accountNo: accNo, invoice: invoice)
+        APIManager.shared.uploadPdfDocs(endPoint: BeneficiaryEndpoint.createBankBusinessBeneficiary(fullName: fullName, nationality: nationality, phoneNumber: phone, address: address, bankId: bankId, accNo: accNo), invoice: invoice, resultType: EmptyResponse.self, showLoader: true)
             .sink { completion in
                 switch completion{
                 case .failure(let error):
@@ -180,6 +186,8 @@ class BeneficiaryRepository {
                     if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                         print("Successfully Created Bank Beneficiary Business type")
                         self.bankBeneficiaryNormalCreationStatus = true
+                        showToast( message: "Account Created Successfully!",after: 0.2)
+                        loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
                     }else{
                         self.bankBeneficiaryNormalCreationStatus = false
                         print("Failed!")

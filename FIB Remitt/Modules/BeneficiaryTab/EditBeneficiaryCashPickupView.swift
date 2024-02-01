@@ -39,7 +39,7 @@ struct EditBeneficiaryCashPickupView: View {
                             TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
                             FRVerticalField(placeholder: "Full Name", placeholderIcon: "user_ico", inputText: $vm.firstName)
                             FRSimpleDropDownButton(title: vm.selectedNationality.name ?? "Select Nationality", icon: "nationality_ico", action: {self.nationalityButtonPressed()})
-                            FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $vm.phone)
+                            FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $vm.phone).keyboardType(.numberPad)
                             FRVerticalField(placeholder: "Address", placeholderIcon: "location_ico", inputText: $vm.address)}
                         
                         VStack(alignment:.leading){
