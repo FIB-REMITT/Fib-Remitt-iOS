@@ -19,7 +19,6 @@ struct HomeRootView: View {
                 topBarContainer
                 ScrollView{
                     VStack(spacing:16){
-                   //     topProfileContainer
                         topAmountInputContainer
                         deliveryMethodContainer
                         purposeContainer
@@ -35,8 +34,9 @@ struct HomeRootView: View {
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
         .onTapGesture {hideKeyboard()}
-        .onChange(of: vm.transferAmount, perform: {newValue in recipientAmountUpdate()})
-        .onChange(of: vm.recipentAmount, perform: {newValue in transferAmountUpdate()})
+        .onChange(of: vm.transferAmount, perform: {newValue in recipientAmountUpdate(); vm.validateProceedButton()})
+        .onChange(of: vm.recipentAmount, perform: {newValue in transferAmountUpdate(); vm.validateProceedButton()})
+        .onChange(of: vm.isTermsSelected, perform: {newValue in vm.validateProceedButton()})
         .onAppear(){vm.viewWillAppearCalled()}
     }
    
@@ -125,7 +125,7 @@ extension HomeRootView{
             }, label: {
                 FRVContainer (backgroundColor: .fr_background){
                     HStack{
-                        TextBaseRegular(text:vm.selectedPurpose.name ?? "Family Support", fg_color: .text_Mute)
+                        TextBaseRegular(text:vm.selectedPurpose.name ?? "Select Purpose", fg_color: .text_Mute)
                         Spacer()
                         Image(systemName: "chevron.down")
                     }
@@ -164,6 +164,7 @@ extension HomeRootView{
     private func purposeButtonPressed(){
         showSheet(view: AnyView(PurposePicker(purposes: HomeDataHandler.shared.purposes, itemSelect: { selectedItem in
             self.vm.selectedPurpose = selectedItem
+            self.vm.validateProceedButton()
         })))
     }
     private func selectRecipientCurrencyPressed(){

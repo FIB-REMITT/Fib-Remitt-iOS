@@ -15,7 +15,7 @@ class HomeViewModel : ObservableObject{
     @Published var goToNext         = false
     @Published var destinationView  = AnyView(Text("Destination"))
     
-    @Published var selectedPurpose           : PurposeResponse  = PurposeResponse(id: "7bd96326-c76d-4920-adff-9f03b2fd0df3",code: "Account Opening",name: "Account Opening",gateway: "PARAGRAM",status: true)
+    @Published var selectedPurpose           : PurposeResponse  = PurposeResponse(name: "Select Purpose")
     @Published var selectedRecipientCurrency : CurrencyResponse = CurrencyResponse()
     @Published var selectedDeliveryMethod                       = "Bank Transfer"
     @Published var selectedLanguage              : Language     = .Eng
@@ -33,7 +33,7 @@ class HomeViewModel : ObservableObject{
         self.getPurposes()
         self.getCurrencies()
         self.getConversionRates()
-        self.observeValidationScopes()
+    //    self.observeValidationScopes()
     }
     
     //MARK: - NAVIGATIONS
@@ -98,25 +98,28 @@ class HomeViewModel : ObservableObject{
         HomeDataHandler.shared.amountToTransfer = transferAmount
     }
     
-    private func observeValidationScopes() {
-        Publishers.CombineLatest($transferAmount, $isTermsSelected)
-            .map { amount, terms in
-                return self.validate(transferAmount: self.transferAmount, termsAndCondition: self.isTermsSelected)
-            }
-            .sink(receiveValue: { isValidate in })
-            .store(in: &subscribers)
-    }
+//    private func observeValidationScopes() {
+//        Publishers.CombineLatest($transferAmount, $isTermsSelected)
+//            .map { amount, terms in
+//                return self.validate(transferAmount: self.transferAmount, termsAndCondition: self.isTermsSelected)
+//            }
+//            .sink(receiveValue: { isValidate in })
+//            .store(in: &subscribers)
+//    }
     
-    private func validate(transferAmount:String, termsAndCondition:Bool) -> Bool {
-        if transferAmount.isEmpty {
+    func validateProceedButton() {
+        if transferAmount.isEmpty || (Double(transferAmount) == 0){
             self.isProceedValidated = false
-            return false
-        }/*else if termsAndCondition == false{
+
+        }else if self.isTermsSelected  == false{
             self.isProceedValidated = false
-            return false
-        }*/else{
+
+        }else if selectedPurpose.id == nil{
+            self.isProceedValidated = false
+
+        }else{
             self.isProceedValidated = true
-            return true
+
         }
     }
     
