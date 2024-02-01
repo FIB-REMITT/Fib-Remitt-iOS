@@ -16,7 +16,7 @@ struct HomePayViaFIBView: View {
             middleListContainer
             Spacer()
             bottomCancelButton
-
+            
         }.onAppear{
             vm.getConfirmationByTransactionId(trxId: HomeDataHandler.shared.beneficiaryCollectionResponse?.transactionNumber ?? "")
         }
@@ -46,11 +46,28 @@ extension HomePayViaFIBView{
                     .cornerRadius(12)
                 
             }
+            
+            HStack(spacing:6){
+                TextMediumRegular(text: vm.ConfirmationResponse?.readableCode ?? "", fg_color: .textMute)
+                    .padding(10)
+                    .background(.frForground)
+                
+                Image("copy")
+                    .imageDefaultStyle()
+                    .frame(width: 15, height: 15)
+                    .padding(.trailing,10)
+                    .background(Color.frForground)
+                    .cornerRadius(100)
+            }
+            
+            .background(Color.frForground)
+            .cornerRadius(18)
            
-            TextMediumRegular(text: vm.ConfirmationResponse?.readableCode ?? "", fg_color: .textMute)
-                .padding(10)
-                .background(.frForground)
-                .cornerRadius(18)
+            
+            .onTapGesture {
+                UIPasteboard.general.string = vm.ConfirmationResponse?.readableCode
+                showToast(message: "Text Copied")
+            }
         }
     }
     
@@ -84,5 +101,5 @@ extension HomePayViaFIBView{
     private func cancelButtonPressed(){
         loadView(view: FRBottomBarContainer())
     }
-
+    
 }

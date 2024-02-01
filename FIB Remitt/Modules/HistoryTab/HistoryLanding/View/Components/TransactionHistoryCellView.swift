@@ -67,7 +67,7 @@ struct TransactionHistoryCellView: View {
                             .cornerRadius(100)
                             .onTapGesture {
                                 UIPasteboard.general.string = transaction.transactionNumber
-                                showToast(message: "Copied")
+                                showToast(message: "Text Copied")
                             }
                         
                     }
