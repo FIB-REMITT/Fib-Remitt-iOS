@@ -164,11 +164,13 @@ extension HomeSelectBeneficiaryView{
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "business"{
                                     isFilePickerPresented = true
                                     selectedBeneficiaryID = beneficiary.id
+                                    isProceedEnable = false
                                     resetSelection = false
                                 }else{
                                   //
                                     selectedBeneficiaryID = beneficiary.id
                                     resetSelection = false
+                                    isProceedEnable = true
                                 }
                             }
                     }
@@ -183,6 +185,12 @@ extension HomeSelectBeneficiaryView{
 //        FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}
         FRVerticalControlBtn(isDisabled: $isProceedEnable, title: "Procced") {
             self.proccedBtnPressed()
+        }
+        .onTapGesture {
+            if  isProceedEnable == true{
+                self.proccedBtnPressed()
+            }
+           
         }
     }
 }
