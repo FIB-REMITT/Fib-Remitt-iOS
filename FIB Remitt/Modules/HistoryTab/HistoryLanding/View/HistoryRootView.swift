@@ -20,7 +20,7 @@ struct HistoryRootView: View {
                 contextContainer
             }
         }
-        .padding()
+        .padding(.horizontal)
         .background(Color.frBackground.ignoresSafeArea())
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
         .onAppear(perform: {
@@ -45,7 +45,7 @@ struct HistoryRootView: View {
 //MARK: - VIEW COMPONENTS
 extension HistoryRootView{
     private var navigationBar : some View {
-        FRNavigationBarView(title: "Transfer History", rightView: AnyView(FRBarButton(icon: "bell_ico", action: {self.notificationBtnPressed()})))
+        FRNavigationBarView( leftView: nil, title: "Transfer History", rightView: AnyView(FRBarButton(icon: "bell_ico", action: {self.notificationBtnPressed()})))
     }
     private var topFilterDropdown : some View {
         HStack{

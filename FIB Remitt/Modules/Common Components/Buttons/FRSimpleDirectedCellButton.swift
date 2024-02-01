@@ -9,12 +9,13 @@ import SwiftUI
 
 struct FRSimpleDirectedCellButton: View {
     var title : String = "FIB Personal App"
+    var backgrounColor : Color = .frForground
     var action : () -> Void = {}
     var body: some View {
         Button {
             action()
         } label: {
-            SimpleDirectedCellView(title: title)
+            SimpleDirectedCellView(title: title, backgroundColor: backgrounColor)
         }
 
         

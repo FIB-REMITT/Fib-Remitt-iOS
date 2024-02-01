@@ -12,9 +12,9 @@ struct FRSimpleStaticPicker<T: RawRepresentable & CaseIterable & Hashable>: View
     @Binding var selected: T
     
     var body: some View {
-        SheetHolder {
+        SheetHolder (spacing: 12){
             ForEach(Array(T.allCases), id: \.self) { item in
-                FRSimpleDirectedCellButton(title: item.rawValue, action: {
+                FRSimpleDirectedCellButton(title: item.rawValue, backgrounColor: .fr_background, action: {
                     self.selected = item
                     getWindow().rootViewController?.dismiss(animated: true, completion: nil)
                 })

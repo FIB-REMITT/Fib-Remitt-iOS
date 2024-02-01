@@ -18,7 +18,7 @@ struct HomeRootView: View {
                 topBarContainer
                 ScrollView{
                     VStack(spacing:16){
-                        topProfileContainer
+                   //     topProfileContainer
                         topAmountInputContainer
                         deliveryMethodContainer
                         purposeContainer
@@ -27,34 +27,14 @@ struct HomeRootView: View {
                     }
                 }
             }
-            .padding()
+            .padding(.horizontal)
         }
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
         .onTapGesture {hideKeyboard()}
         .onAppear(){vm.viewWillAppearCalled()
-//            vm.apiReceivedInBank(beneficiaryId: "76284f97-e50d-402d-b52d-4710f5341c2b", fromCurrency: "IQD", amountToTransfer: "45000", toCurrency: "TRY", paymentMethod: "BANK", collectionPoint: "BANK", purposeId: "2217ff09-e479-4a60-b8f2-297c9912e481", invoice: loadPDF())
-            
         }
     }
-    
-    
-//    func loadPDF() -> Data? {
-//        guard let url = Bundle.main.url(forResource: "invoice", withExtension: "pdf") else {
-//            print("PDF file not found in bundle.")
-//            return nil
-//        }
-//
-//        do {
-//            let data = try Data(contentsOf: url)
-//            return data
-//        } catch {
-//            print("Error loading PDF data: \(error)")
-//            return nil
-//        }
-//    }
-   
-
    
 }
 
@@ -64,7 +44,7 @@ extension HomeRootView{
         HStack{
             Image("logo_horizantal")
             Spacer()
-            FRTextDropDownButton(title: "Eng")
+            FRTextDropDownButton(title: vm.selectedLanguage.title, action: {languageButtonPressed()})
             FRBarButton(icon: "bell_ico")
         }
     }
@@ -92,7 +72,7 @@ extension HomeRootView{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $vm.transferAmount)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
-                FRSimpleDropDownButton(title: "IQD", icon: "iraq_flag")
+                FRSimpleDropDownButton(title: "IQD", icon: "iraq_flag", action: {self.selectTransferCurrencyPressed()})
             }
             
             TextBaseMedium(text: "Recipient gets", fg_color: .text_Mute)
@@ -187,6 +167,17 @@ extension HomeRootView{
             self.vm.selectedRecipientCurrency = selectedItem
             self.vm.convertCurrency()
         })))
+    }
+    
+    private func selectTransferCurrencyPressed(){
+        showSheet(view: AnyView(CurrencyPicker(currencies: HomeDataHandler.shared.transferCurrencies, itemSelect: { selectedItem in
+            self.vm.selectedRecipientCurrency = selectedItem
+            self.vm.convertCurrency()
+        })))
+    }
+    
+    private func languageButtonPressed(){
+        showSheet(view: AnyView(FRSimpleStaticPicker(type: Language.self, selected: $vm.selectedLanguage)))
     }
 }
 
