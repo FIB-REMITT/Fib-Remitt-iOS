@@ -30,6 +30,7 @@ class APIManager{
                 if showLoader {LoaderManager.shared.showHud()}
 
                 let headers = self?.getDefaultHeaders(endpoint: endPoint)
+               
                 print("Headers ->\n \(headers ?? HTTPHeaders())")
                 print("EndPoint:", path)
                 print("Parameters: \(endPoint.query ?? ["":""] )")
@@ -100,8 +101,7 @@ class APIManager{
                 let boundary = "Boundary-\(UUID().uuidString)"
                 let headers: HTTPHeaders = [
                     HTTPHeaderField.authentication.rawValue: UserSettings.shared.getAccessToken(),
-                    HTTPHeaderField.contentType.rawValue: "multipart/form-data; boundary=\(boundary)",
-                    HTTPHeaderField.contentType.rawValue: ContentType.urlEncoded.rawValue
+                    HTTPHeaderField.contentType.rawValue: "multipart/form-data; boundary=\(boundary)"
                 ]
 
                 let multipartData: MultipartFormData = MultipartFormData()

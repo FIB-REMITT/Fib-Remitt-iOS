@@ -9,9 +9,9 @@ import SwiftUI
 
 struct InitialView: View {
     @ObservedObject var vm = AuthViewModel()
-   // @StateObject var viewModel = AuthViewModel()
+    // @StateObject var viewModel = AuthViewModel()
     @State var tapped = false
-
+    
     var body: some View {
         NavigationStack{
             ZStack {
@@ -31,10 +31,10 @@ struct InitialView: View {
                     }
                 }
             }.navigationBarHidden(true)
-            .navigationDestination(isPresented: $vm.goToNext, destination: {vm.destinationView})
-//            .onChange(of: vm.loggedIn, perform: { value in
-//                self.tapped = value
-//            })
+                .navigationDestination(isPresented: $vm.goToNext, destination: {vm.destinationView})
+            //            .onChange(of: vm.loggedIn, perform: { value in
+            //                self.tapped = value
+            //            })
         }
     }
 }

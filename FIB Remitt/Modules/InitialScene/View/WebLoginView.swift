@@ -69,23 +69,25 @@ struct WebContentView: View {
     @ObservedObject var viewModel = AuthViewModel()
     let urlLink = "https://fib.stage.fib.iq/auth/realms/fib-business-application/protocol/openid-connect/auth?redirect_uri="+Constant.redirect_url+"&response_type=code&client_id=sso-fib-pos&scope=openid"
     var body: some View {
-//        WebLoginView(url: URL(string: urlLink)!) { url in
-//            self.redirectURL = url
-//        }
-        WebLoginView(url: URL(string: urlLink)!,scale: 4.0, redirectModel: redirectModel)
-        .onReceive(redirectModel.$redirectURL, perform: { url in
+        //        WebLoginView(url: URL(string: urlLink)!) { url in
+        //            self.redirectURL = url
+        //        }
+        HStack(alignment:.top){
+            WebLoginView(url: URL(string: urlLink)!,scale: 4.0, redirectModel: redirectModel)
+                .onReceive(redirectModel.$redirectURL, perform: { url in
+                    
+                    let urlStr: String = url?.absoluteString ?? ""
+                    if urlStr.contains(Constant.redirect_url) && urlStr.contains("code="){
+                        let code = urlStr.split(separator: "code=")
+                        print("Here is the code = \(code[1])")
+                        viewModel.ssoLogin(code: String(code[1]))
+                        return
+                        
+                    }
+                    print("Here is the urls: \(String(describing: url))")
+                })
             
-            let urlStr: String = url?.absoluteString ?? ""
-            if urlStr.contains(Constant.redirect_url) && urlStr.contains("code="){
-                let code = urlStr.split(separator: "code=")
-                print("Here is the code = \(code[1])")
-                viewModel.ssoLogin(code: String(code[1]))
-                return
-                
-            }
-            print("Here is the urls: \(String(describing: url))")
-        })
-        
+        }//.frame(width: UI.scnWidth * 1.1)
     }
 }
 

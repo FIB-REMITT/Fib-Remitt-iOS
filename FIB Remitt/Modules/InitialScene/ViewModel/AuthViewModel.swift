@@ -34,8 +34,8 @@ class AuthViewModel : ObservableObject{
 
     func ssoLogin(code: String){
         repo.ssoLoginAPICall(code: code)
-        repo.$ssoLoginResponse.sink{ result in
-            
+        repo.$authWithFIBResponse.sink{ result in
+
         }.store(in: &subscribers)
     }
     

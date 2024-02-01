@@ -20,10 +20,11 @@ enum AuthEndPoint: Endpoint {
     case forgotPassVerifyOTP(username:String, otp:String)
     case forgotPassReset(username:String, otp:String, password:String)
     case ssoLogin(code: String)
+    case authWithFIB(idToken:String, accessToken:String)
     
     var method: HTTPMethod {
         switch self {
-        case .signIn, .createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken, .ssoLogin :
+        case .signIn, .createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken, .ssoLogin, .authWithFIB :
             return .post
         }
     }
@@ -52,6 +53,8 @@ enum AuthEndPoint: Endpoint {
             return "api/v1/auth/refresh-token"
         case .ssoLogin:
             return "auth/realms/fib-business-application/protocol/openid-connect/token"
+        case .authWithFIB:
+            return "api/v1/oauth/login/fib"
         }
     }
     
@@ -80,12 +83,14 @@ enum AuthEndPoint: Endpoint {
             return ["grant_type":"refresh_token", "client_id":"mobile-app", "client_secret":"rYTLJ0lgPKUHNluGaSDEeyT2hou2KYq5", "refresh_token":refreshToken]
         case .ssoLogin(let code):
             return ["grant_type":"authorization_code", "client_id":"sso-fib-pos", "client_secret":"8f363003-407c-4f8c-b704-8a9ea2327a95", "redirect_uri":Constant.redirect_url, "code": code ]
+        case .authWithFIB(let idToken ,let accessToken):
+            return ["idToken":idToken, "accessToken":accessToken]
         }
     }
     
     var encoder: ParameterEncoder {
         switch self{
-        case .forgotPassSendOTP:
+        case .forgotPassSendOTP, .ssoLogin, .authWithFIB:
             return URLEncodedFormParameterEncoder.default
             
         default:
@@ -95,7 +100,7 @@ enum AuthEndPoint: Endpoint {
     
     var contentType: String{
         switch self{
-        case .forgotPassSendOTP:
+        case .forgotPassSendOTP, .ssoLogin, .authWithFIB:
             return ContentType.urlEncoded.rawValue
         default:
             return ContentType.json.rawValue

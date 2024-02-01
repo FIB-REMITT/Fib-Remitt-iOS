@@ -11,8 +11,8 @@ class AuthRepository {
     private var subscribers = Set<AnyCancellable>()
     
     @Published var loginInfo: SignInResponse?
-    @Published var ssoLoginResponse: SignInResponse?
-  //  let vm = AuthViewModel()
+    @Published var authWithFIBResponse: SignInData?
+
     func loginAPICall(username:String, pass:String)  {
         APIManager.shared.getData(endPoint: AuthEndPoint.signIn(username: username, password: pass), resultType: SignInResponse.self, showLoader: true)
             .sink { completion in
@@ -26,17 +26,14 @@ class AuthRepository {
                     }
                  
                 case .finished:
-                    print("API Called!")// kabbo+81@newroztech.com //Password100@
+                    print("API Called!")
                 }
             } receiveValue: { result in
                 if result.data?.access_token == nil{
-                    //self.presenter?.loginDidAttempedWithTwoFactorRequired()
                 }else{
                     if let data = result.data{
                         self.loginInfo = result
                         UserSettings.shared.setLoginInfo(loginInfo: data)
-                       // self.presenter?.loginDidAttempedWithSuccess()
-                       // self.vm.successfullyLoggedIn()
                     }
 
                 }
@@ -44,7 +41,7 @@ class AuthRepository {
     }
     
     func ssoLoginAPICall(code: String)  {
-        APIManager.shared.uploadFormData(apiUrl: "https://fib.stage.fib.iq/",endPoint: AuthEndPoint.ssoLogin(code: code), resultType: SignInResponse.self, showLoader: true)
+        APIManager.shared.getData(apiUrl: "https://fib.stage.fib.iq/",endPoint: AuthEndPoint.ssoLogin(code: code), resultType: SignInData.self, showLoader: true)
             .sink { completion in
                 switch completion{
                 case .failure(let error):
@@ -56,20 +53,33 @@ class AuthRepository {
                     }
                  
                 case .finished:
-                    print("API Called!")// kabbo+81@newroztech.com //Password100@
+                    print("API Called!")
                 }
             } receiveValue: { result in
-                if result.data?.access_token == nil{
-                    //self.presenter?.loginDidAttempedWithTwoFactorRequired()
-                }else{
-                    if result.data != nil{
-                        self.ssoLoginResponse = result
-                        print("Here is the login response: \(String(describing: self.ssoLoginResponse))")
-                        //UserSettings.shared.setLoginInfo(loginInfo: data)
-                       // self.presenter?.loginDidAttempedWithSuccess()
-                       // self.vm.successfullyLoggedIn()
+                self.authWithFIBAPICall(idToken: result.id_token ?? "", accessToken: result.access_token ?? "")
+            }.store(in: &subscribers)
+    }
+    
+    func authWithFIBAPICall(idToken:String, accessToken:String)  {
+        APIManager.shared.getData(endPoint: AuthEndPoint.authWithFIB(idToken: idToken, accessToken: accessToken), resultType: SignInData.self, showLoader: true)
+            .sink { completion in
+                switch completion{
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    if error is NetworkError{
+                        // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: true)
+                    }else{
+                       // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: false)
                     }
-
+                 
+                case .finished:
+                    print("API Called!")
+                }
+            } receiveValue: { result in
+                self.authWithFIBResponse = result
+                UserSettings.shared.setLoginInfo(loginInfo: result)
+                if result.access_token?.isEmpty == false{
+                    loadView(view:  FRBottomBarContainer())
                 }
             }.store(in: &subscribers)
     }

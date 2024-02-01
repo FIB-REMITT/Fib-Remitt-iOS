@@ -27,6 +27,7 @@ struct SignInData: Codable, CustomStringConvertible {
     var access_token:String?
     var refresh_token:String?
     var token_type: String?
+    var id_token: String?
     var session_state:String?
     var scope: String?
     var expires_in: Int?
@@ -37,6 +38,7 @@ struct SignInData: Codable, CustomStringConvertible {
         case access_token
         case refresh_token
         case token_type
+        case id_token
         case session_state
         case scope
         case expires_in
