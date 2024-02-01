@@ -9,9 +9,9 @@ import SwiftUI
 import Combine
 
 class BeneficiaryViewModel : ObservableObject{
-    private var subscribers = Set<AnyCancellable>()
-    private let repo        = BeneficiaryRepository()
-    private let homeRepo    = HomeRepository()
+    private var subscribers     = Set<AnyCancellable>()
+    private let repo            = BeneficiaryRepository()
+    private let homeRepo        = HomeRepository()
     private let beneficiaryData = BenficiaryDataHandler.shared
     @Published var selectedCollectionPoint : CollectionPoint = .all
     
@@ -35,10 +35,13 @@ class BeneficiaryViewModel : ObservableObject{
     @Published var phone     : String = ""
     @Published var address   : String = ""
     //@Published var bankName  : String = ""
-    @Published var selectedBankName : BankResponse = BankResponse(name: "Select Bank")
-    @Published var selectedNationality : NationalityResponse = NationalityResponse(name: "Select Nationality")
-    @Published var accountNo : String = ""
-    @Published var relation : String = ""
+    @Published var selectedBankName     : BankResponse        = BankResponse(name: "Select Bank")
+    @Published var selectedNationality  : NationalityResponse = NationalityResponse(name: "Select Nationality")
+    @Published var accountNo            : String = ""
+    @Published var relation             : String  = ""
+    @Published var isSaveValidated     = false
+    
+    @Published var isBankSaveValidated = false
     
     //MARK: - VIEWLIFECYCLE
     func viewWillAppearCalled() {
@@ -54,6 +57,14 @@ class BeneficiaryViewModel : ObservableObject{
         }else if beneficiaryType == .bank_Transfer{
             self.getBankBeneficiaryDetails()
         }
+    }
+    
+    func addCashPickupOnAppear() {
+        observeCashPickupValidationScopes()
+    }
+    
+    func addBankBeneficiaryOnAppear() {
+        observeBankValidationScopes()
     }
     
     //MARK: - NAVIGATION
@@ -193,6 +204,76 @@ class BeneficiaryViewModel : ObservableObject{
     }
     
     //MARK: - CUSTOME METHODS
+    private func observeCashPickupValidationScopes() {
+        Publishers.CombineLatest4($firstName, $selectedNationality, $phone, $address)
+            .map { name, nationality, phone, address in
+                return self.validate(name: self.firstName, nationality: self.selectedNationality.id ?? "", phone: phone, address: address)
+            }
+            .sink(receiveValue: { isValidate in
+                self.isSaveValidated = isValidate
+            })
+            .store(in: &subscribers)
+    }
+    
+    @Published var firstValidationCheck  = false
+    @Published var secondValidationCheck = false
+    
+    private func observeBankValidationScopes() {
+
+        Publishers.CombineLatest4($firstName, $selectedNationality, $phone, $address)
+            .map { name, nationality, phone, address in
+                return self.validate(name: self.firstName, nationality: self.selectedNationality.id ?? "", phone: phone, address: address)
+            }
+            .sink(receiveValue: { isValidate in
+                self.firstValidationCheck = isValidate
+            })
+            .store(in: &subscribers)
+        
+        Publishers.CombineLatest($accountNo, $selectedBankName)
+            .map { accountNo, bank in
+                return self.validate(selectedBank: bank.id ?? "", accountNo: accountNo)
+            }
+            .sink(receiveValue: { isValidate in
+                self.secondValidationCheck = isValidate
+            })
+            .store(in: &subscribers)
+        
+        Publishers.CombineLatest($firstValidationCheck, $secondValidationCheck)
+            .map { first, second in
+                return first && second
+            }
+            .sink(receiveValue: { isValidate in
+                self.isBankSaveValidated = isValidate
+            })
+            .store(in: &subscribers)
+    }
+    
+    private func validate(name:String, nationality:String, phone:String, address:String) -> Bool {
+        if name.isEmpty {
+            return false
+        }else if nationality.isEmpty {
+            return false
+        }else if phone.isEmpty{
+            return false
+        }else if address.isEmpty{
+            return false
+        }else{
+            return true
+        }
+
+    }
+    
+    private func validate(selectedBank:String, accountNo:String) -> Bool {
+        if selectedBank.isEmpty {
+            return false
+        }else if accountNo.isEmpty {
+            return false
+        }else{
+            return true
+        }
+
+    }
+    
     func loadPDF() -> Data? {
         guard let url = Bundle.main.url(forResource: "invoice", withExtension: "pdf") else {
             print("PDF file not found in bundle.")

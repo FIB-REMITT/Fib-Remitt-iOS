@@ -95,6 +95,7 @@ struct EditBeneficiaryCashPickupView: View {
             .padding()
             .navigationBarHidden(true)
             .onTapGesture {hideKeyboard()}
+            .onAppear(){viewOnAppearCalled()}
         }
 
     }
@@ -105,11 +106,12 @@ extension EditBeneficiaryCashPickupView{
         FRNavigationBarView(title: "Cash Pick-up Beneficiary")
     }
     private var bottomSaveButton : some View{
-        FRVerticalBtn(title: "Save", btnColor: .primary500) {self.saveButtonPressed()}
+        FRVerticalControlBtn(isDisabled: $vm.isSaveValidated, title: "Save") {self.saveButtonPressed()}
     }
 }
 extension EditBeneficiaryCashPickupView{
     private func nationalityButtonPressed() {
+        hideKeyboard()
         showSheet(view: AnyView(NationalityPicker(nations: BenficiaryDataHandler.shared.nationalities, itemSelect: { item in
             self.vm.selectedNationality = item
         })))
@@ -123,6 +125,13 @@ extension EditBeneficiaryCashPickupView{
         }
     }
 }
+
+extension EditBeneficiaryCashPickupView{
+    func viewOnAppearCalled() {
+        vm.addCashPickupOnAppear()
+    }
+}
+
 #Preview {
     EditBeneficiaryCashPickupView()
 }

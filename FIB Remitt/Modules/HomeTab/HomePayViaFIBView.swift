@@ -64,21 +64,20 @@ extension HomePayViaFIBView{
     }
     
     private var bottomCancelButton : some View{
-        FRTextButton(title: "Cancel", color: .red) { 
-            
-        }
+        FRTextButton(title: "Cancel", color: .red) { cancelButtonPressed()}
     }
 }
 
 //MARK: - ACTIONS
 extension HomePayViaFIBView{
-    private func notificationBtnPressed() {
-        
-    }
+    private func notificationBtnPressed() {}
     
     private func navigateToWebApp(urlStr:String){
         vm.navigateToWebAppLink(urlStr: urlStr)
     }
     
+    private func cancelButtonPressed(){
+        loadView(view: FRBottomBarContainer())
+    }
 
 }

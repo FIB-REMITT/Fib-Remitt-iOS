@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct FRNavigationBarView: View {
-    var leftView  : AnyView = AnyView(FRBarButton(icon: "back_arrow"))
+    var leftView  : AnyView? = AnyView(FRBarButton(icon: "back_arrow"))
     var title     : String = ""
     var rightView : AnyView?
     
     var body: some View {
         HStack{
-            leftView
-            Spacer()
+            if let lView = leftView{
+               lView
+                Spacer()
+            }
+//            leftView
+//            Spacer()
             TextBaseMedium(text: title)
             Spacer()
             if let rView = rightView{
@@ -27,7 +31,7 @@ struct FRNavigationBarView: View {
 
 #Preview {
     ZStack{
-        Color.frBackground.ignoresSafeArea()
+        Color.cyan.ignoresSafeArea()
         FRNavigationBarView(title: "Transfer History")
     }
 }

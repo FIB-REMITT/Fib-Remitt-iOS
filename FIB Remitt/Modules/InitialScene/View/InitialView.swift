@@ -9,14 +9,14 @@ import SwiftUI
 
 struct InitialView: View {
     @ObservedObject var vm = AuthViewModel()
-   // @StateObject var viewModel = AuthViewModel()
-    @State var tapped      = false
-
+    // @StateObject var viewModel = AuthViewModel()
+    @State var tapped = false
+    
     var body: some View {
         NavigationStack{
             ZStack {
                 if tapped{
-                    FRBottomBarContainer()
+                    WebContentView()
                 }else{
                     backgroundView
                     VStack {
@@ -27,14 +27,14 @@ struct InitialView: View {
                         Spacer()
                         bottomLoginButton
                         bottomDownloadOptionContainer
-                        Spacer()
+
                     }
                 }
             }.navigationBarHidden(true)
-            .navigationDestination(isPresented: $vm.goToNext, destination: {vm.destinationView})
-//            .onChange(of: vm.loggedIn, perform: { value in
-//                self.tapped = value
-//            })
+                .navigationDestination(isPresented: $vm.goToNext, destination: {vm.destinationView})
+            //            .onChange(of: vm.loggedIn, perform: { value in
+            //                self.tapped = value
+            //            })
         }
     }
 }
@@ -85,7 +85,6 @@ extension InitialView {
     private func loginWithFIBButtonPressed() {
 //        vm.navigateToHome()
         self.tapped = true
-        vm.login() 
 
     }
     private func downloadNowButtonPressed(){}

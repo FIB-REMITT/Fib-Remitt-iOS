@@ -18,7 +18,7 @@ struct BeneficiaryRootView: View {
             topCollectionPointTypeContianer
             contextContainer
         }
-        .padding()
+        .padding(.horizontal)
         .background(Color.fr_background.ignoresSafeArea())
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
@@ -28,7 +28,7 @@ struct BeneficiaryRootView: View {
 //MARK: - VIEW COMPONENTS
 extension BeneficiaryRootView{
     private var navigationBar : some View {
-        FRNavigationBarView(title: "Beneficiary", rightView: AnyView(FRTextButton(title: "+Add New", action: {self.addNewBtnPressed()})))
+        FRNavigationBarView(leftView: nil, title: "Beneficiary", rightView: AnyView(FRTextButton(title: "+Add New", action: {self.addNewBtnPressed()})))
     }
     
     private var topCollectionPointTypeContianer : some View{

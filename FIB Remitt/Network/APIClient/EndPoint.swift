@@ -19,10 +19,12 @@ enum AuthEndPoint: Endpoint {
     case forgotPassSendOTP(username:String)
     case forgotPassVerifyOTP(username:String, otp:String)
     case forgotPassReset(username:String, otp:String, password:String)
+    case ssoLogin(code: String)
+    case authWithFIB(idToken:String, accessToken:String)
     
     var method: HTTPMethod {
         switch self {
-        case .signIn, .createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken :
+        case .signIn, .createAccountSentOtp, .createAccount, .forgotPassSendOTP, .forgotPassVerifyOTP, .forgotPassReset, .refreshToken, .ssoLogin, .authWithFIB :
             return .post
         }
     }
@@ -49,6 +51,10 @@ enum AuthEndPoint: Endpoint {
             
         case .refreshToken:
             return "api/v1/auth/refresh-token"
+        case .ssoLogin:
+            return "auth/realms/fib-business-application/protocol/openid-connect/token"
+        case .authWithFIB:
+            return "api/v1/oauth/login/fib"
         }
     }
     
@@ -75,12 +81,16 @@ enum AuthEndPoint: Endpoint {
             
         case .refreshToken(let refreshToken):
             return ["grant_type":"refresh_token", "client_id":"mobile-app", "client_secret":"rYTLJ0lgPKUHNluGaSDEeyT2hou2KYq5", "refresh_token":refreshToken]
+        case .ssoLogin(let code):
+            return ["grant_type":"authorization_code", "client_id":"sso-fib-pos", "client_secret":"8f363003-407c-4f8c-b704-8a9ea2327a95", "redirect_uri":Constant.redirect_url, "code": code ]
+        case .authWithFIB(let idToken ,let accessToken):
+            return ["idToken":idToken, "accessToken":accessToken]
         }
     }
     
     var encoder: ParameterEncoder {
         switch self{
-        case .forgotPassSendOTP:
+        case .forgotPassSendOTP, .ssoLogin, .authWithFIB:
             return URLEncodedFormParameterEncoder.default
             
         default:
@@ -90,7 +100,7 @@ enum AuthEndPoint: Endpoint {
     
     var contentType: String{
         switch self{
-        case .forgotPassSendOTP:
+        case .forgotPassSendOTP, .ssoLogin, .authWithFIB:
             return ContentType.urlEncoded.rawValue
         default:
             return ContentType.json.rawValue
@@ -109,11 +119,12 @@ enum BasicEndPoint: Endpoint {
     case getPurposes
     case getAllBanks
     case getAllCurrencies
+    case currencyConversion
     
     var method: HTTPMethod {
         switch self {
 
-        case .getNationalities, .getPurposes, .getAllBanks, .getAllCurrencies:
+        case .getNationalities, .getPurposes, .getAllBanks, .getAllCurrencies, .currencyConversion:
             return .get
         }
     }
@@ -132,37 +143,20 @@ enum BasicEndPoint: Endpoint {
             
         case .getAllCurrencies:
             return "api/v1/private/currencies"
+            
+        case .currencyConversion:
+            return "api/v1/private/currency/IQD/all"
         }
     }
     
     var query: [String: String]?  {
         switch self {
             
-        case .getNationalities, .getAllBanks, .getPurposes, .getAllCurrencies:
+        case .getNationalities, .getAllBanks, .getPurposes, .getAllCurrencies, .currencyConversion:
             return nil
             
-
         }
     }
-    
-//    var encoder: ParameterEncoder {
-//        switch self{
-//        case .forgotPassSendOTP:
-//            return URLEncodedFormParameterEncoder.default
-//            
-//        default:
-//            return JSONParameterEncoder.default
-//        }
-//    }
-    
-//    var contentType: String{
-//        switch self{
-//        case .forgotPassSendOTP:
-//            return ContentType.urlEncoded.rawValue
-//        default:
-//            return ContentType.json.rawValue
-//        }
-//    }
     
     var headerAuth: Bool{
         return false
@@ -267,23 +261,23 @@ enum BeneficiaryEndpoint: Endpoint {
     var path: String{
         switch self {
         case .getCashPickupBeneficiaries:
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/cashpickup"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup"
             
         case .getCashPickupDetails(let id):
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/cashpickup/\(id)"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup/\(id)"
         
         case .getBankDetails(let id):
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank/\(id)"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank/\(id)"
             
         case .createBankPersonalBeneficiary:
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank"
         
         case .resetPassword:
             return "api/v1/auth/reset-password"
         case .createCashPickupPersonalBeneficiary:
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/cashpickup"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup"
         case .getBankBeneficiaries:
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank"
         }
     }
     
@@ -562,15 +556,8 @@ enum TransactionListEndpoint: Endpoint{
         default:
             return JSONParameterEncoder.default
         }
-        
     }
 }
-
-
-//}
-
-
-
 
 /**
  *  Protocol for all endpoints to conform to.

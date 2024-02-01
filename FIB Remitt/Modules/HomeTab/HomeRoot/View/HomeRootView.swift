@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct HomeRootView: View {
-    @State var isSelected = false
     @State var isNotSelected = true
-    
- 
     @ObservedObject var vm = HomeViewModel()
     
     var body: some View {
         ZStack{
             Color.frBackground.ignoresSafeArea()
             VStack (spacing: 16){
-                //Spacer()
                 topBarContainer
                 ScrollView{
                     VStack(spacing:16){
-                        topProfileContainer
+                   //     topProfileContainer
                         topAmountInputContainer
                         deliveryMethodContainer
                         purposeContainer
@@ -31,34 +27,14 @@ struct HomeRootView: View {
                     }
                 }
             }
-            .padding()
+            .padding(.horizontal)
         }
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
         .onTapGesture {hideKeyboard()}
         .onAppear(){vm.viewWillAppearCalled()
-//            vm.apiReceivedInBank(beneficiaryId: "76284f97-e50d-402d-b52d-4710f5341c2b", fromCurrency: "IQD", amountToTransfer: "45000", toCurrency: "TRY", paymentMethod: "BANK", collectionPoint: "BANK", purposeId: "2217ff09-e479-4a60-b8f2-297c9912e481", invoice: loadPDF())
-            
         }
     }
-    
-    
-//    func loadPDF() -> Data? {
-//        guard let url = Bundle.main.url(forResource: "invoice", withExtension: "pdf") else {
-//            print("PDF file not found in bundle.")
-//            return nil
-//        }
-//
-//        do {
-//            let data = try Data(contentsOf: url)
-//            return data
-//        } catch {
-//            print("Error loading PDF data: \(error)")
-//            return nil
-//        }
-//    }
-   
-
    
 }
 
@@ -68,7 +44,7 @@ extension HomeRootView{
         HStack{
             Image("logo_horizantal")
             Spacer()
-            FRTextDropDownButton(title: "Eng")
+            FRTextDropDownButton(title: vm.selectedLanguage.title, action: {languageButtonPressed()})
             FRBarButton(icon: "bell_ico")
         }
     }
@@ -96,7 +72,7 @@ extension HomeRootView{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $vm.transferAmount)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
-                FRSimpleDropDownButton(title: "IQD", icon: "iraq_flag")
+                FRSimpleDropDownButton(title: "IQD", icon: "iraq_flag", action: {self.selectTransferCurrencyPressed()})
             }
             
             TextBaseMedium(text: "Recipient gets", fg_color: .text_Mute)
@@ -104,6 +80,7 @@ extension HomeRootView{
                 FRVerticalField(placeholder: "Enter Amount", inputText: $vm.recipentAmount)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
+                    .disabled(true)
                 FRSimpleDropDownButton(title: vm.selectedRecipientCurrency.code ?? "", icon: vm.selectedRecipientCurrency.code == "TRY" ? "turkey" : "", action: {selectRecipientCurrencyPressed()})
             }
             Divider().padding(.horizontal)
@@ -161,14 +138,14 @@ extension HomeRootView{
     
     private var termsAndConditionContainer : some View{
         HStack(){
-            FRCheckbox(isSelected: $isSelected)
+            FRCheckbox(isSelected: $vm.isTermsSelected)
             FRTextButton(title: "Terms and Conditions", action: {self.termsAndConditionBtnPressed()})
             Spacer()
         }
     }
     
     private var bottomProccedButton : some View{
-        FRVerticalBtn(title: "Procced", btnColor: .primary500) {self.proccedBtnPressed()}
+        FRVerticalControlBtn(isDisabled: $vm.isProceedValidated, title: "Procced") {self.proccedBtnPressed()}
     }
 }
 
@@ -188,7 +165,19 @@ extension HomeRootView{
     private func selectRecipientCurrencyPressed(){
         showSheet(view: AnyView(CurrencyPicker(currencies: HomeDataHandler.shared.currencies, itemSelect: { selectedItem in
             self.vm.selectedRecipientCurrency = selectedItem
+            self.vm.convertCurrency()
         })))
+    }
+    
+    private func selectTransferCurrencyPressed(){
+        showSheet(view: AnyView(CurrencyPicker(currencies: HomeDataHandler.shared.transferCurrencies, itemSelect: { selectedItem in
+            self.vm.selectedRecipientCurrency = selectedItem
+            self.vm.convertCurrency()
+        })))
+    }
+    
+    private func languageButtonPressed(){
+        showSheet(view: AnyView(FRSimpleStaticPicker(type: Language.self, selected: $vm.selectedLanguage)))
     }
 }
 

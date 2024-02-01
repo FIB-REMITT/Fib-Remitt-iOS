@@ -15,19 +15,25 @@ class HomeViewModel : ObservableObject{
     @Published var goToNext         = false
     @Published var destinationView  = AnyView(Text("Destination"))
     
-    @Published var selectedPurpose:PurposeResponse            = PurposeResponse()
-    @Published var selectedRecipientCurrency:CurrencyResponse = CurrencyResponse()
-    @Published var selectedDeliveryMethod = "Bank Transfer"
-    @Published var beneficiaryCollectionResponse:BankCollectionResponse?
+    @Published var selectedPurpose : PurposeResponse            = PurposeResponse()
+    @Published var selectedRecipientCurrency : CurrencyResponse = CurrencyResponse()
+    @Published var selectedDeliveryMethod                       = "Bank Transfer"
+    @Published var selectedLanguage          : Language         = .Eng
+    @Published var beneficiaryCollectionResponse : BankCollectionResponse?
     @Published var ConfirmationResponse : ConfirmationByTransactionResponse?
     
-    @Published var transferAmount = ""
-    @Published var recipentAmount = ""
+    @Published var transferAmount     = "1.0"
+    @Published var recipentAmount     = "0.023148"
+    @Published var isTermsSelected    = false
+    @Published var isProceedValidated = false
     
     //MARK: - VIEWCONTROLLER LIFICYCLE
     func viewWillAppearCalled() {
         self.getPurposes()
         self.getCurrencies()
+        self.getConversionRates()
+        self.observeValidationScopes()
+        self.convertCurrency()
     }
     
     //MARK: - NAVIGATIONS
@@ -38,6 +44,12 @@ class HomeViewModel : ObservableObject{
     
     func navigateToBeneficiarySummary() {
         self.destinationView = AnyView(HomeBeneficiarySummaryView())
+        self.goToNext        = true
+    }
+    
+    
+    func navigateToSelectBeneficiarySheet() {
+        self.destinationView = AnyView(SelectBeneficiaryTypeBottomSheet())
         self.goToNext        = true
     }
     
@@ -59,13 +71,46 @@ class HomeViewModel : ObservableObject{
    
     
     //MARK: - CUSTOM METHODS
-    
     func  storeHomeData() {
         HomeDataHandler.shared.toCurrency       = selectedRecipientCurrency.code ?? ""
         HomeDataHandler.shared.purposeId        = selectedPurpose.id ?? ""
         HomeDataHandler.shared.paymentMethod    = "BANK"
         HomeDataHandler.shared.collectionPoint  = selectedDeliveryMethod == "Bank Transfer" ? "BANK" : "AGENT"
         HomeDataHandler.shared.amountToTransfer = transferAmount
+    }
+    
+    private func observeValidationScopes() {
+        Publishers.CombineLatest($transferAmount, $isTermsSelected)
+            .map { amount, terms in
+                return self.validate(transferAmount: self.transferAmount, termsAndCondition: self.isTermsSelected)
+            }
+            .sink(receiveValue: { isValidate in
+               // self.isProceedValidated = isValidate
+                self.convertCurrency()
+            })
+            .store(in: &subscribers)
+    }
+    
+    private func validate(transferAmount:String, termsAndCondition:Bool) -> Bool {
+        if transferAmount.isEmpty {
+            self.isProceedValidated = false
+            return false
+        }/*else if termsAndCondition == false{
+            self.isProceedValidated = false
+            return false
+        }*/else{
+            self.isProceedValidated = true
+            return true
+        }
+    }
+    
+    func convertCurrency(){
+        if let conversionRates = HomeDataHandler.shared.conversionRates{
+            let targetRate = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
+            let defaultValue = transferAmount.isEmpty ? 0.0 : 1.0
+            let recipentAmountDouble =  (Double(self.transferAmount) ?? defaultValue) * (targetRate ?? 1.0)
+            self.recipentAmount = "\(recipentAmountDouble)"
+        }
     }
     
     //MARK: - API CALLs
@@ -86,6 +131,16 @@ class HomeViewModel : ObservableObject{
             repo.getCurrencisAPICall()
             repo.$allCurrency.sink { result in
                 HomeDataHandler.shared.currencies = result ?? []
+                HomeDataHandler.shared.currencies.removeAll { currency in currency.code == "IQD"}
+            }.store(in: &subscribers)
+        }
+    }
+    
+    func getConversionRates() {
+        if HomeDataHandler.shared.conversionRates == nil{
+            repo.getConverionRatesAPICall()
+            repo.$conversionRates.sink { result in
+                HomeDataHandler.shared.conversionRates = result
             }.store(in: &subscribers)
         }
     }

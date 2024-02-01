@@ -12,9 +12,11 @@ class HomeDataHandler{
     static let shared = HomeDataHandler()
     private init(){}
 
-    var purposes   : [PurposeResponse]  = []
-    var currencies : [CurrencyResponse] = []
-    var beneficiaryCollectionResponse:BankCollectionResponse?
+    var purposes           : [PurposeResponse]  = []
+    var currencies         : [CurrencyResponse] = []
+    var transferCurrencies : [CurrencyResponse] = [CurrencyResponse(name: "IQD")]
+    var conversionRates    : ConversionRateResponse?
+    var beneficiaryCollectionResponse : BankCollectionResponse?
     var deliveryMethodType : String = "Bank Transfer"
     var fromCurrency       : String = "IQD"
     var amountToTransfer   : String = ""

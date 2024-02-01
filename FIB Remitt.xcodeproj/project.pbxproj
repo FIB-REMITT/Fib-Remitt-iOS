@@ -20,9 +20,15 @@
 		2E91D7072B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D7062B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift */; };
 		2E91D7092B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */; };
 		2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D70A2B5F094B002983F1 /* BeneficiaryDetailView.swift */; };
+		401CA4B12B68D64B00589966 /* WebLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401CA4B02B68D64B00589966 /* WebLoginView.swift */; };
+		401CA4B32B68EDB000589966 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401CA4B22B68EDB000589966 /* Constant.swift */; };
 		40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */; };
 		40711F692B5CFD1600F966E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F682B5CFD1600F966E7 /* Assets.xcassets */; };
 		40711F6C2B5CFD1600F966E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */; };
+		408744C72B6B6921003ADE66 /* ResourceAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408744C32B6B6921003ADE66 /* ResourceAccess.swift */; };
+		408744C82B6B6921003ADE66 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408744C42B6B6921003ADE66 /* Account.swift */; };
+		408744C92B6B6921003ADE66 /* RealmAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408744C52B6B6921003ADE66 /* RealmAccess.swift */; };
+		408744CA2B6B6921003ADE66 /* JWTTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408744C62B6B6921003ADE66 /* JWTTokenModel.swift */; };
 		89611BDF2B5E300300407E32 /* SheetHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BDE2B5E300300407E32 /* SheetHolder.swift */; };
 		89611BE12B5E31E400407E32 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BE02B5E31E400407E32 /* Utils.swift */; };
 		89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BE32B5E32AD00407E32 /* TopRoundedShape.swift */; };
@@ -57,6 +63,7 @@
 		89705A742B69360200307E3E /* NationalityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A732B69360200307E3E /* NationalityPicker.swift */; };
 		89705A762B69373A00307E3E /* BankPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A752B69373A00307E3E /* BankPicker.swift */; };
 		89705A7A2B69518000307E3E /* SelectBeneficiaryTypeBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A792B69517F00307E3E /* SelectBeneficiaryTypeBottomSheet.swift */; };
+		89705A7C2B6A22C600307E3E /* ConversionRateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A7B2B6A22C600307E3E /* ConversionRateResponse.swift */; };
 		897228022B665BBD006B4FEE /* NationalityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228012B665BBD006B4FEE /* NationalityResponse.swift */; };
 		897228042B665CE9006B4FEE /* PurposeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228032B665CE9006B4FEE /* PurposeResponse.swift */; };
 		897228062B665D8B006B4FEE /* BankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897228052B665D8B006B4FEE /* BankResponse.swift */; };
@@ -108,6 +115,7 @@
 		899F1D382B66687A00E7B35F /* TransactionDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D372B66687A00E7B35F /* TransactionDetailsResponse.swift */; };
 		899F1D3A2B66721000E7B35F /* TransactionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D392B66721000E7B35F /* TransactionDetailsViewModel.swift */; };
 		899F1D3C2B66722800E7B35F /* TransactionDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F1D3B2B66722800E7B35F /* TransactionDetailsRepository.swift */; };
+		89C1C96A2B6B826000DA70AF /* HomeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C1C9692B6B826000DA70AF /* HomeEnum.swift */; };
 		9248954BA1DA9AF72EF8DF96 /* Pods_FIB_Remitt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */; };
 		A8737DFF2B68D531008A2465 /* StringData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8737DFE2B68D531008A2465 /* StringData.swift */; };
 		A8CA78602B66ABA700C383C8 /* BankCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */; };
@@ -133,10 +141,16 @@
 		2E91D7062B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTransferSuccessfulView.swift; sourceTree = "<group>"; };
 		2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryTypeCellView.swift; sourceTree = "<group>"; };
 		2E91D70A2B5F094B002983F1 /* BeneficiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryDetailView.swift; sourceTree = "<group>"; };
+		401CA4B02B68D64B00589966 /* WebLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLoginView.swift; sourceTree = "<group>"; };
+		401CA4B22B68EDB000589966 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		40711F612B5CFD1500F966E7 /* FIB Remitt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FIB Remitt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIB_RemittApp.swift; sourceTree = "<group>"; };
 		40711F682B5CFD1600F966E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		408744C32B6B6921003ADE66 /* ResourceAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceAccess.swift; sourceTree = "<group>"; };
+		408744C42B6B6921003ADE66 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		408744C52B6B6921003ADE66 /* RealmAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmAccess.swift; sourceTree = "<group>"; };
+		408744C62B6B6921003ADE66 /* JWTTokenModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTTokenModel.swift; sourceTree = "<group>"; };
 		541E218C4505AE18176251D8 /* Pods-FIB Remitt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FIB Remitt.release.xcconfig"; path = "Target Support Files/Pods-FIB Remitt/Pods-FIB Remitt.release.xcconfig"; sourceTree = "<group>"; };
 		89611BDE2B5E300300407E32 /* SheetHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHolder.swift; sourceTree = "<group>"; };
 		89611BE02B5E31E400407E32 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -172,6 +186,7 @@
 		89705A732B69360200307E3E /* NationalityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalityPicker.swift; sourceTree = "<group>"; };
 		89705A752B69373A00307E3E /* BankPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankPicker.swift; sourceTree = "<group>"; };
 		89705A792B69517F00307E3E /* SelectBeneficiaryTypeBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBeneficiaryTypeBottomSheet.swift; sourceTree = "<group>"; };
+		89705A7B2B6A22C600307E3E /* ConversionRateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionRateResponse.swift; sourceTree = "<group>"; };
 		897228012B665BBD006B4FEE /* NationalityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalityResponse.swift; sourceTree = "<group>"; };
 		897228032B665CE9006B4FEE /* PurposeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurposeResponse.swift; sourceTree = "<group>"; };
 		897228052B665D8B006B4FEE /* BankResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankResponse.swift; sourceTree = "<group>"; };
@@ -224,6 +239,7 @@
 		899F1D372B66687A00E7B35F /* TransactionDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsResponse.swift; sourceTree = "<group>"; };
 		899F1D392B66721000E7B35F /* TransactionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewModel.swift; sourceTree = "<group>"; };
 		899F1D3B2B66722800E7B35F /* TransactionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsRepository.swift; sourceTree = "<group>"; };
+		89C1C9692B6B826000DA70AF /* HomeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEnum.swift; sourceTree = "<group>"; };
 		A8737DFE2B68D531008A2465 /* StringData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringData.swift; sourceTree = "<group>"; };
 		A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCollectionResponse.swift; sourceTree = "<group>"; };
 		A8CA78612B66B97300C383C8 /* invoice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = invoice.pdf; sourceTree = "<group>"; };
@@ -268,6 +284,7 @@
 			children = (
 				89740D312B5D120D000ACFBA /* InitialView.swift */,
 				896EA0D72B5FF12C00FB231A /* SplashView.swift */,
+				401CA4B02B68D64B00589966 /* WebLoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -429,6 +446,7 @@
 			children = (
 				8988E8EB2B62360100741F58 /* DeliveryMethodEnum.swift */,
 				8974F91B2B67D305007F2522 /* BeneficiaryEnum.swift */,
+				89C1C9692B6B826000DA70AF /* HomeEnum.swift */,
 			);
 			path = ModuleConstant;
 			sourceTree = "<group>";
@@ -609,6 +627,7 @@
 				89740D442B5D4284000ACFBA /* Colour.swift */,
 				897A10F62B626DF4002CF87D /* UserSettings.swift */,
 				A8CA786A2B67D24600C383C8 /* Enums.swift */,
+				401CA4B22B68EDB000589966 /* Constant.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -706,6 +725,10 @@
 		897A10F82B626F04002CF87D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				408744C42B6B6921003ADE66 /* Account.swift */,
+				408744C62B6B6921003ADE66 /* JWTTokenModel.swift */,
+				408744C52B6B6921003ADE66 /* RealmAccess.swift */,
+				408744C32B6B6921003ADE66 /* ResourceAccess.swift */,
 				897A10F92B626F20002CF87D /* EmptyResponse.swift */,
 				2E71DB942B659E6F000A6471 /* SignInResponse.swift */,
 				897228012B665BBD006B4FEE /* NationalityResponse.swift */,
@@ -793,6 +816,7 @@
 			children = (
 				A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */,
 				A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */,
+				89705A7B2B6A22C600307E3E /* ConversionRateResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -939,6 +963,7 @@
 				89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */,
 				8974F9102B67A3F2007F2522 /* HomeDataHandler.swift in Sources */,
 				2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */,
+				89705A7C2B6A22C600307E3E /* ConversionRateResponse.swift in Sources */,
 				896EA0CC2B5F956100FB231A /* FRBarButton.swift in Sources */,
 				A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */,
 				897228222B66A21A006B4FEE /* BankBeneficiariesResponse.swift in Sources */,
@@ -953,10 +978,13 @@
 				8974F9182B67ADDC007F2522 /* FRSearchBar.swift in Sources */,
 				897228242B66A71C006B4FEE /* BankBeneficiaryDetailResponse.swift in Sources */,
 				897A10FA2B626F21002CF87D /* EmptyResponse.swift in Sources */,
+				408744C92B6B6921003ADE66 /* RealmAccess.swift in Sources */,
 				89611BEC2B5E4F4300407E32 /* FRCircularRadioButton.swift in Sources */,
 				89611BF02B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift in Sources */,
+				408744CA2B6B6921003ADE66 /* JWTTokenModel.swift in Sources */,
 				89740D4D2B5D5762000ACFBA /* Image.swift in Sources */,
 				897A10FC2B628285002CF87D /* FRSimpleDirectedCellButton.swift in Sources */,
+				408744C72B6B6921003ADE66 /* ResourceAccess.swift in Sources */,
 				89705A692B68F06900307E3E /* CurrencyPicker.swift in Sources */,
 				89705A742B69360200307E3E /* NationalityPicker.swift in Sources */,
 				899749392B615C4F00DEBD8C /* BeneficiaryViewModel.swift in Sources */,
@@ -997,6 +1025,7 @@
 				89740D3D2B5D2A0B000ACFBA /* UI.swift in Sources */,
 				89705A762B69373A00307E3E /* BankPicker.swift in Sources */,
 				897228042B665CE9006B4FEE /* PurposeResponse.swift in Sources */,
+				401CA4B12B68D64B00589966 /* WebLoginView.swift in Sources */,
 				89611BFD2B5EA66900407E32 /* SimpleDirectedCellView.swift in Sources */,
 				89705A7A2B69518000307E3E /* SelectBeneficiaryTypeBottomSheet.swift in Sources */,
 				897A10F52B626C5C002CF87D /* FIBLoaderView.swift in Sources */,
@@ -1012,6 +1041,8 @@
 				89740D402B5D3883000ACFBA /* FRVerticalButton.swift in Sources */,
 				897228062B665D8B006B4FEE /* BankResponse.swift in Sources */,
 				A8CA78602B66ABA700C383C8 /* BankCollectionResponse.swift in Sources */,
+				401CA4B32B68EDB000589966 /* Constant.swift in Sources */,
+				89C1C96A2B6B826000DA70AF /* HomeEnum.swift in Sources */,
 				897228142B667D9E006B4FEE /* PickerView.swift in Sources */,
 				89740D482B5D558D000ACFBA /* View.swift in Sources */,
 				899F1D3A2B66721000E7B35F /* TransactionDetailsViewModel.swift in Sources */,
@@ -1019,6 +1050,7 @@
 				A8CA78692B67854800C383C8 /* FilePickerCellView.swift in Sources */,
 				8997492E2B60DB1100DEBD8C /* AuthViewModel.swift in Sources */,
 				8974F91C2B67D305007F2522 /* BeneficiaryEnum.swift in Sources */,
+				408744C82B6B6921003ADE66 /* Account.swift in Sources */,
 				89740D452B5D4284000ACFBA /* Colour.swift in Sources */,
 				897A10F72B626DF4002CF87D /* UserSettings.swift in Sources */,
 				89611BF32B5E7D0600407E32 /* AccountInfoCellView.swift in Sources */,
@@ -1157,7 +1189,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"FIB Remitt/Preview Content\"";
 				DEVELOPMENT_TEAM = 5F92FMJYFX;
 				ENABLE_PREVIEWS = YES;
@@ -1189,7 +1221,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"FIB Remitt/Preview Content\"";
 				DEVELOPMENT_TEAM = 5F92FMJYFX;
 				ENABLE_PREVIEWS = YES;

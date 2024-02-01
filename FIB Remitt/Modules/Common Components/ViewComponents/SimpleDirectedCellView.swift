@@ -9,8 +9,9 @@ import SwiftUI
 
 struct SimpleDirectedCellView: View {
     var title : String = "FIB Personal App"
+    var backgroundColor:Color = .fr_forground
     var body: some View {
-        FRVContainer(backgroundColor:.fr_forground) {
+        FRVContainer(backgroundColor: backgroundColor) {
             HStack{
                 TextBaseMedium(text: title)
                 Spacer()

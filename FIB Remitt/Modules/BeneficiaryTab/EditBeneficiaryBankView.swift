@@ -68,7 +68,8 @@ struct EditBeneficiaryBankView: View {
             }
             .padding()
             .navigationBarHidden(true)
-            
+            .onTapGesture {hideKeyboard()}
+            .onAppear(){self.viewOnAppearCalled()}
         }
         
     }
@@ -124,7 +125,7 @@ extension EditBeneficiaryBankView{
     }
     
     private var bottomSaveButton : some View{
-        FRVerticalBtn(title: "Save", btnColor: .primary500) {self.saveBtnPressed()}
+        FRVerticalControlBtn(isDisabled:$vm.isBankSaveValidated, title: "Save") {self.saveBtnPressed()}
     }
 }
 
@@ -147,6 +148,10 @@ extension EditBeneficiaryBankView{
         }else if vm.selectedBeneficaryAccountType == .buissness{
             vm.addBankBeneficiaryBusiness()
         }
+    }
+    
+    private func viewOnAppearCalled() {
+        vm.addBankBeneficiaryOnAppear()
     }
 }
 #Preview {

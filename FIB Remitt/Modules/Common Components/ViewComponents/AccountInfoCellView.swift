@@ -32,7 +32,7 @@ struct AccountInfoCellView: View {
                             .frame(width: 50, height: 50)
                         }
                     }else{
-                        TextH4Medium(text: String(title.prefix(1)), fg_color: .primary500 )
+                        TextH4Medium(text: String(title.prefix(1)).uppercased(), fg_color: .primary500 )
                             .padding(14)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 25)
@@ -51,12 +51,15 @@ struct AccountInfoCellView: View {
                 VStack(alignment:.leading){
                     HStack {
                         TextBaseMedium(text: title, fg_color: .textRegula)
+                            .multilineTextAlignment(.leading)
                         Image(icon)
                             .imageDefaultStyle()
                             .frame(width: 15)
                     }
-                    TextBaseRegular(text: subtitle1, fg_color: .textFade)
+                    TextBaseRegular(text: "A/C No: \(subtitle1)", fg_color: .textFade)
+                        .multilineTextAlignment(.leading)
                     TextBaseRegular(text: subtitle2, fg_color: .textFade)
+                        .multilineTextAlignment(.leading)
                 }
                 Spacer()
                 if selected{

@@ -59,7 +59,7 @@ extension BeneficiaryDetailView{
     
     private var contextMiddleInfoSection : some View{
         VStack (spacing:10){
-            SimpleHColonInfoView(title: "Phone number", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.phoneNumber ?? "": vm.selectedBankBeneficiary?.phoneNumber ?? "")
+            SimpleHColonInfoView(title: "Phone no.", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.phoneNumber ?? "": vm.selectedBankBeneficiary?.phoneNumber ?? "")
             SimpleHColonInfoView(title: "Nationality", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.nationality ?? "": vm.selectedBankBeneficiary?.nationality ?? "")
             SimpleHColonInfoView(title: "Address", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.address ?? "": vm.selectedBankBeneficiary?.address ?? "")
             SimpleHColonInfoView(title: "Gender", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.gender ?? "": vm.selectedBankBeneficiary?.gender ?? "")
