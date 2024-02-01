@@ -50,7 +50,7 @@ class TransactionHistoryViewModel : ObservableObject{
     func transactionListFetch(page:Int, from: String, to : String) {
         repo.transactionListApi(page:page ,from:from, to:to)
         repo.$transactionHistoryList.sink { result in
-//            self.transactionHistoryResponse = result
+            self.transactionHistoryResponse = result
             print(self.transactionHistoryDataOnly.count)
             if page == 0{
                 self.transactionHistoryDataOnly =   (result?.content ?? [])
