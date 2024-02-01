@@ -69,17 +69,17 @@ extension HistoryRootView{
                     .onTapGesture {
                         vm.navigateToTransactionDetails(transactionNumber: transactionData.transactionNumber ?? "")
                     }
-                    .onAppear {
-                        if let currentIndex = vm.transactionHistoryDataOnly.firstIndex(where: { $0.id == transactionData.id }),
-                           currentIndex == vm.transactionHistoryDataOnly.count - 1 {
-                            if vm.transactionHistoryResponse?.last == false{
-                                pageNo = pageNo + 1
-                                transactionListApi(from: self.from, to: self.to)
-                              
-                            }
-                           
-                        }
-                    }
+//                    .onAppear {
+//                        if let currentIndex = vm.transactionHistoryDataOnly.firstIndex(where: { $0.id == transactionData.id }),
+//                           currentIndex == vm.transactionHistoryDataOnly.count - 1 {
+//                            if vm.transactionHistoryResponse?.last == false{
+//                                pageNo = 0
+//                                transactionListApi(from: self.from, to: self.to)
+//                              
+//                            }
+//                           
+//                        }
+//                    }
             }
         }
     }

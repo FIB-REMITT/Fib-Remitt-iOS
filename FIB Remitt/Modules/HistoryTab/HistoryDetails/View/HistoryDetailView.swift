@@ -44,7 +44,7 @@ struct HistoryDetailView: View {
                             SimpleHColonInfoView(title: "Bank Name", info: vm.transactionDetails?.receiver?.bankName ?? "")
                             SimpleHColonInfoView(title: "Account No.", info: vm.transactionDetails?.receiver?.accountNumber ?? "")
                             SimpleHColonInfoView(title: "Ref No.", info: vm.transactionDetails?.transactionNumber ?? "")
-                            SimpleHColonInfoView(title: "Type", info: "Personal")
+                            SimpleHColonInfoView(title: "Type", info: vm.transactionDetails?.receiver?.typeOfBeneficiary ?? "")
                             SimpleHColonInfoView(title: "Relation", info: vm.transactionDetails?.receiver?.relationship ?? "-")
                             SimpleHColonInfoView(title: "Phone", info: vm.transactionDetails?.receiver?.phoneNumber ?? "")
                             SimpleHColonInfoView(title: "Address", info: vm.transactionDetails?.receiver?.address ?? "")
@@ -83,30 +83,35 @@ struct HistoryDetailView: View {
                     }
                 }
                 
-                FRVContainer (spacing: 12,backgroundColor: .fr_forground){
-                    VStack(alignment: .center){
-                        HStack {
-                            TextBaseMedium(text: "Progress", fg_color: .text_Mute)
-                            Spacer()
-                        }
-                            VStack(spacing: 20){
-                                ProgressComponentWithDivider(status: "Pending", timeDat: "9th March 2023 | 10:00 PM", iconName: "pending", cellColor: Color.warning_regular, alignmentStyle: .left)
-                                
-                                ProgressComponentWithDivider(status: "Hold", timeDat: "9th March 2023 | 10:00 PM", iconName: "pause", cellColor: Color.red, alignmentStyle: .right)
-                                
-                                ProgressComponent(status: "Hold", timeDat: "9th March 2023 | 10:00 PM", iconName: "pause", cellColor: Color.red, alignmentStyle: .right)
-                                
-//                                ProgressComponent(status: "Approved", timeDat: "9th March 2023 | 10:00 PM", iconName: "approved", cellColor: Color.green, alignmentStyle: .right)
-//                                
-//                                ProgressComponent(status: "Canceled", timeDat: "9th March 2023 | 10:00 PM", iconName: "close", cellColor: Color.red, alignmentStyle: .right)
-//                                
-//                                ProgressComponent(status: "Paid", timeDat: "9th March 2023 | 10:00 PM", iconName: "paid", cellColor: Color.green, alignmentStyle: .left)
+                if vm.transactionDetails?.progress != nil && vm.transactionDetails?.progress?.count != 0 {
+                    FRVContainer (spacing: 12,backgroundColor: .fr_forground){
+                        VStack(alignment: .center){
+                            HStack {
+                                TextBaseMedium(text: "Progress", fg_color: .text_Mute)
+                                Spacer()
                             }
-                            .padding(.horizontal, screenWidth * 0.065)
+                                VStack(spacing: 20){
+                                    
+                                    if let progresses = vm.transactionDetails?.progress {
+                                        ForEach(progresses.indices, id: \.self) { index in
+                                            let progressData = progresses[index]
+                                          
+                                            let icon =  viewForProgressState(progressData: progressData)
+                                       
+                                            let side : ProgressComponentAlignment = (index % 2 == 0) ? .left : .right
+
+                                            
+                                            ProgressComponentWithDivider(status: icon, timeDat:formatDateString(incomingFormate: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS",dateString: progressData.createdAt ?? "", convertFormat: "d MMMM yyyy | h:mm a") ?? "", iconName: icon, cellColor: Color.warning_regular, alignmentStyle: side)
+                                           //
+                                        }
+                                    }
+                                }
+                        }
+                        .padding(.vertical, 10)
                     }
-                    .padding(.vertical, 10)
+                    Spacer()
                 }
-                Spacer()
+
             }.padding()
                 .navigationBarHidden(true)
                 .onAppear(perform: {
@@ -115,6 +120,22 @@ struct HistoryDetailView: View {
         }
         .background(Color.fr_background.ignoresSafeArea())
     }
+    private func viewForProgressState(progressData:DetailsProgress) -> String {
+           switch progressData.state {
+           case "1":
+               return "Pending"
+           case "2":
+               return "Approved"
+           case "3":
+               return "Paid"
+           case "4":
+               return "Hold"
+           case "5":
+               return "Canceled"
+           default:
+               return ""
+           }
+       }
 }
 //MARK: - VIEW COMPONENTS
 extension HistoryDetailView{

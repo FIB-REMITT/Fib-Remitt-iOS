@@ -54,9 +54,10 @@ class TransactionHistoryViewModel : ObservableObject{
             print(self.transactionHistoryDataOnly.count)
             if page == 0{
                 self.transactionHistoryDataOnly =   (result?.content ?? [])
-            }else{
-                self.transactionHistoryDataOnly =  self.transactionHistoryDataOnly  + (result?.content ?? [])
             }
+//            else{
+//                self.transactionHistoryDataOnly =  self.transactionHistoryDataOnly  + (result?.content ?? [])
+//            }
         
         }.store(in: &subscribers)
         
