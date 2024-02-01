@@ -44,7 +44,7 @@ struct HistoryDetailView: View {
                             SimpleHColonInfoView(title: "Bank Name", info: vm.transactionDetails?.receiver?.bankName ?? "")
                             SimpleHColonInfoView(title: "Account No.", info: vm.transactionDetails?.receiver?.accountNumber ?? "")
                             SimpleHColonInfoView(title: "Ref No.", info: vm.transactionDetails?.transactionNumber ?? "")
-                            SimpleHColonInfoView(title: "Type", info: "Personal")
+                            SimpleHColonInfoView(title: "Type", info: vm.transactionDetails?.receiver?.typeOfBeneficiary ?? "")
                             SimpleHColonInfoView(title: "Relation", info: vm.transactionDetails?.receiver?.relationship ?? "-")
                             SimpleHColonInfoView(title: "Phone", info: vm.transactionDetails?.receiver?.phoneNumber ?? "")
                             SimpleHColonInfoView(title: "Address", info: vm.transactionDetails?.receiver?.address ?? "")
