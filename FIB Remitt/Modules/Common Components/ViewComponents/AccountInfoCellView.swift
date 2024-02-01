@@ -55,8 +55,10 @@ struct AccountInfoCellView: View {
                             .imageDefaultStyle()
                             .frame(width: 15)
                     }
-                    TextBaseRegular(text: subtitle1, fg_color: .textFade)
+                    TextBaseRegular(text: "A/C No: \(subtitle1)", fg_color: .textFade)
+                        .multilineTextAlignment(.leading)
                     TextBaseRegular(text: subtitle2, fg_color: .textFade)
+                        .multilineTextAlignment(.leading)
                 }
                 Spacer()
                 if selected{

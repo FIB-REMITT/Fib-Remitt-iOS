@@ -25,6 +25,10 @@
 		40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */; };
 		40711F692B5CFD1600F966E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F682B5CFD1600F966E7 /* Assets.xcassets */; };
 		40711F6C2B5CFD1600F966E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */; };
+		408744C72B6B6921003ADE66 /* ResourceAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408744C32B6B6921003ADE66 /* ResourceAccess.swift */; };
+		408744C82B6B6921003ADE66 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408744C42B6B6921003ADE66 /* Account.swift */; };
+		408744C92B6B6921003ADE66 /* RealmAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408744C52B6B6921003ADE66 /* RealmAccess.swift */; };
+		408744CA2B6B6921003ADE66 /* JWTTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408744C62B6B6921003ADE66 /* JWTTokenModel.swift */; };
 		89611BDF2B5E300300407E32 /* SheetHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BDE2B5E300300407E32 /* SheetHolder.swift */; };
 		89611BE12B5E31E400407E32 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BE02B5E31E400407E32 /* Utils.swift */; };
 		89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89611BE32B5E32AD00407E32 /* TopRoundedShape.swift */; };
@@ -142,6 +146,10 @@
 		40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIB_RemittApp.swift; sourceTree = "<group>"; };
 		40711F682B5CFD1600F966E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40711F6B2B5CFD1600F966E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		408744C32B6B6921003ADE66 /* ResourceAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceAccess.swift; sourceTree = "<group>"; };
+		408744C42B6B6921003ADE66 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		408744C52B6B6921003ADE66 /* RealmAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmAccess.swift; sourceTree = "<group>"; };
+		408744C62B6B6921003ADE66 /* JWTTokenModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTTokenModel.swift; sourceTree = "<group>"; };
 		541E218C4505AE18176251D8 /* Pods-FIB Remitt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FIB Remitt.release.xcconfig"; path = "Target Support Files/Pods-FIB Remitt/Pods-FIB Remitt.release.xcconfig"; sourceTree = "<group>"; };
 		89611BDE2B5E300300407E32 /* SheetHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHolder.swift; sourceTree = "<group>"; };
 		89611BE02B5E31E400407E32 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -714,6 +722,10 @@
 		897A10F82B626F04002CF87D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				408744C42B6B6921003ADE66 /* Account.swift */,
+				408744C62B6B6921003ADE66 /* JWTTokenModel.swift */,
+				408744C52B6B6921003ADE66 /* RealmAccess.swift */,
+				408744C32B6B6921003ADE66 /* ResourceAccess.swift */,
 				897A10F92B626F20002CF87D /* EmptyResponse.swift */,
 				2E71DB942B659E6F000A6471 /* SignInResponse.swift */,
 				897228012B665BBD006B4FEE /* NationalityResponse.swift */,
@@ -963,10 +975,13 @@
 				8974F9182B67ADDC007F2522 /* FRSearchBar.swift in Sources */,
 				897228242B66A71C006B4FEE /* BankBeneficiaryDetailResponse.swift in Sources */,
 				897A10FA2B626F21002CF87D /* EmptyResponse.swift in Sources */,
+				408744C92B6B6921003ADE66 /* RealmAccess.swift in Sources */,
 				89611BEC2B5E4F4300407E32 /* FRCircularRadioButton.swift in Sources */,
 				89611BF02B5E7AB900407E32 /* HomeSelectBeneficiaryView.swift in Sources */,
+				408744CA2B6B6921003ADE66 /* JWTTokenModel.swift in Sources */,
 				89740D4D2B5D5762000ACFBA /* Image.swift in Sources */,
 				897A10FC2B628285002CF87D /* FRSimpleDirectedCellButton.swift in Sources */,
+				408744C72B6B6921003ADE66 /* ResourceAccess.swift in Sources */,
 				89705A692B68F06900307E3E /* CurrencyPicker.swift in Sources */,
 				89705A742B69360200307E3E /* NationalityPicker.swift in Sources */,
 				899749392B615C4F00DEBD8C /* BeneficiaryViewModel.swift in Sources */,
@@ -1031,6 +1046,7 @@
 				A8CA78692B67854800C383C8 /* FilePickerCellView.swift in Sources */,
 				8997492E2B60DB1100DEBD8C /* AuthViewModel.swift in Sources */,
 				8974F91C2B67D305007F2522 /* BeneficiaryEnum.swift in Sources */,
+				408744C82B6B6921003ADE66 /* Account.swift in Sources */,
 				89740D452B5D4284000ACFBA /* Colour.swift in Sources */,
 				897A10F72B626DF4002CF87D /* UserSettings.swift in Sources */,
 				89611BF32B5E7D0600407E32 /* AccountInfoCellView.swift in Sources */,
