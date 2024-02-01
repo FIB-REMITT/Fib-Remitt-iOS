@@ -14,11 +14,13 @@ struct HomeSelectBeneficiaryView: View {
     @State var isFilePickerPresented = false
     @State private var isPickerShown = false
     @State private var selectedBeneficiaryID: String?
-    
+    @State var type : SelectBeneficiaryType = .BankTransfer
     @State private var selectedFileURL: URL?
+    
     @ObservedObject var vm = HomeViewModel()
     @ObservedObject var beneficiaryVM = BeneficiaryViewModel()
-    @State var type : SelectBeneficiaryType = .BankTransfer
+    
+ 
     
     @State var isProceedEnable = false
     @State private var resetSelection = false
@@ -127,7 +129,7 @@ extension HomeSelectBeneficiaryView{
     }
     private var topAccountCreation : some View{
         HStack{
-            TextBaseMedium(text: homeData.collectionPoint.lowercased() == "bank" ? "Select Bank Account" : "Select Beneficiary Account",fg_color: .textMute)
+            TextBaseMedium(text: homeData.collectionPoint.lowercased() == "bank" ? "Select Bank Account" : "Select Cash Pick-up Account",fg_color: .textMute)
             Spacer()
             Button(action: { self.createAccountBtnPressed()}, label: {
                 TextBaseMedium(text: "+Add New",fg_color: .primary500).underline()
@@ -164,11 +166,13 @@ extension HomeSelectBeneficiaryView{
                                 if  beneficiary.typeOfBeneficiary?.lowercased() == "business"{
                                     isFilePickerPresented = true
                                     selectedBeneficiaryID = beneficiary.id
+                                    isProceedEnable = false
                                     resetSelection = false
                                 }else{
                                   //
                                     selectedBeneficiaryID = beneficiary.id
                                     resetSelection = false
+                                    isProceedEnable = true
                                 }
                             }
                     }
@@ -184,13 +188,19 @@ extension HomeSelectBeneficiaryView{
         FRVerticalControlBtn(isDisabled: $isProceedEnable, title: "Procced") {
             self.proccedBtnPressed()
         }
+        .onTapGesture {
+            if  isProceedEnable == true{
+                self.proccedBtnPressed()
+            }
+           
+        }
     }
 }
 
 //MARK: - ACTIONS
 extension HomeSelectBeneficiaryView{
     private func createAccountBtnPressed() {
-        
+        vm.navigateToSelectBeneficiarySheet()
     }
     private func notificationBtnPressed() {
         

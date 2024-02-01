@@ -49,7 +49,6 @@ struct WebLoginView: UIViewRepresentable {
         }
         
         
-        
         func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
             
             guard let redirectURL = navigationAction.request.url else {
@@ -60,7 +59,6 @@ struct WebLoginView: UIViewRepresentable {
             decisionHandler(.allow)
         }
     }
-    
     
 }
 

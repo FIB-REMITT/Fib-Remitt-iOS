@@ -51,7 +51,7 @@ struct FRVerticalControlBtn: View {
                         .frame(maxWidth: 15, maxHeight: 17)
                         .foregroundColor(.white)
                 }
-                FRTextButton(title: title,color: !isDisabled ? Color.white : Color.white)
+                FRTextButton(title: title,color: !isDisabled ? Color.white : Color.white,action: action)
             }
             .frVerticalShapeStyle()
             .background(!isDisabled ? Color.textMute.opacity(0.2) : Color.primary500)
