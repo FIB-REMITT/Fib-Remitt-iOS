@@ -60,7 +60,8 @@ class APIManager{
                             if response.response?.statusCode == 200||response.response?.statusCode == 201{
                                 promise(.failure(NetworkError.responseIsEmpty))
                             }else if response.response?.statusCode == 401 && endPoint.headerAuth{
-                                self?.updateToken()
+                                //self?.updateToken()
+                                loadView(view: InitialView())
                             }else if response.response?.statusCode == 406{
                                 promise(.failure(self?.getErrorResponse(data: response.data) ?? error.localizedDescription))
                             }else{
@@ -137,7 +138,8 @@ class APIManager{
                             if response.response?.statusCode == 200 || response.response?.statusCode == 201{
                                 promise(.failure(NetworkError.responseIsEmpty))
                             }else if response.response?.statusCode == 401 && endPoint.headerAuth{
-                                self?.updateToken()
+                                //self?.updateToken()
+                                loadView(view: InitialView())
                             }else if response.response?.statusCode == 406{
                                 promise(.failure(self?.getErrorResponse(data: response.data) ?? error.localizedDescription))
                             }else{
@@ -206,7 +208,8 @@ class APIManager{
                     if response.response?.statusCode == 200{
                         promise(.failure(NetworkError.responseIsEmpty))
                     }else if response.response?.statusCode == 401{
-                        self.updateToken()
+                       // self.updateToken()
+                        loadView(view: InitialView())
                     }else{
                         if let data = response.data {
                             do {
@@ -271,7 +274,8 @@ class APIManager{
                     if response.response?.statusCode == 201{
                         promise(.failure(NetworkError.responseIsEmpty))
                     }else if response.response?.statusCode == 401{
-                        self.updateToken()
+                        //self.updateToken()
+                        loadView(view: InitialView())
                     }else{
                         if let data = response.data {
                             do {
@@ -335,7 +339,8 @@ class APIManager{
                     if response.response?.statusCode == 201{
                         promise(.failure(NetworkError.responseIsEmpty))
                     }else if response.response?.statusCode == 401{
-                        self.updateToken()
+                       // self.updateToken()
+                        loadView(view: InitialView())
                     }else{
                         if let data = response.data {
                             do {

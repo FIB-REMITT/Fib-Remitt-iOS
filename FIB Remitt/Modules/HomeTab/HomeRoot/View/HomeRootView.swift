@@ -28,6 +28,7 @@ struct HomeRootView: View {
                 }
             }
             .padding(.horizontal)
+            .padding(.top)
         }
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })

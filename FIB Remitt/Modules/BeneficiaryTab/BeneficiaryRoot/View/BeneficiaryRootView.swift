@@ -19,6 +19,7 @@ struct BeneficiaryRootView: View {
             contextContainer
         }
         .padding(.horizontal)
+        .padding(.top)
         .background(Color.fr_background.ignoresSafeArea())
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}

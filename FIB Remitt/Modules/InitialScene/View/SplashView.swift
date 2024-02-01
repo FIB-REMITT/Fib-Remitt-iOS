@@ -15,8 +15,11 @@ struct SplashView: View {
         NavigationStack{
             ZStack{
                 if isActive{
-                    InitialView()
-                    //                splashView
+                    if  UserSettings.shared.apiToken != nil {
+                        FRBottomBarContainer()
+                    }else{
+                        InitialView()
+                    }
                 }else{
                     splashView
                 }
