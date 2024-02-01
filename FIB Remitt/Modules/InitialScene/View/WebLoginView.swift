@@ -87,7 +87,11 @@ struct WebContentView: View {
                         print("Here is the urls: \(String(describing: url))")
                     })
             }else{
-                VStack{}
+                VStack{
+                    Image("initial_scene_bg")
+                        .resizable()
+                        .ignoresSafeArea(.all)
+                }
             }
             
         }//.frame(width: UI.scnWidth * 1.1)

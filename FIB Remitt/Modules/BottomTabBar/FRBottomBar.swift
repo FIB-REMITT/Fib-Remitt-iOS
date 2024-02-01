@@ -14,8 +14,8 @@ struct FRBottomBar: View {
     var body: some View {
         HStack {
             ForEach(tabs, id: \.self) { tab in
-                if tab.title == "Trade"{
-                    centerTabView(tab)
+                if tab.title == "Beneficiary"{
+                    tabBeneficiaryView(tab)
                 }else{
                     tabView(tab)
                 }
@@ -37,6 +37,26 @@ extension FRBottomBar{
             Text(tab.title)
                 .font(.system(size: 10, weight: .semibold, design: .rounded))
                 .scaleEffect(selected == tab ? 1.1 : 1)
+        }
+        .foregroundColor(selected == tab ? Color.primary_500 : Color.text_Mute)
+        .padding(.vertical, 8)
+        .frame(maxWidth: .infinity)
+        .cornerRadius(6)
+        .onTapGesture {
+            switchToTab(tab)
+        }
+    }
+    
+    func tabBeneficiaryView(_ tab:TabBarItem) -> some View {
+        VStack {
+            Image(selected == tab ? "\(tab.icon)_selected" :  tab.icon)
+                .font(.subheadline)
+                .scaleEffect(selected == tab ? 1.1 : 1)
+            
+            Text(tab.title)
+                .font(.system(size: 10, weight: .semibold, design: .rounded))
+                .scaleEffect(selected == tab ? 1.1 : 1)
+                .frame(width: 130)
         }
         .foregroundColor(selected == tab ? Color.primary_500 : Color.text_Mute)
         .padding(.vertical, 8)

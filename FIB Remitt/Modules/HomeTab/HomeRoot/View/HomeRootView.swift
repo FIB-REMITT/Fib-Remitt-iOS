@@ -23,9 +23,11 @@ struct HomeRootView: View {
                         deliveryMethodContainer
                         purposeContainer
                         termsAndConditionContainer
-                        bottomProccedButton
+                        
                     }
                 }
+              //  Spacer()
+                bottomProccedButton.padding(.bottom)
             }
             .padding(.horizontal)
             .padding(.top)
