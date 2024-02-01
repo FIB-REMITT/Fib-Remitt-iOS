@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct HistoryDetailView: View {
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var vm = TransactionHistoryViewModel()
     var id : String
     @State var benDetails : Bool = false
     @State var traSummary : Bool = false
+    var fromPaymentSuccess:Bool = false
     
     let screenWidth = UIScreen.main.bounds.width
     
@@ -140,7 +142,14 @@ struct HistoryDetailView: View {
 //MARK: - VIEW COMPONENTS
 extension HistoryDetailView{
     private var navigationBar : some View {
-        FRNavigationBarView(title: "History Details", rightView: AnyView(FRBarButton(icon: "bell_ico", action: {self.notificationBtnPressed()})))
+        FRNavigationBarView(leftView: AnyView(FRBarButton(icon: "back_arrow",action: {
+            if  fromPaymentSuccess{
+                loadView(view: FRBottomBarContainer())
+            }else{
+                presentationMode.wrappedValue.dismiss()
+            }
+           
+        })),title: "History Details", rightView: AnyView(FRBarButton(icon: "bell_ico", action: {self.notificationBtnPressed()})))
     }
 }
 

@@ -76,6 +76,11 @@ extension HomePayViaFIBView{
         vm.navigateToWebAppLink(urlStr: urlStr)
     }
     
+    
+    private func navigateToSuccess(urlStr:String){
+        //vm.navigateToSuccessfulView()
+    }
+    
     private func cancelButtonPressed(){
         loadView(view: FRBottomBarContainer())
     }

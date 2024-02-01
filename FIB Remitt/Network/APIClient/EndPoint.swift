@@ -336,10 +336,11 @@ enum DashboardEndpoint: Endpoint {
     case getCoins
     case sendFcm(fcmKey:String)
     case confirmationByTrx(trxId:String)
+    case confirmationPaymentByTrx(trxId:String)
     
     var method: Alamofire.HTTPMethod{
         switch self {
-        case .getInstrumentKeywordSearch, .getInstrumentGroupSearch, .getCurrencyClass, .getCoins, .getCoinLogo:
+        case .getInstrumentKeywordSearch, .getInstrumentGroupSearch, .getCurrencyClass, .getCoins, .getCoinLogo,.confirmationPaymentByTrx:
             return .get
         case .sendFcm:
             return .put
@@ -368,7 +369,8 @@ enum DashboardEndpoint: Endpoint {
 
         case .confirmationByTrx(trxId: let transactionId):
             return "api/v1/private/transfer/personal/transaction/\(transactionId)"
-            
+        case .confirmationPaymentByTrx(trxId: let transactionId):
+            return "api/v1/transfer/status"
         }
     }
     
@@ -383,12 +385,14 @@ enum DashboardEndpoint: Endpoint {
             
         case .confirmationByTrx:
             return nil
+        case .confirmationPaymentByTrx(trxId: let transactionId):
+            return ["transactionId":transactionId]
         }
     }
     
     var encoder: ParameterEncoder {
         switch self{
-        case .getInstrumentGroupSearch,.sendFcm:
+        case .getInstrumentGroupSearch,.sendFcm,.confirmationPaymentByTrx:
             return URLEncodedFormParameterEncoder.default
         default:
             return JSONParameterEncoder.default

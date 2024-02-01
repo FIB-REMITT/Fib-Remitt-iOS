@@ -118,6 +118,8 @@
 		89C1C96A2B6B826000DA70AF /* HomeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C1C9692B6B826000DA70AF /* HomeEnum.swift */; };
 		9248954BA1DA9AF72EF8DF96 /* Pods_FIB_Remitt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6DF2A766BA4E68BB0134D7 /* Pods_FIB_Remitt.framework */; };
 		A8737DFF2B68D531008A2465 /* StringData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8737DFE2B68D531008A2465 /* StringData.swift */; };
+		A8737E062B6BB3BB008A2465 /* FibPaymentCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8737E052B6BB3BB008A2465 /* FibPaymentCheck.swift */; };
+		A8737E082B6BB989008A2465 /* PaymentCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8737E072B6BB989008A2465 /* PaymentCheckResponse.swift */; };
 		A8CA78602B66ABA700C383C8 /* BankCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */; };
 		A8CA78622B66B97400C383C8 /* invoice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8CA78612B66B97300C383C8 /* invoice.pdf */; };
 		A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */; };
@@ -241,6 +243,8 @@
 		899F1D3B2B66722800E7B35F /* TransactionDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsRepository.swift; sourceTree = "<group>"; };
 		89C1C9692B6B826000DA70AF /* HomeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEnum.swift; sourceTree = "<group>"; };
 		A8737DFE2B68D531008A2465 /* StringData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringData.swift; sourceTree = "<group>"; };
+		A8737E052B6BB3BB008A2465 /* FibPaymentCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FibPaymentCheck.swift; sourceTree = "<group>"; };
+		A8737E072B6BB989008A2465 /* PaymentCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCheckResponse.swift; sourceTree = "<group>"; };
 		A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCollectionResponse.swift; sourceTree = "<group>"; };
 		A8CA78612B66B97300C383C8 /* invoice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = invoice.pdf; sourceTree = "<group>"; };
 		A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationByTransactionResponse.swift; sourceTree = "<group>"; };
@@ -564,6 +568,7 @@
 				896EA0D12B5FBCC000FB231A /* HomeRoot */,
 				896EA0D22B5FBCD800FB231A /* HomeSelectBeneficiary */,
 				896EA0D32B5FDE6300FB231A /* HomeBeneficiarySummary */,
+				A8737E002B6BB2DD008A2465 /* FibPaymentCheck */,
 				89611BFA2B5EA5E400407E32 /* HomePayViaFIBView.swift */,
 				2E91D7062B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift */,
 			);
@@ -811,12 +816,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		A8737E002B6BB2DD008A2465 /* FibPaymentCheck */ = {
+			isa = PBXGroup;
+			children = (
+				A8737E052B6BB3BB008A2465 /* FibPaymentCheck.swift */,
+			);
+			path = FibPaymentCheck;
+			sourceTree = "<group>";
+		};
 		A8CA785E2B66AB9300C383C8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */,
 				A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */,
 				89705A7B2B6A22C600307E3E /* ConversionRateResponse.swift */,
+				A8737E072B6BB989008A2465 /* PaymentCheckResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -963,6 +977,7 @@
 				89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */,
 				8974F9102B67A3F2007F2522 /* HomeDataHandler.swift in Sources */,
 				2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */,
+				A8737E082B6BB989008A2465 /* PaymentCheckResponse.swift in Sources */,
 				89705A7C2B6A22C600307E3E /* ConversionRateResponse.swift in Sources */,
 				896EA0CC2B5F956100FB231A /* FRBarButton.swift in Sources */,
 				A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */,
@@ -1057,6 +1072,7 @@
 				89740D4B2B5D5669000ACFBA /* ViewModifier.swift in Sources */,
 				8974F90E2B6786CD007F2522 /* PurposeCellView.swift in Sources */,
 				209971862B68D0CB001A6B91 /* FilterOptionsView.swift in Sources */,
+				A8737E062B6BB3BB008A2465 /* FibPaymentCheck.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
