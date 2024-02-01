@@ -173,9 +173,50 @@ class UserSettings{
         isUserLoggedIn = true
     }
     
+    func jwtToken(token: String){
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: decodeToken(jwtToken: token), options: [])
+            
+            // Convert JSON data to JSON string
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                let model = try JSONDecoder().decode(JWTTokenModel.self, from: jsonData)
+                sub = model.sub
+            } else {
+                print("Failed to convert JSON data to string.")
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    
+    var sub: String?{
+        get{
+            return UserDefaults.standard.string(forKey: K.UserDefaultsKey.sub)
+        }set(apiToken){
+            guard let apiToken = apiToken else {
+                UserDefaults.standard.removeObject(forKey: K.UserDefaultsKey.sub)
+                UserDefaults.standard.synchronize()
+                return
+            }
+            
+            UserDefaults.standard.set(apiToken, forKey: K.UserDefaultsKey.sub)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    
     func getAccessToken() -> String{
         if let apiToken = self.apiToken{
             return "Bearer \(apiToken)"
+        }else{
+            return ""
+        }
+    }
+    
+    func getSUB() -> String{
+        if let sub = self.sub{
+            return sub
         }else{
             return ""
         }

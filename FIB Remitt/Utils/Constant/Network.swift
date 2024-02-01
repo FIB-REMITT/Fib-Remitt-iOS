@@ -69,6 +69,7 @@ struct K {
         static let PerpetualCoin = "perpetualCoin"
         static let AccountTradingLevel = "accountTradingLevel"
         static let FcmToken = "fcm_token"
+        static let sub = "token_sub"
     }
     
 }

@@ -78,6 +78,7 @@ class AuthRepository {
             } receiveValue: { result in
                 self.authWithFIBResponse = result
                 UserSettings.shared.setLoginInfo(loginInfo: result)
+                UserSettings.shared.jwtToken(token: self.authWithFIBResponse?.access_token ?? "")
                 if result.access_token?.isEmpty == false{
                     loadView(view:  FRBottomBarContainer())
                 }

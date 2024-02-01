@@ -261,23 +261,23 @@ enum BeneficiaryEndpoint: Endpoint {
     var path: String{
         switch self {
         case .getCashPickupBeneficiaries:
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/cashpickup"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup"
             
         case .getCashPickupDetails(let id):
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/cashpickup/\(id)"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup/\(id)"
         
         case .getBankDetails(let id):
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank/\(id)"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank/\(id)"
             
         case .createBankPersonalBeneficiary:
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank"
         
         case .resetPassword:
             return "api/v1/auth/reset-password"
         case .createCashPickupPersonalBeneficiary:
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/cashpickup"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup"
         case .getBankBeneficiaries:
-            return "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank"
+            return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank"
         }
     }
     
