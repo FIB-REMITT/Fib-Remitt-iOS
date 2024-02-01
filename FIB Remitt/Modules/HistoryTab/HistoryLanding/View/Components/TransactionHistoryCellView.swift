@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct TransactionHistoryCellView: View {
     @ObservedObject var vm = TransactionHistoryViewModel()
@@ -64,6 +65,10 @@ struct TransactionHistoryCellView: View {
                             .padding(4)
                             .background(Color.color_info_10)
                             .cornerRadius(100)
+                            .onTapGesture {
+                                UIPasteboard.general.string = transaction.transactionNumber
+                                showToast(message: "Copied")
+                            }
                         
                     }
                     TextSmallRegular(text: formatDateString(dateString: transaction.createdAt ?? "",  convertFormat:  "M/d/yyyy | h:mm a") ?? "", fg_color: .textFade)

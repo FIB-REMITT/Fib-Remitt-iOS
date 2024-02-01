@@ -37,7 +37,7 @@ struct TransactionDetailsResponse: Codable,CustomStringConvertible {
 }
 
 // MARK: - Progress
-struct DetailsProgress: Codable,CustomStringConvertible {
+struct DetailsProgress: Codable,CustomStringConvertible,Identifiable {
     var description: String{ return "" }
     let id: String?
     let transactionId: String?
