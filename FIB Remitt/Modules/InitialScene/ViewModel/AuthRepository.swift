@@ -13,32 +13,32 @@ class AuthRepository {
     @Published var loginInfo: SignInResponse?
     @Published var authWithFIBResponse: SignInData?
 
-    func loginAPICall(username:String, pass:String)  {
-        APIManager.shared.getData(endPoint: AuthEndPoint.signIn(username: username, password: pass), resultType: SignInResponse.self, showLoader: true)
-            .sink { completion in
-                switch completion{
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    if let err = error as? NetworkError{
-                        // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: true)
-                    }else{
-                       // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: false)
-                    }
-                 
-                case .finished:
-                    print("API Called!")
-                }
-            } receiveValue: { result in
-                if result.data?.access_token == nil{
-                }else{
-                    if let data = result.data{
-                        self.loginInfo = result
-                        UserSettings.shared.setLoginInfo(loginInfo: data)
-                    }
-
-                }
-            }.store(in: &subscribers)
-    }
+//    func loginAPICall(username:String, pass:String)  {
+//        APIManager.shared.getData(endPoint: AuthEndPoint.signIn(username: username, password: pass), resultType: SignInResponse.self, showLoader: true)
+//            .sink { completion in
+//                switch completion{
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                    if let err = error as? NetworkError{
+//                        // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: true)
+//                    }else{
+//                       // self.presenter?.loginDidAttempedWithError(errorMsg: error.localizedDescription,toast: false)
+//                    }
+//                 
+//                case .finished:
+//                    print("API Called!")
+//                }
+//            } receiveValue: { result in
+//                if result.data?.access_token == nil{
+//                }else{
+//                    if let data = result.data{
+//                        self.loginInfo = result
+//                        UserSettings.shared.setLoginInfo(loginInfo: data)
+//                    }
+//
+//                }
+//            }.store(in: &subscribers)
+//    }
     
     func ssoLoginAPICall(code: String)  {
         APIManager.shared.getData(apiUrl: "https://fib.stage.fib.iq/",endPoint: AuthEndPoint.ssoLogin(code: code), resultType: SignInData.self, showLoader: true)

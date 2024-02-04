@@ -24,12 +24,12 @@ class AuthViewModel : ObservableObject{
     }
     
     func login() {
-        repo.loginAPICall(username: "amasudul95@gmail.com", pass: "Password100@")
-        repo.$loginInfo.sink { result in
-            if result != nil{
-//                self.successfullyLoggedIn()
-            }
-        }.store(in: &subscribers)
+//        repo.loginAPICall(username: "amasudul95@gmail.com", pass: "Password100@")
+//        repo.$loginInfo.sink { result in
+//            if result != nil{
+////                self.successfullyLoggedIn()
+//            }
+//        }.store(in: &subscribers)
     }
 
     func ssoLogin(code: String){
