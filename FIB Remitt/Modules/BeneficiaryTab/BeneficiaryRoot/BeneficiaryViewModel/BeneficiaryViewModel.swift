@@ -273,20 +273,20 @@ class BeneficiaryViewModel : ObservableObject{
 
     }
     
-    func loadPDF() -> Data? {
-        guard let url = Bundle.main.url(forResource: "invoice", withExtension: "pdf") else {
-            print("PDF file not found in bundle.")
-            return nil
-        }
-        
-        do {
-            let data = try Data(contentsOf: url)
-            return data
-        } catch {
-            print("Error loading PDF data: \(error)")
-            return nil
-        }
-    }
+//    func loadPDF() -> Data? {
+//        guard let url = Bundle.main.url(forResource: "invoice", withExtension: "pdf") else {
+//            print("PDF file not found in bundle.")
+//            return nil
+//        }
+//        
+//        do {
+//            let data = try Data(contentsOf: url)
+//            return data
+//        } catch {
+//            print("Error loading PDF data: \(error)")
+//            return nil
+//        }
+//    }
     
     private func getMergedAllBeneficiaries()  {
         self.allBeneficiaries = []
