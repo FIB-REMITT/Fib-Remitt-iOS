@@ -20,37 +20,37 @@ class APIManager{
     static let baseUrl: String = K.IS_DEV_BUILD ? K.BaseURL.FIB.Sandbox : K.BaseURL.FIB.Production
     
     @available(iOS 13.0, *)
-    func getData<T:Decodable>(apiUrl: String = baseUrl,  endPoint: Endpoint, resultType: T.Type, showLoader:Bool = false) -> Future<T, Error> {
-        
-        let path = apiUrl + endPoint.path
-        
-        return Future <T,Error> {[weak self] promise in
-            if Connectivity.isConnectedToInternet {
-                print("Network Connected")
-                if showLoader {LoaderManager.shared.showHud()}
+        func getData<T:Decodable>(apiUrl: String = baseUrl,  endPoint: Endpoint, resultType: T.Type, showLoader:Bool = false) -> Future<T, Error> {
+            
+            let path = apiUrl + endPoint.path
+            
+            return Future <T,Error> {[weak self] promise in
+                if Connectivity.isConnectedToInternet {
+                    print("Network Connected")
+                    if showLoader {LoaderManager.shared.showHud()}
 
-                let headers = self?.getDefaultHeaders(endpoint: endPoint)
-               
-                print("Headers ->\n \(headers ?? HTTPHeaders())")
-                print("EndPoint:", path)
-                print("Parameters: \(endPoint.query ?? ["":""] )")
-                print("Method:\(endPoint.method)")
-                
-                AF.request(path, method: endPoint.method, parameters: endPoint.query, encoder: endPoint.encoder, headers: headers)
-                    .validate(statusCode: 200...299)
-                    .publishDecodable(type: T.self)
-                    .retry(1)
-                    .sink(receiveCompletion: { completion in
-                        if showLoader {LoaderManager.shared.hideHud()}
-                        switch completion {
-                        case .finished :
-                            print("Successfully Finished")
-                        case .failure(let error):
-                            promise(.failure(error.localizedDescription))
-                            print(error.localizedDescription)
-                        }
-                    }, receiveValue: { (response) in
-                        if showLoader {LoaderManager.shared.hideHud()}
+                    let headers = self?.getDefaultHeaders(endpoint: endPoint)
+                   
+                    print("Headers ->\n \(headers ?? HTTPHeaders())")
+                    print("EndPoint:", path)
+                    print("Parameters: \(endPoint.query ?? ["":""] )")
+                    print("Method:\(endPoint.method)")
+                    
+                    AF.request(path, method: endPoint.method, parameters: endPoint.query, encoder: endPoint.encoder, headers: headers)
+                        .validate(statusCode: 200...299)
+                        .publishDecodable(type: T.self)
+                        .retry(1)
+                        .sink(receiveCompletion: { completion in
+                            if showLoader {LoaderManager.shared.hideHud()}
+                            switch completion {
+                            case .finished :
+                                print("Successfully Finished")
+                            case .failure(let error):
+                                promise(.failure(error.localizedDescription))
+                                print(error.localizedDescription)
+                            }
+                        }, receiveValue: { (response) in
+                            if showLoader {LoaderManager.shared.hideHud()}
                         switch response.result{
                         case .success(let model):
                             promise(.success(model))
