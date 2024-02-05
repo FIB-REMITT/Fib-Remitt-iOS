@@ -82,7 +82,7 @@ class HomeViewModel : ObservableObject{
     
      func navigateToWebAppLink(urlStr:String){
         if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
-            navigateToFibPAymentCheck()
+//            navigateToFibPAymentCheck()
             UIApplication.shared.open(url)
         }
     }

@@ -9,22 +9,87 @@ import SwiftUI
 
 struct HomePayViaFIBView: View {
     @ObservedObject var vm = HomeViewModel()
+    @State private var secondsRemaining = 60
+    @State private var isLoading = false
+    @State private var navigateToFailedView = false
+    @State private var areTimersRunning = true
+    
+    private let timerPublisher = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+
     var body: some View {
         VStack(spacing:20){
             navigationBar
             qrInfoContainer
             middleListContainer
+            TextH6Medium(text: "Waiting for vaildate the transaction", fg_color: .primary500)
+            TextBaseRegular(text: "Ramaining: \(secondsRemaining) seconds", fg_color: .primary500)
+                .padding()
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .primary500))
+                        .scaleEffect(2.0) // Increase the scale factor to make it bigger
+                        .padding()
+            }
             Spacer()
             bottomCancelButton
             
         }.onAppear{
+            startTimers()
             vm.getConfirmationByTransactionId(trxId: HomeDataHandler.shared.beneficiaryCollectionResponse?.transactionNumber ?? "")
+        }
+        .onDisappear {
+            stopTimers()
+        }
+        .onReceive(timerPublisher, perform: { _ in
+            if areTimersRunning {
+                paymentCheckApiCall()
+                if vm.PaymentConfirmationResponse?.status == true{
+                    navigateToSuccessDialogue()
+                }
+            }
+        })
+        .onChange(of: vm.PaymentConfirmationResponse) { value in
+            if value?.status == true{
+                navigateToSuccessDialogue()
+            }
         }
         .padding()
         .background(Color.frBackground.ignoresSafeArea())
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
     }
+    
+    func navigateToSuccessDialogue(){
+       
+        isLoading = false
+        areTimersRunning = false
+        vm.navigateToSuccessfulView()
+    }
+
+    func startTimers() {
+        isLoading = true
+      
+        areTimersRunning = true
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if secondsRemaining > 0 {
+                secondsRemaining -= 1
+            } else {
+                timer.invalidate()
+                isLoading = false
+                areTimersRunning = false
+                vm.navigateToFailedView()
+            }
+        }
+    }
+
+    func stopTimers() {
+        areTimersRunning = false
+    }
+
+    func paymentCheckApiCall() {
+        vm.paymentCheck(trxId: HomeDataHandler.shared.beneficiaryCollectionResponse?.transactionNumber ?? "")
+    }
+    
 }
 
 #Preview {
