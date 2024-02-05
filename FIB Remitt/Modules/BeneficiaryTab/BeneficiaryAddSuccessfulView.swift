@@ -21,7 +21,7 @@ struct BeneficiaryAddSuccessfulView: View {
                 .multilineTextAlignment(.center)
 
             VStack(spacing:10){
-                FRVerticalBtn(title:"OK", btnColor: .primary500) {}
+                FRVerticalBtn(title:"OK", btnColor: .primary500) {self.okBtnPressed()}
                     .frame(width:80)
 
             }.padding()
@@ -29,14 +29,17 @@ struct BeneficiaryAddSuccessfulView: View {
         }.navigationBarHidden(true)
     }
 }
+
 ////MARK: - VIEW COMPONENTS
-//extension HomePayViaFIBView{
+//extension BeneficiaryAddSuccessfulView{
 //    private var bottomButton : some View{}
 //}
 //
+
 //MARK: - ACTIONS
-extension HomePayViaFIBView{
+extension BeneficiaryAddSuccessfulView{
     private func okBtnPressed() {
+        loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
     }
 }
 #Preview {

@@ -37,10 +37,10 @@ class BeneficiaryViewModel : ObservableObject{
     //@Published var bankName  : String = ""
     @Published var selectedBankName     : BankResponse        = BankResponse(name: "Select Bank")
     @Published var selectedNationality  : NationalityResponse = NationalityResponse(name: "Select Nationality")
-    @Published var accountNo            : String = ""
+    @Published var accountNo            : String  = ""
     @Published var relation             : String  = ""
-    @Published var isSaveValidated     = false
     
+    @Published var isSaveValidated     = false
     @Published var isBankSaveValidated = false
     
     //MARK: - VIEWLIFECYCLE
@@ -69,22 +69,27 @@ class BeneficiaryViewModel : ObservableObject{
     
     //MARK: - NAVIGATION
     func navigateToBeneficiaryDetail() {
-       self.destinationView = AnyView(BeneficiaryDetailView())
-       self.goToNext        = true
+       self.destinationView  = AnyView(BeneficiaryDetailView())
+       self.goToNext         = true
    }
     
     func navigateToEditBankBeneficiary() {
-       self.destinationView = AnyView(EditBeneficiaryBankView())
-       self.goToNext        = true
+       self.destinationView  = AnyView(EditBeneficiaryBankView())
+       self.goToNext         = true
    }
     
     func navigateToEditCashPickupBeneficiary() {
-       self.destinationView = AnyView(EditBeneficiaryCashPickupView())
-       self.goToNext        = true
+       self.destinationView  = AnyView(EditBeneficiaryCashPickupView())
+       self.goToNext         = true
    }
     
     func navigateToSelectBeneficiarySheet() {
         self.destinationView = AnyView(SelectBeneficiaryTypeBottomSheet())
+        self.goToNext        = true
+    }
+    
+    func navigateToBenfAddedSuccessfull() {
+        self.destinationView = AnyView(BeneficiaryAddSuccessfulView())
         self.goToNext        = true
     }
     
@@ -150,10 +155,7 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$cashPickupBeneficiaryNormalCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-//                    showToast( message: "Account Created Successfully!")
-//                    loadView(view: FRBottomBarContainer())
-                }else{
-                    showToast(message: "Failed to create Account")
+                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
                 }
             }
         }.store(in: &subscribers)
@@ -165,10 +167,7 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$cashPickupBeneficiaryBusinessCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-//                    showToast( message: "Account Created Successfully!")
-//                    loadView(view: FRBottomBarContainer())
-                }else{
-                    showToast(message: "Failed to create Account")
+                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
                 }
             }
         }.store(in: &subscribers)
@@ -180,10 +179,7 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$bankBeneficiaryBusinessCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-//                    showToast( message: "Account Created Successfully!")
-//                    loadView(view: FRBottomBarContainer())
-                }else{
-                    showToast(message: "Failed to create Account")
+                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
                 }
             }
         }.store(in: &subscribers)
@@ -194,9 +190,7 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$bankBeneficiaryNormalCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    
-                }else{
-                    showToast(message: "Failed to create Account")
+                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
                 }
             }
         }.store(in: &subscribers)

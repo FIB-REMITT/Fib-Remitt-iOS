@@ -140,10 +140,18 @@ class APIManager{
                             }else if response.response?.statusCode == 401 && endPoint.headerAuth{
                                 //self?.updateToken()
                                 loadView(view: InitialView())
-                            }else if response.response?.statusCode == 406{
-                                promise(.failure(self?.getErrorResponse(data: response.data) ?? error.localizedDescription))
                             }else{
-                                promise(.failure(self?.getErrorResponse(data: response.data) ?? error.localizedDescription))
+                                if let data = response.data {
+                                    do {
+                                        let errorResponse = try JSONDecoder().decode(RequestFailed.self, from: data)
+                                        promise(.failure(errorResponse.errors?.joined(separator: " ") ?? ""))
+                                       // showAlert(title:"Sorry!", message: errorResponse.errors?.joined(separator: " ") ?? "")
+                                        showToast(message: errorResponse.errors?.joined(separator: " ") ?? "" )
+                                    } catch {
+                                        promise(.failure(error.localizedDescription))
+                                       // showAlert(message: "Failed!")
+                                    }
+                                }
                             }
                     }
                 }).store(in: &self!.subscribers)

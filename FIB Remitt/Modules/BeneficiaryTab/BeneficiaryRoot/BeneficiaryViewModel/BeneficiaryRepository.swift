@@ -113,8 +113,6 @@ class BeneficiaryRepository {
                     if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                         print("Successfully Created CashPickup Beneficiary")
                         self.cashPickupBeneficiaryNormalCreationStatus = true
-                        showToast( message: "Account Created Successfully!",after: 0.2)
-                        loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
                     }else{
                         print("Failed!")
                         self.cashPickupBeneficiaryNormalCreationStatus = false
@@ -139,8 +137,6 @@ class BeneficiaryRepository {
                     if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                         print("Successfully Created CashPickup Beneficiary")
                         self.bankBeneficiaryNormalCreationStatus = true
-                        showToast( message: "Account Created Successfully!",after: 0.2)
-                        loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
                     }else{
                         self.bankBeneficiaryNormalCreationStatus = false
                         print("Failed!")
@@ -162,8 +158,6 @@ class BeneficiaryRepository {
               if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                   print("Successfully Created CashPickup Beneficiary Business")
                   self.cashPickupBeneficiaryBusinessCreationStatus = true
-                  showToast( message: "Account Created Successfully!",after: 0.2)
-                  loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
               }else{
                   print("Failed!")
                   self.cashPickupBeneficiaryBusinessCreationStatus = false
@@ -185,11 +179,9 @@ class BeneficiaryRepository {
                     print(error.localizedDescription)
                     if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
                         print("Successfully Created Bank Beneficiary Business type")
-                        self.bankBeneficiaryNormalCreationStatus = true
-                        showToast( message: "Account Created Successfully!",after: 0.2)
-                        loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
+                        self.bankBeneficiaryBusinessCreationStatus = true
                     }else{
-                        self.bankBeneficiaryNormalCreationStatus = false
+                        self.bankBeneficiaryBusinessCreationStatus = false
                         print("Failed!")
                     }
                     

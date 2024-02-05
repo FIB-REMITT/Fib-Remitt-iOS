@@ -26,6 +26,7 @@ struct BeneficiaryRootView: View {
         .onAppear(){vm.viewWillAppearCalled()}
     }
 }
+
 //MARK: - VIEW COMPONENTS
 extension BeneficiaryRootView{
     private var navigationBar : some View {

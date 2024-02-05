@@ -67,17 +67,18 @@ func hideSheet( after:Double = 0.0) {
 }
 
 
-func showSheet(view: AnyView, isFullScreen: Bool = false) {
+func showSheet(view: AnyView, isFullScreen: Bool = false, isTransferent:Bool = true) {
     let vc = UIHostingController(rootView: view)
     if isFullScreen { vc.modalPresentationStyle = .overFullScreen }
-    vc.view.backgroundColor = UIColor.clear
+    if isTransferent { vc.view.backgroundColor = UIColor.clear    }
     getWindow().rootViewController?.present(vc, animated: true)
 }
 
-func showSheet(view: AnyView, after:Double) {
+func showSheet(view: AnyView, after:Double, isFullScreen: Bool = false, isTransferent:Bool = true) {
     let vc = UIHostingController(rootView: view)
     //    vc.modalPresentationStyle = .overFullScreen
-    vc.view.backgroundColor = UIColor.clear
+    if isFullScreen { vc.modalPresentationStyle = .overFullScreen }
+    if isTransferent { vc.view.backgroundColor = UIColor.clear    }
     DispatchQueue.main.asyncAfter(deadline: .now() + after) {
         getWindow().rootViewController?.present(vc, animated: true)
     }

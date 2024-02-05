@@ -54,6 +54,7 @@
 		896EA0D02B5F9B9300FB231A /* FRNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EA0CF2B5F9B9300FB231A /* FRNavigationBarView.swift */; };
 		896EA0D62B5FEE6200FB231A /* FRTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EA0D52B5FEE6200FB231A /* FRTextButton.swift */; };
 		896EA0D82B5FF12C00FB231A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EA0D72B5FF12C00FB231A /* SplashView.swift */; };
+		896EC25D2B70CA3B007DF3A4 /* BeneficiaryAddedFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EC25C2B70CA3B007DF3A4 /* BeneficiaryAddedFailedView.swift */; };
 		89705A672B68D61100307E3E /* CommonBeneficiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A662B68D61100307E3E /* CommonBeneficiaryModel.swift */; };
 		89705A692B68F06900307E3E /* CurrencyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A682B68F06900307E3E /* CurrencyPicker.swift */; };
 		89705A6B2B68F56200307E3E /* FRSimpleDirectedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89705A6A2B68F56200307E3E /* FRSimpleDirectedButton.swift */; };
@@ -179,6 +180,7 @@
 		896EA0CF2B5F9B9300FB231A /* FRNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRNavigationBarView.swift; sourceTree = "<group>"; };
 		896EA0D52B5FEE6200FB231A /* FRTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRTextButton.swift; sourceTree = "<group>"; };
 		896EA0D72B5FF12C00FB231A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		896EC25C2B70CA3B007DF3A4 /* BeneficiaryAddedFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryAddedFailedView.swift; sourceTree = "<group>"; };
 		89705A662B68D61100307E3E /* CommonBeneficiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonBeneficiaryModel.swift; sourceTree = "<group>"; };
 		89705A682B68F06900307E3E /* CurrencyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPicker.swift; sourceTree = "<group>"; };
 		89705A6A2B68F56200307E3E /* FRSimpleDirectedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRSimpleDirectedButton.swift; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 				896EA0BE2B5F811F00FB231A /* EditBeneficiaryBankView.swift */,
 				896EA0C02B5F816100FB231A /* EditBeneficiaryCashPickupView.swift */,
 				896EA0C22B5F820500FB231A /* BeneficiaryAddSuccessfulView.swift */,
+				896EC25C2B70CA3B007DF3A4 /* BeneficiaryAddedFailedView.swift */,
 			);
 			path = BeneficiaryTab;
 			sourceTree = "<group>";
@@ -1029,6 +1032,7 @@
 				8972280E2B667744006B4FEE /* HomeRepo.swift in Sources */,
 				89611BEA2B5E464B00407E32 /* FRSimpleDropDownButton.swift in Sources */,
 				89740D422B5D3907000ACFBA /* FRText.swift in Sources */,
+				896EC25D2B70CA3B007DF3A4 /* BeneficiaryAddedFailedView.swift in Sources */,
 				896EA0C32B5F820500FB231A /* BeneficiaryAddSuccessfulView.swift in Sources */,
 				899F1D382B66687A00E7B35F /* TransactionDetailsResponse.swift in Sources */,
 				89611BF72B5E9A4900407E32 /* HomeBeneficiarySummaryView.swift in Sources */,
@@ -1222,7 +1226,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-
 				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fib.services;
 				PRODUCT_NAME = "$(TARGET_NAME)";
