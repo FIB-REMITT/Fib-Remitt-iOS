@@ -251,10 +251,14 @@ enum BeneficiaryEndpoint: Endpoint {
     case createBankBusinessBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, bankId:String, accNo:String)
     case createBankPersonalBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, gender:String, relationShip:String, bankId:String, accNo:String)
     case resetPassword(newPassword: String)
+    case makeAPICallReceivedInBank(fromCurrency:String,amountToTransfer:String, toCurrency : String, paymentMethod : String, collectionPoint : String,purposeId : String,isBankbeneficiary:Bool,beneficiaryId:String)
+    
+    case cashPickUpFromAgent(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?,isBankbeneficiary:Bool)
+    
     
     var method: Alamofire.HTTPMethod{
         switch self {
-        case .createCashPickupPersonalBeneficiary, .createBankPersonalBeneficiary, .resetPassword, .createCashPickupBusinessBeneficiary, .createBankBusinessBeneficiary:
+        case .createCashPickupPersonalBeneficiary, .createBankPersonalBeneficiary, .resetPassword, .createCashPickupBusinessBeneficiary, .createBankBusinessBeneficiary,.makeAPICallReceivedInBank,.cashPickUpFromAgent:
             return .post
             
         case .getCashPickupBeneficiaries, .getBankBeneficiaries, .getCashPickupDetails , .getBankDetails:
@@ -286,6 +290,13 @@ enum BeneficiaryEndpoint: Endpoint {
             return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup"
         case .createBankBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address, bankId: let bankId, accNo: let accNo):
             return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank"
+        case .makeAPICallReceivedInBank(fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer , toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, isBankbeneficiary : let isBankbeneficiary,beneficiaryId : let beneficiaryId):
+            return isBankbeneficiary ? "api/v1/private/transfer/personal/receive-in-bank" : "api/v1/private/transfer/personal/receive-in-cash"
+            
+        case .cashPickUpFromAgent(beneficiaryId: let beneficiaryId, fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer, toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, invoice: let invoice,isBankbeneficiary: let isBankbeneficiary):
+            return isBankbeneficiary ? "api/v1/private/transfer/personal/receive-in-bank" : "api/v1/private/transfer/personal/receive-in-cash"
+            
+            
         }
     }
     
@@ -312,12 +323,21 @@ enum BeneficiaryEndpoint: Endpoint {
         case .createBankBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address, bankId: let bankId, accNo: let accNo):
             return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address":address,"typeOfBeneficiary":"Business","bankId":bankId, "accountNumber":accNo]
            // "fullName": fullName,"nationalityId": nationalityId, "phoneNumber" : phoneNumber, "address": address, "typeOfBeneficiary":"Business", "bankId" : bankId, "accountNumber" : accountNo
+            
+        case .makeAPICallReceivedInBank(fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer , toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, isBankbeneficiary : let isBankbeneficiary,beneficiaryId : let beneficiaryId):
+            
+            return ["fromCurrency": fromCurrency,"amountToTransfer": amountToTransfer, "toCurrency" : toCurrency, "paymentMethod": paymentMethod, "collectionPoint": collectionPoint,"purposeId": purposeId,(isBankbeneficiary ? "bankBeneficiaryId" : "cashPickupBeneficiaryId") : beneficiaryId]
+            
+        case .cashPickUpFromAgent(beneficiaryId: let beneficiaryId, fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer, toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, invoice: let invoice,isBankbeneficiary: let isBankbeneficiary):
+            
+            return ["fromCurrency": fromCurrency,"amountToTransfer": amountToTransfer, "toCurrency" : toCurrency, "paymentMethod": paymentMethod, "collectionPoint": collectionPoint,"purposeId": purposeId, (isBankbeneficiary ? "bankBeneficiaryId" : "cashPickupBeneficiaryId") : beneficiaryId]
+            
         }
     }
     
     var encoder: ParameterEncoder {
         switch self{
-        case .resetPassword, .createCashPickupPersonalBeneficiary, .createBankPersonalBeneficiary:
+        case .resetPassword, .createCashPickupPersonalBeneficiary, .createBankPersonalBeneficiary,.makeAPICallReceivedInBank, .cashPickUpFromAgent:
             return MultipartFormData() as! ParameterEncoder
             
         default:
