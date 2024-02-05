@@ -139,8 +139,29 @@ class HomeRepository {
             }.store(in: &subscribers)
     }
     
+//    func receivedInBank(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {
+//        APIManager.shared.makeAPICallReceivedInBank(isBankbeneficiary:true,beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice)
+//          .sink { completion in
+//            switch completion{
+//            case .failure(let error):
+//              if error.localizedDescription == NetworkError.responseIsEmpty.localizedDescription{
+//               
+//         
+//              }else{
+//                  showToast(message: error.localizedDescription)
+//              }
+//            case .finished:
+//             print("finished")
+//            }
+//          } receiveValue: { result in
+//            print(result)
+//              self.bankCollectionResponse = result
+//          }.store(in: &subscribers)
+//      }
+    
+    
     func receivedInBank(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {
-        APIManager.shared.makeAPICallReceivedInBank(isBankbeneficiary:true,beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice)
+        APIManager.shared.uploadPdfDocs(endPoint: BeneficiaryEndpoint.makeAPICallReceivedInBank(fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, isBankbeneficiary: true, beneficiaryId: beneficiaryId), invoice: invoice, resultType: BankCollectionResponse.self,showLoader: true)
           .sink { completion in
             switch completion{
             case .failure(let error):
@@ -148,7 +169,7 @@ class HomeRepository {
                
          
               }else{
-             
+                  showToast(message: error.localizedDescription)
               }
             case .finished:
              print("finished")
@@ -161,7 +182,7 @@ class HomeRepository {
     
     
     func cashPickUpFromAgent(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {
-        APIManager.shared.makeAPICallReceivedInBank(isBankbeneficiary:false,beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice)
+        APIManager.shared.uploadFormData(endPoint: BeneficiaryEndpoint.cashPickUpFromAgent(beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice, isBankbeneficiary: false), resultType:BankCollectionResponse.self ,showLoader: true)
           .sink { completion in
             switch completion{
             case .failure(let error):

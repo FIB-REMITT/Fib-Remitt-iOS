@@ -192,7 +192,7 @@ class APIManager{
                     }
                     
                     if let invoiceData = invoice {
-                        multipartFormData.append(invoiceData, withName: "contract", fileName: "invoice.pdf", mimeType: "application/pdf")
+                        multipartFormData.append(invoiceData, withName: "invoice", fileName: "invoice.pdf", mimeType: "application/pdf")
                     }
                 }, to: path, method: .post, headers: headers)
                 .validate(statusCode: 200...299)
@@ -211,7 +211,7 @@ class APIManager{
                     case .success(let model):
                         promise(.success(model))
                     case .failure(_):
-                        if response.response?.statusCode == 201{
+                        if response.response?.statusCode == 201 || response.response?.statusCode == 200{
                             promise(.failure(NetworkError.responseIsEmpty))
                         }else if response.response?.statusCode == 401{
                             // self.updateToken()
