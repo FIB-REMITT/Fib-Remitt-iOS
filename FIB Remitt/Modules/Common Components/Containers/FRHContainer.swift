@@ -25,7 +25,6 @@ struct FRHContainer<Content:View>: View {
             VStack (spacing:0){
                 HStack (alignment:alignment, spacing:spacing){
                     content
-                        .onTapGesture {}
                 }
                 .padding()
                 .frame(maxWidth: .infinity )
