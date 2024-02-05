@@ -11,7 +11,6 @@ struct HistoryRootView: View {
     
     @ObservedObject var vm = TransactionHistoryViewModel() // history view model
     //@State var selectedFilterValue: String = "All"
-    @State var pageNo = 0
     @State var from = ""
     @State var to = ""
     var body: some View {
@@ -35,14 +34,13 @@ struct HistoryRootView: View {
     
     func initialDataAll(from:String = "",to:String = ""){
         vm.transactionHistoryDataOnly = []
-        pageNo = 0
         transactionListApi(from: from, to:to)
         
     }
     
     //MARK: - API CALL
     func transactionListApi(from:String = "",to:String = ""){
-        vm.transactionListFetch(page: self.pageNo,from: from,to: to)
+        vm.transactionListFetch(page: TransactionDataHandler.shared.currentTransactionPageNo,from: from,to: to)
     }
     
 }
@@ -53,33 +51,28 @@ extension HistoryRootView{
     }
     private var topFilterDropdown : some View {
         HStack{
-            FRTextDropDownButton(title: vm.selectedFilterValue, action: {self.filterBtnPressed()}).padding(.vertical,5)
-//                .frame(width: 50,height: 50)
-                .padding(.trailing,20)
-                .padding(.vertical,10)
+            FRTextDropDownButton(title: vm.selectedFilterValue, action: {self.filterBtnPressed()})
+                .padding(.vertical, 5)
+                .padding(.trailing, 20)
+                .padding(.vertical, 10)
             Spacer()
         }
     }
     private var contextContainer : some View{
-        VStack{
+        VStack(spacing:10){
+            LazyVStack{
+                ForEach(vm.transactionHistoryDataOnly) { transactionData in
+                    TransactionHistoryCellView(transaction: transactionData)
+                        .onTapGesture { vm.navigateToTransactionDetails(transactionNumber: transactionData.transactionNumber ?? "") }
+                        .onAppear()   { if transactionData == vm.transactionHistoryDataOnly.last{
+                            TransactionDataHandler.shared.currentTransactionPageNo += 1
+                            vm.transactionListFetch(page: TransactionDataHandler.shared.currentTransactionPageNo,from: from,to: to)
+                        }}
+                }
+            }
             
-            ForEach(vm.transactionHistoryDataOnly) { transactionData in
-                TransactionHistoryCellView(transaction: transactionData)
-                
-                    .onTapGesture {
-                        vm.navigateToTransactionDetails(transactionNumber: transactionData.transactionNumber ?? "")
-                    }
-//                    .onAppear {
-//                        if let currentIndex = vm.transactionHistoryDataOnly.firstIndex(where: { $0.id == transactionData.id }),
-//                           currentIndex == vm.transactionHistoryDataOnly.count - 1 {
-//                            if vm.transactionHistoryResponse?.last == false{
-//                                pageNo = 0
-//                                transactionListApi(from: self.from, to: self.to)
-//                              
-//                            }
-//                           
-//                        }
-//                    }
+            if self.vm.isMorePerpHistoryLoading {
+                ProgressView()
             }
         }
     }

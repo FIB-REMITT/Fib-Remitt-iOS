@@ -6,13 +6,14 @@ import Combine
 
 class TransactionHistoryViewModel : ObservableObject{
     @Published var goToNext        = false
-    
     @Published var destinationView = AnyView(Text("Destination"))
-    @Published var transactionHistoryResponse: TransactionHistoryResponse?
-    @Published var transactionHistoryDataOnly: [TransactionListContent] = []
-    @Published var transactionDetails : TransactionDetailsResponse?
     
-    @Published var selectedFilterValue : String = "All"
+    @Published var transactionHistoryResponse : TransactionHistoryResponse?
+    @Published var transactionHistoryDataOnly : [TransactionListContent] = []
+    @Published var transactionDetails         : TransactionDetailsResponse?
+    @Published var selectedFilterValue        : String = "All"
+    
+    @Published var isMorePerpHistoryLoading = false
     
     
     private var subscribers = Set<AnyCancellable>()
@@ -30,13 +31,6 @@ class TransactionHistoryViewModel : ObservableObject{
         self.goToNext        = true
     }
     
-//    func transactionDetailsFetch(transactionNumber:String) {
-//        repo.transactionDetailsApi(transactionNumber: transactionNumber)
-//        repo.$transactionDetails.sink { result in
-//            self.transactionDetails = result
-//        }.store(in: &subscribers)
-//    }
-    
     func transactionDetailsFetch(transactionNumber: String) {
         repo.transactionDetailsApi(transactionNumber: transactionNumber)
         repo.$transactionDetails
@@ -46,26 +40,21 @@ class TransactionHistoryViewModel : ObservableObject{
             .store(in: &subscribers)
     }
 
-    
     func transactionListFetch(page:Int, from: String, to : String) {
         repo.transactionListApi(page:page ,from:from, to:to)
         repo.$transactionHistoryList.sink { result in
-            self.transactionHistoryResponse = result
             print(self.transactionHistoryDataOnly.count)
-            if page == 0{
-                self.transactionHistoryDataOnly =   (result?.content ?? [])
+            if result != nil && result != self.transactionHistoryResponse{
+                self.transactionHistoryResponse = result
+                self.transactionHistoryDataOnly += result?.content ?? []//= (result?.content ?? [])
             }
-//            else{
-//                self.transactionHistoryDataOnly =  self.transactionHistoryDataOnly  + (result?.content ?? [])
-//            }
-        
+
         }.store(in: &subscribers)
         
     }
     
     
     //MARK: FOR FILTER
-    
     enum DateRangeType {
         case today
         case last7Days
@@ -114,20 +103,4 @@ class TransactionHistoryViewModel : ObservableObject{
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: Date())
     }
-
-    // Usage Today
-//    let todayDateString = getTodayDateString()
-//    print("Today: \(todayDateString)")
-//
-//
-//
-//    // Usage others range
-//    let last7DaysRange = getDateRange(for: .last7Days)
-//    print("Last 7 Days: From \(last7DaysRange.from) to \(last7DaysRange.to)")
-//
-//    let currentMonthRange = getDateRange(for: .currentMonth)
-//    print("Current Month: From \(currentMonthRange.from) to \(currentMonthRange.to)")
-//
-//    let currentYearRange = getDateRange(for: .currentYear)
-//    print("Current Year: From \(currentYearRange.from) to \(currentYearRange.to)")
 }

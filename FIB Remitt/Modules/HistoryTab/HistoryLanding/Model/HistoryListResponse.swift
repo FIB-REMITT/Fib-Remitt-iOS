@@ -8,7 +8,9 @@
 import Foundation
 
 // MARK: - TransactionHistoryResponse
-struct TransactionHistoryResponse: Codable,CustomStringConvertible {
+struct TransactionHistoryResponse: Codable,CustomStringConvertible, Equatable {
+    static func == (lhs: TransactionHistoryResponse, rhs: TransactionHistoryResponse) -> Bool { lhs.number == rhs.number }
+    
     var description: String{ return "" }
     var content: [TransactionListContent]?
     var pageable: TransactionPageable?
@@ -38,7 +40,9 @@ struct TransactionHistoryResponse: Codable,CustomStringConvertible {
 }
 
 // MARK: - Content
-struct TransactionListContent: Codable,Identifiable,CustomStringConvertible {
+struct TransactionListContent: Codable,Identifiable,CustomStringConvertible , Equatable {
+    static func == (lhs: TransactionListContent, rhs: TransactionListContent) -> Bool { lhs.id == rhs.id }
+    
     var description: String{ return "" }
     var id = UUID()
     let transactionNumber: String?
