@@ -330,7 +330,7 @@ enum BeneficiaryEndpoint: Endpoint {
             
         case .cashPickUpFromAgent(beneficiaryId: let beneficiaryId, fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer, toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, invoice: let invoice,isBankbeneficiary: let isBankbeneficiary):
             
-            return ["fromCurrency": fromCurrency,"amountToTransfer": amountToTransfer, "toCurrency" : toCurrency, "paymentMethod": paymentMethod, "collectionPoint": collectionPoint,"purposeId": purposeId, (isBankbeneficiary ? "bankBeneficiaryId" : "cashPickupBeneficiaryId") : beneficiaryId]
+            return ["fromCurrency": fromCurrency,"amountToTransfer": amountToTransfer, "toCurrency" : toCurrency, "paymentMethod": paymentMethod, "collectionPoint": collectionPoint,"purposeId": purposeId, (isBankbeneficiary ? "bankBeneficiaryId" : "cashPickupBeneficiaryId") : beneficiaryId, "docName":"invoice"]
             
         }
     }

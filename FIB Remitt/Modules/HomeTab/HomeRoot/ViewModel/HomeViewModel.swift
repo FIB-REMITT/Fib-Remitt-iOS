@@ -23,13 +23,14 @@ class HomeViewModel : ObservableObject{
     @Published var ConfirmationResponse          : ConfirmationByTransactionResponse?
     @Published var PaymentConfirmationResponse   : PaymentCheckResponse?
     
-    @Published var transferAmount     = "1.0"
-    @Published var recipentAmount     = ""
+    @Published var transferAmount     = "1"
+    @Published var recipentAmount     = "0.0233"
     @Published var isTermsSelected    = false
     @Published var isProceedValidated = false
     
     //MARK: - VIEWCONTROLLER LIFICYCLE
     func viewWillAppearCalled() {
+       // HomeDataHandler.shared.clear()
         self.getPurposes()
         self.getCurrencies()
         self.getConversionRates()
@@ -128,7 +129,7 @@ class HomeViewModel : ObservableObject{
             let targetRate           = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
             let defaultValue         = transferAmount.isEmpty ? 0.0 : 1.0
             let recipentAmountDouble =  (Double(self.transferAmount) ?? defaultValue) * (targetRate ?? 1.0)
-            self.recipentAmount      = String(format: "%.4f", recipentAmountDouble)// "\(recipentAmountDouble)"
+            self.recipentAmount      = String(format: "%.5f", recipentAmountDouble)// "\(recipentAmountDouble)"
         }
     }
     
@@ -137,7 +138,7 @@ class HomeViewModel : ObservableObject{
             let targetRate           = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
             let defaultValue         = recipentAmount.isEmpty ? 0.0 : 1.0
             let transferAmountDouble =  (Double(self.recipentAmount) ?? defaultValue) / (targetRate ?? 1.0)//String(format: "%.4f", myDoubleValue)
-            self.transferAmount      = String(format: "%.4f", transferAmountDouble)
+            self.transferAmount      =  "\(Int(transferAmountDouble))"//String(format: "%.4f", transferAmountDouble)
         }
     }
     

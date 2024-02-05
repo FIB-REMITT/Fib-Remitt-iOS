@@ -182,7 +182,7 @@ class HomeRepository {
     
     
     func cashPickUpFromAgent(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) {
-        APIManager.shared.uploadFormData(endPoint: BeneficiaryEndpoint.cashPickUpFromAgent(beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice, isBankbeneficiary: false), resultType:BankCollectionResponse.self ,showLoader: true)
+        APIManager.shared.uploadPdfDocs(endPoint: BeneficiaryEndpoint.cashPickUpFromAgent(beneficiaryId: beneficiaryId, fromCurrency: fromCurrency, amountToTransfer: amountToTransfer, toCurrency: toCurrency, paymentMethod: paymentMethod, collectionPoint: collectionPoint, purposeId: purposeId, invoice: invoice, isBankbeneficiary: false), invoice: invoice, resultType:BankCollectionResponse.self ,showLoader: true)
           .sink { completion in
             switch completion{
             case .failure(let error):

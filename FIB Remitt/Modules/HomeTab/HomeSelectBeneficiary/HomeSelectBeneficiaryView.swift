@@ -64,7 +64,7 @@ struct HomeSelectBeneficiaryView: View {
             .navigationBarHidden(true)
             .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
             .onAppear{
-                if homeData.deliveryMethodType.lowercased() == "bank transfer"{
+                if homeData.collectionPoint.lowercased() == "bank"{
                     beneficiaryVM.getBankBeneficiaries()
                     self.type = .BankTransfer
                     
