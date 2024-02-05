@@ -23,7 +23,7 @@ struct BeneficiaryRootView: View {
         .background(Color.fr_background.ignoresSafeArea())
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
-        .onAppear(){vm.viewWillAppearCalled()}
+        .onAppear(){vm.viewWillAppearCalled(); BenficiaryDataHandler.shared.contractPath = ""}
     }
 }
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomePayViaFIBView: View {
     @ObservedObject var vm = HomeViewModel()
-    @State private var secondsRemaining = 60
+    @State private var secondsRemaining = 300
     @State private var isLoading = false
     @State private var navigateToFailedView = false
     @State private var areTimersRunning = true
@@ -22,7 +22,7 @@ struct HomePayViaFIBView: View {
             qrInfoContainer
             middleListContainer
             TextH6Medium(text: "Waiting for vaildate the transaction", fg_color: .primary500)
-            TextBaseRegular(text: "Ramaining: \(secondsRemaining) seconds", fg_color: .primary500)
+            TextBaseRegular(text: "Ramaining: \(secondsRemaining/60) minutes \(secondsRemaining%60) seconds", fg_color: .primary500)
                 .padding()
             if isLoading {
                 ProgressView()
@@ -71,7 +71,7 @@ struct HomePayViaFIBView: View {
       
         areTimersRunning = true
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if secondsRemaining > 0 {
+            if secondsRemaining > 0 && (secondsRemaining/5) > 0 {
                 secondsRemaining -= 1
             } else {
                 timer.invalidate()

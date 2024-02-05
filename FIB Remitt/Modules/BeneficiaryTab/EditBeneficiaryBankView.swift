@@ -68,6 +68,10 @@ struct EditBeneficiaryBankView: View {
             }
             .padding()
             .navigationBarHidden(true)
+            .onChange(of: vm.lastName, perform: { value in
+               let isValid = vm.validate(firstName: vm.firstName, lastName: vm.lastName, nationality: vm.selectedNationality.id ?? "", phone: vm.phone, address: vm.address)
+                vm.isBankSaveValidated = isValid
+            })
             .onTapGesture {hideKeyboard()}
             .onAppear(){self.viewOnAppearCalled()}
         }

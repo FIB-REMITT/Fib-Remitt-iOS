@@ -151,7 +151,7 @@ class BeneficiaryRepository {
     
     @Published var cashPickupBeneficiaryBusinessCreationStatus:Bool?
     func createCashPickupBusinessAPICall(fullName:String, nationality:String, phoneNumber:String, address:String, invoice:Data?) {
-        APIManager.shared.uploadPdfDocs(endPoint: BeneficiaryEndpoint.createCashPickupBusinessBeneficiary(fullName: fullName, nationality: nationality, phoneNumber: phoneNumber, address: address), invoice: invoice, resultType:  EmptyResponse.self, showLoader: true)
+        APIManager.shared.uploadPdfDocs(endPoint: BeneficiaryEndpoint.createCashPickupBusinessBeneficiary(fullName: fullName, nationality: nationality, phoneNumber: phoneNumber, address: address, docName: "contract"), invoice: invoice, resultType:  EmptyResponse.self, showLoader: true)
           .sink { completion in
             switch completion{
             case .failure(let error):
@@ -172,7 +172,7 @@ class BeneficiaryRepository {
     
     @Published var bankBeneficiaryBusinessCreationStatus:Bool?
     func createBankBeneficiaryBusinessAPICall(fullName:String, nationality:String, phone:String, address:String, bankId:String, accNo:String, invoice:Data?)  {
-        APIManager.shared.uploadPdfDocs(endPoint: BeneficiaryEndpoint.createBankBusinessBeneficiary(fullName: fullName, nationality: nationality, phoneNumber: phone, address: address, bankId: bankId, accNo: accNo), invoice: invoice, resultType: EmptyResponse.self, showLoader: true)
+        APIManager.shared.uploadPdfDocs(endPoint: BeneficiaryEndpoint.createBankBusinessBeneficiary(fullName: fullName, nationality: nationality, phoneNumber: phone, address: address, bankId: bankId, accNo: accNo, docName: "contract"), invoice: invoice, resultType: EmptyResponse.self, showLoader: true)
             .sink { completion in
                 switch completion{
                 case .failure(let error):

@@ -192,7 +192,7 @@ class APIManager{
                     }
                     
                     if let invoiceData = invoice {
-                        multipartFormData.append(invoiceData, withName: "invoice", fileName: "invoice.pdf", mimeType: "application/pdf")
+                        multipartFormData.append(invoiceData, withName: parameters["docName"] as! String, fileName: "invoice.pdf", mimeType: "application/pdf")
                     }
                 }, to: path, method: .post, headers: headers)
                 .validate(statusCode: 200...299)

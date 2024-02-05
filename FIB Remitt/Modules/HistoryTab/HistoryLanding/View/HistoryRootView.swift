@@ -28,12 +28,13 @@ struct HistoryRootView: View {
             vm.selectedFilterValue = "All"
             self.from = ""
             self.to = ""
+            TransactionDataHandler.shared.clear()
             initialDataAll()
         })
     }
     
     func initialDataAll(from:String = "",to:String = ""){
-        vm.transactionHistoryDataOnly = []
+        //vm.transactionHistoryDataOnly = []
         transactionListApi(from: from, to:to)
         
     }

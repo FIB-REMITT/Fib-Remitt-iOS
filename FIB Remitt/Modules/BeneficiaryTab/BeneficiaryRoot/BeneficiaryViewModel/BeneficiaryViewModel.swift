@@ -151,7 +151,7 @@ class BeneficiaryViewModel : ObservableObject{
     }
     
     func addCashPickupBeneficiary() {
-        repo.createCashPickupBeneficiaryAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phone: phone, address: address, gender: selectedGenderType.title, relationShip: relation)
+        repo.createCashPickupBeneficiaryAPICall(fullName: firstName + " "+lastName, nationality: selectedNationality.id ?? "", phone: phone, address: address, gender: selectedGenderType.title, relationShip: relation)
         repo.$cashPickupBeneficiaryNormalCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
@@ -163,7 +163,7 @@ class BeneficiaryViewModel : ObservableObject{
     
     func addCashPickupBeneficiaryBusiness() {
         let pdfContractDoc  = pdfData(from: URL(string: beneficiaryData.contractPath) ?? URL(fileURLWithPath: ""))
-        repo.createCashPickupBusinessAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phoneNumber: phone, address: address, invoice: pdfContractDoc)
+        repo.createCashPickupBusinessAPICall(fullName: firstName + " "+lastName, nationality: selectedNationality.id ?? "", phoneNumber: phone, address: address, invoice: pdfContractDoc)
         repo.$cashPickupBeneficiaryBusinessCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
@@ -175,7 +175,7 @@ class BeneficiaryViewModel : ObservableObject{
     
     func addBankBeneficiaryBusiness() {
         let pdfContractDoc  = pdfData(from: URL(string: beneficiaryData.contractPath) ?? URL(fileURLWithPath: ""))
-        repo.createBankBeneficiaryBusinessAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phone: phone, address: address, bankId:  selectedBankName.id ?? "", accNo: accountNo, invoice: pdfContractDoc)
+        repo.createBankBeneficiaryBusinessAPICall(fullName: firstName + " "+lastName, nationality: selectedNationality.id ?? "", phone: phone, address: address, bankId:  selectedBankName.id ?? "", accNo: accountNo, invoice: pdfContractDoc)
         repo.$bankBeneficiaryBusinessCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
@@ -186,7 +186,7 @@ class BeneficiaryViewModel : ObservableObject{
     }
     
     func addBankBeneficiary() {
-        repo.createBankBeneficiaryAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phone: phone, address: address, gender: selectedGenderType.title, relationShip: relation, bankId: selectedBankName.id ?? "", accNo: accountNo)
+        repo.createBankBeneficiaryAPICall(fullName: firstName + " "+lastName, nationality: selectedNationality.id ?? "", phone: phone, address: address, gender: selectedGenderType.title, relationShip: relation, bankId: selectedBankName.id ?? "", accNo: accountNo)
         repo.$bankBeneficiaryNormalCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
@@ -200,7 +200,7 @@ class BeneficiaryViewModel : ObservableObject{
     private func observeCashPickupValidationScopes() {
         Publishers.CombineLatest4($firstName, $selectedNationality, $phone, $address)
             .map { name, nationality, phone, address in
-                return self.validate(name: self.firstName, nationality: self.selectedNationality.id ?? "", phone: phone, address: address)
+                return self.validate(firstName: self.firstName,lastName: self.lastName, nationality: self.selectedNationality.id ?? "", phone: phone, address: address)
             }
             .sink(receiveValue: { isValidate in
                 self.isSaveValidated = isValidate
@@ -215,7 +215,7 @@ class BeneficiaryViewModel : ObservableObject{
 
         Publishers.CombineLatest4($firstName, $selectedNationality, $phone, $address)
             .map { name, nationality, phone, address in
-                return self.validate(name: self.firstName, nationality: self.selectedNationality.id ?? "", phone: phone, address: address)
+                return self.validate(firstName: self.firstName, lastName: self.lastName, nationality: self.selectedNationality.id ?? "", phone: phone, address: address)
             }
             .sink(receiveValue: { isValidate in
                 self.firstValidationCheck = isValidate
@@ -241,9 +241,11 @@ class BeneficiaryViewModel : ObservableObject{
             .store(in: &subscribers)
     }
     
-    private func validate(name:String, nationality:String, phone:String, address:String) -> Bool {
-        if name.isEmpty {
+    func validate(firstName:String, lastName:String, nationality:String, phone:String, address:String) -> Bool {
+        if firstName.isEmpty {
             return false
+        }else if lastName.isEmpty{
+         return false
         }else if nationality.isEmpty {
             return false
         }else if phone.isEmpty{

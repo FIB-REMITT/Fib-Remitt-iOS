@@ -247,11 +247,11 @@ enum BeneficiaryEndpoint: Endpoint {
     case getCashPickupDetails(id:String)
     case getBankDetails(id:String)
     case createCashPickupPersonalBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, gender:String, relationShip:String)
-    case createCashPickupBusinessBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String)
-    case createBankBusinessBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, bankId:String, accNo:String)
+    case createCashPickupBusinessBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, docName:String)
+    case createBankBusinessBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, bankId:String, accNo:String, docName:String)
     case createBankPersonalBeneficiary(fullName:String, nationality:String, phoneNumber:String, address:String, gender:String, relationShip:String, bankId:String, accNo:String)
     case resetPassword(newPassword: String)
-    case makeAPICallReceivedInBank(fromCurrency:String,amountToTransfer:String, toCurrency : String, paymentMethod : String, collectionPoint : String,purposeId : String,isBankbeneficiary:Bool,beneficiaryId:String)
+    case makeAPICallReceivedInBank(fromCurrency:String,amountToTransfer:String, toCurrency : String, paymentMethod : String, collectionPoint : String,purposeId : String,isBankbeneficiary:Bool,beneficiaryId:String, docName:String)
     
     case cashPickUpFromAgent(beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?,isBankbeneficiary:Bool)
     
@@ -286,11 +286,11 @@ enum BeneficiaryEndpoint: Endpoint {
             return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup"
         case .getBankBeneficiaries:
             return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank"
-        case .createCashPickupBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address):
+        case .createCashPickupBusinessBeneficiary:
             return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/cashpickup"
-        case .createBankBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address, bankId: let bankId, accNo: let accNo):
+        case .createBankBusinessBeneficiary:
             return "api/v1/private/beneficiary/\(UserSettings.shared.getSUB())/bank"
-        case .makeAPICallReceivedInBank(fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer , toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, isBankbeneficiary : let isBankbeneficiary,beneficiaryId : let beneficiaryId):
+        case .makeAPICallReceivedInBank(fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer , toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, isBankbeneficiary : let isBankbeneficiary,beneficiaryId : let beneficiaryId,let docName):
             return isBankbeneficiary ? "api/v1/private/transfer/personal/receive-in-bank" : "api/v1/private/transfer/personal/receive-in-cash"
             
         case .cashPickUpFromAgent(beneficiaryId: let beneficiaryId, fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer, toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, invoice: let invoice,isBankbeneficiary: let isBankbeneficiary):
@@ -317,16 +317,16 @@ enum BeneficiaryEndpoint: Endpoint {
             
         case .resetPassword(let newPassword):
             return ["newPassword": newPassword, "confirmNewPassword": newPassword]
-        case .createCashPickupBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address):
-            return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address": address, "typeOfBeneficiary":"Business"]
+        case .createCashPickupBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address, let docName):
+            return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address": address, "typeOfBeneficiary":"Business" , "docName":"contract"]
             //"fullName": fullName,"nationalityId": nationalityId, "phoneNumber" : phoneNumber, "address": address, "typeOfBeneficiary":"Business"
-        case .createBankBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address, bankId: let bankId, accNo: let accNo):
-            return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address":address,"typeOfBeneficiary":"Business","bankId":bankId, "accountNumber":accNo]
+        case .createBankBusinessBeneficiary(fullName: let fullName, nationality: let nationality, phoneNumber: let phoneNumber, address: let address, bankId: let bankId, accNo: let accNo, let DocName):
+            return ["fullName":fullName, "nationalityId":nationality, "phoneNumber":phoneNumber, "address":address,"typeOfBeneficiary":"Business","bankId":bankId, "accountNumber":accNo, "docName":"contract"]
            // "fullName": fullName,"nationalityId": nationalityId, "phoneNumber" : phoneNumber, "address": address, "typeOfBeneficiary":"Business", "bankId" : bankId, "accountNumber" : accountNo
             
-        case .makeAPICallReceivedInBank(fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer , toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, isBankbeneficiary : let isBankbeneficiary,beneficiaryId : let beneficiaryId):
+        case .makeAPICallReceivedInBank(fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer , toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, isBankbeneficiary : let isBankbeneficiary,beneficiaryId : let beneficiaryId,let docName):
             
-            return ["fromCurrency": fromCurrency,"amountToTransfer": amountToTransfer, "toCurrency" : toCurrency, "paymentMethod": paymentMethod, "collectionPoint": collectionPoint,"purposeId": purposeId,(isBankbeneficiary ? "bankBeneficiaryId" : "cashPickupBeneficiaryId") : beneficiaryId]
+            return ["fromCurrency": fromCurrency,"amountToTransfer": amountToTransfer, "toCurrency" : toCurrency, "paymentMethod": paymentMethod, "collectionPoint": collectionPoint,"purposeId": purposeId,(isBankbeneficiary ? "bankBeneficiaryId" : "cashPickupBeneficiaryId") : beneficiaryId, "docName":"invoice"]
             
         case .cashPickUpFromAgent(beneficiaryId: let beneficiaryId, fromCurrency: let fromCurrency , amountToTransfer: let amountToTransfer, toCurrency: let toCurrency, paymentMethod: let paymentMethod, collectionPoint: let collectionPoint, purposeId: let purposeId, invoice: let invoice,isBankbeneficiary: let isBankbeneficiary):
             
