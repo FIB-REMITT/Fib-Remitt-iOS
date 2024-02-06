@@ -204,9 +204,7 @@ extension HomeSelectBeneficiaryView{
         beneficiaryVM.getNationalities()
         vm.navigateToSelectBeneficiarySheet()
     }
-    private func notificationBtnPressed() {
-        
-    }
+    private func notificationBtnPressed() {showToast(message: "No notification found!")}
     private func proccedBtnPressed() {
         //vm.navigateToBeneficiarySummary()
         if homeData.collectionPoint.lowercased() == "bank"{

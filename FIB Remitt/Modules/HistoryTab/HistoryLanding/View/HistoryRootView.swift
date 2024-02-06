@@ -28,7 +28,6 @@ struct HistoryRootView: View {
             vm.selectedFilterValue = "All"
             self.from = ""
             self.to = ""
-            TransactionDataHandler.shared.clear()
             initialDataAll()
         })
     }
@@ -81,7 +80,7 @@ extension HistoryRootView{
 
 //MARK: - ACTIONS
 extension HistoryRootView{
-    private func notificationBtnPressed() {}
+    private func notificationBtnPressed() {showToast(message: "No notification found!")}
     private func filterBtnPressed() {
         showSheet(view: AnyView(FilterOptionsView(selectedValue: vm.selectedFilterValue) { selectedItem in
             self.vm.selectedFilterValue = selectedItem

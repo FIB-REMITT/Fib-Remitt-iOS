@@ -198,8 +198,7 @@ extension HistoryDetailView{
 
 //MARK: - ACTIONS
 extension HistoryDetailView{
-    private func notificationBtnPressed() {
-    }
+    private func notificationBtnPressed() {showToast(message: "No notification found!")}
 }
 #Preview {
     HistoryDetailView(id: "")

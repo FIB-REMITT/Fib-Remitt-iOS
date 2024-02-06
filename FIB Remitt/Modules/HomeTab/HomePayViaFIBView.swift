@@ -19,19 +19,20 @@ struct HomePayViaFIBView: View {
     var body: some View {
         VStack(spacing:20){
             navigationBar
-            qrInfoContainer
-            middleListContainer
-            TextH6Medium(text: "Waiting for vaildate the transaction", fg_color: .primary500)
-            TextBaseRegular(text: "Ramaining: \(secondsRemaining/60) minutes \(secondsRemaining%60) seconds", fg_color: .primary500)
-                .padding()
-            if isLoading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .primary500))
+            ScrollView{
+                qrInfoContainer
+                middleListContainer
+                TextH6Medium(text: "Waiting for vaildate the transaction", fg_color: .primary500)
+                TextBaseRegular(text: "Ramaining: \(secondsRemaining/60) minutes \(secondsRemaining%60) seconds", fg_color: .primary500)
+                    .padding()
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .primary500))
                         .scaleEffect(2.0) // Increase the scale factor to make it bigger
                         .padding()
-            }
-            Spacer()
-            bottomCancelButton
+                }
+                Spacer()
+                bottomCancelButton}
             
         }.onAppear{
             startTimers()
@@ -152,7 +153,7 @@ extension HomePayViaFIBView{
 
 //MARK: - ACTIONS
 extension HomePayViaFIBView{
-    private func notificationBtnPressed() {}
+    private func notificationBtnPressed() {showToast(message: "No notification found!")}
     
     private func navigateToWebApp(urlStr:String){
         vm.navigateToWebAppLink(urlStr: urlStr)

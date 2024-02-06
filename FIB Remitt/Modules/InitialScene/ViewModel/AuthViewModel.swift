@@ -12,7 +12,6 @@ class AuthViewModel : ObservableObject{
     private var subscribers = Set<AnyCancellable>()
     
     @Published var goToNext        = false
-    @Published var loggedIn        = false
     @Published var destinationView = AnyView(Text("Destination"))
     
     
@@ -44,7 +43,6 @@ class AuthViewModel : ObservableObject{
     }
     
     func successfullyLoggedIn() {
-        loggedIn = true
         //self.navigateToHome()
     }
     

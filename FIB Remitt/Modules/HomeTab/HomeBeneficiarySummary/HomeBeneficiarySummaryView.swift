@@ -66,9 +66,7 @@ extension HomeBeneficiarySummaryView{
 
 //MARK: - ACTIONS
 extension HomeBeneficiarySummaryView{
-    private func notificationBtnPressed() {
-        
-    }
+    private func notificationBtnPressed() {showToast(message: "No notification found!") }
     private func proccedBtnPressed() {
         vm.navigateToPayViaFIB()
     }
