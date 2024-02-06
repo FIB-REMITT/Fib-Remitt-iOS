@@ -239,82 +239,12 @@ class APIManager{
         }
     }
     
-    func makeAPICallReceivedInBank(isBankbeneficiary:Bool,beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) -> Future<BankCollectionResponse, Error> {
-        let headers: HTTPHeaders = [
-            "Authorization": UserSettings.shared.getAccessToken(),
-            "Content-Type": "multipart/form-data"
-        ]
-        let path = isBankbeneficiary ? "api/v1/private/transfer/personal/receive-in-bank" : "api/v1/private/transfer/personal/receive-in-cash"
-      
-        
-        let url = "\(K.IS_DEV_BUILD ? K.BaseURL.FIB.Sandbox : K.BaseURL.FIB.Production)\(path)"
-        
-        
-        var parameters : Parameters = [String: Any]()
-      
-         parameters = [
-            "fromCurrency": fromCurrency,"amountToTransfer": amountToTransfer, "toCurrency" : toCurrency, "paymentMethod": paymentMethod, "collectionPoint": collectionPoint,"purposeId": purposeId
-        ]
-        if isBankbeneficiary == true{
-            parameters["bankBeneficiaryId"] = beneficiaryId
-        }else{
-            parameters["cashPickupBeneficiaryId"] = beneficiaryId
-        }
-        
-        print("--------- > \(parameters)")
-        return Future<BankCollectionResponse, Error> { promise in
-            AF.upload(multipartFormData: { multipartFormData in
-                for (key, value) in parameters {
-                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
-                }
-               
-                if let invoiceData = invoice {
-                    multipartFormData.append(invoiceData, withName: "invoice", fileName: "invoice.pdf", mimeType: "application/pdf")
-                }
-            }, to: url, method: .post, headers: headers)
-            .validate(statusCode: 200...299)
-            .publishDecodable(type: BankCollectionResponse.self)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    promise(.failure(error))
-                }
-            }, receiveValue: { response in
-                switch response.result{
-                case .success(let model):
-                    promise(.success(model))
-                case .failure(_):
-                    if response.response?.statusCode == 200{
-                        promise(.failure(NetworkError.responseIsEmpty))
-                    }else if response.response?.statusCode == 401{
-                       // self.updateToken()
-                        loadView(view: InitialView())
-                    }else{
-                        if let data = response.data {
-                            do {
-                                let errorResponse = try JSONDecoder().decode(RequestFailed.self, from: data)
-                                promise(.failure(errorResponse.errors?.joined(separator: " ") ?? ""))
-                                showToast(message: errorResponse.errors?.joined(separator: " ") ?? "")
-                                
-                            } catch {
-                                promise(.failure(error.localizedDescription))
-                                showAlert(message: "Failed!")
-                            }
-                        }
-                    }
-                }
-            }).store(in: &self.subscribers)
-        }
-    }
-//    
-//    func uploadBeneficiaryDocs(fullName:String,nationalityId:String,phoneNumber:String, address:String, invoice:Data?) -> Future<EmptyResponse, Error> {
+//    func makeAPICallReceivedInBank(isBankbeneficiary:Bool,beneficiaryId:String,fromCurrency:String,amountToTransfer:String,toCurrency:String,paymentMethod:String,collectionPoint:String,purposeId:String, invoice:Data?) -> Future<BankCollectionResponse, Error> {
 //        let headers: HTTPHeaders = [
 //            "Authorization": UserSettings.shared.getAccessToken(),
 //            "Content-Type": "multipart/form-data"
 //        ]
-//        let path = "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/cashpickup"
+//        let path = isBankbeneficiary ? "api/v1/private/transfer/personal/receive-in-bank" : "api/v1/private/transfer/personal/receive-in-cash"
 //      
 //        
 //        let url = "\(K.IS_DEV_BUILD ? K.BaseURL.FIB.Sandbox : K.BaseURL.FIB.Production)\(path)"
@@ -323,87 +253,28 @@ class APIManager{
 //        var parameters : Parameters = [String: Any]()
 //      
 //         parameters = [
-//            "fullName": fullName,"nationalityId": nationalityId, "phoneNumber" : phoneNumber, "address": address, "typeOfBeneficiary":"Business"
+//            "fromCurrency": fromCurrency,"amountToTransfer": amountToTransfer, "toCurrency" : toCurrency, "paymentMethod": paymentMethod, "collectionPoint": collectionPoint,"purposeId": purposeId
 //        ]
-//        
-//        return Future<EmptyResponse, Error> { promise in
-//            AF.upload(multipartFormData: { multipartFormData in
-//                for (key, value) in parameters {
-//                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
-//                }
-//               
-//                if let invoiceData = invoice {
-//                    multipartFormData.append(invoiceData, withName: "contract", fileName: "invoice.pdf", mimeType: "application/pdf")
-//                }
-//            }, to: url, method: .post, headers: headers)
-//            .validate(statusCode: 200...299)
-//            .publishDecodable(type: EmptyResponse.self)
-//            .sink(receiveCompletion: { completion in
-//                LoaderManager.shared.showHud()
-//                switch completion {
-//                case .finished:
-//                    break
-//                case .failure(let error):
-//                    promise(.failure(error))
-//                }
-//            }, receiveValue: { response in
-//                LoaderManager.shared.hideHud()
-//                switch response.result{
-//                case .success(let model):
-//                    promise(.success(model))
-//                case .failure(_):
-//                    if response.response?.statusCode == 201{
-//                        promise(.failure(NetworkError.responseIsEmpty))
-//                    }else if response.response?.statusCode == 401{
-//                        //self.updateToken()
-//                        loadView(view: InitialView())
-//                    }else{
-//                        if let data = response.data {
-//                            do {
-//                                let errorResponse = try JSONDecoder().decode(RequestFailed.self, from: data)
-//                                promise(.failure(errorResponse.errors?.joined(separator: " ") ?? ""))
-//                                showToast(message: errorResponse.errors?.joined(separator: " ") ?? "")
-//                            } catch {
-//                                promise(.failure(error.localizedDescription))
-//                                showAlert(message: "Failed!")
-//                            }
-//                        }
-//                    }
-//                }
-//            }).store(in: &self.subscribers)
+//        if isBankbeneficiary == true{
+//            parameters["bankBeneficiaryId"] = beneficiaryId
+//        }else{
+//            parameters["cashPickupBeneficiaryId"] = beneficiaryId
 //        }
-//    }
-//       
-//    func uploadBankBeneficiaryDocs(fullName:String,nationalityId:String,phoneNumber:String, address:String, bankId:String, accountNo:String, invoice:Data?) -> Future<EmptyResponse, Error> {
-//        let headers: HTTPHeaders = [
-//            "Authorization": UserSettings.shared.getAccessToken(),
-//            "Content-Type": "multipart/form-data"
-//        ]
 //        
-//        let path = "api/v1/private/beneficiary/\("853692f2-3a30-47e5-a9df-cf6b7c9ffed3")/bank"
-//        let url = "\(K.IS_DEV_BUILD ? K.BaseURL.FIB.Sandbox : K.BaseURL.FIB.Production)\(path)"
-//        
-//        
-//        var parameters : Parameters = [String: Any]()
-//      
-//         parameters = [
-//            "fullName": fullName,"nationalityId": nationalityId, "phoneNumber" : phoneNumber, "address": address, "typeOfBeneficiary":"Business", "bankId" : bankId, "accountNumber" : accountNo
-//        ]
-//        
-//        return Future<EmptyResponse, Error> { promise in
+//        print("--------- > \(parameters)")
+//        return Future<BankCollectionResponse, Error> { promise in
 //            AF.upload(multipartFormData: { multipartFormData in
 //                for (key, value) in parameters {
 //                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
 //                }
 //               
 //                if let invoiceData = invoice {
-//                    multipartFormData.append(invoiceData, withName: "contract", fileName: "invoice.pdf", mimeType: "application/pdf")
+//                    multipartFormData.append(invoiceData, withName: "invoice", fileName: "invoice.pdf", mimeType: "application/pdf")
 //                }
 //            }, to: url, method: .post, headers: headers)
 //            .validate(statusCode: 200...299)
-//            .publishDecodable(type: EmptyResponse.self)
+//            .publishDecodable(type: BankCollectionResponse.self)
 //            .sink(receiveCompletion: { completion in
-//                LoaderManager.shared.showHud()
 //                switch completion {
 //                case .finished:
 //                    break
@@ -411,12 +282,11 @@ class APIManager{
 //                    promise(.failure(error))
 //                }
 //            }, receiveValue: { response in
-//                LoaderManager.shared.hideHud()
 //                switch response.result{
 //                case .success(let model):
 //                    promise(.success(model))
 //                case .failure(_):
-//                    if response.response?.statusCode == 201{
+//                    if response.response?.statusCode == 200{
 //                        promise(.failure(NetworkError.responseIsEmpty))
 //                    }else if response.response?.statusCode == 401{
 //                       // self.updateToken()
@@ -427,6 +297,7 @@ class APIManager{
 //                                let errorResponse = try JSONDecoder().decode(RequestFailed.self, from: data)
 //                                promise(.failure(errorResponse.errors?.joined(separator: " ") ?? ""))
 //                                showToast(message: errorResponse.errors?.joined(separator: " ") ?? "")
+//                                
 //                            } catch {
 //                                promise(.failure(error.localizedDescription))
 //                                showAlert(message: "Failed!")
@@ -437,7 +308,7 @@ class APIManager{
 //            }).store(in: &self.subscribers)
 //        }
 //    }
-    
+
     func updateToken() {
         if UserSettings.shared.shouldRefreshTokenCall(){
             LoaderManager.shared.hideHud()

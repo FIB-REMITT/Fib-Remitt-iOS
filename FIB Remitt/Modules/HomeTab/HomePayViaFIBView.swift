@@ -104,7 +104,7 @@ extension HomePayViaFIBView{
     }
     private var qrInfoContainer : some View{
         VStack {
-            TextBaseRegular(text: "Scan bellow QR using FIB App", fg_color: .textMute)
+            TextBaseRegular(text: "Scan below QR using FIB App", fg_color: .textMute)
             if let qrDataImg = vm.ConfirmationResponse?.qrCode?.getBase64StrQRcodeToImage(){
                 Image(uiImage:qrDataImg )
                     .padding(12)

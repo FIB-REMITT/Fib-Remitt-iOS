@@ -12,7 +12,7 @@ struct FibPaymentCheckView: View {
 
     var body: some View {
         VStack {
-            TextH6Medium(text: "Waiting for vaildate the transaction", fg_color: .primary500)
+            TextH6Medium(text: "Awaiting Payment Confirmation...", fg_color: .primary500)
             TextBaseRegular(text: "Ramaining: \(secondsRemaining) seconds", fg_color: .primary500)
                 .padding()
             if isLoading {

@@ -53,7 +53,7 @@ extension HomeBeneficiarySummaryView{
                     
                     SimpleHInfoRegularView(title: "Service charge", info: "+ \(beneficiaryResponse?.transaction?.charge ?? 0)")
                     Divider()
-                    SimpleHModInfoView(title: "Total payble", info: "\(beneficiaryResponse?.transaction?.totalPayable ?? 0)",fontStyle: .titleBold)
+                    SimpleHModInfoView(title: "Total payable", info: "\(beneficiaryResponse?.transaction?.totalPayable ?? 0)",fontStyle: .titleBold)
                     SimpleHModInfoView(title: "Recipient gets", info: "\(beneficiaryResponse?.transaction?.amountReceivable ?? 0)", textColor: Color.primary500, fontStyle: .allBold)
                 }
             }
