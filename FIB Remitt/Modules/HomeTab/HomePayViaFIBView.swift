@@ -22,7 +22,8 @@ struct HomePayViaFIBView: View {
             ScrollView{
                 qrInfoContainer
                 middleListContainer
-                TextH6Medium(text: "Waiting for vaildate the transaction", fg_color: .primary500)
+                Spacer(minLength: 20)
+                TextH6Medium(text: "Awaiting Payment Confirmation...", fg_color: .primary500)
                 TextBaseRegular(text: "Ramaining: \(secondsRemaining/60) minutes \(secondsRemaining%60) seconds", fg_color: .primary500)
                     .padding()
                 if isLoading {
