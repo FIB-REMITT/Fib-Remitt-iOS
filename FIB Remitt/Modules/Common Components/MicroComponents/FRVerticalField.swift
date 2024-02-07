@@ -12,18 +12,31 @@ struct FRVerticalField: View {
     var placeholderIcon     : String?
     @Binding var inputText  : String
     var maxCharacter: Int?
+    var extraString: String?
     
     var paddingValue : CGFloat = 15
     var body: some View {
-        VStack {
-            FRTextField(placeholder: AnyView( 
-                HStack{
-                    if let ico = placeholderIcon{ Image(ico)}
-                    Text(placeholder)
-                }), text: $inputText,maxCharacterCount: maxCharacter ?? 100)
-        }   .padding(paddingValue)
+        HStack{
+            Text(extraString ?? "").foregroundColor(.textRegula)
+            VStack {
+                
+                FRTextField(placeholder: AnyView(
+                    HStack{
+                        if let ico = placeholderIcon{ Image(ico)}
+                        Text(placeholder)
+                    }), text: $inputText,maxCharacterCount: maxCharacter ?? 100)
+            }
+            .padding(.top,paddingValue)
+            .padding(.bottom,paddingValue)
+            .padding(.trailing,paddingValue)
+            .padding(.leading, extraString?.isBlankOrEmpty ?? true ? paddingValue: 0)
             .background(Color.fr_background)
             .cornerRadius(100)
+        }
+        .padding(.leading, extraString?.isBlankOrEmpty ?? true ? 0: 20)
+        .background(Color.fr_background)
+        .cornerRadius(100)
+        
     }
 }
 
