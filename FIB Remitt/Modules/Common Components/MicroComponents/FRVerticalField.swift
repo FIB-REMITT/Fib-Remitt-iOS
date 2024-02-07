@@ -11,6 +11,7 @@ struct FRVerticalField: View {
     var placeholder         : String
     var placeholderIcon     : String?
     @Binding var inputText  : String
+    var maxCharacter: Int?
     
     var paddingValue : CGFloat = 15
     var body: some View {
@@ -19,7 +20,7 @@ struct FRVerticalField: View {
                 HStack{
                     if let ico = placeholderIcon{ Image(ico)}
                     Text(placeholder)
-                }), text: $inputText)
+                }), text: $inputText,maxCharacterCount: maxCharacter ?? 100)
         }   .padding(paddingValue)
             .background(Color.fr_background)
             .cornerRadius(100)

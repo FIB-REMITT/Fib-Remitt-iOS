@@ -39,12 +39,13 @@ extension HomeBeneficiarySummaryView{
                 VStack(spacing:10){
                     SimpleHColonInfoView(title: "Name", info: beneficiaryResponse?.receiver?.fullName ?? "")
                     SimpleHColonInfoView(title: "Bank Name", info: beneficiaryResponse?.receiver?.bankName ?? "N/A")
-                    SimpleHColonInfoView(title: "Account No.", info:  beneficiaryResponse?.receiver?.accountNumber ?? "N/A")
+                    SimpleHColonInfoView(title: "IBAN", info: beneficiaryResponse?.receiver?.accountNumber ?? "N/A" )
                     SimpleHColonInfoView(title: "Type", info: beneficiaryResponse?.receiver?.typeOfBeneficiary ?? "")
                     SimpleHColonInfoView(title: "Relation", info: beneficiaryResponse?.receiver?.relationship ?? "")
                     SimpleHColonInfoView(title: "Phone", info: beneficiaryResponse?.receiver?.phoneNumber ?? "")
                     SimpleHColonInfoView(title: "Address", info: beneficiaryResponse?.receiver?.address ?? "")}
             }
+            
             
             FRVContainer (backgroundColor:.frForground){
                 TextBaseMedium(text: "Transfer Summary", fg_color: .text_Mute)
@@ -54,7 +55,7 @@ extension HomeBeneficiarySummaryView{
                     SimpleHInfoRegularView(title: "Service charge", info: "+ \(beneficiaryResponse?.transaction?.charge ?? 0)")
                     Divider()
                     SimpleHModInfoView(title: "Total payable", info: "\(beneficiaryResponse?.transaction?.totalPayable ?? 0)",fontStyle: .titleBold)
-                    SimpleHModInfoView(title: "Recipient gets", info: "\(beneficiaryResponse?.transaction?.amountReceivable ?? 0)", textColor: Color.primary500, fontStyle: .allBold)
+                    SimpleHModInfoView(title: "Recipient gets", info: roundAmount(doubleValue: beneficiaryResponse?.transaction?.amountReceivable ?? 0,format: "%.2f"), textColor: Color.primary500, fontStyle: .allBold)
                 }
             }
         }

@@ -73,7 +73,7 @@ extension BeneficiaryDetailView{
                 TextBaseMedium(text: "Bank Details", fg_color: .textRegula)
                 VStack (spacing:10){
                     SimpleHColonInfoView(title: "Bank Name", info: vm.selectedBankBeneficiary?.bankBeneficiaryBankDTO?.name ?? "")
-                    SimpleHColonInfoView(title: "Account Number", info: vm.selectedBankBeneficiary?.accountNumber ?? "")
+                    SimpleHColonInfoView(title: "IBAN", info: vm.selectedBankBeneficiary?.accountNumber ?? "")
                 }
             }
         }

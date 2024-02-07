@@ -22,6 +22,7 @@ struct HistoryDetailView: View {
             VStack(spacing: 12){
                 navigationBar
                 SimpleHInfoCellView(title: "Delivery Method", info: vm.transactionDetails?.collectionPoint ?? "")
+                SimpleHInfoCellView(title: "Reference Code", info:  vm.transactionDetails?.transactionNumber ?? "")
                 SimpleHInfoCellView(title: "Purpose", info:  vm.transactionDetails?.purposeTitle ?? "")
                 
                 FRVContainer (spacing: 12,backgroundColor: .fr_forground){
@@ -44,7 +45,7 @@ struct HistoryDetailView: View {
                         VStack(spacing: 12){
                             SimpleHColonInfoView(title: "Name", info:  vm.transactionDetails?.receiver?.fullName ?? "")
                             SimpleHColonInfoView(title: "Bank Name", info: vm.transactionDetails?.receiver?.bankName ?? "")
-                            SimpleHColonInfoView(title: "Account No.", info: vm.transactionDetails?.receiver?.accountNumber ?? "")
+                            SimpleHColonInfoView(title: "IBAN", info:  vm.transactionDetails?.receiver?.accountNumber ?? "" )
                             SimpleHColonInfoView(title: "Ref No.", info: vm.transactionDetails?.transactionNumber ?? "")
                             SimpleHColonInfoView(title: "Type", info: vm.transactionDetails?.receiver?.typeOfBeneficiary ?? "")
                             SimpleHColonInfoView(title: "Relation", info: vm.transactionDetails?.receiver?.relationship ?? "-")
@@ -80,7 +81,7 @@ struct HistoryDetailView: View {
                             SimpleHInfoRegularView(title: "Service charge", info: "\(vm.transactionDetails?.transaction?.charge ?? 0.0) "+(vm.transactionDetails?.transaction?.fromCurrency ?? ""))
                             Divider()
                             SimpleHModInfoView(title: "Total payable", info: "\(vm.transactionDetails?.transaction?.totalPayable ?? 0.0) ",fontStyle: .titleBold)
-                            SimpleHModInfoView(title: "Recipient gets", info: "\(vm.transactionDetails?.transaction?.amountReceivable ?? 0.0) "+(vm.transactionDetails?.transaction?.toCurrency ?? ""), textColor: Color.primary500, fontStyle: .allBold)
+                            SimpleHModInfoView(title: "Recipient gets", info: "\(roundAmount(doubleValue: vm.transactionDetails?.transaction?.amountReceivable ?? 0.0,format: "%.2f")) "+(vm.transactionDetails?.transaction?.toCurrency ?? ""), textColor: Color.primary500, fontStyle: .allBold)
                         }
                     }
                 }
@@ -135,10 +136,11 @@ struct HistoryDetailView: View {
         }
         .background(Color.fr_background.ignoresSafeArea())
     }
+  
     private func viewForProgressState(progressData:DetailsProgress) -> String {
            switch progressData.state {
            case "1":
-               return "Pending"
+               return "Pending_Approval"
            case "2":
                return "Approved"
            case "3":

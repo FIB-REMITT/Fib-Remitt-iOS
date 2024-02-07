@@ -73,7 +73,7 @@ extension HomeRootView{
         FRVContainer (spacing: 7, backgroundColor: .frForground){
             TextBaseMedium(text: "Transfer amount", fg_color: .text_Mute)
             HStack{
-                FRVerticalField(placeholder: "Enter Amount", inputText: $vm.transferAmount)
+                FRVerticalField(placeholder: "Enter Amount", inputText: $vm.transferAmount, maxCharacter: 20)
                     .focused($transferIsFocused)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
@@ -82,10 +82,11 @@ extension HomeRootView{
             
             TextBaseMedium(text: "Recipient gets", fg_color: .text_Mute)
             HStack{
-                FRVerticalField(placeholder: "Enter Amount", inputText: $vm.recipentAmount)
+                FRVerticalField(placeholder: "Enter Amount", inputText: $vm.recipentAmount, maxCharacter: 20)
                     .focused($recepientIsFofused)
                     .frame(width: UI.scnWidth * 0.5)
                     .keyboardType(.numberPad)
+                
                 FRSimpleDropDownButton(title: vm.selectedRecipientCurrency.code ?? "", icon: vm.selectedRecipientCurrency.code == "TRY" ? "turkey" : "", action: {selectRecipientCurrencyPressed()})
             }
             Divider().padding(.horizontal)
@@ -93,7 +94,11 @@ extension HomeRootView{
                 .padding(.bottom, 2)
             HStack {
                 Spacer()
-                TextSmallRegular(text: "Conversion rate 1 TRY = 43.53 IQD", fg_color: .primary400)
+                if let conversionRates       = HomeDataHandler.shared.conversionRates{
+                    let targetRate           = conversionRates.toDictionary()[vm.selectedRecipientCurrency.code ?? "TRY"]
+                    TextSmallRegular(text: "Conversion rate 1 IQD = \(roundAmount(doubleValue: targetRate ?? 0.02341, format: "%.4f")) TRY", fg_color: .primary400)
+                }
+                
                 Spacer()
             }
         }

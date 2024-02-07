@@ -34,8 +34,8 @@ struct EditBeneficiaryBankView: View {
                         VStack(alignment:.leading, spacing: 12){
                             TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
                             HStack{
-                                FRVerticalField(placeholder: "First Name", placeholderIcon: "user_ico", inputText: $vm.firstName)
-                                FRVerticalField(placeholder: "Last Name", placeholderIcon: "user_ico", inputText: $vm.lastName)
+                                FRVerticalField(placeholder: "Full Name", placeholderIcon: "user_ico", inputText: $vm.firstName)
+//                                FRVerticalField(placeholder: "Last Name", placeholderIcon: "user_ico", inputText: $vm.lastName)
                             }
                             
                             FRSimpleDropDownButton(title: vm.selectedNationality.name
@@ -68,8 +68,8 @@ struct EditBeneficiaryBankView: View {
             }
             .padding()
             .navigationBarHidden(true)
-            .onChange(of: vm.lastName, perform: { value in
-               let isValid = vm.validate(firstName: vm.firstName, lastName: vm.lastName, nationality: vm.selectedNationality.id ?? "", phone: vm.phone, address: vm.address)
+            .onChange(of: vm.firstName, perform: { value in
+               let isValid = vm.validate(firstName: vm.firstName, nationality: vm.selectedNationality.id ?? "", phone: vm.phone, address: vm.address)
                 vm.isBankSaveValidated = isValid
             })
             .onTapGesture {hideKeyboard()}
@@ -124,7 +124,7 @@ extension EditBeneficiaryBankView{
             TextBaseMedium(text: "Bank Details", fg_color: .text_Mute)
             //  FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_gry_ico", inputText: $vm.bankName)
             FRSimpleDropDownButton(title: vm.selectedBankName.name ?? "Select Bank", icon: "bank_gry_ico", action: {bankNameBtnPressed()})
-            FRVerticalField(placeholder: "Account Number", placeholderIcon: "acc_no", inputText: $vm.accountNo).keyboardType(.numberPad)
+            FRVerticalField(placeholder: "Please enter 24 digit IBAN", placeholderIcon: "acc_no", inputText: $vm.accountNo,maxCharacter: 24).keyboardType(.numberPad)
         }
     }
     
@@ -148,7 +148,9 @@ extension EditBeneficiaryBankView{
     }
     private func saveBtnPressed() {
         if vm.selectedBeneficaryAccountType == .personal{
+            
             vm.addBankBeneficiary()
+            
         }else if vm.selectedBeneficaryAccountType == .buissness{
             vm.addBankBeneficiaryBusiness()
         }

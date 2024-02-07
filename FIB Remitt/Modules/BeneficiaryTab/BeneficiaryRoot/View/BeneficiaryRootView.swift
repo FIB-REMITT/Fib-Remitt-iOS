@@ -86,7 +86,7 @@ extension BeneficiaryRootView{
     private var bankBeneficiariesContainer : some View{
         LazyVStack{
             ForEach(vm.bankBeneficiaries ?? [], id: \.self) { item in
-                AccountInfoCellViewButton(selected: isNotSelected, title: item.fullName ?? "", subtitle1: "A/C no: \(item.accountNumber ?? "")", subtitle2: item.address ?? "", icon: item.typeOfBeneficiary  == "Business" ? "business_ico": "personal_user_ico", action: {
+                AccountInfoCellViewButton(selected: isNotSelected, title: item.fullName ?? "", subtitle1: "IBAN: \(item.accountNumber ?? "")", subtitle2: item.bankBeneficiaryBankDTO?.name ?? "", icon: item.typeOfBeneficiary  == "Business" ? "business_ico": "personal_user_ico", action: {
                     BenficiaryDataHandler.shared.beneficiaryType = .bank_Transfer
                     BenficiaryDataHandler.shared.selectedBenficiaryId = item.id ?? ""
                     vm.navigateToBeneficiaryDetail()

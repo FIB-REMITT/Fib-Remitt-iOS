@@ -15,7 +15,7 @@ struct BeneficiaryAddSuccessfulView: View {
             Image("success_tick")
                 .imageDefaultStyle()
                 .frame(width: width * 0.25)
-            TextH4Medium(text: "Congratulation!", fg_color: .textRegula)
+            TextH4Medium(text: "Congratulation!", fg_color: .green)
             TextBaseRegular(text: "You have successfully added the Beneficiary", fg_color: .textFade)
                 .padding(.horizontal)
                 .multilineTextAlignment(.center)

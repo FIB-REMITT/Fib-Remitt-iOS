@@ -102,7 +102,7 @@ struct TransactionHistoryCellView: View {
             .onAppear{
                 if transaction.status == "Paid" {
                     tempColor = Color.green
-                } else if transaction.status == "Pending" {
+                } else if transaction.status == "Pending_Approval" {
                     tempColor = Color.warning_regular
                 } else {
                     tempColor = Color.red

@@ -10,7 +10,7 @@ import SwiftUI
 struct AccountInfoCellViewButton: View {
     var selected: Bool = false
     var title = "John Doe"
-    var subtitle1 = "A/C No. 124 458 458 856"
+    var subtitle1 = "IBAN. 124 458 458 856"
     var subtitle2 = "Ziraat Bank"
     var icon = ""
     var action : ()->Void = {}

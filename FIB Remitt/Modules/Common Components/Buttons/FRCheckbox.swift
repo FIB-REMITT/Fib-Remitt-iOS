@@ -16,7 +16,7 @@ struct FRCheckbox: View {
             Toggle("", isOn: $isSelected)
                 .toggleStyle(SquareRadioButtonStyle(size: 22, color: radioColor))
             
-            Text("I agree the")
+            Text("I agree to the")
                 .font(UI.FRAppDesignedFont(style: .baseRegular))
                 .foregroundColor(Color.textFade)
         }

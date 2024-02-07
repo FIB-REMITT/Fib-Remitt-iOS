@@ -11,6 +11,7 @@ struct FRTextField: View {
     var placeholder: AnyView
     @Binding var text: String
     @FocusState var isEditing
+    var maxCharacterCount = 100
     
     var editingChanged: (Bool)->() = { _ in }
     var commit: ()->() = { }
@@ -23,6 +24,14 @@ struct FRTextField: View {
                     .foregroundColor(.text_Regula)
                     .onTapGesture { isEditing = true }
                     .focused($isEditing)
+                    .onChange(of: text) { newValue in
+                        // Check if the length exceeds maxLength
+                        if newValue.count > maxCharacterCount {
+                            // Truncate the text if it exceeds maxLength
+                            text = String(newValue.prefix(maxCharacterCount))
+                        }
+                    }
+                    
         }
     }
 }

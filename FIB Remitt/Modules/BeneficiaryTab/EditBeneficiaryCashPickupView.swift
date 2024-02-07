@@ -39,7 +39,7 @@ struct EditBeneficiaryCashPickupView: View {
                             TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
                             HStack{
                                 FRVerticalField(placeholder: "Full Name", placeholderIcon: "user_ico", inputText: $vm.firstName)
-                                FRVerticalField(placeholder: "Last Name", placeholderIcon: "user_ico", inputText: $vm.lastName)
+//                                FRVerticalField(placeholder: "Last Name", placeholderIcon: "user_ico", inputText: $vm.lastName)
                             }
                             FRSimpleDropDownButton(title: vm.selectedNationality.name ?? "Select Nationality", icon: "nationality_ico", action: {self.nationalityButtonPressed()})
                             FRVerticalField(placeholder: "Phone number", placeholderIcon: "call_ico", inputText: $vm.phone).keyboardType(.numberPad)
@@ -97,8 +97,8 @@ struct EditBeneficiaryCashPickupView: View {
             }
             .padding()
             .navigationBarHidden(true)
-            .onChange(of: vm.lastName, perform: { value in
-               let isValid = vm.validate(firstName: vm.firstName, lastName: vm.lastName, nationality: vm.selectedNationality.id ?? "", phone: vm.phone, address: vm.address)
+            .onChange(of: vm.firstName, perform: { value in
+               let isValid = vm.validate(firstName: vm.firstName, nationality: vm.selectedNationality.id ?? "", phone: vm.phone, address: vm.address)
                 vm.isSaveValidated = isValid
             })
             .onTapGesture {hideKeyboard()}

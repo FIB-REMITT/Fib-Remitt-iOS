@@ -206,3 +206,8 @@ func decodeJWTPart(_ value: String) -> [String: Any]? {
 
   return payload
 }
+
+func roundAmount(doubleValue: Double , format: String) -> String{
+    //"%.2f"
+    return String(format: format, doubleValue)
+}

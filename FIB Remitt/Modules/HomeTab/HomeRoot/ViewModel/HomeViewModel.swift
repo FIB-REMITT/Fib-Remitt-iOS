@@ -137,8 +137,16 @@ class HomeViewModel : ObservableObject{
         if let conversionRates       = HomeDataHandler.shared.conversionRates{
             let targetRate           = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
             let defaultValue         = recipentAmount.isEmpty ? 0.0 : 1.0
-            let transferAmountDouble =  (Double(self.recipentAmount) ?? defaultValue) / (targetRate ?? 1.0)//String(format: "%.4f", myDoubleValue)
-            self.transferAmount      =  "\(Int(transferAmountDouble))"//String(format: "%.4f", transferAmountDouble)
+            let transferAmountDouble =  (Double(self.recipentAmount) ?? defaultValue) / (targetRate ?? 1.0)
+            //String(format: "%.4f", myDoubleValue)
+            //self.transferAmount      =  "\(Int(transferAmountDouble))"//String(format: "%.4f", transferAmountDouble)
+            if transferAmountDouble >= Double(Int.min) && transferAmountDouble <= Double(Int.max) {
+                let intValue = Int(transferAmountDouble)
+                self.transferAmount      =  "\(intValue)"
+                print("Converted value: \(intValue)")
+            } else {
+                print("Double value is out of the range of Int")
+            }
         }
     }
     
@@ -222,5 +230,7 @@ class HomeViewModel : ObservableObject{
             }
         }.store(in: &subscribers)
     }
+    
+    
         
 }

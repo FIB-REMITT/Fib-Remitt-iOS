@@ -10,7 +10,7 @@ import SwiftUI
 struct AccountInfoCellView: View {
     var selected: Bool = false
     var title = "John Doe"
-    var subtitle1 = "A/C No. 124 458 458 856"
+    var subtitle1 = "IBAN. 124 458 458 856"
     var subtitle2 = "Ziraat Bank"
     var icon = ""
     var type : SelectBeneficiaryType = .BankTransfer
@@ -25,19 +25,19 @@ struct AccountInfoCellView: View {
                 ZStack (alignment: .bottomTrailing){
                     if type == .BankTransfer{
                         Image("bank_ico")
-                        .padding(14)
+                        .padding(10)
                         .overlay {
                             RoundedRectangle(cornerRadius: 25)
                             .strokeBorder(Color.frBorder, lineWidth: 1)
-                            .frame(width: 50, height: 50)
+                            .frame(width: 40, height: 40)
                         }
                     }else{
                         TextH4Medium(text: String(title.prefix(1)).uppercased(), fg_color: .primary500 )
-                            .padding(14)
+                            .padding(10)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 25)
                                 .strokeBorder(Color.frBorder, lineWidth: 1)
-                                .frame(width: 50, height: 50)
+                                .frame(width: 40, height: 40)
                                 
                             }
                     }
@@ -54,7 +54,7 @@ struct AccountInfoCellView: View {
                             .multilineTextAlignment(.leading)
                         Image(icon)
                             .imageDefaultStyle()
-                            .frame(width: 15)
+                            .frame(width: 10)
                     }
                     TextBaseRegular(text: "\(subtitle1)", fg_color: .textFade)
                         .multilineTextAlignment(.leading)
