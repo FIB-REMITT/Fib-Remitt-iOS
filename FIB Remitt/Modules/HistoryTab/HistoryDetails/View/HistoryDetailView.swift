@@ -18,9 +18,10 @@ struct HistoryDetailView: View {
     let screenWidth = UIScreen.main.bounds.width
     
     var body: some View {
-        ScrollView {
+      
             VStack(spacing: 12){
                 navigationBar
+                ScrollView {
                 SimpleHInfoCellView(title: "Delivery Method", info: vm.transactionDetails?.collectionPoint ?? "")
                 SimpleHInfoCellView(title: "Reference Code", info:  vm.transactionDetails?.transactionNumber ?? "")
                 SimpleHInfoCellView(title: "Purpose", info:  vm.transactionDetails?.purposeTitle ?? "")
@@ -96,54 +97,60 @@ struct HistoryDetailView: View {
                                 TextBaseMedium(text: "Progress", fg_color: .text_Mute)
                                 Spacer()
                             }
-                                VStack(spacing: 20){
-                                  
-                                    if let progresses = vm.transactionDetails?.progress {
-                                        let sortedProgress = progresses.sorted { (progress1, progress2) in
-                                            if let state1 = Int(progress1.state ?? "0"), let state2 = Int(progress2.state ?? "0") {
-                                                        if state1 == state2 {
-                                                            // If states are equal, compare by createdDate
-                                                            if let date1 = progress1.createdAt, let date2 = progress2.createdAt {
-                                                                return date1 < date2
-                                                            }
-                                                        }
-                                                        return state1 > state2
-                                                    }
-                                                    return false // Handle cases where conversion to Int fails
+                            VStack(spacing: 20){
+                                
+                                if let progresses = vm.transactionDetails?.progress {
+                                    let sortedProgress = progresses.sorted { (progress1, progress2) in
+                                        if let state1 = Int(progress1.state ?? "0"), let state2 = Int(progress2.state ?? "0") {
+                                            if state1 == state2 {
+                                                // If states are equal, compare by createdDate
+                                                if let date1 = progress1.createdAt, let date2 = progress2.createdAt {
+                                                    return date1 < date2
                                                 }
-                                        
-                                        ForEach(sortedProgress.indices, id: \.self) { index in
-                                            let progressData = progresses[index]
-                                          
-                                            let icon =  viewForProgressState(progressData: progressData)
-                                            
-                                            let side : ProgressComponentAlignment = (index % 2 == 0) ? .left : .right
-                                            let textColor = viewForProgressTextColor(progressData: progressData)
-                                            
-                                            ProgressComponentWithDivider(status: icon, timeDat:formatDateString(incomingFormate: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS",dateString: progressData.createdAt ?? "", convertFormat: "d MMMM yyyy | h:mm a") ?? "", iconName: icon, cellColor: textColor, alignmentStyle: side)
-                                           //
+                                            }
+                                            return state1 > state2
                                         }
+                                        return false // Handle cases where conversion to Int fails
+                                    }
+                                    
+                                    ForEach(sortedProgress.indices, id: \.self) { index in
+                                        let progressData = progresses[index]
+                                        
+                                        let statusName =  viewForProgressState(progressData: progressData,returnTitle: true)
+                                        let icon =  viewForProgressState(progressData: progressData,returnTitle: false)
+                                        
+                                        let side : ProgressComponentAlignment = (index % 2 == 0) ? .left : .right
+                                        let textColor = viewForProgressTextColor(progressData: progressData)
+                                        
+                                        ProgressComponentWithDivider(status: statusName, timeDat:formatDateString(incomingFormate: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS",dateString: progressData.createdAt ?? "", convertFormat: "d MMMM yyyy | h:mm a") ?? "", iconName: icon, cellColor: textColor, alignmentStyle: side)
+                                        //
                                     }
                                 }
+                            }
                         }
                         .padding(.vertical, 10)
                     }
                     Spacer()
                 }
+            }
 
             }.padding()
                 .navigationBarHidden(true)
                 .onAppear(perform: {
                     vm.transactionDetailsFetch(transactionNumber: id)
             })
-        }
+     
         .background(Color.fr_background.ignoresSafeArea())
     }
   
-    private func viewForProgressState(progressData:DetailsProgress) -> String {
+    private func viewForProgressState(progressData:DetailsProgress,returnTitle:Bool = false) -> String {
            switch progressData.state {
            case "1":
-               return "Pending_Approval"
+               if returnTitle{
+                          return "Pending_Approval"
+                      } else {
+                          return "Pending"
+                      }
            case "2":
                return "Approved"
            case "3":
