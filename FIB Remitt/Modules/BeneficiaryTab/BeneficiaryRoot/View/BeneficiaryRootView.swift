@@ -30,7 +30,9 @@ struct BeneficiaryRootView: View {
 //MARK: - VIEW COMPONENTS
 extension BeneficiaryRootView{
     private var navigationBar : some View {
-        FRNavigationBarView(leftView: nil, title: "Beneficiary", rightView: AnyView(FRTextButton(title: "+Add New", action: {self.addNewBtnPressed()})))
+        FRNavigationBarView(leftView: nil, title: "Beneficiary", rightView: AnyView(Button(action: { self.addNewBtnPressed()}, label: {
+            TextBaseMedium(text: "+Add New",fg_color: .primary500).underline()
+        })))
     }
     
     private var topCollectionPointTypeContianer : some View{

@@ -129,7 +129,7 @@ class HomeViewModel : ObservableObject{
             let targetRate           = conversionRates.toDictionary()[self.selectedRecipientCurrency.code ?? "TRY"]
             let defaultValue         = transferAmount.isEmpty ? 0.0 : 1.0
             let recipentAmountDouble =  (Double(self.transferAmount) ?? defaultValue) * (targetRate ?? 1.0)
-            self.recipentAmount      = String(format: "%.5f", recipentAmountDouble)// "\(recipentAmountDouble)"
+            self.recipentAmount      = String(format: "%.4f", recipentAmountDouble)// "\(recipentAmountDouble)"
         }
     }
     

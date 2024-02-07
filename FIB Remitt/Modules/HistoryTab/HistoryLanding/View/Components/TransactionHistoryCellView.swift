@@ -82,7 +82,7 @@ struct TransactionHistoryCellView: View {
                             .frame(width: 12, height: 12)
                     }
                     HStack {
-                        TextSmallRegular(text:"\(transaction.transaction?.amountReceivable ?? 0) TRY")
+                        TextSmallRegular(text:"\(roundAmount(doubleValue: transaction.transaction?.amountReceivable ?? 0, format: "%.2f")) TRY")
                         Image("green-arrow-down")
                             .imageDefaultStyle()
                             .frame(width: 12, height: 12)
