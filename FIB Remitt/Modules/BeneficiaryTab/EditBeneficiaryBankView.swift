@@ -124,7 +124,7 @@ extension EditBeneficiaryBankView{
             TextBaseMedium(text: "Bank Details", fg_color: .text_Mute)
             //  FRVerticalField(placeholder: "Bank Name", placeholderIcon: "bank_gry_ico", inputText: $vm.bankName)
             FRSimpleDropDownButton(title: vm.selectedBankName.name ?? "Select Bank", icon: "bank_gry_ico", action: {bankNameBtnPressed()})
-            FRVerticalField(placeholder: "Please enter 24 digit IBAN", placeholderIcon: "acc_no", inputText: $vm.accountNo,maxCharacter: 24).keyboardType(.numberPad)
+            FRVerticalField(placeholder: "Please enter 24 digit IBAN", placeholderIcon: "acc_no", inputText: $vm.accountNo,maxCharacter: 24, extraString: "TR").keyboardType(.numberPad)
         }
     }
     

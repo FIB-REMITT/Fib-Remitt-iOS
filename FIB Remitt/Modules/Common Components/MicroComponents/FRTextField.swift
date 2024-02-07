@@ -28,10 +28,14 @@ struct FRTextField: View {
                         // Check if the length exceeds maxLength
                         if newValue.count > maxCharacterCount {
                             // Truncate the text if it exceeds maxLength
-                            text = String(newValue.prefix(maxCharacterCount))
+                            if newValue.hasPrefix("TR") {
+                                text = String(newValue.dropFirst(2))
+                            }else{
+                                text = String(newValue.prefix(maxCharacterCount))
+                            }
+          
                         }
                     }
-                    
         }
     }
 }

@@ -85,7 +85,7 @@ struct HistoryDetailView: View {
                             SimpleHInfoRegularView(title: "Service charge", info: "\(vm.transactionDetails?.transaction?.charge ?? 0.0) "+(vm.transactionDetails?.transaction?.fromCurrency ?? ""))
                             Divider()
                             SimpleHModInfoView(title: "Total payable", info: "\(vm.transactionDetails?.transaction?.totalPayable ?? 0.0)  IQD",fontStyle: .titleBold)
-                            SimpleHModInfoView(title: "Recipient gets", info: "\(roundAmount(doubleValue: vm.transactionDetails?.transaction?.amountReceivable ?? 0.0,format: "%.2f")) "+(vm.transactionDetails?.transaction?.toCurrency ?? ""), textColor: Color.primary500, fontStyle: .allBold)
+                            SimpleHModInfoView(title: "Recipient gets", info: "\(roundAmount(doubleValue: vm.transactionDetails?.transaction?.amountReceivable ?? 0.0,format: "%.4f")) "+(vm.transactionDetails?.transaction?.toCurrency ?? ""), textColor: Color.primary500, fontStyle: .allBold)
                         }
                     }
                 }
