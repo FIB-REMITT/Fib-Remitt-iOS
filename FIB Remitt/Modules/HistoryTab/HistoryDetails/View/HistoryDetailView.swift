@@ -44,8 +44,11 @@ struct HistoryDetailView: View {
                     if benDetails{
                         VStack(spacing: 12){
                             SimpleHColonInfoView(title: "Name", info:  vm.transactionDetails?.receiver?.fullName ?? "")
-                            SimpleHColonInfoView(title: "Bank Name", info: vm.transactionDetails?.receiver?.bankName ?? "")
-                            SimpleHColonInfoView(title: "IBAN", info:  vm.transactionDetails?.receiver?.accountNumber ?? "" )
+                            if((vm.transactionDetails?.receiver?.bankName?.isBlankOrEmpty) != nil){
+                                SimpleHColonInfoView(title: "Bank Name", info: vm.transactionDetails?.receiver?.bankName ?? "")
+                                SimpleHColonInfoView(title: "IBAN", info:  vm.transactionDetails?.receiver?.accountNumber ?? "" )
+                            }
+                            
                             SimpleHColonInfoView(title: "Ref No.", info: vm.transactionDetails?.transactionNumber ?? "")
                             SimpleHColonInfoView(title: "Type", info: vm.transactionDetails?.receiver?.typeOfBeneficiary ?? "")
                             SimpleHColonInfoView(title: "Relation", info: vm.transactionDetails?.receiver?.relationship ?? "-")

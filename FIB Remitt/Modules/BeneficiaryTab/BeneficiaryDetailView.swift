@@ -62,7 +62,9 @@ extension BeneficiaryDetailView{
             SimpleHColonInfoView(title: "Phone no.", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.phoneNumber ?? "": vm.selectedBankBeneficiary?.phoneNumber ?? "")
             SimpleHColonInfoView(title: "Nationality", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.nationality ?? "": vm.selectedBankBeneficiary?.nationality ?? "")
             SimpleHColonInfoView(title: "Address", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.address ?? "": vm.selectedBankBeneficiary?.address ?? "")
-            SimpleHColonInfoView(title: "Gender", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.gender ?? "": vm.selectedBankBeneficiary?.gender ?? "")
+            if((vm.selectedCashPickUpBeneficiary?.gender?.isBlankOrEmpty) != nil){
+                SimpleHColonInfoView(title: "Gender", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.gender ?? "": vm.selectedBankBeneficiary?.gender ?? "")
+            }
             SimpleHColonInfoView(title: "Type of Beneficiary", info: BenficiaryDataHandler.shared.beneficiaryType == .cash_Pickup ? vm.selectedCashPickUpBeneficiary?.typeOfBeneficiary ?? "": vm.selectedBankBeneficiary?.typeOfBeneficiary ?? "")
         }
     }
