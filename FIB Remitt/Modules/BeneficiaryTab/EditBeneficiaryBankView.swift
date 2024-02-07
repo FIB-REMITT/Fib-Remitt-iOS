@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 struct EditBeneficiaryBankView: View {
     @ObservedObject var vm = BeneficiaryViewModel()
     @State var isPickerShown = false
-    
+    var fromHomeRoot : Bool = false
     var body: some View {
         let filePickerView = FilePickerView(
             isPickerShown: $isPickerShown,
@@ -149,7 +149,7 @@ extension EditBeneficiaryBankView{
     private func saveBtnPressed() {
         if vm.selectedBeneficaryAccountType == .personal{
             
-            vm.addBankBeneficiary()
+            vm.addBankBeneficiary(fromHomeRoot: fromHomeRoot)
             
         }else if vm.selectedBeneficaryAccountType == .buissness{
             vm.addBankBeneficiaryBusiness()

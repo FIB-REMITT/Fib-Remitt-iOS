@@ -16,6 +16,8 @@ struct EditBeneficiaryCashPickupView: View {
     @State var isSelected : Bool    = true
     @State var isNotSelected : Bool = true
     
+    var fromHomeRoot : Bool = false
+    
     var body: some View {
         let filePickerView = FilePickerView(
             isPickerShown: $isPickerShown,

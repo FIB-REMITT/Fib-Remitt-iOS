@@ -49,8 +49,8 @@ class HomeViewModel : ObservableObject{
     }
     
     
-    func navigateToSelectBeneficiarySheet() {
-        self.destinationView = AnyView(SelectBeneficiaryTypeBottomSheet())
+    func navigateToSelectBeneficiarySheet(fromHomeRoot: Bool = false) {
+        self.destinationView = AnyView(SelectBeneficiaryTypeBottomSheet(fromHomeRoot: fromHomeRoot))
         self.goToNext        = true
     }
     

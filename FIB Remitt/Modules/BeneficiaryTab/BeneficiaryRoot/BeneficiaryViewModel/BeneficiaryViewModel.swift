@@ -73,13 +73,13 @@ class BeneficiaryViewModel : ObservableObject{
        self.goToNext         = true
    }
     
-    func navigateToEditBankBeneficiary() {
-       self.destinationView  = AnyView(EditBeneficiaryBankView())
+    func navigateToEditBankBeneficiary(fromHomeRoot: Bool = false) {
+       self.destinationView  = AnyView(EditBeneficiaryBankView(fromHomeRoot: fromHomeRoot))
        self.goToNext         = true
    }
     
-    func navigateToEditCashPickupBeneficiary() {
-       self.destinationView  = AnyView(EditBeneficiaryCashPickupView())
+    func navigateToEditCashPickupBeneficiary(fromHomeRoot: Bool = false) {
+       self.destinationView  = AnyView(EditBeneficiaryCashPickupView(fromHomeRoot: fromHomeRoot))
        self.goToNext         = true
    }
     
@@ -93,6 +93,10 @@ class BeneficiaryViewModel : ObservableObject{
         self.goToNext        = true
     }
     
+    func navigateSelectBeneficiary() {
+        self.destinationView = AnyView(HomeSelectBeneficiaryView())
+        self.goToNext        = true
+    }
     //MARK: - API CALL
     func getCashPickBeneficiaries() {
         repo.getCashPickUpBeneficiariesAPICall()
@@ -173,24 +177,24 @@ class BeneficiaryViewModel : ObservableObject{
         }.store(in: &subscribers)
     }
     
-    func addBankBeneficiaryBusiness() {
+    func addBankBeneficiaryBusiness(fromHomeRoot: Bool = false) {
         let pdfContractDoc  = pdfData(from: URL(string: beneficiaryData.contractPath) ?? URL(fileURLWithPath: ""))
         repo.createBankBeneficiaryBusinessAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phone: phone, address: address, bankId:  selectedBankName.id ?? "", accNo: "TR"+accountNo, invoice: pdfContractDoc)
         repo.$bankBeneficiaryBusinessCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
+                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView(fromHomeRoot: fromHomeRoot)), after: 0.3, isFullScreen: true, isTransferent: false)
                 }
             }
         }.store(in: &subscribers)
     }
     
-    func addBankBeneficiary() {
+    func addBankBeneficiary(fromHomeRoot: Bool = false) {
         repo.createBankBeneficiaryAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phone: phone, address: address, gender: selectedGenderType.title, relationShip: relation, bankId: selectedBankName.id ?? "", accNo: "TR"+accountNo)
         repo.$bankBeneficiaryNormalCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
+                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView(fromHomeRoot: fromHomeRoot)), after: 0.3, isFullScreen: true, isTransferent: false)
                 }
             }
         }.store(in: &subscribers)

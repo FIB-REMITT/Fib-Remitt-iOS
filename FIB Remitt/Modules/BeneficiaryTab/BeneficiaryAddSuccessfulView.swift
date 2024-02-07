@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct BeneficiaryAddSuccessfulView: View {
+    @Environment(\.presentationMode) var presentationMode
+//    @ObservedObject var homeVm = HomeViewModel()
+    @ObservedObject var vm = BeneficiaryViewModel()
     let width = UIScreen.main.bounds.width
+    var fromHomeRoot: Bool = false
     var body: some View {
         VStack(spacing: 20){
             Spacer()
@@ -39,7 +43,17 @@ struct BeneficiaryAddSuccessfulView: View {
 //MARK: - ACTIONS
 extension BeneficiaryAddSuccessfulView{
     private func okBtnPressed() {
-        loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
+        if fromHomeRoot{
+            print("------------------It will redirect to the select beneficiary option!------------------")
+//            presentationMode.wrappedValue.dismiss()
+//            vm.navigateSelectBeneficiary()
+            
+            loadView(view: FRBottomBarContainer())
+            
+        } else {
+            loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
+        }
+        
     }
 }
 #Preview {

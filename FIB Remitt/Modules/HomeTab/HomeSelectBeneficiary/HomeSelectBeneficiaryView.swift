@@ -202,7 +202,7 @@ extension HomeSelectBeneficiaryView{
     private func createAccountBtnPressed() {
         beneficiaryVM.getBanks()
         beneficiaryVM.getNationalities()
-        vm.navigateToSelectBeneficiarySheet()
+        vm.navigateToSelectBeneficiarySheet(fromHomeRoot: true)
     }
     private func notificationBtnPressed() {showToast(message: "No notification found!")}
     private func proccedBtnPressed() {
