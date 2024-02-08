@@ -64,7 +64,7 @@ extension BeneficiaryRootView{
     private var cashPickupContainer : some View{
         LazyVStack{
             ForEach(vm.cashPickUpBeneficiaries ?? [], id: \.self) { item in
-                AccountInfoCellViewButton(selected: isNotSelected, title: item.fullName ?? "", subtitle1: "Phone \(item.phoneNumber ?? "")", subtitle2: item.address ?? "", icon: item.typeOfBeneficiary  == "Business" ? "business_ico": "personal_user_ico") {
+                AccountInfoCellViewButton(selected: isNotSelected, title: item.fullName ?? "", subtitle1: "Phone \(item.phoneNumber ?? "")", subtitle2: item.address ?? "", icon: item.typeOfBeneficiary  == "Business" ? "business_ico": "personal_user_ico",type : .CashPickup) {
                     BenficiaryDataHandler.shared.beneficiaryType = .cash_Pickup
                     BenficiaryDataHandler.shared.selectedBenficiaryId = item.id ?? ""
                     vm.navigateToBeneficiaryDetail()
@@ -76,7 +76,7 @@ extension BeneficiaryRootView{
     private var allBeneficiariesContainer : some View{
         LazyVStack{
             ForEach(vm.allBeneficiaries ?? [], id: \.self) { item in
-                AccountInfoCellViewButton(selected: isNotSelected, title: item.title ?? "", subtitle1: "\(item.subTitle ?? "")", subtitle2: item.address ?? "", icon: item.accTypeIsBuiessness ?? false ? "business_ico": "personal_user_ico") {
+                AccountInfoCellViewButton(selected: isNotSelected, title: item.title ?? "", subtitle1: "\(item.subTitle ?? "")", subtitle2: item.address ?? "", icon: item.accTypeIsBuiessness ?? false ? "business_ico": "personal_user_ico",type : .BankTransfer) {
                     BenficiaryDataHandler.shared.beneficiaryType = item.beneficiaryType
                     BenficiaryDataHandler.shared.selectedBenficiaryId = item.id ?? ""
                     vm.navigateToBeneficiaryDetail()

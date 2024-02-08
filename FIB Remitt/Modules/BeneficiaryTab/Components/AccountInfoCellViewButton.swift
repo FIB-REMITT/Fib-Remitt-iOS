@@ -13,13 +13,14 @@ struct AccountInfoCellViewButton: View {
     var subtitle1 = "IBAN. 124 458 458 856"
     var subtitle2 = "Ziraat Bank"
     var icon = ""
+    var type : SelectBeneficiaryType = .BankTransfer
     var action : ()->Void = {}
     
     var body: some View {
         Button {
             action()
         } label: {
-            AccountInfoCellView(selected: selected, title: title, subtitle1: subtitle1, subtitle2: subtitle2, icon: icon)
+            AccountInfoCellView(selected: selected, title: title, subtitle1: subtitle1, subtitle2: subtitle2, icon: icon,type: type)
         }
 
     }
