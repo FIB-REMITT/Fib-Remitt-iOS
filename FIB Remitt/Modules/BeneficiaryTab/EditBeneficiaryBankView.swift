@@ -84,7 +84,7 @@ extension EditBeneficiaryBankView{
         FRNavigationBarView(title: "Bank Beneficiary")
     }
     private var genderSelectionContainer : some View{
-        VStack(alignment:.leading){
+        VStack(alignment:.leading, spacing: 8){
             TextMediumMedium(text: "Gender", fg_color: .text_fade)
             HStack{
                 ForEach(Gender.allCases, id: \.self) { item in
