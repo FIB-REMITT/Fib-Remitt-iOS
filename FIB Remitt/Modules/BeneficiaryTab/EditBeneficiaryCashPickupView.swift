@@ -9,12 +9,12 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct EditBeneficiaryCashPickupView: View {
-    @ObservedObject var vm          = BeneficiaryViewModel()
-    @State var isPickerShown        = false
-    
-    @State var text : String        = ""
-    @State var isSelected : Bool    = true
-    @State var isNotSelected : Bool = true
+    @ObservedObject var vm            = BeneficiaryViewModel()
+    @EnvironmentObject var navTracker : NavTracker
+    @State var isPickerShown          = false
+    @State var text          : String = ""
+    @State var isSelected    : Bool   = true
+    @State var isNotSelected : Bool   = true
     
     var body: some View {
         let filePickerView = FilePickerView(
@@ -92,7 +92,7 @@ struct EditBeneficiaryCashPickupView: View {
                         }
                     }
                 }
-                Spacer()
+                Spacer ()
                 bottomSaveButton
             }
             .padding()
@@ -101,8 +101,14 @@ struct EditBeneficiaryCashPickupView: View {
                let isValid = vm.validate(firstName: vm.firstName, nationality: vm.selectedNationality.id ?? "", phone: vm.phone, address: vm.address)
                 vm.isSaveValidated = isValid
             })
+            .onChange(of: vm.relation, perform: { isSucceed in
+                if isSucceed == "TRUE"{
+                    hideKeyboard()
+                    navTracker.navigationPath.append(BeneficiaryFlowScene.addBeneficiarySuccessfull)
+                }
+            })
             .onTapGesture {hideKeyboard()}
-            .onAppear(){viewOnAppearCalled()}
+            .onAppear() {viewOnAppearCalled()}
         }
 
     }

@@ -20,6 +20,8 @@
 		2E91D7072B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D7062B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift */; };
 		2E91D7092B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */; };
 		2E91D70B2B5F094B002983F1 /* BeneficiaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91D70A2B5F094B002983F1 /* BeneficiaryDetailView.swift */; };
+		2EA320BB2B77F8FA003C0AB0 /* NavTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA320BA2B77F8F9003C0AB0 /* NavTracker.swift */; };
+		2EA320BD2B77F985003C0AB0 /* AppSceneEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA320BC2B77F985003C0AB0 /* AppSceneEnum.swift */; };
 		401CA4B12B68D64B00589966 /* WebLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401CA4B02B68D64B00589966 /* WebLoginView.swift */; };
 		401CA4B32B68EDB000589966 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401CA4B22B68EDB000589966 /* Constant.swift */; };
 		40711F652B5CFD1500F966E7 /* FIB_RemittApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40711F642B5CFD1500F966E7 /* FIB_RemittApp.swift */; };
@@ -145,6 +147,8 @@
 		2E91D7062B5EEE7B002983F1 /* HomeTransferSuccessfulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTransferSuccessfulView.swift; sourceTree = "<group>"; };
 		2E91D7082B5EFEBD002983F1 /* BeneficiaryTypeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryTypeCellView.swift; sourceTree = "<group>"; };
 		2E91D70A2B5F094B002983F1 /* BeneficiaryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryDetailView.swift; sourceTree = "<group>"; };
+		2EA320BA2B77F8F9003C0AB0 /* NavTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavTracker.swift; sourceTree = "<group>"; };
+		2EA320BC2B77F985003C0AB0 /* AppSceneEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSceneEnum.swift; sourceTree = "<group>"; };
 		401CA4B02B68D64B00589966 /* WebLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLoginView.swift; sourceTree = "<group>"; };
 		401CA4B22B68EDB000589966 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		40711F612B5CFD1500F966E7 /* FIB Remitt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FIB Remitt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,6 +306,7 @@
 			children = (
 				8997492D2B60DB1100DEBD8C /* AuthViewModel.swift */,
 				2E71DB982B65A7DB000A6471 /* AuthRepository.swift */,
+				2EA320BA2B77F8F9003C0AB0 /* NavTracker.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -455,6 +460,7 @@
 				8988E8EB2B62360100741F58 /* DeliveryMethodEnum.swift */,
 				8974F91B2B67D305007F2522 /* BeneficiaryEnum.swift */,
 				89C1C9692B6B826000DA70AF /* HomeEnum.swift */,
+				2EA320BC2B77F985003C0AB0 /* AppSceneEnum.swift */,
 			);
 			path = ModuleConstant;
 			sourceTree = "<group>";
@@ -979,6 +985,7 @@
 				896EA0C12B5F816100FB231A /* EditBeneficiaryCashPickupView.swift in Sources */,
 				89740D322B5D120D000ACFBA /* InitialView.swift in Sources */,
 				89611BE62B5E338900407E32 /* FRVContainer.swift in Sources */,
+				2EA320BB2B77F8FA003C0AB0 /* NavTracker.swift in Sources */,
 				897228022B665BBD006B4FEE /* NationalityResponse.swift in Sources */,
 				89611BE42B5E32AD00407E32 /* TopRoundedShape.swift in Sources */,
 				8974F9102B67A3F2007F2522 /* HomeDataHandler.swift in Sources */,
@@ -1039,6 +1046,7 @@
 				896EA0C32B5F820500FB231A /* BeneficiaryAddSuccessfulView.swift in Sources */,
 				899F1D382B66687A00E7B35F /* TransactionDetailsResponse.swift in Sources */,
 				89611BF72B5E9A4900407E32 /* HomeBeneficiarySummaryView.swift in Sources */,
+				2EA320BD2B77F985003C0AB0 /* AppSceneEnum.swift in Sources */,
 				209971842B68CF2F001A6B91 /* FilterCellView.swift in Sources */,
 				89611BEE2B5E785D00407E32 /* FRTextField.swift in Sources */,
 				8997493B2B615EC200DEBD8C /* TransactionHistoryViewModel.swift in Sources */,

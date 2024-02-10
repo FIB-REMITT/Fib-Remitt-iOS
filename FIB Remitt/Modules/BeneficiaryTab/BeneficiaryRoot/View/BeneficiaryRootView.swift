@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BeneficiaryRootView: View {
+    @EnvironmentObject var navTracker : NavTracker
     @State var isNotSelected : Bool = false
     @State var isSelected    : Bool = true
     @ObservedObject var vm = BeneficiaryViewModel()
@@ -101,7 +102,8 @@ extension BeneficiaryRootView{
 //MARK: - ACTIONS
 extension BeneficiaryRootView{
     private func addNewBtnPressed() {
-        vm.navigateToSelectBeneficiarySheet()
+        //vm.navigateToSelectBeneficiarySheet()
+        navTracker.navigationPath.append(BeneficiaryFlowScene.selectBeneficiaryType)
     }
 }
 #Preview {

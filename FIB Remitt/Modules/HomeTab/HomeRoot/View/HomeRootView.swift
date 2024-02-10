@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeRootView: View {
     @ObservedObject var vm = HomeViewModel()
+    @EnvironmentObject var navTracker:NavTracker
+    
     @FocusState var recepientIsFofused
     @FocusState var transferIsFocused
     
@@ -23,7 +25,6 @@ struct HomeRootView: View {
                         deliveryMethodContainer
                         purposeContainer
                         termsAndConditionContainer
-                        
                     }
                 }
                 bottomProccedButton.padding(.bottom)
@@ -32,7 +33,12 @@ struct HomeRootView: View {
             .padding(.top)
         }
         .navigationBarHidden(true)
-        .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
+//        .navigationDestination(isPresented: $vm.goToNext, destination: { vm.destinationView })
+        .navigationDestination(for: HomeFlowScene.self, destination: { scene in
+            scene.view
+        })
+        .navigationDestination(for: BeneficiaryFlowScene.self, destination: { scene in scene.view
+        })
         .onTapGesture {hideKeyboard()}
         .onChange(of: vm.transferAmount, perform: {newValue in recipientAmountUpdate(); vm.validateProceedButton()})
         .onChange(of: vm.recipentAmount, perform: {newValue in transferAmountUpdate(); vm.validateProceedButton()})
@@ -139,9 +145,6 @@ extension HomeRootView{
                 }
                 .cornerRadius(100)
             })
-//            FRSimpleDropDownButton {
-//                purposeButtonPressed()
-//            }
         }
     }
     
@@ -163,7 +166,7 @@ extension HomeRootView{
     private func notificationBtnPressed() {showToast(message: "No notification found!")}
     private func proccedBtnPressed() {
         vm.storeHomeData()
-        vm.navigateSelectBeneficiary()
+        navTracker.navigationPath.append(HomeFlowScene.beneficiarySelection)
     }
     private func termsAndConditionBtnPressed() {}
     private func purposeButtonPressed(){

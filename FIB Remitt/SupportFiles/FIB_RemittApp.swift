@@ -9,10 +9,10 @@ import SwiftUI
 
 @main
 struct FIB_RemittApp: App {
-    
+    @StateObject var navTracker = NavTracker()
     var body: some Scene {
         WindowGroup {
-            SplashView()
+            SplashView().environmentObject(navTracker)
         }
     }
 }

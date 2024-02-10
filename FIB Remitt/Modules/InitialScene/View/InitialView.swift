@@ -13,7 +13,7 @@ struct InitialView: View {
     @State var tapped = false
     
     var body: some View {
-        NavigationStack{
+        //NavigationStack{
             ZStack {
                 if tapped{
                     WebContentView()
@@ -35,7 +35,7 @@ struct InitialView: View {
             //            .onChange(of: vm.loggedIn, perform: { value in
             //                self.tapped = value
             //            })
-        }
+        //}
     }
 }
 

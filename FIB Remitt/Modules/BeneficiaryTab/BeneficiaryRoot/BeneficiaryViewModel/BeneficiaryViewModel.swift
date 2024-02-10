@@ -30,18 +30,18 @@ class BeneficiaryViewModel : ObservableObject{
     @Published var selectedBeneficaryAccountType  : BeneficiaryAccountType = .personal
     @Published var selectedGenderType             : Gender                 = .male
     
-    @Published var firstName : String = ""
-    //@Published var lastName  : String = ""
-    @Published var phone     : String = ""
-    @Published var address   : String = ""
-    //@Published var bankName  : String = ""
+    @Published var firstName : String                         = ""
+    //@Published var lastName  : String                       = ""
+    @Published var phone     : String                         = ""
+    @Published var address   : String                         = ""
+    //@Published var bankName  : String                       = ""
     @Published var selectedBankName     : BankResponse        = BankResponse(name: "Select Bank")
     @Published var selectedNationality  : NationalityResponse = NationalityResponse(name: "Select Nationality")
-    @Published var accountNo            : String  = ""
-    @Published var relation             : String  = ""
+    @Published var accountNo            : String              = ""
+    @Published var relation             : String              = ""
     
-    @Published var isSaveValidated     = false
-    @Published var isBankSaveValidated = false
+    @Published var isSaveValidated                            = false
+    @Published var isBankSaveValidated                        = false
     
     //MARK: - VIEWLIFECYCLE
     func viewWillAppearCalled() {
@@ -150,12 +150,16 @@ class BeneficiaryViewModel : ObservableObject{
         }.store(in: &subscribers)
     }
     
+    @Published var successfullyAddedBeneficiary : Bool = false
     func addCashPickupBeneficiary() {
         repo.createCashPickupBeneficiaryAPICall(fullName: firstName, nationality: selectedNationality.id ?? "", phone: phone, address: address, gender: selectedGenderType.title, relationShip: relation)
         repo.$cashPickupBeneficiaryNormalCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
+                    //showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
+                    self.successfullyAddedBeneficiary = true
+                    HomeDataHandler.shared.collectionPoint = "AGENT"
+                    self.relation = "TRUE"
                 }
             }
         }.store(in: &subscribers)
@@ -167,7 +171,9 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$cashPickupBeneficiaryBusinessCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
+                   // showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
+                    HomeDataHandler.shared.collectionPoint = "AGENT"
+                    self.relation = "TRUE"
                 }
             }
         }.store(in: &subscribers)
@@ -179,7 +185,9 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$bankBeneficiaryBusinessCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
+                    //showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
+                    HomeDataHandler.shared.collectionPoint = "BANK"
+                    self.relation = "TRUE"
                 }
             }
         }.store(in: &subscribers)
@@ -190,7 +198,9 @@ class BeneficiaryViewModel : ObservableObject{
         repo.$bankBeneficiaryNormalCreationStatus.sink { status in
             if let isCreated = status{
                 if isCreated{
-                    showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
+                   // showSheet(view: AnyView(BeneficiaryAddSuccessfulView()), after: 0.3, isFullScreen: true, isTransferent: false)
+                    HomeDataHandler.shared.collectionPoint = "BANK"
+                    self.relation = "TRUE"
                 }
             }
         }.store(in: &subscribers)

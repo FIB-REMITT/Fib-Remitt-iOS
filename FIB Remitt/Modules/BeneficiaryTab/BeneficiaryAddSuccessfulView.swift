@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BeneficiaryAddSuccessfulView: View {
+    @EnvironmentObject var navTracker : NavTracker
     let width = UIScreen.main.bounds.width
     var body: some View {
         VStack(spacing: 20){
@@ -39,7 +40,9 @@ struct BeneficiaryAddSuccessfulView: View {
 //MARK: - ACTIONS
 extension BeneficiaryAddSuccessfulView{
     private func okBtnPressed() {
-        loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
+     //   loadView(view: FRBottomBarContainer(selected: TabBarItem(icon: "beneficiary_ico", title: "Beneficiary", color: .red)))
+       // hideSheet()
+        navTracker.navigationPath.removeLast(3)
     }
 }
 #Preview {

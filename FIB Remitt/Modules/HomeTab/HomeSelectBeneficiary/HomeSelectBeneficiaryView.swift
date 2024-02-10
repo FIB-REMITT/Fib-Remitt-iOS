@@ -9,20 +9,22 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct HomeSelectBeneficiaryView: View {
-    @State var isSelected : Bool = false
-    @State var isNotSelected : Bool = false
+    @State var isSelected    : Bool  = false
+    @State var isNotSelected : Bool  = false
     @State var isFilePickerPresented = false
     @State private var isPickerShown = false
-    @State private var selectedBeneficiaryID: String?
+    @State private var selectedBeneficiaryID : String?
     @State var type : SelectBeneficiaryType = .BankTransfer
-    @State private var selectedFileURL: URL?
+    @State private var selectedFileURL       : URL?
     
-    @ObservedObject var vm = HomeViewModel()
+    @EnvironmentObject var navTracker: NavTracker
+    
+    @ObservedObject var vm            = HomeViewModel()
     @ObservedObject var beneficiaryVM = BeneficiaryViewModel()
     
  
     
-    @State var isProceedEnable = false
+    @State var isProceedEnable        = false
     @State private var resetSelection = false
     
     var homeData = HomeDataHandler.shared
@@ -202,7 +204,10 @@ extension HomeSelectBeneficiaryView{
     private func createAccountBtnPressed() {
         beneficiaryVM.getBanks()
         beneficiaryVM.getNationalities()
-        vm.navigateToSelectBeneficiarySheet()
+        //vm.navigateToSelectBeneficiarySheet()
+        navTracker.navigationPath.append(BeneficiaryFlowScene.selectBeneficiaryType)
+
+
     }
     private func notificationBtnPressed() {showToast(message: "No notification found!")}
     private func proccedBtnPressed() {

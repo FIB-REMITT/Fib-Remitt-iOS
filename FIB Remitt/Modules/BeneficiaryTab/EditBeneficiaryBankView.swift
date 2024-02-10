@@ -9,6 +9,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct EditBeneficiaryBankView: View {
+    @EnvironmentObject var navTracker:NavTracker
     @ObservedObject var vm = BeneficiaryViewModel()
     @State var isPickerShown = false
     
@@ -71,6 +72,12 @@ struct EditBeneficiaryBankView: View {
             .onChange(of: vm.firstName, perform: { value in
                let isValid = vm.validate(firstName: vm.firstName, nationality: vm.selectedNationality.id ?? "", phone: vm.phone, address: vm.address)
                 vm.isBankSaveValidated = isValid
+            })
+            .onChange(of: vm.relation, perform: { isSucceed in
+                if isSucceed == "TRUE"{
+                    hideKeyboard()
+                    navTracker.navigationPath.append(BeneficiaryFlowScene.addBeneficiarySuccessfull)
+                }
             })
             .onTapGesture {hideKeyboard()}
             .onAppear(){self.viewOnAppearCalled()}
@@ -148,9 +155,7 @@ extension EditBeneficiaryBankView{
     }
     private func saveBtnPressed() {
         if vm.selectedBeneficaryAccountType == .personal{
-            
             vm.addBankBeneficiary()
-            
         }else if vm.selectedBeneficaryAccountType == .buissness{
             vm.addBankBeneficiaryBusiness()
         }

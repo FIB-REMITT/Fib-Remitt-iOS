@@ -12,7 +12,7 @@ struct SplashView: View {
     @State var currentImage: String = "map"
     @State private var rotationAngle: Double = 0
     var body: some View {
-        NavigationStack{
+       // NavigationStack{
             ZStack{
                 if isActive{
                     if  UserSettings.shared.apiToken != nil {
@@ -33,7 +33,7 @@ struct SplashView: View {
                     self.rotationAngle = 360
                 }
             }
-        }
+       // }
     }
 }
 

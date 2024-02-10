@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct FRBottomBarContainer: View {
-    @State var selected:TabBarItem
+    @EnvironmentObject var navTracker : NavTracker//()
+    @State       var selected : TabBarItem
     
     init(selected:TabBarItem = TabBarItem.data.first!) {
         self.selected = selected
@@ -16,7 +17,7 @@ struct FRBottomBarContainer: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack (path: $navTracker.navigationPath){
             VStack (spacing: 0){
                 ZStack {
                     TabView(selection: $selected) {
@@ -30,10 +31,10 @@ struct FRBottomBarContainer: View {
                             .tag(TabBarItem.data[4])
                     }
                 }
-                
                 FRBottomBar(tabs: [TabBarItem.data.first!, TabBarItem.data[1], TabBarItem.data[4]], selected: $selected)
                 
             }.ignoresSafeArea(.keyboard,edges: .bottom)
+            
         }
     }
 }

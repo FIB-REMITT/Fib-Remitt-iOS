@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SelectBeneficiaryTypeBottomSheet: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var navTracker: NavTracker
     @ObservedObject var vm = BeneficiaryViewModel()
     var body: some View {
         SheetHolder (onClickOutSide: {
@@ -18,10 +19,12 @@ struct SelectBeneficiaryTypeBottomSheet: View {
                 TextBaseMedium(text: "Add Beneficiary", fg_color: .textMute).padding(.bottom, 10)
  
                 FRSimpleDirectedButton(title: AvailableBeneficiaryType.bank_Transfer.title,  cornerRadius: 7) {
-                    vm.navigateToEditBankBeneficiary()
+                   // vm.navigateToEditBankBeneficiary()
+                    navTracker.navigationPath.append(BeneficiaryFlowScene.editBankBeneficiary)
                 }
                 FRSimpleDirectedButton(title: AvailableBeneficiaryType.cash_Pickup.title, cornerRadius: 7) {
-                    vm.navigateToEditCashPickupBeneficiary()
+                    //vm.navigateToEditCashPickupBeneficiary()
+                    navTracker.navigationPath.append(BeneficiaryFlowScene.editCashPickupBeneficiary)
                 }
   
             }
