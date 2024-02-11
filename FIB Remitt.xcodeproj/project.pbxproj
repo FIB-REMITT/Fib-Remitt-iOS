@@ -125,7 +125,6 @@
 		A8737E062B6BB3BB008A2465 /* FibPaymentCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8737E052B6BB3BB008A2465 /* FibPaymentCheck.swift */; };
 		A8737E082B6BB989008A2465 /* PaymentCheckResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8737E072B6BB989008A2465 /* PaymentCheckResponse.swift */; };
 		A8CA78602B66ABA700C383C8 /* BankCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */; };
-		A8CA78622B66B97400C383C8 /* invoice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A8CA78612B66B97300C383C8 /* invoice.pdf */; };
 		A8CA78642B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */; };
 		A8CA78672B677C8200C383C8 /* FilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78662B677C8200C383C8 /* FilePickerView.swift */; };
 		A8CA78692B67854800C383C8 /* FilePickerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CA78682B67854800C383C8 /* FilePickerCellView.swift */; };
@@ -254,7 +253,6 @@
 		A8737E052B6BB3BB008A2465 /* FibPaymentCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FibPaymentCheck.swift; sourceTree = "<group>"; };
 		A8737E072B6BB989008A2465 /* PaymentCheckResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCheckResponse.swift; sourceTree = "<group>"; };
 		A8CA785F2B66ABA700C383C8 /* BankCollectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCollectionResponse.swift; sourceTree = "<group>"; };
-		A8CA78612B66B97300C383C8 /* invoice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = invoice.pdf; sourceTree = "<group>"; };
 		A8CA78632B66BFC500C383C8 /* ConfirmationByTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationByTransactionResponse.swift; sourceTree = "<group>"; };
 		A8CA78662B677C8200C383C8 /* FilePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerView.swift; sourceTree = "<group>"; };
 		A8CA78682B67854800C383C8 /* FilePickerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerCellView.swift; sourceTree = "<group>"; };
@@ -340,7 +338,6 @@
 		40711F632B5CFD1500F966E7 /* FIB Remitt */ = {
 			isa = PBXGroup;
 			children = (
-				A8CA78612B66B97300C383C8 /* invoice.pdf */,
 				89740D522B5D66DD000ACFBA /* FIB-Remitt-Info.plist */,
 				89740D332B5D1CC0000ACFBA /* Modules */,
 				897A10E92B623E12002CF87D /* Network */,
@@ -917,7 +914,6 @@
 			files = (
 				89740D552B5D691B000ACFBA /* Roboto-Medium.ttf in Resources */,
 				40711F6C2B5CFD1600F966E7 /* Preview Assets.xcassets in Resources */,
-				A8CA78622B66B97400C383C8 /* invoice.pdf in Resources */,
 				40711F692B5CFD1600F966E7 /* Assets.xcassets in Resources */,
 				89740D542B5D6918000ACFBA /* Roboto-Regular.ttf in Resources */,
 				89740D532B5D6915000ACFBA /* Roboto-Bold.ttf in Resources */,
