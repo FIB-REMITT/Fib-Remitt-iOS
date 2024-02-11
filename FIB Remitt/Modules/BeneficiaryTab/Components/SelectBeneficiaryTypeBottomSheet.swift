@@ -13,7 +13,7 @@ struct SelectBeneficiaryTypeBottomSheet: View {
     @ObservedObject var vm = BeneficiaryViewModel()
     var body: some View {
         SheetHolder (onClickOutSide: {
-            presentationMode.wrappedValue.dismiss()
+            navTracker.navigationPath.removeLast()
         }){
             VStack(spacing: 10){
                 TextBaseMedium(text: "Add Beneficiary", fg_color: .textMute).padding(.bottom, 10)

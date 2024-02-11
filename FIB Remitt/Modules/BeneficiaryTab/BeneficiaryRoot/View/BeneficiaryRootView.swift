@@ -102,7 +102,7 @@ extension BeneficiaryRootView{
 //MARK: - ACTIONS
 extension BeneficiaryRootView{
     private func addNewBtnPressed() {
-        //vm.navigateToSelectBeneficiarySheet()
+//        vm.navigateToSelectBeneficiarySheet()
         navTracker.navigationPath.append(BeneficiaryFlowScene.selectBeneficiaryType)
     }
 }

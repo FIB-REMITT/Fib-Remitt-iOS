@@ -12,8 +12,8 @@ class TransactionDataHandler{
     static let shared = TransactionDataHandler()
     private init(){}
 
-    var currentTransactionPageNo           : Int = 0
-
+    var currentTransactionPageNo   : Int = 0
+    var currentFilterPageNo        : Int = 0
     
     func clear(){
         currentTransactionPageNo = 0

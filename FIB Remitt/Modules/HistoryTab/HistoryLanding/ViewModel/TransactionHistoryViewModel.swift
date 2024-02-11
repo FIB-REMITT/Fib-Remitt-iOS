@@ -12,11 +12,14 @@ class TransactionHistoryViewModel : ObservableObject{
     @Published var destinationView = AnyView(Text("Destination"))
     
     @Published var transactionHistoryResponse   : TransactionHistoryResponse?
+    @Published var filteredransactionHistoryResponse   : TransactionHistoryResponse?
     @Published var transactionHistoryDataOnly   : [TransactionListContent]    = []
     @Published var filterTransactionHistoryData : [TransactionListContent]    = []
     @Published var transactionDetails           : TransactionDetailsResponse?
     @Published var selectedFilterValue          : String = "All"
     
+    @Published var from = ""
+    @Published var to = ""
     @Published var shouldFilterApply        = false
     @Published var isMorePerpHistoryLoading = false
 
@@ -53,12 +56,12 @@ class TransactionHistoryViewModel : ObservableObject{
     }
     
     func filteredTransactionListFetch(page:Int, from: String = "", to : String = "") {
-        repo.transactionListApi(page:page ,from:from, to:to)
-        repo.$transactionHistoryList.sink { result in
-            print(self.transactionHistoryDataOnly.count)
-            if result != nil && result != self.transactionHistoryResponse{
-                self.transactionHistoryResponse = result
-                self.transactionHistoryDataOnly += result?.content ?? [] //= (result?.content ?? [])
+        repo.filterTransactionListApi(page:page ,from:from, to:to)
+        repo.$filterTransactionHistoryList.sink { result in
+            print(self.filterTransactionHistoryData.count)
+            if result != nil /*&& result != self.filteredransactionHistoryResponse*/{
+                self.filteredransactionHistoryResponse = result
+                self.filterTransactionHistoryData = result?.content ?? [] //= (result?.content ?? [])
             }
         }.store(in: &subscribers)
         

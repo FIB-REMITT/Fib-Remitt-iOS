@@ -11,8 +11,6 @@ struct HistoryRootView: View {
     
     @ObservedObject var vm = TransactionHistoryViewModel() // history view model
     //@State var selectedFilterValue: String = "All"
-    @State var from = ""
-    @State var to = ""
     var body: some View {
         VStack{
             navigationBar
@@ -26,14 +24,14 @@ struct HistoryRootView: View {
         .navigationDestination(isPresented: $vm.goToNext) {vm.destinationView}
         .onAppear(perform: {
             vm.selectedFilterValue = "All"
-            self.from = ""
-            self.to = ""
+            self.vm.from = ""
+            self.vm.to = ""
             initialDataAll()
         })
     }
     
     func initialDataAll(from:String = "",to:String = ""){
-        //vm.transactionHistoryDataOnly = []
+        // vm.transactionHistoryDataOnly = []
         transactionListApi(from: from, to:to)
         
     }
@@ -61,13 +59,17 @@ extension HistoryRootView{
     private var contextContainer : some View{
         VStack(spacing:10){
             LazyVStack{
-                ForEach(vm.transactionHistoryDataOnly) { transactionData in
+                ForEach(vm.shouldFilterApply ? vm.filterTransactionHistoryData : vm.transactionHistoryDataOnly) { transactionData in
                     TransactionHistoryCellView(transaction: transactionData)
                         .onTapGesture { vm.navigateToTransactionDetails(transactionNumber: transactionData.transactionNumber ?? "") }
                         .onAppear()   { if transactionData == vm.transactionHistoryDataOnly.last{
                             TransactionDataHandler.shared.currentTransactionPageNo += 1
-                            vm.transactionListFetch(page: TransactionDataHandler.shared.currentTransactionPageNo,from: from,to: to)
-                        }}
+                            vm.transactionListFetch(page: TransactionDataHandler.shared.currentTransactionPageNo,from: vm.from,to: vm.to)
+                        }else if transactionData == vm.filterTransactionHistoryData.last{
+//                            TransactionDataHandler.shared.currentFilterPageNo += 1
+//                            vm.filteredTransactionListFetch(page: TransactionDataHandler.shared.currentTransactionPageNo,from: vm.from,to: vm.to)
+                        }
+                    }
                 }
             }
             
@@ -90,29 +92,38 @@ extension HistoryRootView{
     
     func filterTheData(){
         if vm.selectedFilterValue == "All"{
-            self.from = ""
-            self.to = ""
+            self.vm.shouldFilterApply = false
+            self.vm.from = ""
+            self.vm.to = ""
             initialDataAll() //from:String = "",to:String = ""
         }else if vm.selectedFilterValue == "Today" {
+            self.vm.shouldFilterApply = true
             let dateRangeToday = vm.getDateRange(for: .today)
-            self.from = dateRangeToday.from
-            self.to = dateRangeToday.to
-            initialDataAll(from:"\(dateRangeToday.from)",to: "\(dateRangeToday.to)")
+            self.vm.from = dateRangeToday.from
+            self.vm.to = dateRangeToday.to
+           // initialDataAll(from:"\(dateRangeToday.from)",to: "\(dateRangeToday.to)")
+            vm.filteredTransactionListFetch(page: 0, from:"\(dateRangeToday.from)",to: "\(dateRangeToday.to)")
         } else if vm.selectedFilterValue == "Last 7 Days" {
+            self.vm.shouldFilterApply = true
             let dateRangeLast7Days = vm.getDateRange(for: .last7Days)
-            self.from = dateRangeLast7Days.from
-            self.to = dateRangeLast7Days.to
-            initialDataAll(from:"\(dateRangeLast7Days.from)",to: "\(dateRangeLast7Days.to)")
+            self.vm.from = dateRangeLast7Days.from
+            self.vm.to = dateRangeLast7Days.to
+            vm.filteredTransactionListFetch(page: 0,from:"\(dateRangeLast7Days.from)",to: "\(dateRangeLast7Days.to)")
+            //initialDataAll(from:"\(dateRangeLast7Days.from)",to: "\(dateRangeLast7Days.to)")
         } else if vm.selectedFilterValue == "This Month" {
+            self.vm.shouldFilterApply = true
             let currentMonthRange = vm.getDateRange(for: .currentMonth)
-            self.from = currentMonthRange.from
-            self.to = currentMonthRange.to
-            initialDataAll(from:"\(currentMonthRange.from)",to: "\(currentMonthRange.to)")
+            self.vm.from = currentMonthRange.from
+            self.vm.to = currentMonthRange.to
+            //initialDataAll(from:"\(currentMonthRange.from)",to: "\(currentMonthRange.to)")
+            vm.filteredTransactionListFetch(page: 0,from:"\(currentMonthRange.from)",to: "\(currentMonthRange.to)")
         } else {
+            self.vm.shouldFilterApply = true
             let currentYearRange = vm.getDateRange(for: .currentYear)
-            self.from = currentYearRange.from
-            self.to = currentYearRange.to
-            initialDataAll(from:"\(currentYearRange.from)",to: "\(currentYearRange.to)")
+            self.vm.from = currentYearRange.from
+            self.vm.to = currentYearRange.to
+            //initialDataAll(from:"\(currentYearRange.from)",to: "\(currentYearRange.to)")
+            vm.filteredTransactionListFetch(page: 0,from:"\(currentYearRange.from)",to: "\(currentYearRange.to)")
         }
     }
 }
