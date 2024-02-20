@@ -229,8 +229,5 @@ class HomeViewModel : ObservableObject{
                 self.PaymentConfirmationResponse = result
             }
         }.store(in: &subscribers)
-    }
-    
-    
-        
+    }    
 }

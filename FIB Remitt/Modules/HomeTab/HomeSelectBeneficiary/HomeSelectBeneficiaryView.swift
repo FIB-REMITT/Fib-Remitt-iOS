@@ -42,8 +42,6 @@ struct HomeSelectBeneficiaryView: View {
                 }else{
                     agentReceivedApi()
                 }
-              
-                
             },
             onError: { error in
                 print("Error: \(error.localizedDescription)")

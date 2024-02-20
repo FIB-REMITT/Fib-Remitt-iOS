@@ -37,13 +37,13 @@ extension HomeBeneficiarySummaryView{
             FRVContainer (backgroundColor:.frForground){
                 TextBaseMedium(text: "Beneficiary Details", fg_color: .text_Mute)
                 VStack(spacing:10){
-                    SimpleHColonInfoView(title: "Name", info: beneficiaryResponse?.receiver?.fullName ?? "")
-                    SimpleHColonInfoView(title: "Bank Name", info: beneficiaryResponse?.receiver?.bankName ?? "N/A")
-                    SimpleHColonInfoView(title: "IBAN", info: beneficiaryResponse?.receiver?.accountNumber ?? "N/A" )
-                    SimpleHColonInfoView(title: "Type", info: beneficiaryResponse?.receiver?.typeOfBeneficiary ?? "")
-                    SimpleHColonInfoView(title: "Relation", info: beneficiaryResponse?.receiver?.relationship ?? "")
-                    SimpleHColonInfoView(title: "Phone", info: beneficiaryResponse?.receiver?.phoneNumber ?? "")
-                    SimpleHColonInfoView(title: "Address", info: beneficiaryResponse?.receiver?.address ?? "")}
+                    SimpleHColonInfoView(title : "Name", info: beneficiaryResponse?.receiver?.fullName ?? "")
+                    SimpleHColonInfoView(title : "Bank Name", info: beneficiaryResponse?.receiver?.bankName ?? "N/A")
+                    SimpleHColonInfoView(title : "IBAN", info: beneficiaryResponse?.receiver?.accountNumber ?? "N/A" )
+                    SimpleHColonInfoView(title : "Type", info: beneficiaryResponse?.receiver?.typeOfBeneficiary ?? "")
+                    SimpleHColonInfoView(title : "Relation", info: beneficiaryResponse?.receiver?.relationship ?? "")
+                    SimpleHColonInfoView(title : "Phone", info: beneficiaryResponse?.receiver?.phoneNumber ?? "")
+                    SimpleHColonInfoView(title : "Address", info: beneficiaryResponse?.receiver?.address ?? "")}
             }
             
             
